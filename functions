@@ -29,3 +29,30 @@ exports.temporalFeatures = function(image){
         .addBands([min, max, median, amp, stdv])) //Creates an empty image and add the reduced bands to it
     return result
 }
+
+exports.temporalPercs function(image):
+
+    percs = image.reduce(ee.Reducer.percentile([10, 25, 75, 90]))
+
+    result = ee.Image().select().addBands([percs])
+
+    return result
+}
+//Function made to generate the latitude and the longitude of each pixel
+exports.getLatLong function(img){
+    ## Gets the projection
+    proj = ee.Image(img).select(0).projection() //Gets the reference projection from one image
+    latlon = ee.Image.pixelLonLat() //Estimates the latitude and longitude for each pixel
+    return ee.Image(img).addBands(latlon.select('longitude', 'latitude')) //Adds the latitude and the longitude as a band
+}
+//Function made to mask cloud and shadows in the images, based on the quality band from Google Cloud Score (cs)
+exports.maskClouds = function(img):
+    // The threshold for masking; values between 0.50 and 0.65 generally work well.
+    // Higher values will remove thin clouds, haze & cirrus shadows.
+    CLEAR_THRESHOLD = 0.50;
+    mask = img.select('cs').gte(CLEAR_THRESHOLD); //Masks the pixels with 50% of chance or more to be clouds.
+    return img.updateMask(mask);
+}
+#Function made to convert deegre image to percent
+def radians(img):
+    return img.toFloat().multiply(math.pi).divide(180)
