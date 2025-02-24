@@ -14,7 +14,7 @@ exports.spectralFeatures = function(image){
     return image
 }
 
-exports.temporalFeatures = function(image):
+exports.temporalFeatures = function(image){
 
     min = image.reduce(ee.Reducer.min()) //Reduces all bands to the minimum of their values per pixel
     max = image.reduce(ee.Reducer.max()) //Reduces all bands to the maximum of their values per pixel
@@ -28,3 +28,4 @@ exports.temporalFeatures = function(image):
     result = (ee.Image().select()
         .addBands([min, max, median, amp, stdv])) //Creates an empty image and add the reduced bands to it
     return result
+}
