@@ -77,7 +77,7 @@ function run_classficiation(carta, year) {
     
     //Applies the spectral index calculations and selects the bands to be used
     var spectralDataNei = (s2CloudMasked
-        .map(spectralFeatures)
+        .map(func.spectralFeatures)
         .select(['B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B8A',
             'B11', 'B12', 'NDVI', 'NDWI', 'CAI', 'CRI1', 'ARI_1', 'RGR',
             'PSRI', 'SATVI'
