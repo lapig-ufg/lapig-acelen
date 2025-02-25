@@ -28,23 +28,6 @@ var indexes = {
     'SATVI': "((b('B11') - b('B4'))/(b('B11') + b('B4') + 0.5))*(1*0.5)-(b('B12')/2)*0.0001" //Soil-Adjusted Total Vegetation Index
 }
 
-//Function made to reduce all images/band in the collection to their specific reductor, e.g. median.
-function temporalFeatures(image) {
-
-    var min = image.reduce(ee.Reducer.min()) //Reduces all bands to the minimum of their values per pixel
-    var max = image.reduce(ee.Reducer.max()) //Reduces all bands to the maximum of their values per pixel
-    var median = image.reduce(ee.Reducer.median()) //Reduces all bands to the median of their values per pixel
-    var stdv = image.reduce(ee.Reducer.stdDev()) //Reduces all bands to the standaard deviation of their values per pixel
-
-    var amp = (image.reduce(ee.Reducer.max()) //Reduces all bands to the amplitude (max - min) of their values per pixel
-        .subtract(image.reduce(ee.Reducer.min()))
-        .rename(BandsWetAmp))
-
-    var result = (ee.Image().select()
-        .addBands([min, max, median, amp, stdv])) //Creates an empty image and add the reduced bands to it
-    return result
-}
-
 //Function made to reduce all images/band in the collection to their percentiles, e.g. 10%, 25%, 75% and 90%.
 function temporalPercs(image) {
 
