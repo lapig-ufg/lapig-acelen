@@ -1,6 +1,6 @@
 exports.datasets = {
   'cultivated_perc' : ee.ImageCollection("projects/global-pasture-watch/assets/ggc-30m/v1/cultiv-grassland_p"),
   'natural_perc':ee.ImageCollection("projects/global-pasture-watch/assets/ggc-30m/v1/nat-semi-grassland_p"),
-  'grassland_dominant':ee.ImageCollection("projects/global-pasture-watch/assets/ggc-30m/v1/grassland_c")
-
+  'grasslande_dominant':ee.ImageCollection("projects/global-pasture-watch/assets/ggc-30m/v1/grassland_c"),
+  'test_data':ee.FeatureCollection('projects/saomartinho/assets/Usina_Boa_Vista_Quadras')
 }
