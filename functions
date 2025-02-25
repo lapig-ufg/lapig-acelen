@@ -97,6 +97,8 @@ exports.thresholdSamples = function(img,area,type,year){
     }
     
   }
+  var dataclass = data.datasets[type+'_perc']
+  
   var pos_samples = cultiv_grassland_p.first().updateMask(cultiv_grassland_p.first().gte(50))
   var neg_samples = cultiv_grassland_p.first().updateMask(cultiv_grassland_p.first().lte(18))
   
