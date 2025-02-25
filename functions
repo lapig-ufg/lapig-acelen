@@ -88,7 +88,7 @@ exports.onlyWetSeasonNei = function(image){
 exports.thresholdSamples = function(img,area,type,year){
   
   //Clip and select image from year
-  img = img.clip(area).select(year+'_probability')
+  img = img.select(year+'_probability').clip(area)
   
   //Threshold Values
   var dictype = {
