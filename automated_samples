@@ -46,7 +46,8 @@ var scale = 30
 
 //Calculation samples        
 var target = func.automatedSamples(imgs,type,year,area,numberSamples,scale)
-print(target)
+Map.addLayer(target['taget-data'],{palette:['red','green']},'Target Data')
+Map.addLayer(target['samples'],{},'Samples')
 
 
 
