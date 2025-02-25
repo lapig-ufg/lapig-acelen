@@ -98,7 +98,7 @@ exports.thresholdSamples = function(img,area,type,year){
                   'negative':15
     },
     'natural':{
-                 'positive':70,
+                 'positive':60,
                  'negative':25
     }
     
