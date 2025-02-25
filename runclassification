@@ -7,10 +7,10 @@ var trainSamples_main,extra_samples
 //Function to classification pastures
 var run_classficiation = function(carta, year){
 
-    var nm_carta = carta; //Changes the chart variable name
+    //var nm_carta = carta; //Changes the chart variable name
 
-    var cartas_area = cartas.filter(ee.Filter.eq('grid_name', nm_carta)) // Filters the main charts feature collection by the choosed chart
-    var cartas_buffer = cartas_area.geometry().buffer(100000) // Selects the charts around the choosed chart
+    //var cartas_area = cartas.filter(ee.Filter.eq('grid_name', nm_carta)) // Filters the main charts feature collection by the choosed chart
+    //var cartas_buffer = cartas_area.geometry().buffer(100000) // Selects the charts around the choosed chart
 
     var START_DATE = year - 1+"-07-01" //Start date to filter the image collection (usually six months before the main year)
     var END_DATE = year + 1+"-06-30" //End date to filter the image collection (usually six months after the main year)
@@ -33,17 +33,15 @@ var run_classficiation = function(carta, year){
         .map(func.res_bilinear)); //Applies the bilinear resampling on the lower resolution images (i.e. 20 meters)
     
     //Applies the spectral index calculations and selects the bands to be used
-    var spectralDataNei = (s2CloudMasked
-        .map(func.spectralFeatures)
+    var spectralDataNei = s2CloudMasked.map(func.spectralFeatures)
         .select(['B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B8A',
             'B11', 'B12', 'NDVI', 'NDWI', 'CAI', 'CRI1', 'ARI_1', 'RGR',
             'PSRI', 'SATVI'
-        ]));
+        ])
+        
 
     //Calculates the 25% NDVI percentile to use as a noise mask
-    var wetThresholdNei = (spectralDataNei
-        .select("NDVI")
-        .reduce(ee.Reducer.percentile([25])));
+    var wetThresholdNei = spectralDataNei.select("NDVI").reduce(ee.Reducer.percentile([25]))
         
     //Function made to get the image NDVI and mask it according to the 25% NDVI percentile
     var onlyWetSeasonNei = function(image){
