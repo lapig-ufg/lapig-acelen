@@ -28,12 +28,6 @@ var indexes = {
 }
 
 
-//Function made to mask some weird black edges which can appear in some Sentinel 2 images
-function maskEdges(s2_img) {
-    return s2_img.updateMask(
-        s2_img.select('B8A').mask().updateMask(s2_img.select('B9').mask())) //Defined
-}
-
 var terrain = ee.Algorithms.Terrain(ee.Image("NASA/NASADEM_HGT/001")); //Terrain variables (i.e. elevation, slope, aspect) extraction from the NASADEM 
 var elevation = terrain.select('elevation'); //Selection of the elevation band
 var slope = (radians(terrain.select('slope'))).expression('b("slope")*100'); //Selection of the slope band and conversion from deegre to percentage
