@@ -2,6 +2,7 @@
 var func = require('users/Amazonas21/acelen:functions')
 var data = require('users/Amazonas21/acelen:datasets')
 
+/*
 //Parametros
 var type = 'cultivated'
 var ano = '2001'
@@ -31,6 +32,21 @@ var samples = target.stratifiedSample({
 Map.addLayer(imgs.clip(area.geometry().buffer(5000)),{},'Cultivated')
 Map.addLayer(target,{palette:['red','green']},'Target Data')
 Map.addLayer(samples,{palette:['red','green']},'Samples Data')
+*/
+
+//Parametros
+var type = 'cultivated'
+var ano = '2001'
+var area = data.datasets['test_data'].filter(ee.Filter.eq('Fazenda','ADRIANA'))
+var imgs = data.datasets[type+"_perc"].toBands()
+var numberSamples = 500
+var scale = 30
+
+
+
+//Calculation samples        
+var target = func.automatedSamples(imgs,area,type,ano,numberSamples,scale)
+print(target)
 
 
 
