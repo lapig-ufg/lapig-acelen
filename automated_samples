@@ -10,8 +10,7 @@ var ano = '2001'
 
 //Select images
 var imgs = data.datasets[type+"_perc"].toBands()
-           .select(ano+'_probability')
            
-      
-var samples = func.thresholdSamples
+var samples = func.thresholdSamples(imgs,'','cultivated',2001)
+print(samples)
 
