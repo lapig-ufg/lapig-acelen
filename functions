@@ -133,7 +133,7 @@ exports.automatedSamples = function(img,type,year,area,numSamples,scale){
     numPoints:numSamples,
     classBand: 'targetMap',
     region:cliparea,
-    scale:30,
+    scale:scale,
     geometries: true
   })
   
