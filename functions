@@ -107,10 +107,13 @@ exports.thresholdSamples = function(img,area,type,year){
   var threshold = dictype[type]
 
   //Access threshold positive and negative
-  var pos_samples = img.updateMask(img.gte(threshold.positive))
+  var pos_samples = img.gte(threshold.positive).updateMask()
                     .rename(type+"_"+year+"_positive")
-  var neg_samples = img.updateMask(img.lte(threshold.negative))
+  var neg_samples = img.lte(threshold.negative).updateMask()
+                     .remap([1],[0])
                     .rename(type+"_"+year+"_negative")
   
-  return [pos_samples,neg_samples]
+  var target = ee.Image().add[pos_samples,neg_samples]
+               .reduce(ee.Reducer.Max())
+  return target
 }
