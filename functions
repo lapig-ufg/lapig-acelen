@@ -18,23 +18,24 @@ exports.spectralFeatures = function (image) {
     return image
 }
 
+//Function made to reduce all images/band in the collection to their specific reductor, e.g. median.
+exports.temporalFeatures = function(image) {
 
+    var min = image.reduce(ee.Reducer.min()) //Reduces all bands to the minimum of their values per pixel
+    var max = image.reduce(ee.Reducer.max()) //Reduces all bands to the maximum of their values per pixel
+    var median = image.reduce(ee.Reducer.median()) //Reduces all bands to the median of their values per pixel
+    var stdv = image.reduce(ee.Reducer.stdDev()) //Reduces all bands to the standaard deviation of their values per pixel
 
-exports.temporalFeatures = function(image){
-
-    min = image.reduce(ee.Reducer.min()) //Reduces all bands to the minimum of their values per pixel
-    max = image.reduce(ee.Reducer.max()) //Reduces all bands to the maximum of their values per pixel
-    median = image.reduce(ee.Reducer.median()) //Reduces all bands to the median of their values per pixel
-    stdv = image.reduce(ee.Reducer.stdDev()) //Reduces all bands to the standaard deviation of their values per pixel
-
-    amp = (image.reduce(ee.Reducer.max()) //Reduces all bands to the amplitude (max - min) of their values per pixel
+    var amp = (image.reduce(ee.Reducer.max()) //Reduces all bands to the amplitude (max - min) of their values per pixel
         .subtract(image.reduce(ee.Reducer.min()))
         .rename(BandsWetAmp))
 
-    result = (ee.Image().select()
+    var result = (ee.Image().select()
         .addBands([min, max, median, amp, stdv])) //Creates an empty image and add the reduced bands to it
     return result
 }
+
+
 
 exports.temporalPercs  = function(image){
 
