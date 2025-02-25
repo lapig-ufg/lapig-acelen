@@ -28,9 +28,9 @@ var run_classficiation = function(carta, year){
 
     var s2CloudMasked = (s2.linkCollection(csPlus, csPlusBands) //Link the Sentinel collection with the CloudScore+
         .filter(ee.Filter.lte('CLOUDY_PIXEL_PERCENTAGE', 80)) //Filter the images with more than 80% of cloud
-        .map(maskEdges) //Applies the filter to mask fault edges
-        .map(maskClouds) //Applies the filter to mask cloud and shadows
-        .map(res_bilinear)); //Applies the bilinear resampling on the lower resolution images (i.e. 20 meters)
+        .map(func.maskEdges) //Applies the filter to mask fault edges
+        .map(func.maskClouds) //Applies the filter to mask cloud and shadows
+        .map(func.res_bilinear)); //Applies the bilinear resampling on the lower resolution images (i.e. 20 meters)
     
     //Applies the spectral index calculations and selects the bands to be used
     var spectralDataNei = (s2CloudMasked
