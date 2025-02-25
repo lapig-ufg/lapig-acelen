@@ -98,7 +98,7 @@ exports.threshold = function(img,type){
     
   }
   
-  if (type'cultivated')
+  
   
   
 }
