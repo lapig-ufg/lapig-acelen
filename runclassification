@@ -88,12 +88,6 @@ function run_classficiation(carta, year) {
         .select("NDVI")
         .reduce(ee.Reducer.percentile([25])));
         
-    //Function made to get the image NDVI and mask it according to the 25% NDVI percentile
-    function onlyWetSeasonNei(image) {
-        var seasonMask = image.select("ndvi_wet").gte(wetThresholdNei);
-        return image.mask(seasonMask);
-    }
-  
     //Applies the 25% NDVI percentile mask to each image in the collection
     var wetSpectralDataNei = (spectralDataNei
         .select(spectralDataNei.first().bandNames(), BandsWet)
