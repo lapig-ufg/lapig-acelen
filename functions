@@ -1,3 +1,7 @@
+//Import dataset
+var data = require('users/Amazonas21/acelen:datasets')
+
+
 exports.spectralFeatures = function(image){
 
     ndvi = image.expression(indexes["NDVI"]).select([0],['NDVI']) //Calculates the NDVI
