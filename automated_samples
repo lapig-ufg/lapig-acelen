@@ -1,3 +1,11 @@
 //Import modules and datasets
 var data = require('users/Amazonas21/acelen:datasets')
-print(ee.ImageCollection("projects/global-pasture-watch/assets/ggc-30m/v1/cultiv-grassland_p"))
+
+//Parametros
+var type = 'cultivated'
+var ano = '2001'
+
+var imgs = data.datasets[type+"_perc"].toBands()
+           .select(ano+'_probability')
+
+
