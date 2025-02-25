@@ -85,7 +85,7 @@ exports.threshold = function(img,type){
   dictype = {
     'cultivated':{
                   'positive':50,
-                  'negative':18
+                  'negative':15
     },
     'natural':{
                  'positive':70,
