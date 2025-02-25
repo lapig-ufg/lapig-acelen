@@ -7,12 +7,14 @@ var data = require('users/Amazonas21/acelen:datasets')
 //Parametros
 var type = 'cultivated'
 var ano = '2001'
-var area = data.datasets['test_data']
+var area = data.datasets['test_data'].filter(ee.Filter.eq('Fazenda','ADRIANA'))
 
+Map.addLayer(area)
+Map.centerObject(area)
 
 //Select images
 var imgs = data.datasets[type+"_perc"].toBands()
            
-var samples = func.thresholdSamples(imgs,'','cultivated',2001)
+var samples = func.thresholdSamples(imgs,area,'cultivated',2001)
 print(samples)
 
