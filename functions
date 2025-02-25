@@ -120,7 +120,7 @@ exports.thresholdSamples = function(img,area,type,year){
   return target
 }
 
-exports.automatedSamples = function(img,type,year,area){
+exports.automatedSamples = function(img,type,year,area,numSamples,scale){
  
   //Area images
   var cliparea = area.geometry().buffer(5000)
@@ -130,7 +130,7 @@ exports.automatedSamples = function(img,type,year,area){
 
   //Create points from samples positive and negative from GPW maps
   var samples = target.stratifiedSample({
-    numPoints:500,
+    numPoints:numSamples,
     classBand: 'targetMap',
     region:cliparea,
     scale:30,
