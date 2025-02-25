@@ -97,7 +97,7 @@ function run_classficiation(carta, year) {
     //Applies the 25% NDVI percentile mask to each image in the collection
     var wetSpectralDataNei = (spectralDataNei
         .select(spectralDataNei.first().bandNames(), BandsWet)
-        .map(onlyWetSeasonNei));
+        .map(func.onlyWetSeasonNei));
     
     //Applies the functions to calculate percentiles, get latitude and longitude, calculate the temporal reducers and adds the elevation and slope data.
     var temporalData = getLatLong(temporalPercs(wetSpectralDataNei))
