@@ -15,8 +15,11 @@ Map.centerObject(area)
 //Select images
 var imgs = data.datasets[type+"_perc"].toBands()
 var cliparea = area.geometry().buffer(5000)
-        
+
+//Calculation samples        
 var target = func.thresholdSamples(imgs,cliparea,'cultivated',2001)
+
+//Create points from samples positive and negative from GPW maps
 var samples = target.stratifiedSample({
   numPoints:500,
   classBand: 'targetMap',
