@@ -19,6 +19,7 @@ var imgs = data.datasets[type+"_perc"].toBands()
 var samples = func.thresholdSamples(imgs,area.geometry().buffer(5000),'cultivated',2001)
 
 Map.addLayer(imgs.clip(area.geometry().buffer(5000)),{},'Cultivated')
+print(samples)
 Map.addLayer(samples,{},'Target Data')
 
 
