@@ -20,7 +20,7 @@ var samples = func.thresholdSamples(imgs,area.geometry().buffer(5000),'cultivate
 
 Map.addLayer(imgs.clip(area.geometry().buffer(5000)),{},'Cultivated')
 print(samples)
-Map.addLayer(samples,{},'Target Data')
+Map.addLayer(samples[],{},'Target Data')
 
 
 
