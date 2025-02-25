@@ -107,8 +107,8 @@ exports.thresholdSamples = function(img,area,type,year){
   var threshold = dictype[type]
 
   //Access threshold positive and negative
-  var pos_samples = img.updateMask(cultiv_grassland_p.first().gte(threshold.positive))
-  var neg_samples = img.updateMask(cultiv_grassland_p.first().lte(threshold.negative))
+  var pos_samples = img.updateMask(img.gte(threshold.positive))
+  var neg_samples = img.updateMask(img.lte(threshold.negative))
   
   return [pos_samples,neg_samples]
 }
