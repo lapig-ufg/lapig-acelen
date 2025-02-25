@@ -50,10 +50,10 @@ var BandsWetAmp = ['blue_wet_amp', 'green_wet_amp', 'red_wet_amp', 'rededge1_wet
 //Main function, responsible to execute the classification. Accept as parameters the chart name (e.g. 'SE-22-X-A') and the year (e.g. 2022)
 function run_classficiation(carta, year) {
 
-    var nm_carta = carta; //Changes the chart variable name
+    //var nm_carta = carta; //Changes the chart variable name
 
-    var cartas_area = cartas.filter(ee.Filter.eq('grid_name', nm_carta)); // Filters the main charts feature collection by the choosed chart
-    var cartas_buffer = cartas_area.geometry().buffer(100000); // Selects the charts around the choosed chart
+    //var cartas_area = cartas.filter(ee.Filter.eq('grid_name', nm_carta)); // Filters the main charts feature collection by the choosed chart
+    //var cartas_buffer = cartas_area.geometry().buffer(100000); // Selects the charts around the choosed chart
 
     var START_DATE = ee.Date((year - 1) + '-07-01'); //Start date to filter the image collection (usually six months before the main year)
     var END_DATE = ee.Date((year + 1) + '-06-30'); //End date to filter the image collection (usually six months after the main year)
@@ -71,9 +71,9 @@ function run_classficiation(carta, year) {
 
     var s2CloudMasked = (s2.linkCollection(csPlus, csPlusBands) //Link the Sentinel collection with the CloudScore+
         .filter(ee.Filter.lte('CLOUDY_PIXEL_PERCENTAGE', 80)) //Filter the images with more than 80% of cloud
-        .map(maskEdges) //Applies the filter to mask fault edges
-        .map(maskClouds) //Applies the filter to mask cloud and shadows
-        .map(res_bilinear)); //Applies the bilinear resampling on the lower resolution images (i.e. 20 meters)
+        .map(func.maskEdges) //Applies the filter to mask fault edges
+        .map(func.maskClouds) //Applies the filter to mask cloud and shadows
+        .map(func.res_bilinear)); //Applies the bilinear resampling on the lower resolution images (i.e. 20 meters)
     
     //Applies the spectral index calculations and selects the bands to be used
     var spectralDataNei = (s2CloudMasked
