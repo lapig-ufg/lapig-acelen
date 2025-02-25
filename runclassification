@@ -1,54 +1,54 @@
 var run_classficiation = function(carta, year){
 
-    nm_carta = carta; #Changes the chart variable name
+    var nm_carta = carta; //Changes the chart variable name
 
-    cartas_area = cartas.filter(ee.Filter.eq('grid_name', nm_carta)); # Filters the main charts feature collection by the choosed chart
-    cartas_buffer = cartas_area.geometry().buffer(100000); # Selects the charts around the choosed chart
+    var cartas_area = cartas.filter(ee.Filter.eq('grid_name', nm_carta)) // Filters the main charts feature collection by the choosed chart
+    var cartas_buffer = cartas_area.geometry().buffer(100000) // Selects the charts around the choosed chart
 
-    START_DATE = f"{year - 1}-07-01"; #Start date to filter the image collection (usually six months before the main year)
-    END_DATE = f"{year + 1}-06-30"; #End date to filter the image collection (usually six months after the main year)
+    var START_DATE = year - 1+"-07-01" //Start date to filter the image collection (usually six months before the main year)
+    var END_DATE = year + 1+"-06-30" //End date to filter the image collection (usually six months after the main year)
 
-    s2 = (ee.ImageCollection("COPERNICUS/S2_HARMONIZED") #Selects the Sentinel 2 TOA Harmonized time series 
-        .filterBounds(cartas_buffer) #Filters the images that intersects with the main and neighbor charts
-        .filterDate(START_DATE, END_DATE) #Filters the images by the range of dates (start and end)
+    var s2 = (ee.ImageCollection("COPERNICUS/S2_HARMONIZED") //Selects the Sentinel 2 TOA Harmonized time series 
+        .filterBounds(cartas_buffer) //Filters the images that intersects with the main and neighbor charts
+        .filterDate(START_DATE, END_DATE) //Filters the images by the range of dates (start and end)
     )
 
-    csPlus = (ee.ImageCollection('GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED') #Selects the Google Sentinel 2 AI Cloud Score +, the best cloud and shadow mask from Sentinel 2
-        .filterBounds(cartas_buffer) #Filters the images that intersects with the main and neighbor charts
-        .filterDate(START_DATE, END_DATE)); #Filters the images by the range of dates (start and end)
+    var csPlus = (ee.ImageCollection('GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED') //Selects the Google Sentinel 2 AI Cloud Score +, the best cloud and shadow mask from Sentinel 2
+        .filterBounds(cartas_buffer) //Filters the images that intersects with the main and neighbor charts
+        .filterDate(START_DATE, END_DATE)); //Filters the images by the range of dates (start and end)
 
-    csPlusBands = csPlus.first().bandNames(); #Get the band names of the Cloud Score+ bands
+    var csPlusBands = csPlus.first().bandNames(); //Get the band names of the Cloud Score+ bands
 
-    s2CloudMasked = (s2.linkCollection(csPlus, csPlusBands) #Link the Sentinel collection with the CloudScore+
-        .filter(ee.Filter.lte('CLOUDY_PIXEL_PERCENTAGE', 80)) #Filter the images with more than 80% of cloud
-        .map(maskEdges) #Applies the filter to mask fault edges
-        .map(maskClouds) #Applies the filter to mask cloud and shadows
-        .map(res_bilinear)); #Applies the bilinear resampling on the lower resolution images (i.e. 20 meters)
+    var s2CloudMasked = (s2.linkCollection(csPlus, csPlusBands) //Link the Sentinel collection with the CloudScore+
+        .filter(ee.Filter.lte('CLOUDY_PIXEL_PERCENTAGE', 80)) //Filter the images with more than 80% of cloud
+        .map(maskEdges) //Applies the filter to mask fault edges
+        .map(maskClouds) //Applies the filter to mask cloud and shadows
+        .map(res_bilinear)); //Applies the bilinear resampling on the lower resolution images (i.e. 20 meters)
     
-    #Applies the spectral index calculations and selects the bands to be used
-    spectralDataNei = (s2CloudMasked
+    //Applies the spectral index calculations and selects the bands to be used
+    var spectralDataNei = (s2CloudMasked
         .map(spectralFeatures)
         .select(['B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B8A',
             'B11', 'B12', 'NDVI', 'NDWI', 'CAI', 'CRI1', 'ARI_1', 'RGR',
             'PSRI', 'SATVI'
         ]));
 
-    #Calculates the 25% NDVI percentile to use as a noise mask
-    wetThresholdNei = (spectralDataNei
+    //Calculates the 25% NDVI percentile to use as a noise mask
+    var wetThresholdNei = (spectralDataNei
         .select("NDVI")
         .reduce(ee.Reducer.percentile([25])));
         
-    #Function made to get the image NDVI and mask it according to the 25% NDVI percentile
-    def onlyWetSeasonNei(image):
+    //Function made to get the image NDVI and mask it according to the 25% NDVI percentile
+    var onlyWetSeasonNei = function(image){
         seasonMask = image.select("ndvi_wet").gte(wetThresholdNei);
         return image.mask(seasonMask);
-  
-    #Applies the 25% NDVI percentile mask to each image in the collection
-    wetSpectralDataNei = (spectralDataNei
+    }
+    //Applies the 25% NDVI percentile mask to each image in the collection
+    var wetSpectralDataNei = (spectralDataNei
         .select(spectralDataNei.first().bandNames(), BandsWet)
         .map(onlyWetSeasonNei));
     
-    #Applies the functions to calculate percentiles, get latitude and longitude, calculate the temporal reducers and adds the elevation and slope data.
+    //Applies the functions to calculate percentiles, get latitude and longitude, calculate the temporal reducers and adds the elevation and slope data.
     temporalData = (getLatLong(temporalPercs(wetSpectralDataNei))
       .addBands([temporalFeatures(wetSpectralDataNei),elevation, slope]));
 
