@@ -85,7 +85,7 @@ exports.onlyWetSeasonNei = function(image){
         return image.mask(seasonMask);
 }
 
-exports.threshold = function(img,type){
+exports.threshold = function(img,type,year){
   dictype = {
     'cultivated':{
                   'positive':50,
