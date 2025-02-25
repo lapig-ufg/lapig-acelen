@@ -30,7 +30,7 @@ exports.temporalFeatures = function(image){
     return result
 }
 
-exports.temporalPercs function(image):
+exports.temporalPercs  = function(image){
 
     percs = image.reduce(ee.Reducer.percentile([10, 25, 75, 90]))
 
@@ -39,14 +39,14 @@ exports.temporalPercs function(image):
     return result
 }
 //Function made to generate the latitude and the longitude of each pixel
-exports.getLatLong function(img){
-    ## Gets the projection
+exports.getLatLong  = function(img){
+    // Gets the projection
     proj = ee.Image(img).select(0).projection() //Gets the reference projection from one image
     latlon = ee.Image.pixelLonLat() //Estimates the latitude and longitude for each pixel
     return ee.Image(img).addBands(latlon.select('longitude', 'latitude')) //Adds the latitude and the longitude as a band
 }
 //Function made to mask cloud and shadows in the images, based on the quality band from Google Cloud Score (cs)
-exports.maskClouds = function(img):
+exports.maskClouds = function(img){
     // The threshold for masking; values between 0.50 and 0.65 generally work well.
     // Higher values will remove thin clouds, haze & cirrus shadows.
     CLEAR_THRESHOLD = 0.50;
@@ -54,7 +54,7 @@ exports.maskClouds = function(img):
     return img.updateMask(mask);
 }
 //Function made to convert deegre image to percent
-exports.radians function(img){
+exports.radians = function(img){
     return img.toFloat().multiply(math.pi).divide(180)
 }
 
@@ -79,4 +79,22 @@ exports.maskEdges = function(s2_img){
 exports.onlyWetSeasonNei = function(image){
         seasonMask = image.select("ndvi_wet").gte(wetThresholdNei);
         return image.mask(seasonMask);
+}
+
+exports.threshold = function(img,type){
+  dictype = {
+    'cultivated':{
+                  'positive':50,
+                  'negative':18
+    },
+    'natural':{
+                 'positive':70,
+                 'negative':25
+    }
+    
+  }
+  
+  if (type'cultivated')
+  
+  
 }
