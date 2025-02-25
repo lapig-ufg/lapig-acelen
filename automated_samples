@@ -2,38 +2,6 @@
 var func = require('users/Amazonas21/acelen:functions')
 var data = require('users/Amazonas21/acelen:datasets')
 
-/*
-//Parametros
-var type = 'cultivated'
-var ano = '2001'
-var area = data.datasets['test_data'].filter(ee.Filter.eq('Fazenda','ADRIANA'))
-
-Map.addLayer(area)
-Map.centerObject(area)
-
-//Select images
-var imgs = data.datasets[type+"_perc"].toBands()
-var cliparea = area.geometry().buffer(5000)
-
-//Calculation samples        
-var target = func.thresholdSamples(imgs,cliparea,'cultivated',2001)
-
-//Create points from samples positive and negative from GPW maps
-var samples = target.stratifiedSample({
-  numPoints:500,
-  classBand: 'targetMap',
-  region:cliparea,
-  scale:30,
-  geometries: true
-})
-
-
-
-Map.addLayer(imgs.clip(area.geometry().buffer(5000)),{},'Cultivated')
-Map.addLayer(target,{palette:['red','green']},'Target Data')
-Map.addLayer(samples,{palette:['red','green']},'Samples Data')
-*/
-
 //Parametros
 var type = 'cultivated'
 var year = 2001
@@ -43,10 +11,9 @@ var numberSamples = 500
 var scale = 30
 
 
-
-//Calculation samples        
+//Calculation automated samples        
 var target = func.automatedSamples(imgs,type,year,area,numberSamples,scale)
-Map.addLayer(target['taget-data'],{palette:['red','green']},'Target Data')
+Map.addLayer(target['target-data'],{palette:['red','green']},'Target Data')
 Map.addLayer(target['samples'],{},'Samples')
 
 
