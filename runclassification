@@ -1,3 +1,6 @@
+var trainSamples_main
+
+
 var run_classficiation = function(carta, year){
 
     var nm_carta = carta; //Changes the chart variable name
@@ -49,27 +52,28 @@ var run_classficiation = function(carta, year){
         .map(onlyWetSeasonNei));
     
     //Applies the functions to calculate percentiles, get latitude and longitude, calculate the temporal reducers and adds the elevation and slope data.
-    temporalData = (getLatLong(temporalPercs(wetSpectralDataNei))
+    var temporalData = (getLatLong(temporalPercs(wetSpectralDataNei))
       .addBands([temporalFeatures(wetSpectralDataNei),elevation, slope]));
 
-    featureSpace = ee.Image(temporalData)
+    var featureSpace = ee.Image(temporalData)
         
-    #Defines the name of the column to be used as training reference (e.g. cons_2022); NEEDS TO BE INTERGER DATA (i.e. 1 ,2 ,3 4)
-    classFieldName = f'cons_{year}';
+    //Defines the name of the column to be used as training reference (e.g. cons_2022); NEEDS TO BE INTERGER DATA (i.e. 1 ,2 ,3 4)
+    var classFieldName = 'cons_'+ year;
     
-    #Function made to adjust the class field from the extra training samples 
-    def make_classFieldName(feat):
+    //Function made to adjust the class field from the extra training samples 
+    var make_classFieldName = function(feat){
         return feat.set(classFieldName, feat.get('is_pasture'));
-  
-    #Merges the main training samples with the extra training samples
+    }
+    
+    //Merges the main training samples with the extra training samples
     trainSamples_main = ee.FeatureCollection('users/vieiramesquita/LAPIG-PASTURE/VECTORS/mapa_pastagem_col8_50k_final_v2')
 
-    if year < 2023:
+    if (year < 2023){
       trainSamples_main = ee.FeatureCollection(trainSamples_main).select(classFieldName)
-    else:
+    }else{
       classFieldName = 'cons_2022'
       trainSamples_main = ee.FeatureCollection(trainSamples_main).select('cons_2022')
-    
+    }
     extra_samples = (ee.FeatureCollection('users/vieiramesquita/LAPIG-PASTURE/VECTORS/Pasture_Extra_Brasil_plus_Date_v1_3')
       .filter(ee.Filter.lte('YearPastur',year)))
 
