@@ -88,6 +88,7 @@ exports.onlyWetSeasonNei = function(image){
 //Create thresholds from samples
 exports.thresholdSamples = function(img,area,type,year){
   
+  img = img.select(year+'_probability')
   //Threshold Values
   dictype = {
     'cultivated':{
