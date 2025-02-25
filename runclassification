@@ -1,4 +1,4 @@
-var trainSamples_main
+var trainSamples_main,extra_samples
 
 
 var run_classficiation = function(carta, year){
