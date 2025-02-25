@@ -97,11 +97,12 @@ exports.thresholdSamples = function(img,area,type,year){
     }
     
   }
-  var dataclass = data.datasets[type+'_perc']
+  //Access threshold type
+  var threshold = dictype[type]
+
+  //Access threshold positive and negative
+  var pos_samples = img.updateMask(cultiv_grassland_p.first().gte(threshold.positive))
+  var neg_samples = img.updateMask(cultiv_grassland_p.first().lte(threshold.negative))
   
-  var pos_samples = dataclass.select()first().updateMask(cultiv_grassland_p.first().gte(50))
-  var neg_samples = cultiv_grassland_p.first().updateMask(cultiv_grassland_p.first().lte(18))
-  
-  
-  
+  return [pos_samples,neg_samples]
 }
