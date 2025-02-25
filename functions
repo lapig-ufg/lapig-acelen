@@ -35,16 +35,16 @@ exports.temporalFeatures = function(image) {
     return result
 }
 
+//Function made to reduce all images/band in the collection to their percentiles, e.g. 10%, 25%, 75% and 90%.
+exports.temporalPercs = function(image) {
 
+    var percs = image.reduce(ee.Reducer.percentile([10, 25, 75, 90]))
 
-exports.temporalPercs  = function(image){
-
-    percs = image.reduce(ee.Reducer.percentile([10, 25, 75, 90]))
-
-    result = ee.Image().select().addBands([percs])
+    var result = ee.Image().select().addBands([percs])
 
     return result
 }
+
 //Function made to generate the latitude and the longitude of each pixel
 exports.getLatLong  = function(img){
     // Gets the projection
