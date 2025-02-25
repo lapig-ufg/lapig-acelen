@@ -78,6 +78,19 @@ exports.res_bilinear = function(img){
     //})
 }
 
+exports.res_bilinear = function(img) {
+
+    //#Resamples the 20 meters bands to 10m using bilinear resampling method
+    var bands = img.select('B5', 'B6', 'B7', 'B8A', 'B11', 'B12'); //Bands to be resampled from 20 to 10 meters
+
+    return img.resample('bilinear').reproject({
+        'crs': bands.projection().crs(), //Gets the projection
+        'scale': img.select('B8').projection().nominalScale() //Gets the pixel size
+    })
+}
+
+
+
 //Function made to mask some weird black edges which can appear in some Sentinel 2 images
 exports.maskEdges = function(s2_img){
     return s2_img.updateMask(
