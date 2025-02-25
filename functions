@@ -90,7 +90,7 @@ exports.thresholdSamples = function(img,area,type,year){
   
   img = img.select(year+'_probability')
   //Threshold Values
-  dictype = {
+  var dictype = {
     'cultivated':{
                   'positive':50,
                   'negative':15
