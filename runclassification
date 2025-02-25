@@ -29,15 +29,6 @@ var indexes = {
 }
 
 
-//Function made to generate the latitude and the longitude of each pixel
-function getLatLong(img) {
-    //# Gets the projection
-    var proj = ee.Image(img).select(0).projection() //Gets the reference projection from one image
-    var latlon = ee.Image.pixelLonLat() //Estimates the latitude and longitude for each pixel
-    return ee.Image(img).addBands(latlon.select('longitude', 'latitude')) //Adds the latitude and the longitude as a band
-}
-
-
 function res_bilinear(img) {
 
     //#Resamples the 20 meters bands to 10m using bilinear resampling method
