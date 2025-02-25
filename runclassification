@@ -56,8 +56,8 @@ var run_classficiation = function(carta, year){
         .map(onlyWetSeasonNei));
     
     //Applies the functions to calculate percentiles, get latitude and longitude, calculate the temporal reducers and adds the elevation and slope data.
-    var temporalData = (getLatLong(temporalPercs(wetSpectralDataNei))
-      .addBands([temporalFeatures(wetSpectralDataNei),elevation, slope]));
+    var temporalData = (func.getLatLong(func.temporalPercs(wetSpectralDataNei))
+      .addBands([func.temporalFeatures(wetSpectralDataNei),elevation, slope]));
 
     var featureSpace = ee.Image(temporalData)
         
