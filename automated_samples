@@ -36,16 +36,16 @@ Map.addLayer(samples,{palette:['red','green']},'Samples Data')
 
 //Parametros
 var type = 'cultivated'
-var ano = '2001'
+var year = 2001
 var area = data.datasets['test_data'].filter(ee.Filter.eq('Fazenda','ADRIANA'))
 var imgs = data.datasets[type+"_perc"].toBands()
 var numberSamples = 500
 var scale = 30
 
-print(area.geometry())
+
 
 //Calculation samples        
-var target = func.automatedSamples(imgs,area,type,ano,numberSamples,scale)
+var target = func.automatedSamples(imgs,type,year,area,numberSamples,scale)
 print(target)
 
 
