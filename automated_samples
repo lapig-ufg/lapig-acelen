@@ -42,7 +42,7 @@ var imgs = data.datasets[type+"_perc"].toBands()
 var numberSamples = 500
 var scale = 30
 
-
+print(area.geometry())
 
 //Calculation samples        
 var target = func.automatedSamples(imgs,area,type,ano,numberSamples,scale)
