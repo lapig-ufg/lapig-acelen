@@ -28,15 +28,6 @@ var indexes = {
     'SATVI': "((b('B11') - b('B4'))/(b('B11') + b('B4') + 0.5))*(1*0.5)-(b('B12')/2)*0.0001" //Soil-Adjusted Total Vegetation Index
 }
 
-//Function made to reduce all images/band in the collection to their percentiles, e.g. 10%, 25%, 75% and 90%.
-function temporalPercs(image) {
-
-    var percs = image.reduce(ee.Reducer.percentile([10, 25, 75, 90]))
-
-    var result = ee.Image().select().addBands([percs])
-
-    return result
-}
 
 //Function made to generate the latitude and the longitude of each pixel
 function getLatLong(img) {
