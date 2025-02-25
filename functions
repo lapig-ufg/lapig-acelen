@@ -1,21 +1,24 @@
 //Import dataset
 var data = require('users/Amazonas21/acelen:datasets')
 
-exports.spectralFeatures = function(image){
+//Function made to estimate spectral indexes for each image in the Image Collection
+exports.spectralFeatures = function (image) {
 
-    ndvi = image.expression(indexes["NDVI"]).select([0],['NDVI']) //Calculates the NDVI
-    ndwi = image.expression(indexes["NDWI"]).select([0],['NDWI']) //Calculates the NDWI
-    cai = image.expression(indexes["CAI"]).select([0],['CAI']) //Calculate thes CAI
-    cri1 = image.expression(indexes["CRI1"]).select([0],['CRI1']) //Calculates the CRI1
-    ari1 = image.expression(indexes["ARI_1"]).select([0],['ARI_1']) //Calculates the ARI_1
-    rgr = image.expression(indexes["RGR"]).select([0], ['RGR']) //Calculates the RGR
-    psri = image.expression(indexes["PSRI"]).select([0], ['PSRI']) //Calculates the PSRI
-    satvi = image.expression(indexes["SATVI"]).select([0], ['SATVI']) //Calculates the SATVI
+    var ndvi = image.expression(indexes["NDVI"]).select([0], ['NDVI']) //Calculates the NDVI
+    var ndwi = image.expression(indexes["NDWI"]).select([0], ['NDWI']) //Calculates the NDWI
+    var cai = image.expression(indexes["CAI"]).select([0], ['CAI']) //Calculate thes CAI
+    var cri1 = image.expression(indexes["CRI1"]).select([0], ['CRI1']) //Calculates the CRI1
+    var ari1 = image.expression(indexes["ARI_1"]).select([0], ['ARI_1']) //Calculates the ARI_1
+    var rgr = image.expression(indexes["RGR"]).select([0], ['RGR']) //Calculates the RGR
+    var psri = image.expression(indexes["PSRI"]).select([0], ['PSRI']) //Calculates the PSRI
+    var satvi = image.expression(indexes["SATVI"]).select([0], ['SATVI']) //Calculates the SATVI
 
     image = image.addBands([ndvi, ndwi, cai, cri1, ari1, rgr, psri, satvi]) //Adds the spectral indexes to the image with the spectral bands
 
     return image
 }
+
+
 
 exports.temporalFeatures = function(image){
 
