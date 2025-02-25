@@ -7,6 +7,8 @@ var data = require('users/Amazonas21/acelen:datasets')
 //Parametros
 var type = 'cultivated'
 var ano = '2001'
+var area = data.datasets['test_']
+
 
 //Select images
 var imgs = data.datasets[type+"_perc"].toBands()
