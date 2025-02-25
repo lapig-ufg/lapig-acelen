@@ -1,7 +1,6 @@
 //Import dataset
 var data = require('users/Amazonas21/acelen:datasets')
 
-
 exports.spectralFeatures = function(image){
 
     ndvi = image.expression(indexes["NDVI"]).select([0],['NDVI']) //Calculates the NDVI
@@ -121,4 +120,32 @@ exports.thresholdSamples = function(img,area,type,year){
   return target
 }
 
-exports.automatedSamples
+exports.automatedSamples = function(type,year){
+ //Parametros
+ var area = data.datasets['test_data'].filter(ee.Filter.eq('Fazenda','ADRIANA'))
+
+ //Select images
+ var imgs = data.datasets[type+"_perc"].toBands()
+ var cliparea = area.geometry().buffer(5000)
+
+//Calculation samples        
+var target = exports.thresholdSamples(imgs,cliparea,'cultivated',year)
+
+//Create points from samples positive and negative from GPW maps
+var samples = target.stratifiedSample({
+  numPoints:500,
+  classBand: 'targetMap',
+  region:cliparea,
+  scale:30,
+  geometries: true
+})
+  
+  
+  
+  
+  
+  
+  
+  
+  
+}
