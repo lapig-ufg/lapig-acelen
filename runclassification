@@ -99,4 +99,7 @@ var run_classficiation = function(carta, year){
     classifier = classifier.train(trainSamplesFeeded, classFieldName);
    
     //Takes the trained classifier and use it to classify the entire feature space pixel by pixel
-    classification = featureSpace.classify(classifier).select(0);
+    classification = featureSpace.classify(classifier).select(0)
+  
+    return classification
+}
