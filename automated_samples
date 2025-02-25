@@ -2,8 +2,6 @@
 var func = require('users/Amazonas21/acelen:functions')
 var data = require('users/Amazonas21/acelen:datasets')
 
-
-
 //Parametros
 var type = 'cultivated'
 var ano = '2001'
