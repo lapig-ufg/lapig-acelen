@@ -115,6 +115,7 @@ exports.thresholdSamples = function(img,area,type,year){
   
   var target = ee.Image().add[pos_samples,neg_samples]
                .reduce(ee.Reducer.Max())
+               .rename('targetMap')
   
   return target
 }
