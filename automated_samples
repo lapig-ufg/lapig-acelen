@@ -21,7 +21,7 @@ var samples = target.stratifiedSample({
   numPoints:500,
   classBand: 'targetMap',
   region:cliparea,
-  scale:250,
+  scale:30,
   geometries: true
 })
 
