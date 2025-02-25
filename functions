@@ -120,3 +120,5 @@ exports.thresholdSamples = function(img,area,type,year){
                
   return target
 }
+
+exports.automatedSamples
