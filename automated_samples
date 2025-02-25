@@ -14,13 +14,22 @@ Map.centerObject(area)
 
 //Select images
 var imgs = data.datasets[type+"_perc"].toBands()
-    
+var cliparea = area.geometry().buffer(5000)
         
-var samples = func.thresholdSamples(imgs,area.geometry().buffer(5000),'cultivated',2001)
+var target = func.thresholdSamples(imgs,cliparea,'cultivated',2001)
+var samples = target.stratifiedSample({
+  numPoints:500,
+  classBand: 'targetMap',
+  region:cliparea,
+  scale:250,
+  geometries: true
+})
+
+
 
 Map.addLayer(imgs.clip(area.geometry().buffer(5000)),{},'Cultivated')
-print(samples)
-Map.addLayer(samples,{},'Target Data')
+Map.addLayer(target,{palette:['red','green']},'Target Data')
+Map.addLayer(samples,{palette:['red','green']},'Samples Data')
 
 
 
