@@ -14,8 +14,10 @@ Map.centerObject(area)
 
 //Select images
 var imgs = data.datasets[type+"_perc"].toBands()
-           
+
+        
 var samples = func.thresholdSamples(imgs,area.geometry().buffer(10000),'cultivated',2001)
 
-Map.addLayer(samples,{},'Positive samples'
+Map.addLayer(samples[0],{palette:['green']},samples[0].bandNames().get(0).getInfo())
+Map.addLayer(samples[1],{palette:['red']},samples[1].bandNames().get(0).getInfo())
 
