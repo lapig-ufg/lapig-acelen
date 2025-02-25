@@ -1,3 +1,6 @@
+//Import functions
+var func = require('users/Amazonas21/acelen:functions')
+
 //Create globals variables
 var trainSamples_main,extra_samples
 
