@@ -120,16 +120,14 @@ exports.thresholdSamples = function(img,area,type,year){
   return target
 }
 
-exports.automatedSamples = function(type,year){
- //Parametros
- var area = data.datasets['test_data'].filter(ee.Filter.eq('Fazenda','ADRIANA'))
-
+exports.automatedSamples = function(img,type,year,area,data){
+ 
  //Select images
- var imgs = data.datasets[type+"_perc"].toBands()
+ var img = data.datasets[type+"_perc"].toBands()
  var cliparea = area.geometry().buffer(5000)
 
 //Calculation samples        
-var target = exports.thresholdSamples(imgs,cliparea,'cultivated',year)
+var target = exports.thresholdSamples(imgs,cliparea,type,year)
 
 //Create points from samples positive and negative from GPW maps
 var samples = target.stratifiedSample({
