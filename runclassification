@@ -1,6 +1,7 @@
+//Create globals variables
 var trainSamples_main,extra_samples
 
-
+//Function to classification pastures
 var run_classficiation = function(carta, year){
 
     var nm_carta = carta; //Changes the chart variable name
