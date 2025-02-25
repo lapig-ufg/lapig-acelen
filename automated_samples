@@ -15,6 +15,7 @@ Map.centerObject(area)
 //Select images
 var imgs = data.datasets[type+"_perc"].toBands()
            
-var samples = func.thresholdSamples(imgs,area,'cultivated',2001)
-print(samples)
+var samples = func.thresholdSamples(imgs,area.geometry().buffer(10000),'cultivated',2001)
+
+Map.addLayer(samples,{},'Positive samples'
 
