@@ -67,17 +67,6 @@ exports.radians = function(img){
     return img.toFloat().multiply(math.pi).divide(180)
 }
 
-exports.res_bilinear = function(img){
-
-    //Resamples the 20 meters bands to 10m using bilinear resampling method
-    bands = img.select('B5', 'B6', 'B7', 'B8A', 'B11', 'B12'); //Bands to be resampled from 20 to 10 meters
-
-    //return img.resample('bilinear').reproject(**{
-    //    'crs': bands.projection().crs(), #Gets the projection
-    //    'scale': img.select('B8').projection().nominalScale() #Gets the pixel size
-    //})
-}
-
 exports.res_bilinear = function(img) {
 
     //#Resamples the 20 meters bands to 10m using bilinear resampling method
