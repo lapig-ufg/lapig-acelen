@@ -120,23 +120,22 @@ exports.thresholdSamples = function(img,area,type,year){
   return target
 }
 
-exports.automatedSamples = function(img,type,year,area,data){
+exports.automatedSamples = function(img,type,year,area){
  
- //Select images
- var img = data.datasets[type+"_perc"].toBands()
- var cliparea = area.geometry().buffer(5000)
+  //Area images
+  var cliparea = area.geometry().buffer(5000)
 
-//Calculation samples        
-var target = exports.thresholdSamples(imgs,cliparea,type,year)
+  //Calculation samples        
+  var target = exports.thresholdSamples(imgs,cliparea,type,year)
 
-//Create points from samples positive and negative from GPW maps
-var samples = target.stratifiedSample({
-  numPoints:500,
-  classBand: 'targetMap',
-  region:cliparea,
-  scale:30,
-  geometries: true
-})
+  //Create points from samples positive and negative from GPW maps
+  var samples = target.stratifiedSample({
+    numPoints:500,
+    classBand: 'targetMap',
+    region:cliparea,
+    scale:30,
+    geometries: true
+  })
   
   
   
