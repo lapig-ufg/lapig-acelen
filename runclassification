@@ -37,19 +37,6 @@ function getLatLong(img) {
     return ee.Image(img).addBands(latlon.select('longitude', 'latitude')) //Adds the latitude and the longitude as a band
 }
 
-//Function made to mask cloud and shadows in the images, based on the quality band from Google Cloud Score (cs)
-function maskClouds(img) {
-    // The threshold for masking; values between 0.50 and 0.65 generally work well.
-    // Higher values will remove thin clouds, haze & cirrus shadows.
-    var CLEAR_THRESHOLD = 0.50;
-    var mask = img.select('cs').gte(CLEAR_THRESHOLD); //Masks the pixels with 50% of chance or more to be clouds.
-    return img.updateMask(mask);
-}
-
-//Function made to convert deegre image to percent
-function radians(img) {
-    return img.toFloat().multiply(Math.PI).divide(180)
-}
 
 function res_bilinear(img) {
 
