@@ -7,8 +7,10 @@ var app = {
               values:['Cultivada','Natural'],
               placeholder:'Escolha o tipo'
             })
+            pnTypePasture.add([lblType,selType])
             
             var painelMain = ui.Panel({style: {width: '315px'}})
+                painelMain.add([pnTypePasture])
             return painelMain
             
           },
