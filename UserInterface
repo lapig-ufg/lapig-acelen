@@ -28,5 +28,5 @@ var app = {
               ui.root.widgets().reset([mapPainel]);
           }
 }
-
+//Initialize app
 app.init();
