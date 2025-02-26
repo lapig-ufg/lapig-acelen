@@ -24,18 +24,6 @@ var rfNTrees = 500; //#Number of random trees - lesser faster, but worst. 100-50
 var rfBagFraction = 0.5; //#Fraction (10^-2%) of variables in the bag - 0.5/50% is the default;
 var rfVarPersplit = 13 //#Number of varibales per tree branch - estimated by the square root of the number of variables used in the feature space;
 
-//Dictionary containing spectral indexes and their formulas
-var indexes = {
-    'CAI': "(b('B12') / b('B11'))", //Cellulose absorption index
-    'NDVI': "(b('B8') - b('B4')) / (b('B8') + b('B4'))", //Normalized Difference Vegetation Index
-    'NDWI': "(b('B8') - b('B11')) / (b('B8') + b('B11'))", //Normalized Difference Water/Wetness Index
-    'CRI1': "1/(b('B2')) - 1/(b('B3'))", //Carotenoid Reflectance Index 1
-    'ARI_1': "(1/b('B3') - 1/b('B5'))*1000", //Anthocyanin Reflectance Index 1
-    'RGR': "b('B4')/b('B3')", //Simple Ratio Red/Green Red-Green Ratio
-    'PSRI': "(b('B4') - b('B2') )/(b('B6'))", //Plant Senescence Reflectance Index
-    'SATVI': "((b('B11') - b('B4'))/(b('B11') + b('B4') + 0.5))*(1*0.5)-(b('B12')/2)*0.0001" //Soil-Adjusted Total Vegetation Index
-}
-
 //Function made to convert deegre image to percent
 function radians(img) {
     return img.toFloat().multiply(Math.PI).divide(180)
