@@ -13,13 +13,14 @@ var app = {
                     map.setCenter(-53.23,-16.48, 4)
                 return map
               }
+        
               var maplayer = newMap()
         
-              //Carregando as interfaces gráficas
+              //Load all guis
               var gui = app.gui(maplayer) 
               var listPanel = [gui,maplayer]
   
-              //Unificando todos os paineis
+              //Merge all painels
               var mapPainel = ui.Panel(listPanel,
                   ui.Panel.Layout.Flow('horizontal'), 
                   {stretch: 'both',height:'100%',width:'100%'}
