@@ -143,3 +143,7 @@ exports.automatedSamples = function(img,type,year,area,numSamples,scale){
   return {'target-data':target,'samples':samples}
   
 }
+
+exports.calcFeatureImportance = function(classify){
+  
+}
