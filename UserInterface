@@ -13,12 +13,12 @@ var app = {
             )
             
             //Panel of choose the year for classification in map
-            var lblType = ui.Label('Tipo de pastagem')
-            var selType = ui.Select({
-              items:['Cultivada','Natural'],
-              placeholder:'Escolha o tipo'
+            var lblYear = ui.Label('Ano da análise')
+            var selYear = ui.Select({
+              items:ee.List.sequence(2018,2022),
+              placeholder:'Escolha o ano'
             })
-            var pnTypePasture = ui.Panel([lblType,selType],
+            var pnYear = ui.Panel([lblYear,selYear],
                         ui.Panel.Layout.Flow('horizontal'),
                         {stretch: 'both'}
             )
