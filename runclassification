@@ -44,7 +44,7 @@ var BandsWet = ['blue_wet', 'green_wet', 'red_wet', 'rededge1_wet', 'rededge2_we
 var samplesautomated = func.automatedSamples(imgs,type,year,area,numberSamples,scale)
 
 //Map.centerObject(samplesautomated['samples'])
-//Map.addLayer(samplesautomated['target-data'],{palette:['red','green']},'Samples - Image')
+Map.addLayer(samplesautomated['target-data'],{palette:['red','green']},'Samples - Image')
 //Map.addLayer(samplesautomated['samples'],{},'Amostras:'+year)
 //########################################
 
