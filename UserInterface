@@ -4,7 +4,7 @@ var app = {
             var pnTypePasture = ui.Panel()
             var lblType = ui.Label('Tipo de pastagem')
             var selType = ui.Select({
-              values:['Cultivada','Natural'],
+              items:['Cultivada','Natural'],
               placeholder:'Escolha o tipo'
             })
             pnTypePasture.add([lblType,selType])
