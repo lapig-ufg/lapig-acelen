@@ -1,5 +1,7 @@
 var app = {
-          functions:
+          gui:function(maplayer){
+            
+          }
           
           init:function(){
               //Criacao do mapa de fundo
@@ -12,7 +14,7 @@ var app = {
               var maplayer = newMap()
         
               //Carregando as interfaces gráficas
-              var gui = app.functions.guis(maplayer) 
+              var gui = app.gui(maplayer) 
               var listPanel = [gui,maplayer]
   
               //Unificando todos os paineis
