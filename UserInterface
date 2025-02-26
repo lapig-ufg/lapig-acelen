@@ -1,6 +1,8 @@
 var app = {
           gui:function(maplayer){
             
+            var painelMain = ui.Panel()
+            
           },
           init:function(){
               //Criacao do mapa de fundo
