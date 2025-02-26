@@ -23,11 +23,13 @@ var app = {
                         {stretch: 'both'}
             )
             
-            //var listPanels = [pnTypePasture,]
-            
-            
+            var listPanels = [pnTypePasture,pnYear]
             var painelMain = ui.Panel({style: {width: '250px'}})
-                painelMain.add([pnTypePasture,pnYear])
+            
+            for (i in listPanels){
+              painelMain.add(listPanels[i])
+            }
+            
             return painelMain
             
           },
