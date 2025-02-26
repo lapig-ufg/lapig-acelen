@@ -58,7 +58,7 @@ var samplesautomated = func.automatedSamples(imgs,type,year,area,numberSamples,s
 //########################################
 
 //Main function, responsible to execute the classification. Accept as parameters the chart name (e.g. 'SE-22-X-A') and the year (e.g. 2022)
-function run_classficiation(carta, year) {
+function run_classficiation(carta, year,target) {
 
     //var nm_carta = carta; //Changes the chart variable name
 
