@@ -15,7 +15,7 @@ var app = {
             //Panel of choose the year for classification in map
             var lblYear = ui.Label('Ano da análise')
             var selYear = ui.Select({
-              items:ee.List.sequence(2018,2022),
+              items:['2018','2019','2020','2021','2022'],
               placeholder:'Escolha o ano'
             })
             var pnYear = ui.Panel([lblYear,selYear],
