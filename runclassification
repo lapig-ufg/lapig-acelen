@@ -63,7 +63,7 @@ function run_classficiation(carta, year) {
         .filterBounds(cartas_buffer) //Filters the images that intersects with the main and neighbor charts
         .filterDate(START_DATE, END_DATE) //Filters the images by the range of dates (start and end)
 
-
+    //OK
     var csPlus = (ee.ImageCollection('GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED') //Selects the Google Sentinel 2 AI Cloud Score +, the best cloud and shadow mask from Sentinel 2
         .filterBounds(cartas_buffer) //Filters the images that intersects with the main and neighbor charts
         .filterDate(START_DATE, END_DATE)); //Filters the images by the range of dates (start and end)
