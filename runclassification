@@ -101,7 +101,7 @@ function run_classfication(carta, year,samples,target) {
     
     //OK - Function made to get the image NDVI and mask it according to the 25% NDVI percentile
     function onlyWetSeasonNei(image){
-        seasonMask = image.select("ndvi_wet").gte(wetThresholdNei);
+        var seasonMask = image.select("ndvi_wet").gte(wetThresholdNei);
         return image.mask(seasonMask);
     }
         
