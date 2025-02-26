@@ -3,7 +3,7 @@ var func = require('users/Amazonas21/acelen:functions')
 var data = require('users/Amazonas21/acelen:datasets')
 
 //Classification Params
-var year = 2023
+var year = 2001
 var IBGE_CHART = 'SE-22-X-A' //Check here the code of the desired IBGE Chart
 var my_folder = 'lapig_br_pasture_mapping_s2_v1'
 
