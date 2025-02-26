@@ -1,7 +1,7 @@
 var app = {
           gui:function(maplayer){
             
-            
+            //Choose pasture type for classification in map
             var lblType = ui.Label('Tipo de pastagem')
             var selType = ui.Select({
               items:['Cultivada','Natural'],
