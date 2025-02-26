@@ -1,5 +1,6 @@
 //Import functions
 var func = require('users/Amazonas21/acelen:functions')
+var data = require('users/Amazonas21/acelen:datasets')
 
 //Classification Params
 var year = 2023
