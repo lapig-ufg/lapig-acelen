@@ -4,8 +4,8 @@ var data = require('users/Amazonas21/acelen:datasets')
 
 //Classification Params
 var year = 2018
-var IBGE_CHART = 'SE-22-X-A' //Check here the code of the desired IBGE Chart
-var my_folder = 'lapig_br_pasture_mapping_s2_v1'
+//var IBGE_CHART = 'SE-22-X-A' //Check here the code of the desired IBGE Chart
+//var my_folder = 'lapig_br_pasture_mapping_s2_v1'
 
 //Automated Params - New
 var type = 'cultivated'
