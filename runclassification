@@ -69,6 +69,7 @@ function run_classficiation(carta, year) {
         .filterBounds(cartas_buffer) //Filters the images that intersects with the main and neighbor charts
         .filterDate(START_DATE, END_DATE)); //Filters the images by the range of dates (start and end)
 
+    //OK
     var csPlusBands = csPlus.first().bandNames(); //Get the band names of the Cloud Score+ bands
 
     var s2CloudMasked = (s2.linkCollection(csPlus, csPlusBands) //Link the Sentinel collection with the CloudScore+
