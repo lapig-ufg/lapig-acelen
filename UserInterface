@@ -26,7 +26,7 @@ var app = {
             var listPanels = [pnTypePasture,pnYear]
             var painelMain = ui.Panel({style: {width: '250px'}})
             
-            for (i in listPanels){
+            for (var i in listPanels){
               painelMain.add(listPanels[i])
             }
             
