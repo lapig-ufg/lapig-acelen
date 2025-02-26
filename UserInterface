@@ -1,6 +1,13 @@
 var app = {
           gui:function(maplayer){
             
+            var pnTypePasture = ui.Panel()
+            var lblType = ui.Label('Tipo de pastagem')
+            var selType = ui.Select({
+              values:['Cultivada','Natural'],
+              placeholder:'Escolha o tipo'
+            })
+            
             var painelMain = ui.Panel({style: {width: '315px'}})
             return painelMain
             
