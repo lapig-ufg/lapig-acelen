@@ -58,11 +58,11 @@ var samplesautomated = func.automatedSamples(imgs,type,year,area,numberSamples,s
 //########################################
 
 //Main function, responsible to execute the classification. Accept as parameters the chart name (e.g. 'SE-22-X-A') and the year (e.g. 2022)
-function run_classficiation(area, year,samples,target) {
+function run_classficiation(carta, year,samples,target) {
 
     //var nm_carta = carta; //Changes the chart variable name
 
-    //var cartas_area = cartas.filter(ee.Filter.eq('grid_name', nm_carta)); // Filters the main charts feature collection by the choosed chart
+    var cartas_area = carta//cartas.filter(ee.Filter.eq('grid_name', nm_carta)); // Filters the main charts feature collection by the choosed chart
     //var cartas_buffer = cartas_area.geometry().buffer(100000); // Selects the charts around the choosed chart
 
     //OK
@@ -172,11 +172,12 @@ function run_classficiation(area, year,samples,target) {
     //Takes the trained classifier and use it to classify the entire feature space pixel by pixel
     var classification = featureSpace.classify(classifier).select(0);
     
-    var fileName = 'br_pasture_s2_col2_v1_' + carta + '_' + year; //Output file name
+    //var fileName = 'br_pasture_s2_col2_v1_' + carta + '_' + year; //Output file name
     
     Map.centerObject(cartas_area,15)
     Map.addLayer(featureSpace.clip(cartas_area),{bands:['ndvi_wet_p90','ndvi_wet_median','ndvi_wet_p10'],min:0.2,max:0.8},
       'NDVI Perc Composition (90,50,10)')
+    //Map.addLayer(classification.clip(cartas_area),{min:0,max:1},'Classification')
     Map.addLayer(classification.clip(cartas_area),{min:0,max:1},'Classification')
     /*
     //Generates the export task for the Google Drive
