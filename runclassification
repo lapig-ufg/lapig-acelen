@@ -146,7 +146,6 @@ function run_classfication(carta, year,samples,target) {
     //Sets the classifier to the Probability Mode - Default is CLASSIFICATION
     classifier = classifier.setOutputMode('PROBABILITY');
     
-    print(featureSpace)
     
     //Crosses the training samples with the feature space variables to associate the information with the classes
     var trainSamplesFeeded = (featureSpace.sampleRegions({
