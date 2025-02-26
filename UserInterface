@@ -1,7 +1,7 @@
 var app = {
           gui:function(maplayer){
             
-            var painelMain = ui.Panel()
+            var painelMain = ui.Panel({style: {width: '315px'}})
             
           },
           init:function(){
