@@ -198,4 +198,4 @@ function run_classfication(carta, year,samples,target) {
 
 //Executes the classification function
 //run_classficiation(IBGE_CHART, year);
-run_classfication(area,year,samplesautomated)
+run_classfication(area,year,samplesautomated,'targetMap')
