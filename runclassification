@@ -156,7 +156,7 @@ function run_classfication(carta, year,samples,target) {
         
     }));
     
-    print('Pontos amostradas:',trainSamplesFeeded)
+    
     //Trains the classifier using the training samples asociated with the feature space information
     classifier = classifier.train(trainSamplesFeeded, target);//classFieldName);
     
