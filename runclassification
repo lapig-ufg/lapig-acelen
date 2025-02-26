@@ -36,6 +36,11 @@ var indexes = {
     'SATVI': "((b('B11') - b('B4'))/(b('B11') + b('B4') + 0.5))*(1*0.5)-(b('B12')/2)*0.0001" //Soil-Adjusted Total Vegetation Index
 }
 
+//Function made to convert deegre image to percent
+function radians(img) {
+    return img.toFloat().multiply(Math.PI).divide(180)
+}
+
 
 var terrain = ee.Algorithms.Terrain(ee.Image("NASA/NASADEM_HGT/001")); //Terrain variables (i.e. elevation, slope, aspect) extraction from the NASADEM 
 var elevation = terrain.select('elevation'); //Selection of the elevation band
