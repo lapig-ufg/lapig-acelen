@@ -72,6 +72,7 @@ function run_classficiation(carta, year) {
     //OK
     var csPlusBands = csPlus.first().bandNames(); //Get the band names of the Cloud Score+ bands
 
+    //OK
     var s2CloudMasked = (s2.linkCollection(csPlus, csPlusBands) //Link the Sentinel collection with the CloudScore+
         .filter(ee.Filter.lte('CLOUDY_PIXEL_PERCENTAGE', 80)) //Filter the images with more than 80% of cloud
         .map(func.maskEdges) //Applies the filter to mask fault edges
