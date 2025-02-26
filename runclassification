@@ -94,13 +94,13 @@ function run_classficiation(carta, year) {
         return image.mask(seasonMask);
     }
         
-    //Applies the 25% NDVI percentile mask to each image in the collection
+    //Applies the 25% NDVI percentile mask to each image in the collection - OK
     var wetSpectralDataNei = (spectralDataNei
         .select(spectralDataNei.first().bandNames(), BandsWet)
         .map(onlyWetSeasonNei));
     
     //Applies the functions to calculate percentiles, get latitude and longitude, calculate the temporal reducers and adds the elevation and slope data.
-    var temporalData = func.getLatLong(temporalPercs(wetSpectralDataNei))
+    var temporalData = func.getLatLong(func.temporalPercs(wetSpectralDataNei))
       .addBands([temporalFeatures(wetSpectralDataNei),elevation, slope]);
 
     var featureSpace = ee.Image(temporalData)
