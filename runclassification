@@ -3,7 +3,7 @@ var func = require('users/Amazonas21/acelen:functions')
 var data = require('users/Amazonas21/acelen:datasets')
 
 //Classification Params
-var year = 2001
+var year = 2018
 var IBGE_CHART = 'SE-22-X-A' //Check here the code of the desired IBGE Chart
 var my_folder = 'lapig_br_pasture_mapping_s2_v1'
 
@@ -109,11 +109,12 @@ function run_classfication(carta, year,samples,target) {
       .addBands([func.temporalFeatures(wetSpectralDataNei),elevation, slope]);
 
     //OK
+    print('Temporal Data',temporalData)
     var featureSpace = ee.Image(temporalData)
 
     //OK - Prints the feature space band names
     print(featureSpace.bandNames())
-    
+    print('Bands Names:',featureSpace)
     
     //OK - Defines the name of the column to be used as training reference (e.g. cons_2022); NEEDS TO BE INTERGER DATA (i.e. 1 ,2 ,3 4)
     var classFieldName = 'cons_' + year;
