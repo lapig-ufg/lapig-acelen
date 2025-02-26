@@ -58,6 +58,7 @@ function run_classficiation(carta, year) {
     var START_DATE = ee.Date((year - 1) + '-07-01'); //Start date to filter the image collection (usually six months before the main year)
     var END_DATE = ee.Date((year + 1) + '-06-30'); //End date to filter the image collection (usually six months after the main year)
 
+    //OK
     var s2 = ee.ImageCollection("COPERNICUS/S2_HARMONIZED") //Selects the Sentinel 2 TOA Harmonized time series 
         .filterBounds(cartas_buffer) //Filters the images that intersects with the main and neighbor charts
         .filterDate(START_DATE, END_DATE) //Filters the images by the range of dates (start and end)
@@ -94,12 +95,12 @@ function run_classficiation(carta, year) {
         return image.mask(seasonMask);
     }
         
-    //Applies the 25% NDVI percentile mask to each image in the collection - OK
+    //OK - Applies the 25% NDVI percentile mask to each image in the collection
     var wetSpectralDataNei = (spectralDataNei
         .select(spectralDataNei.first().bandNames(), BandsWet)
         .map(onlyWetSeasonNei));
     
-    //Applies the functions to calculate percentiles, get latitude and longitude, calculate the temporal reducers and adds the elevation and slope data.
+    //OK - Applies the functions to calculate percentiles, get latitude and longitude, calculate the temporal reducers and adds the elevation and slope data.
     var temporalData = func.getLatLong(func.temporalPercs(wetSpectralDataNei))
       .addBands([func.temporalFeatures(wetSpectralDataNei),elevation, slope]);
 
