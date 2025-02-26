@@ -40,12 +40,6 @@ var BandsWet = ['blue_wet', 'green_wet', 'red_wet', 'rededge1_wet', 'rededge2_we
     'cri1_wet', 'ari1_wet', 'rgr_wet', 'psri_wet', 'satvi_wet'
 ];
 
-//List of names to rename amplitude bands
-var BandsWetAmp = ['blue_wet_amp', 'green_wet_amp', 'red_wet_amp', 'rededge1_wet_amp',
-    'rededge2_wet_amp', 'rededge3_wet_amp', 'nir_wet_amp', 'rededge4_wet_amp', 'swir1_wet_amp', 'swir2_wet_amp',
-    'ndvi_wet_amp', 'ndwi_wet_amp', 'cai_wet_amp', 'cri1_wet_amp', 'ari1_wet_amp', 'rgr_wet_amp',
-    'psri_wet_amp', 'satvi_wet_amp'
-];
 
 var samplesautomated = func.automatedSamples(imgs,type,year,area,numberSamples,scale)
 
