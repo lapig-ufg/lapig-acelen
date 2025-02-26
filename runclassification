@@ -169,7 +169,7 @@ function run_classfication(carta, year,samples,target) {
       'natural':0.428
     }
     var classification = featureSpace.classify(classifier).select(0);
-        classification = classification.get()
+        classification = classification.get(threshold[type]).selfMask()
     //var fileName = 'br_pasture_s2_col2_v1_' + carta + '_' + year; //Output file name
     
     //Map.centerObject(cartas_area,15)
