@@ -158,7 +158,7 @@ exports.automatedSamples = function(img,type,year,area,numSamples,scale){
   
 }
 
-exports.calcFeatureImportance = function(classify){
+exports.calcFeatureImportance = function(classifier){
  //Calculates the feature/variable importance for the classifier
     var importance = ee.Dictionary(classifier.explain().get('importance'))
     
