@@ -151,40 +151,8 @@ function run_classficiation(carta, year) {
     //Trains the classifier using the training samples asociated with the feature space information
     classifier = classifier.train(trainSamplesFeeded, classFieldName);
     
-    //Calculates the feature/variable importance for the classifier
-    var importance = ee.Dictionary(classifier.explain().get('importance'))
-    
-    //Do something to rank/sort the importance of the features from highest to lowest
-    var keys = importance.keys().sort(importance.values()).reverse()
-    var values = importance.values(keys);
-
-    var rows = keys.zip(values).map(function(list) {
-        return {
-            c: ee.List(list).map(function(n) {
-                return {
-                    v: n
-                };
-            })
-        }
-    })
-
-    var dataTable = {
-        cols: [{
-                id: 'band',
-                label: 'Band',
-                type: 'string'
-            },
-            {
-                id: 'importance',
-                label: 'Importance',
-                type: 'number'
-            }
-        ],
-        rows: rows
-    };
-    
-    //Prints the ranked feature importance
-    print(keys.zip(values))
+    //Visualization Feature Importance
+    print(func.calcFeatureImportance(classifier))
     
     //Takes the trained classifier and use it to classify the entire feature space pixel by pixel
     var classification = featureSpace.classify(classifier).select(0);
