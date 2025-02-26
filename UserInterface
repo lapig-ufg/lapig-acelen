@@ -20,6 +20,8 @@ var app = {
               ); 
               ui.root.widgets().reset([mapPainel]);
         
+          }
+  
 }
 
-app.init()
+app.init();
