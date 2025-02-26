@@ -195,7 +195,7 @@ function run_classficiation(carta, year) {
     Map.addLayer(featureSpace.clip(cartas_area),{bands:['ndvi_wet_p90','ndvi_wet_median','ndvi_wet_p10'],min:0.2,max:0.8},
       'NDVI Perc Composition (90,50,10)')
     Map.addLayer(classification.clip(cartas_area),{min:0,max:1},'Classification')
-    
+    /*
     //Generates the export task for the Google Drive
     Export.image.toDrive({
         //Points to the classification image and convert it from Float (0 to 1) to Integer image (0 to 10000) and clips it based on the chart geometry
@@ -207,7 +207,7 @@ function run_classficiation(carta, year) {
         scale: 10, //Sets the output resolution, measured in meters
         maxPixels: 1e13, //Sets the maximum amount of pixels that can be exported, which is 10^13 or 1E13
     });
-
+    */
 }
 
 // ##############CHECK#################
