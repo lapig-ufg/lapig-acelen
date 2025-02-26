@@ -6,7 +6,12 @@ var year = 2023
 var IBGE_CHART = 'SE-22-X-A' //Check here the code of the desired IBGE Chart
 var my_folder = 'lapig_br_pasture_mapping_s2_v1'
 
-//Automated Params
+//Automated Params - New
+var type = 'cultivated'
+var area = data.datasets['test_data'].filter(ee.Filter.eq('Fazenda','ADRIANA'))
+var imgs = data.datasets[type+"_perc"].toBands()
+var numberSamples = 500
+var scale = 30
 
 
 //Charts used as region/model delimitation
