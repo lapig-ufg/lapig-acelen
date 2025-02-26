@@ -1,0 +1,25 @@
+var app = {
+          init:function(){
+              //Criacao do mapa de fundo
+              function newMap(){
+                var map = ui.Map().clear();
+                    map.setOptions('SATELLITE');
+                    map.setCenter(-53.23,-16.48, 4)
+                return map
+              }
+              var maplayer = newMap()
+        
+              //Carregando as interfaces gráficas
+              var gui = app.functions.guis(maplayer) 
+              var listPanel = [gui,maplayer]
+  
+              //Unificando todos os paineis
+              var mapPainel = ui.Panel(listPanel,
+                  ui.Panel.Layout.Flow('horizontal'), 
+                  {stretch: 'both',height:'100%',width:'100%'}
+              ); 
+              ui.root.widgets().reset([mapPainel]);
+        
+}
+
+app.init()
