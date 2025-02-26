@@ -150,10 +150,10 @@ function run_classfication(carta, year,samples,target) {
     
     //Crosses the training samples with the feature space variables to associate the information with the classes
     var trainSamplesFeeded = (featureSpace.sampleRegions({
-        'collection': trainSamples,//.filterBounds(cartas_buffer).filter(ee.Filter.neq(classFieldName, null)),
-        'properties': [target],//[classFieldName],
-        'scale': 10,
-        'tileScale': 16
+        collection: trainSamples,//.filterBounds(cartas_buffer).filter(ee.Filter.neq(classFieldName, null)),
+        properties: [target],//[classFieldName],
+        scale: 10,
+        tileScale': 16
     }));
     
     print('Pontos amostradas:',trainSamplesFeeded)
