@@ -1,18 +1,28 @@
 var app = {
           gui:function(maplayer){
             
-            //Choose pasture type for classification in map
+            //Panel of choose pasture type for classification in map
             var lblType = ui.Label('Tipo de pastagem')
             var selType = ui.Select({
               items:['Cultivada','Natural'],
               placeholder:'Escolha o tipo'
             })
-            
             var pnTypePasture = ui.Panel([lblType,selType],
                         ui.Panel.Layout.Flow('horizontal'),
                         {stretch: 'both'}
             )
-           
+            
+            //Panel of choose the year for classification in map
+            var lblType = ui.Label('Tipo de pastagem')
+            var selType = ui.Select({
+              items:['Cultivada','Natural'],
+              placeholder:'Escolha o tipo'
+            })
+            var pnTypePasture = ui.Panel([lblType,selType],
+                        ui.Panel.Layout.Flow('horizontal'),
+                        {stretch: 'both'}
+            )
+            
             var painelMain = ui.Panel({style: {width: '250px'}})
                 painelMain.add(pnTypePasture)
             return painelMain
