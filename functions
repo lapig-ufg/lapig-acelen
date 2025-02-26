@@ -1,6 +1,20 @@
 //Import dataset
 var data = require('users/Amazonas21/acelen:datasets')
 
+//Dictionary containing spectral indexes and their formulas
+var indexes = {
+    'CAI': "(b('B12') / b('B11'))", //Cellulose absorption index
+    'NDVI': "(b('B8') - b('B4')) / (b('B8') + b('B4'))", //Normalized Difference Vegetation Index
+    'NDWI': "(b('B8') - b('B11')) / (b('B8') + b('B11'))", //Normalized Difference Water/Wetness Index
+    'CRI1': "1/(b('B2')) - 1/(b('B3'))", //Carotenoid Reflectance Index 1
+    'ARI_1': "(1/b('B3') - 1/b('B5'))*1000", //Anthocyanin Reflectance Index 1
+    'RGR': "b('B4')/b('B3')", //Simple Ratio Red/Green Red-Green Ratio
+    'PSRI': "(b('B4') - b('B2') )/(b('B6'))", //Plant Senescence Reflectance Index
+    'SATVI': "((b('B11') - b('B4'))/(b('B11') + b('B4') + 0.5))*(1*0.5)-(b('B12')/2)*0.0001" //Soil-Adjusted Total Vegetation Index
+}
+
+
+
 //Function made to estimate spectral indexes for each image in the Image Collection
 exports.spectralFeatures = function (image) {
 
