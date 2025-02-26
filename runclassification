@@ -53,7 +53,7 @@ var BandsWetAmp = ['blue_wet_amp', 'green_wet_amp', 'red_wet_amp', 'rededge1_wet
     'psri_wet_amp', 'satvi_wet_amp'
 ];
 
-var samplesautomated = 
+var samplesautomated = func.automatedSamples(imgs,type,year,area,numberSamples,scale)
 
 //########################################
 
@@ -89,7 +89,7 @@ function run_classficiation(carta, year) {
         .map(func.maskClouds) //Applies the filter to mask cloud and shadows
         .map(func.res_bilinear)); //Applies the bilinear resampling on the lower resolution images (i.e. 20 meters)
     
-    //Applies the spectral index calculations and selects the bands to be used
+    //OK - Applies the spectral index calculations and selects the bands to be used
     var spectralDataNei = (s2CloudMasked
         .map(func.spectralFeatures)
         .select(['B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B8A',
