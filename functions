@@ -145,5 +145,38 @@ exports.automatedSamples = function(img,type,year,area,numSamples,scale){
 }
 
 exports.calcFeatureImportance = function(classify){
-  
+ //Calculates the feature/variable importance for the classifier
+    var importance = ee.Dictionary(classifier.explain().get('importance'))
+    
+    //Do something to rank/sort the importance of the features from highest to lowest
+    var keys = importance.keys().sort(importance.values()).reverse()
+    var values = importance.values(keys);
+
+    var rows = keys.zip(values).map(function(list) {
+        return {
+            c: ee.List(list).map(function(n) {
+                return {
+                    v: n
+                };
+            })
+        }
+    })
+
+    var dataTable = {
+        cols: [{
+                id: 'band',
+                label: 'Band',
+                type: 'string'
+            },
+            {
+                id: 'importance',
+                label: 'Importance',
+                type: 'number'
+            }
+        ],
+        rows: rows
+    };
+    
+    //Prints the ranked feature importance
+    return keys.zip(values)
 }
