@@ -43,9 +43,9 @@ var BandsWet = ['blue_wet', 'green_wet', 'red_wet', 'rededge1_wet', 'rededge2_we
 
 var samplesautomated = func.automatedSamples(imgs,type,year,area,numberSamples,scale)
 
-Map.centerObject(samplesautomated['samples'])
-Map.addLayer(samplesautomated['target-data'],{palette:['red','green']},'Samples - Image')
-Map.addLayer(samplesautomated['samples'],{},'Amostras:'+year)
+//Map.centerObject(samplesautomated['samples'])
+//Map.addLayer(samplesautomated['target-data'],{palette:['red','green']},'Samples - Image')
+//Map.addLayer(samplesautomated['samples'],{},'Amostras:'+year)
 //########################################
 
 //Main function, responsible to execute the classification. Accept as parameters the chart name (e.g. 'SE-22-X-A') and the year (e.g. 2022)
