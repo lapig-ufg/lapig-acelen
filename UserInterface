@@ -13,7 +13,7 @@ var app = {
                         {stretch: 'both'}
             )
            
-            var painelMain = ui.Panel({style: {width: '315px'}})
+            var painelMain = ui.Panel({style: {width: '250px'}})
                 painelMain.add(pnTypePasture)
             return painelMain
             
