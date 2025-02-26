@@ -147,7 +147,7 @@ function run_classficiation(carta, year,samples,target) {
 
     //var reclass_extra_samples = extra_samples.map(make_classFieldName).select(classFieldName)
 
-    var trainSamples = //trainSamples_main.merge(reclass_extra_samples)
+    var trainSamples = samples//trainSamples_main.merge(reclass_extra_samples)
     
     //Creates and define the classifier parameters (NUmber of Trees, Variables per Split, Minimum Leaf Population, Bag Fraction, Max nodes and Seed)
     var classifier = ee.Classifier.smileRandomForest(rfNTrees, rfVarPersplit, 1, rfBagFraction, null, year);
@@ -157,7 +157,7 @@ function run_classficiation(carta, year,samples,target) {
     
     //Crosses the training samples with the feature space variables to associate the information with the classes
     var trainSamplesFeeded = (featureSpace.sampleRegions({
-        'collection': samples,//trainSamples.filterBounds(cartas_buffer).filter(ee.Filter.neq(classFieldName, null)),
+        'collection': trainSamples,//.filterBounds(cartas_buffer).filter(ee.Filter.neq(classFieldName, null)),
         'properties': [target],//[classFieldName],
         'scale': 10,
         'tileScale': 16
