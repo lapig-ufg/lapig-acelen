@@ -1,4 +1,6 @@
 var app = {
+          functions:
+          
           init:function(){
               //Criacao do mapa de fundo
               function newMap(){
