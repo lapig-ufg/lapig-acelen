@@ -58,7 +58,7 @@ var samplesautomated = func.automatedSamples(imgs,type,year,area,numberSamples,s
 //########################################
 
 //Main function, responsible to execute the classification. Accept as parameters the chart name (e.g. 'SE-22-X-A') and the year (e.g. 2022)
-function run_classficiation(carta, year,target) {
+function run_classficiation(carta, year,samples,target) {
 
     //var nm_carta = carta; //Changes the chart variable name
 
@@ -133,21 +133,21 @@ function run_classficiation(carta, year,target) {
     }
   
     //Merges the main training samples with the extra training samples
-    var trainSamples_main = ee.FeatureCollection('users/vieiramesquita/LAPIG-PASTURE/VECTORS/mapa_pastagem_col8_50k_final_v2')
+    //var trainSamples_main = ee.FeatureCollection('users/vieiramesquita/LAPIG-PASTURE/VECTORS/mapa_pastagem_col8_50k_final_v2')
 
-    if (year < 2023){
-      trainSamples_main = ee.FeatureCollection(trainSamples_main).select(classFieldName)
-    } else{
-      classFieldName = 'cons_2022'
-      trainSamples_main = ee.FeatureCollection(trainSamples_main).select('cons_2022')
-    }
+    //if (year < 2023){
+      //trainSamples_main = ee.FeatureCollection(trainSamples_main).select(classFieldName)
+    //} else{
+    //  classFieldName = 'cons_2022'
+    //  trainSamples_main = ee.FeatureCollection(trainSamples_main).select('cons_2022')
+    //}
     
-    var extra_samples = (ee.FeatureCollection('users/vieiramesquita/LAPIG-PASTURE/VECTORS/Pasture_Extra_Brasil_plus_Date_v1_3')
-      .filter(ee.Filter.lte('YearPastur',year)))
+    //var extra_samples = (ee.FeatureCollection('users/vieiramesquita/LAPIG-PASTURE/VECTORS/Pasture_Extra_Brasil_plus_Date_v1_3')
+    //  .filter(ee.Filter.lte('YearPastur',year)))
 
-    var reclass_extra_samples = extra_samples.map(make_classFieldName).select(classFieldName)
+    //var reclass_extra_samples = extra_samples.map(make_classFieldName).select(classFieldName)
 
-    var trainSamples = trainSamples_main.merge(reclass_extra_samples)
+    var trainSamples = //trainSamples_main.merge(reclass_extra_samples)
     
     //Creates and define the classifier parameters (NUmber of Trees, Variables per Split, Minimum Leaf Population, Bag Fraction, Max nodes and Seed)
     var classifier = ee.Classifier.smileRandomForest(rfNTrees, rfVarPersplit, 1, rfBagFraction, null, year);
