@@ -23,6 +23,7 @@ var app = {
                         {stretch: 'both'}
             )
             
+            //Insert all panels into main panel
             var listPanels = [pnTypePasture,pnYear]
             var painelMain = ui.Panel({style: {width: '250px'}})
             
