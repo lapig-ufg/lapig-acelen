@@ -62,11 +62,6 @@ exports.maskClouds = function(img) {
     return img.updateMask(mask);
 }
 
-//Function made to convert deegre image to percent
-exports.radians = function(img){
-    return img.toFloat().multiply(Math.pi).divide(180)
-}
-
 exports.res_bilinear = function(img) {
 
     //#Resamples the 20 meters bands to 10m using bilinear resampling method
