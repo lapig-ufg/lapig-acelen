@@ -117,6 +117,7 @@ function run_classficiation(carta, year) {
     var temporalData = func.getLatLong(func.temporalPercs(wetSpectralDataNei))
       .addBands([func.temporalFeatures(wetSpectralDataNei),elevation, slope]);
 
+    //OK
     var featureSpace = ee.Image(temporalData)
 
     //Prints the feature space band names
