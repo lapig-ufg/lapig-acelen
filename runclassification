@@ -124,10 +124,10 @@ function run_classficiation(carta, year) {
     print(featureSpace.bandNames())
     
     
-    //Defines the name of the column to be used as training reference (e.g. cons_2022); NEEDS TO BE INTERGER DATA (i.e. 1 ,2 ,3 4)
+    //OK - Defines the name of the column to be used as training reference (e.g. cons_2022); NEEDS TO BE INTERGER DATA (i.e. 1 ,2 ,3 4)
     var classFieldName = 'cons_' + year;
     
-    //Function made to adjust the class field from the extra training samples 
+    //OK - Function made to adjust the class field from the extra training samples 
     function make_classFieldName(feat) {
         return feat.set(classFieldName, feat.get('is_pasture'));
     }
