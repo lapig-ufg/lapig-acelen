@@ -109,12 +109,11 @@ function run_classfication(carta, year,samples,target) {
       .addBands([func.temporalFeatures(wetSpectralDataNei),elevation, slope]);
 
     //OK
-    print('Temporal Data',temporalData)
     var featureSpace = ee.Image(temporalData)
 
     //OK - Prints the feature space band names
-    print(featureSpace.bandNames())
-    print('Bands Names:',featureSpace)
+    //print(featureSpace.bandNames())
+    
     
     //OK - Defines the name of the column to be used as training reference (e.g. cons_2022); NEEDS TO BE INTERGER DATA (i.e. 1 ,2 ,3 4)
     var classFieldName = 'cons_' + year;
