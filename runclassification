@@ -164,7 +164,7 @@ function run_classficiation(carta, year,samples,target) {
     }));
     
     //Trains the classifier using the training samples asociated with the feature space information
-    classifier = classifier.train(trainSamplesFeeded, classFieldName);
+    classifier = classifier.train(trainSamplesFeeded, target);//classFieldName);
     
     //Visualization Feature Importance
     print(func.calcFeatureImportance(classifier))
