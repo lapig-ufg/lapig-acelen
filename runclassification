@@ -29,7 +29,7 @@ function radians(img) {
     return img.toFloat().multiply(Math.PI).divide(180)
 }
 
-
+var gppdata = data.datasets['gpp']
 var terrain = ee.Algorithms.Terrain(ee.Image("NASA/NASADEM_HGT/001")); //Terrain variables (i.e. elevation, slope, aspect) extraction from the NASADEM 
 var elevation = terrain.select('elevation'); //Selection of the elevation band
 var slope = (radians(terrain.select('slope'))).expression('b("slope")*100'); //Selection of the slope band and conversion from deegre to percentage
@@ -46,6 +46,7 @@ var samplesautomated = func.automatedSamples(imgs,type,year,area,numberSamples,s
 //Map.centerObject(samplesautomated['samples'])
 Map.addLayer(samplesautomated['target-data'],{palette:['red','green']},'Samples - Image')
 //Map.addLayer(samplesautomated['samples'],{},'Amostras:'+year)
+
 
 var trendgpp = func.trendgpp()
 
