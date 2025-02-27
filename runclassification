@@ -9,7 +9,7 @@ var year = 2018
 
 //Automated Params - New
 var type = 'cultivated'
-var area = data.datasets['test_data'].filter(ee.Filter.eq('Fazenda','ADRIANA'))
+var area = data.datasets['test_data'].filter(ee.Filter.eq('Fazenda','GRAMA'))
 var imgs = data.datasets[type+"_perc"].toBands()
 var numberSamples = 500
 var scale = 30
