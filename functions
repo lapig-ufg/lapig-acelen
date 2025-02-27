@@ -195,7 +195,7 @@ exports.calcFeatureImportance = function(classifier){
     return keys.zip(values)
 }
 
-exports.trendgpp(img,initial,final,areas){
+exports.trendgpp = function(img,initial,final,areas){
   //Calculation trend over GPP data from GPW
   var trend = img.filterBounds(areas)
               .filterDate(initial,final).map(function(image){
