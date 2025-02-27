@@ -110,8 +110,8 @@ exports.thresholdSamples = function(img,area,type,year){
   //Threshold Values
   var dictype = {
     'cultivated':{
-                  'positive':54,
-                  'negative':30
+                  'positive':40,
+                  'negative':18
     },
     'natural':{
                  'positive':60,
