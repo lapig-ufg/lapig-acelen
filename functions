@@ -195,11 +195,15 @@ exports.calcFeatureImportance = function(classifier){
     return keys.zip(values)
 }
 
-exports.trendgpp(img,initial,final){
+exports.trendgpp(img,initial,final,areas){
   //Calculation trend over GPP data from GPW
   var trend = img.filterDate(initial,final).map(function(image){
               return image.addBands(image.metadata('system:time_start').divide(1e18));
-  }).reduce(ee.Reducer.linearFit()).select('scale')
+  }).reduce(ee.Reducer.linearFit())
+    .select('scale')
+    .clip(areas)
+    
+  return trendgpp
 }
 
 
