@@ -193,18 +193,16 @@ exports.calcFeatureImportance = function(classifier){
     
     //Prints the ranked feature importance
     return keys.zip(values)
-},
+}
 
 exports.trendgpp(img,initial,final,areas){
   //Calculation trend over GPP data from GPW
   var trend = img.filterBounds(areas)
               .filterDate(initial,final).map(function(image){
               return image.addBands(image.metadata('system:time_start').divide(1e18));
-  }).reduce(ee.Reducer.linearFit())
-    .select('scale')
-    .clip(areas)
+  }).reduce(ee.Reducer.linearFit()).select('scale')
     
-  return trend
+  return trend.clip(areas)
 }
 
 
