@@ -217,7 +217,7 @@ exports.trendgpp = function(img,initialyear,finalyear,clip){
     
   return {
         'initial-gpp':initial,
-        'final-gpp':final
+        'final-gpp':final,
         'trend':trend.clip(areas)
   }
 }
