@@ -48,8 +48,7 @@ Map.addLayer(samplesautomated['target-data'],{palette:['red','green']},'Samples 
 //Map.addLayer(samplesautomated['samples'],{},'Amostras:'+year)
 
 
-var trendgpp = func.trendgpp(gppdata,'2007-01-01','2021-12-31',area)
-Map.addLayer(trendgpp,styles.gpp,'GPP-Trend')
+
 
 //########################################
 
@@ -203,4 +202,7 @@ function run_classfication(carta, year,samples,target) {
 //Executes the classification function
 //run_classficiation(IBGE_CHART, year);
 run_classfication(area,year,samplesautomated['samples'],'targetMap')
+
+var trendgpp = func.trendgpp(gppdata,'2007-01-01','2021-12-31',area)
+Map.addLayer(trendgpp,styles.gpp,'GPP-Trend')
 Map.addLayer(area,{},'Propriedade')
