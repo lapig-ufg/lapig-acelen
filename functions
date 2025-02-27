@@ -213,7 +213,10 @@ exports.trendgpp = function(img,initialyear,finalyear,clip){
   var trend = img.filterBounds(clip.geometry())
               .filterDate(initialyear+'-01-01',finalyear+'-12-31').map(function(image){
               return image.addBands(image.metadata('system:time_start').divide(1e18));
-  }).reduce(ee.Reducer.linearFit()).select('scale')
+  }).reduce(ee.Reducer.linearFit())
+  .select('scale')
+  .multiply(clip)
+  .selfMask()
     
   return {
         'initial-gpp':initial,
