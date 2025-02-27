@@ -195,14 +195,17 @@ exports.calcFeatureImportance = function(classifier){
     return keys.zip(values)
 }
 
-exports.trendgpp = function(img,initial,final,areas){
+exports.trendgpp = function(img,initialyear,finalyear,clip){
   //Calculation trend over GPP data from GPW
-  var trend = img.filterBounds(areas)
+  var initial = img.filterBounds(clip.geometry())
+              .filterDate(initial,final)
+  
+  var trend = img.filterBounds(clip.geometry())
               .filterDate(initial,final).map(function(image){
               return image.addBands(image.metadata('system:time_start').divide(1e18));
   }).reduce(ee.Reducer.linearFit()).select('scale')
     
-  return trend.clip(areas)
+  return [trend.clip(areas),initial, final]
 }
 
 
