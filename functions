@@ -204,7 +204,7 @@ exports.trendgpp(img,initial,final,areas){
     .select('scale')
     .clip(areas)
     
-  return trendgpp
+  return trend
 }
 
 
