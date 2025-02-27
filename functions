@@ -193,7 +193,7 @@ exports.calcFeatureImportance = function(classifier){
     
     //Prints the ranked feature importance
     return keys.zip(values)
-}
+},
 
 exports.trendgpp(img,initial,final,areas){
   //Calculation trend over GPP data from GPW
