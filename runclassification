@@ -49,7 +49,7 @@ Map.addLayer(samplesautomated['target-data'],{palette:['red','green']},'Samples 
 
 
 var trendgpp = func.trendgpp(gppdata,'2007-01-01','2021-12-31',area)
-Map.addLayer(trendgpp,,'GPP-Trend')
+Map.addLayer(trendgpp,styles.gpp,'GPP-Trend')
 
 //########################################
 
