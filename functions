@@ -140,7 +140,7 @@ exports.thresholdSamples = function(img,area,type,year){
 exports.automatedSamples = function(img,type,year,area,numSamples,scale){
  
   //Area images
-  var cliparea = area.geometry().buffer(5000)
+  var cliparea = area.geometry().buffer(10000)
 
   //Calculation samples        
   var target = exports.thresholdSamples(img,cliparea,type,year)
