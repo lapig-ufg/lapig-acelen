@@ -28,7 +28,7 @@ var app = {
             var selFarm = ui.Textbox({
               placeholder:'Nome da área'
             })
-            var pnFarm = ui.Panel([lblYear,selYear],
+            var pnFarm = ui.Panel([lblFarm,selFarm],
                         ui.Panel.Layout.Flow('horizontal'),
                         {stretch: 'both'}
             )
@@ -38,7 +38,7 @@ var app = {
             
             
             //Insert all panels into main panel
-            var listPanels = [pnTypePasture,pnYear]
+            var listPanels = [pnTypePasture,pnYear,pnFarm]
             var painelMain = ui.Panel({style: {width: '250px'}})
             
             for (var i in listPanels){
