@@ -194,20 +194,20 @@ exports.calcFeatureImportance = function(classifier){
 
 exports.trendgpp = function(img,initialyear,finalyear,clip){
   //Calculation trend over GPP data from GPW
-  var initial = img.filterBounds(clip.geometry())
+  var initial = img//.filterBounds(clip.geometry())
               .filterDate(initialyear+'-01-01',initialyear+'-12-31')
               .median()
               .multiply(clip)
               .selfMask()
   
-  var final = img.filterBounds(clip.geometry())
+  var final = img//.filterBounds(clip.geometry())
               .filterDate(finalyear+'-01-01',finalyear+'-12-31')
               .median()
               .multiply(clip)
               .selfMask()
   
   
-  var trend = img.filterBounds(clip.geometry())
+  var trend = img//.filterBounds(clip.geometry())
               .filterDate(initialyear+'-01-01',finalyear+'-12-31').map(function(image){
               return image.addBands(image.metadata('system:time_start').divide(1e18));
   }).reduce(ee.Reducer.linearFit())
