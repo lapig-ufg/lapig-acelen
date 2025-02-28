@@ -42,7 +42,7 @@ var app = {
                     var typegrass = selType.getValue()
                     var year = selYear.getValue()
                     var farm = selFarm.getValue()
-                    getRun(typegrass,year,farm,maplayer)
+                    run.getRun(typegrass,year,farm,maplayer)
                     
                 })
             
