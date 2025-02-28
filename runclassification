@@ -3,27 +3,11 @@ var func = require('users/Amazonas21/acelen:functions')
 var data = require('users/Amazonas21/acelen:datasets')
 var styles = require('users/Amazonas21/acelen:styles')
 
-//Classification Params
-var year = 2018
-
-//Automated Params - New
-var type = 'cultivated'
-var farm = 'EULALIO'
-var area = data.datasets['test_data'].filter(ee.Filter.eq('Fazenda',farm))
-var imgs = data.datasets[type+"_perc"].toBands()
-var numberSamples = 500
-var scale = 10
-
-
-//Charts used as region/model delimitation
-var cartas = ee.FeatureCollection(
-    "users/vieiramesquita/LAPIG-PASTURE/VECTORS/CARTAS_IBGE_BR_mod"
-)
 
 //Parameters of the random forest algorithm
-var rfNTrees = 500; //#Number of random trees - lesser faster, but worst. 100-500 is the optimal;
-var rfBagFraction = 0.5; //#Fraction (10^-2%) of variables in the bag - 0.5/50% is the default;
-var rfVarPersplit = 13 //#Number of varibales per tree branch - estimated by the square root of the number of variables used in the feature space;
+//var rfNTrees = 500; //#Number of random trees - lesser faster, but worst. 100-500 is the optimal;
+//var rfBagFraction = 0.5; //#Fraction (10^-2%) of variables in the bag - 0.5/50% is the default;
+//var rfVarPersplit = 13 //#Number of varibales per tree branch - estimated by the square root of the number of variables used in the feature space;
 
 //Function made to convert deegre image to percent
 function radians(img) {
@@ -168,6 +152,26 @@ function run_classfication(carta, year,samples,target) {
 }
 
 // ##############CHECK#################
+function getRun(typegrass,year,farm){
+  //Classification Params
+  var year = year
+
+  //Automated Params - New
+  var type = typegrass
+  var farm = farm
+  var area = data.datasets['test_data'].filter(ee.Filter.eq('Fazenda',farm))
+  var imgs = data.datasets[type+"_perc"].toBands()
+  var numberSamples = 500
+  var scale = 10
+  
+  var rfNTrees = 500; //#Number of random trees - lesser faster, but worst. 100-500 is the optimal;
+  var rfBagFraction = 0.5; //#Fraction (10^-2%) of variables in the bag - 0.5/50% is the default;
+  var rfVarPersplit = 13 
+  
+  
+  
+}
+
 
 //Executes the classification function
 //run_classficiation(IBGE_CHART, year);
