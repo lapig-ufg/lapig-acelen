@@ -175,7 +175,7 @@ function run_classfication(carta, year,samples,target) {
 //run_classficiation(IBGE_CHART, year);
 var classRF = run_classfication(area,year,samplesautomated['samples'],'targetMap')
 var trendgpp = func.trendgpp(gppdata,2007,2021,classRF['classification'])
-
+print(trendgpp['trend'])
 //Add layers in map
 Map.centerObject(area)
 //Map.addLayer(trendgpp['initial-gpp'],styles.gpp,'GPP-Initial')
