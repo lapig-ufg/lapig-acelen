@@ -10,9 +10,9 @@ var styles = require('users/Amazonas21/acelen:styles')
 //var rfVarPersplit = 13 //#Number of varibales per tree branch - estimated by the square root of the number of variables used in the feature space;
 
 //Function made to convert deegre image to percent
-function radians(img) {
-    return img.toFloat().multiply(Math.PI).divide(180)
-}
+//function radians(img) {
+//    return img.toFloat().multiply(Math.PI).divide(180)
+//}
 
 var gppdata = data.datasets['gpp']
 var terrain = ee.Algorithms.Terrain(ee.Image("NASA/NASADEM_HGT/001")); //Terrain variables (i.e. elevation, slope, aspect) extraction from the NASADEM 
@@ -168,6 +168,10 @@ function getRun(typegrass,year,farm){
   var rfBagFraction = 0.5; //#Fraction (10^-2%) of variables in the bag - 0.5/50% is the default;
   var rfVarPersplit = 13 
   
+  //Function made to convert deegre image to percent
+  function radians(img) {
+    return img.toFloat().multiply(Math.PI).divide(180)
+  }
   
   
 }
