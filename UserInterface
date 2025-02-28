@@ -24,9 +24,9 @@ var app = {
             )
             
             //Panel of choose the year for classification in map
-            var lblFarm = ui.Label('Digite o nome da área')
+            var lblFarm = ui.Label('Nome da área')
             var selFarm = ui.Textbox({
-              placeholder:'Nome da área'
+              placeholder:'Digite o Nome da área'
             })
             var pnFarm = ui.Panel([lblFarm,selFarm],
                         ui.Panel.Layout.Flow('horizontal'),
