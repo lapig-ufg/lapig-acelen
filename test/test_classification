@@ -35,7 +35,7 @@ var params = {
   scale:10
 }
 
-var area = data.datasets['test_data'].filter(ee.Filter.eq('Fazenda',farm))
+var area = data.datasets['test_data'].filter(ee.Filter.eq('Fazenda',params.farm))
 var imgs = data.datasets[type+"_perc"].toBands()
 
 var gppdata = data.datasets['gpp']
