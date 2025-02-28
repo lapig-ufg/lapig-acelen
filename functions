@@ -213,7 +213,7 @@ exports.trendgpp = function(img,initialyear,finalyear,clip){
   }).reduce(ee.Reducer.linearFit())
   .select('scale')
   .multiply(clip)
-  .selfMask()
+  
     
   return {
         'initial-gpp':initial,
