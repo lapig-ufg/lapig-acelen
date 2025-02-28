@@ -13,6 +13,11 @@ var terrain = ee.Algorithms.Terrain(ee.Image("NASA/NASADEM_HGT/001")); //Terrain
 var elevation = terrain.select('elevation'); //Selection of the elevation band
 var slope = (radians(terrain.select('slope'))).expression('b("slope")*100'); //Selection of the slope band and conversion from deegre to percentage
 
+//Function made to convert deegre image to percent
+function radians(img) {
+    return img.toFloat().multiply(Math.PI).divide(180)
+}
+
 //Parameters of the random forest algorithm
 //var rfNTrees = 500; //#Number of random trees - lesser faster, but worst. 100-500 is the optimal;
 //var rfBagFraction = 0.5; //#Fraction (10^-2%) of variables in the bag - 0.5/50% is the default;
@@ -178,11 +183,6 @@ exports.getRun = function(typegrass,year,farm,maplayer){
   var rfNTrees = 500; //#Number of random trees - lesser faster, but worst. 100-500 is the optimal;
   var rfBagFraction = 0.5; //#Fraction (10^-2%) of variables in the bag - 0.5/50% is the default;
   var rfVarPersplit = 13 
-  
-  //Function made to convert deegre image to percent
-  function radians(img) {
-    return img.toFloat().multiply(Math.PI).divide(180)
-  }
   
   var gppdata = data.datasets['gpp']
   
