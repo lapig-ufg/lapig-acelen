@@ -113,11 +113,13 @@ function run_classfication(carta, year,samples,target) {
     var wetSpectralDataNei = (spectralDataNei
         .select(spectralDataNei.first().bandNames(), BandsWet)
         .map(onlyWetSeasonNei));
+    print('Wet Spectral Data Nei:',wetSpectralDataNei)
     
     //OK - Applies the functions to calculate percentiles, get latitude and longitude, calculate the temporal reducers and adds the elevation and slope data.
     var temporalData = func.getLatLong(func.temporalPercs(wetSpectralDataNei))
       .addBands([func.temporalFeatures(wetSpectralDataNei),elevation, slope]);
-
+  
+    print('Temporal Data:',temporalData)
     //OK
     var featureSpace = ee.Image(temporalData)
 
