@@ -85,7 +85,7 @@ function run_classfication(carta, year,samples,target) {
         .map(func.maskEdges) //Applies the filter to mask fault edges
         .map(func.maskClouds) //Applies the filter to mask cloud and shadows
         .map(func.res_bilinear)); //Applies the bilinear resampling on the lower resolution images (i.e. 20 meters)
-    
+    print(s2CloudMasked)
     //OK - Applies the spectral index calculations and selects the bands to be used
     var spectralDataNei = (s2CloudMasked
         .map(func.spectralFeatures)
