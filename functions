@@ -212,8 +212,8 @@ exports.trendgpp = function(img,initialyear,finalyear,clip){
               return image.addBands(image.metadata('system:time_start').divide(1e18));
   }).reduce(ee.Reducer.linearFit())
   .select('scale')
-  .multiply(clip)
-  .selfMask()
+  //.multiply(clip)
+  //.selfMask()
     
   return {
         'initial-gpp':initial,
