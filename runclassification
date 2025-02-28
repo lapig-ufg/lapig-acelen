@@ -163,7 +163,7 @@ function run_classfication(carta, year,samples,target) {
     var trainSamplesFeeded = (featureSpace.sampleRegions({
         collection: trainSamples,//.filterBounds(cartas_buffer).filter(ee.Filter.neq(classFieldName, null)),
         properties: [target],//[classFieldName],
-        scale: 30,
+        scale: 20,
         tileScale: 16,
         
     }));
