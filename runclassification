@@ -3,20 +3,6 @@ var func = require('users/Amazonas21/acelen:functions')
 var data = require('users/Amazonas21/acelen:datasets')
 var styles = require('users/Amazonas21/acelen:styles')
 
-//List of names to rename the bands
-var BandsWet = ['blue_wet', 'green_wet', 'red_wet', 'rededge1_wet', 'rededge2_wet', 'rededge3_wet',
-        'nir_wet', 'rededge4_wet', 'swir1_wet', 'swir2_wet', 'ndvi_wet', 'ndwi_wet', 'cai_wet',
-        'cri1_wet', 'ari1_wet', 'rgr_wet', 'psri_wet', 'satvi_wet'
-];
-
-var terrain = ee.Algorithms.Terrain(ee.Image("NASA/NASADEM_HGT/001")); //Terrain variables (i.e. elevation, slope, aspect) extraction from the NASADEM 
-var elevation = terrain.select('elevation'); //Selection of the elevation band
-var slope = (radians(terrain.select('slope'))).expression('b("slope")*100'); //Selection of the slope band and conversion from deegre to percentage
-
-//Function made to convert deegre image to percent
-function radians(img) {
-    return img.toFloat().multiply(Math.PI).divide(180)
-}
 
 //Parameters of the random forest algorithm
 var rfNTrees = 500; //#Number of random trees - lesser faster, but worst. 100-500 is the optimal;
@@ -24,20 +10,20 @@ var rfBagFraction = 0.5; //#Fraction (10^-2%) of variables in the bag - 0.5/50% 
 var rfVarPersplit = 13 //#Number of varibales per tree branch - estimated by the square root of the number of variables used in the feature space;
 
 //Function made to convert deegre image to percent
-//function radians(img) {
-//    return img.toFloat().multiply(Math.PI).divide(180)
-//}
+function radians(img) {
+    return img.toFloat().multiply(Math.PI).divide(180)
+}
 
 //var gppdata = data.datasets['gpp']
-//var terrain = ee.Algorithms.Terrain(ee.Image("NASA/NASADEM_HGT/001")); //Terrain variables (i.e. elevation, slope, aspect) extraction from the NASADEM 
-//var elevation = terrain.select('elevation'); //Selection of the elevation band
-//var slope = (radians(terrain.select('slope'))).expression('b("slope")*100'); //Selection of the slope band and conversion from deegre to percentage
+var terrain = ee.Algorithms.Terrain(ee.Image("NASA/NASADEM_HGT/001")); //Terrain variables (i.e. elevation, slope, aspect) extraction from the NASADEM 
+var elevation = terrain.select('elevation'); //Selection of the elevation band
+var slope = (radians(terrain.select('slope'))).expression('b("slope")*100'); //Selection of the slope band and conversion from deegre to percentage
 
 //List of names to rename the bands
-//var BandsWet = ['blue_wet', 'green_wet', 'red_wet', 'rededge1_wet', 'rededge2_wet', 'rededge3_wet',
-//    'nir_wet', 'rededge4_wet', 'swir1_wet', 'swir2_wet', 'ndvi_wet', 'ndwi_wet', 'cai_wet',
-//    'cri1_wet', 'ari1_wet', 'rgr_wet', 'psri_wet', 'satvi_wet'
-//];
+var BandsWet = ['blue_wet', 'green_wet', 'red_wet', 'rededge1_wet', 'rededge2_wet', 'rededge3_wet',
+    'nir_wet', 'rededge4_wet', 'swir1_wet', 'swir2_wet', 'ndvi_wet', 'ndwi_wet', 'cai_wet',
+    'cri1_wet', 'ari1_wet', 'rgr_wet', 'psri_wet', 'satvi_wet'
+];
 
 //Creating automated smaples
 //var samplesautomated = func.automatedSamples(imgs,type,year,area,numberSamples,scale)
