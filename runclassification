@@ -155,7 +155,7 @@ function run_classfication(carta, year,samples,target) {
 exports.getRun = function(typegrass,year,farm,maplayer){
   //Classification Params
   var year = year
-
+  print(type[typegrass]+"_perc")
   //Automated Params - New
   var type = {'cultivada':'cultivated'}
   var farm = farm
