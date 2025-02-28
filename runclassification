@@ -19,9 +19,9 @@ function radians(img) {
 }
 
 //Parameters of the random forest algorithm
-//var rfNTrees = 500; //#Number of random trees - lesser faster, but worst. 100-500 is the optimal;
-//var rfBagFraction = 0.5; //#Fraction (10^-2%) of variables in the bag - 0.5/50% is the default;
-//var rfVarPersplit = 13 //#Number of varibales per tree branch - estimated by the square root of the number of variables used in the feature space;
+var rfNTrees = 500; //#Number of random trees - lesser faster, but worst. 100-500 is the optimal;
+var rfBagFraction = 0.5; //#Fraction (10^-2%) of variables in the bag - 0.5/50% is the default;
+var rfVarPersplit = 13 //#Number of varibales per tree branch - estimated by the square root of the number of variables used in the feature space;
 
 //Function made to convert deegre image to percent
 //function radians(img) {
@@ -180,9 +180,6 @@ exports.getRun = function(typegrass,year,farm,maplayer){
   var numberSamples = 500
   var scale = 10
   
-  var rfNTrees = 500; //#Number of random trees - lesser faster, but worst. 100-500 is the optimal;
-  var rfBagFraction = 0.5; //#Fraction (10^-2%) of variables in the bag - 0.5/50% is the default;
-  var rfVarPersplit = 13 
   
   var gppdata = data.datasets['gpp']
   
