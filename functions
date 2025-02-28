@@ -100,7 +100,6 @@ exports.maskEdges = function(s2_img){
         s2_img.select('B8A').mask().updateMask(s2_img.select('B9').mask())) //Defined
 }
 
-
 //Create thresholds from samples
 exports.thresholdSamples = function(img,area,type,year){
   
