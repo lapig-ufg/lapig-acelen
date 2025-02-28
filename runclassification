@@ -205,7 +205,7 @@ var classRF = run_classfication(area,year,samplesautomated['samples'],'targetMap
 
 var trendgpp = func.trendgpp(gppdata,2007,2021,classRF['classification'])
 
-Map.addLayer(trendgpp['initial-gpp'],{},'GPP-Initial')
+Map.addLayer(trendgpp['initial-gpp'],styles.gpp,'GPP-Initial')
 Map.addLayer(classRF['classification'],{min:1,max:1,palette:['gold']},'Classification')
 //Map.addLayer(trendgpp['initial-gpp'],{},'GPP-Initial')
 //Map.addLayer(trendgpp['final-gpp'],{},'GPP-Final')
