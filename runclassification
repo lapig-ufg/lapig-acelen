@@ -2,6 +2,7 @@
 var func = require('users/Amazonas21/acelen:functions')
 var data = require('users/Amazonas21/acelen:datasets')
 var styles = require('users/Amazonas21/acelen:styles')
+
 //Classification Params
 var year = 2018
 //var IBGE_CHART = 'SE-22-X-A' //Check here the code of the desired IBGE Chart
