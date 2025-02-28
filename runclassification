@@ -155,9 +155,11 @@ function run_classfication(carta, year,samples,target) {
 exports.getRun = function(typegrass,year,farm,maplayer){
   //Classification Params
   var year = year
-  print(type[typegrass]+"_perc")
-  //Automated Params - New
   var type = {'Cultivada':'cultivated'}
+  print(type[typegrass]+"_perc")
+  
+  //Automated Params - New
+  
   var farm = farm
   var area = data.datasets['test_data'].filter(ee.Filter.eq('Fazenda',farm))
   var imgs = data.datasets[type[typegrass]+"_perc"].toBands()
