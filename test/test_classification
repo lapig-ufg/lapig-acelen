@@ -14,7 +14,7 @@ function radians(img) {
     return img.toFloat().multiply(Math.PI).divide(180)
 }
 
-//Tographic Datasets
+//Topographic Datasets
 var terrain = ee.Algorithms.Terrain(ee.Image("NASA/NASADEM_HGT/001")); //Terrain variables (i.e. elevation, slope, aspect) extraction from the NASADEM 
 var elevation = terrain.select('elevation'); //Selection of the elevation band
 var slope = (radians(terrain.select('slope'))).expression('b("slope")*100'); //Selection of the slope band and conversion from deegre to percentage
