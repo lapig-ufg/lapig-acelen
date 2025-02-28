@@ -5,8 +5,6 @@ var styles = require('users/Amazonas21/acelen:styles')
 
 //Classification Params
 var year = 2018
-//var IBGE_CHART = 'SE-22-X-A' //Check here the code of the desired IBGE Chart
-//var my_folder = 'lapig_br_pasture_mapping_s2_v1'
 
 //Automated Params - New
 var type = 'cultivated'
@@ -22,6 +20,7 @@ var cartas = ee.FeatureCollection(
     "users/vieiramesquita/LAPIG-PASTURE/VECTORS/CARTAS_IBGE_BR_mod"
 )
 
+//Parameters of the random forest algorithm
 var rfNTrees = 500; //#Number of random trees - lesser faster, but worst. 100-500 is the optimal;
 var rfBagFraction = 0.5; //#Fraction (10^-2%) of variables in the bag - 0.5/50% is the default;
 var rfVarPersplit = 13 //#Number of varibales per tree branch - estimated by the square root of the number of variables used in the feature space;
