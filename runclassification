@@ -176,12 +176,8 @@ function run_classfication(carta, year,samples,target) {
     print(func.calcFeatureImportance(classifier))
     
     //Takes the trained classifier and use it to classify the entire feature space pixel by pixel
-    var threshold = {
-      'cultivated':0.328,
-      'natural':0.428
-    }
     var classification = featureSpace.classify(classifier).select(0);
-        classification = classification.gt(0.50).selfMask()
+        classification = classification.gte(0.51).selfMask()
     //var fileName = 'br_pasture_s2_col2_v1_' + carta + '_' + year; //Output file name
     
     //Map.centerObject(cartas_area,15)
