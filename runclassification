@@ -121,7 +121,6 @@ function run_classfication(carta, year,samples,target) {
     //OK - Defines the name of the column to be used as training reference (e.g. cons_2022); NEEDS TO BE INTERGER DATA (i.e. 1 ,2 ,3 4)
     var classFieldName = 'cons_' + year;
     
-    
     //Samples to train
     var trainSamples = samples
     
