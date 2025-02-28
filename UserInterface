@@ -39,7 +39,12 @@ var app = {
             
             var btnClassify = ui.Button({label:'Classificação da área'})
                 btnClassify.onClick(function(){
-                  
+                    var typegrass = selType.getValue()
+                    var year = selYear.getValue()
+                    var farm = selFarm.getValue()
+                    print(typegrass)
+                    print(year)
+                    print(farm)
                 })
             
             //Insert all panels into main panel
