@@ -23,6 +23,20 @@ var app = {
                         {stretch: 'both'}
             )
             
+            //Panel of choose the year for classification in map
+            var lblFarm = ui.Label('Digite o nome da área')
+            var selFarm = ui.Textbox({
+              placeholder:'Nome da área'
+            })
+            var pnFarm = ui.Panel([lblYear,selYear],
+                        ui.Panel.Layout.Flow('horizontal'),
+                        {stretch: 'both'}
+            )
+            
+            
+            
+            
+            
             //Insert all panels into main panel
             var listPanels = [pnTypePasture,pnYear]
             var painelMain = ui.Panel({style: {width: '250px'}})
