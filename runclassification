@@ -42,15 +42,8 @@ var BandsWet = ['blue_wet', 'green_wet', 'red_wet', 'rededge1_wet', 'rededge2_we
     'cri1_wet', 'ari1_wet', 'rgr_wet', 'psri_wet', 'satvi_wet'
 ];
 
-
+//Creating automated smaples
 var samplesautomated = func.automatedSamples(imgs,type,year,area,numberSamples,scale)
-
-//Map.centerObject(samplesautomated['samples'])
-//Map.addLayer(samplesautomated['target-data'],{palette:['red','green']},'Samples - Image')
-//Map.addLayer(samplesautomated['samples'],{},'Amostras:'+year)
-
-
-
 
 //########################################
 
