@@ -1,8 +1,16 @@
 //Gross Primary Productivity style
-exports.gpp = {
+exports.gpp_trend = {
   bands:["scale"],
   max:2e-9,
   min:-2e-9,
   opacity:1,
   palette:['#d01c8b','#f1b6da','#f7f7f7','#b8e186','#4dac26']
+}
+
+exports.gpp = {
+  bands:["scale"],
+  max:3500,
+  min:0,
+  opacity:1,
+  palette:['#ffffff','#997755','#663308','#f4bd45','#fbe99f','#abd759','#336600']
 }
