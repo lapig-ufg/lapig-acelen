@@ -93,11 +93,15 @@ function run_classfication(carta, year,samples,target) {
             'B11', 'B12', 'NDVI', 'NDWI', 'CAI', 'CRI1', 'ARI_1', 'RGR',
             'PSRI', 'SATVI'
         ]));
+    
     print('Spectral Features:',spectralDataNei)
+    
     //OK - Calculates the 25% NDVI percentile to use as a noise mask
     var wetThresholdNei = (spectralDataNei
         .select("NDVI")
         .reduce(ee.Reducer.percentile([25])));
+    
+    print('Wet Threshold:',wetThresholdNei)
     
     //OK - Function made to get the image NDVI and mask it according to the 25% NDVI percentile
     function onlyWetSeasonNei(image){
