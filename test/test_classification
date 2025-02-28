@@ -28,21 +28,20 @@ var BandsWet = ['blue_wet', 'green_wet', 'red_wet', 'rededge1_wet', 'rededge2_we
 var year = 2018
   
 //Automated Params - New
-var type = {'Cultivada':'cultivated'}
-    type = type['Cultivada']
-  
-var farm = 'EULALIO'
+var params = {
+  type:'cultivated',
+  farm:'EULALIO',
+  numberSamples:500,
+  scale:10
+}
+
 var area = data.datasets['test_data'].filter(ee.Filter.eq('Fazenda',farm))
-print(area)
 var imgs = data.datasets[type+"_perc"].toBands()
-var numberSamples = 500
-var scale = 10
-  
-  
+
 var gppdata = data.datasets['gpp']
   
 //Creating automated smaples
-var samplesautomated = func.automatedSamples(imgs,type,year,area,numberSamples,scale)
+var samplesautomated = func.automatedSamples(imgs,params.type,year,area,params.numberSamples,params.scale)
   
 //Creating automated smaples
 //var samplesautomated = func.automatedSamples(imgs,type,year,area,numberSamples,scale)
