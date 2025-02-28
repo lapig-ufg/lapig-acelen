@@ -157,10 +157,10 @@ exports.getRun = function(typegrass,year,farm,maplayer){
   var year = year
 
   //Automated Params - New
-  var type = typegrass
+  var type = {'cultivada':'cultivated'}
   var farm = farm
   var area = data.datasets['test_data'].filter(ee.Filter.eq('Fazenda',farm))
-  var imgs = data.datasets[typegrass+"_perc"].toBands()
+  var imgs = data.datasets[type[typegrass]+"_perc"].toBands()
   var numberSamples = 500
   var scale = 10
   
