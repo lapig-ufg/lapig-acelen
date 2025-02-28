@@ -4,7 +4,7 @@ var app = {
             //Panel of choose pasture type for classification in map
             var lblType = ui.Label('Tipo de pastagem')
             var selType = ui.Select({
-              items:['Cultivada','Natural'],
+              items:['Cultivada'],
               placeholder:'Escolha o tipo'
             })
             var pnTypePasture = ui.Panel([lblType,selType],
@@ -27,15 +27,12 @@ var app = {
             var lblFarm = ui.Label('Nome da área')
             var selFarm = ui.Textbox({
               placeholder:'Área',
-              style:{'width':10}
+              style:{'width':'120px'}
             })
             var pnFarm = ui.Panel([lblFarm,selFarm],
                         ui.Panel.Layout.Flow('horizontal'),
                         {stretch: 'both'}
             )
-            
-            
-            
             
             
             //Insert all panels into main panel
