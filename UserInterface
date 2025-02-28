@@ -35,9 +35,12 @@ var app = {
             )
             
             var btnClassify = ui.Button({label:'Classificação da área'})
+                btnClassify.onClick(function(){
+                  
+                })
             
             //Insert all panels into main panel
-            var listPanels = [pnTypePasture,pnYear,pnFarm]
+            var listPanels = [pnTypePasture,pnYear,pnFarm,btnClassify]
             var painelMain = ui.Panel({style: {width: '250px'}})
             
             for (var i in listPanels){
