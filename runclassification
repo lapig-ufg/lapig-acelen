@@ -172,7 +172,6 @@ exports.getRun = function(typegrass,year,farm,maplayer){
   //Creating automated smaples
   var samplesautomated = func.automatedSamples(imgs,type,year,area,numberSamples,scale)
   
-  
   var classRF = run_classfication(area,year,samplesautomated['samples'],'targetMap')
   var trendgpp = func.trendgpp(gppdata,2007,2021,classRF['classification'])
   
