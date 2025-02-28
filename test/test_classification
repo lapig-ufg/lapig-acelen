@@ -144,7 +144,7 @@ function run_classfication(carta, year,samples,target,mask) {
     
     //Takes the trained classifier and use it to classify the entire feature space pixel by pixel
     var classification = featureSpace.classify(classifier).select(0);
-        classification = classification.gte(0.51).selfMask().multiply(cartas_area)
+        classification = classification.gte(0.51).selfMask().multiply(mask)
     //var fileName = 'br_pasture_s2_col2_v1_' + carta + '_' + year; //Output file name
     
     //Map.centerObject(cartas_area,15)
