@@ -9,6 +9,10 @@ var BandsWet = ['blue_wet', 'green_wet', 'red_wet', 'rededge1_wet', 'rededge2_we
         'cri1_wet', 'ari1_wet', 'rgr_wet', 'psri_wet', 'satvi_wet'
 ];
 
+var terrain = ee.Algorithms.Terrain(ee.Image("NASA/NASADEM_HGT/001")); //Terrain variables (i.e. elevation, slope, aspect) extraction from the NASADEM 
+var elevation = terrain.select('elevation'); //Selection of the elevation band
+var slope = (radians(terrain.select('slope'))).expression('b("slope")*100'); //Selection of the slope band and conversion from deegre to percentage
+
 //Parameters of the random forest algorithm
 //var rfNTrees = 500; //#Number of random trees - lesser faster, but worst. 100-500 is the optimal;
 //var rfBagFraction = 0.5; //#Fraction (10^-2%) of variables in the bag - 0.5/50% is the default;
@@ -181,10 +185,6 @@ exports.getRun = function(typegrass,year,farm,maplayer){
   }
   
   var gppdata = data.datasets['gpp']
-  var terrain = ee.Algorithms.Terrain(ee.Image("NASA/NASADEM_HGT/001")); //Terrain variables (i.e. elevation, slope, aspect) extraction from the NASADEM 
-  var elevation = terrain.select('elevation'); //Selection of the elevation band
-  var slope = (radians(terrain.select('slope'))).expression('b("slope")*100'); //Selection of the slope band and conversion from deegre to percentage
-  
   
   //Creating automated smaples
   var samplesautomated = func.automatedSamples(imgs,type,year,area,numberSamples,scale)
