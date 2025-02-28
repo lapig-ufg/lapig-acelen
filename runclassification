@@ -10,7 +10,7 @@ var year = 2018
 
 //Automated Params - New
 var type = 'cultivated'
-var farm = 'PLANALTO'
+var farm = 'EULALIO'
 var area = data.datasets['test_data'].filter(ee.Filter.eq('Fazenda',farm))
 var imgs = data.datasets[type+"_perc"].toBands()
 var numberSamples = 500
