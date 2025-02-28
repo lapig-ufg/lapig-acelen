@@ -36,12 +36,12 @@ var params = {
 }
 
 var area = data.datasets['test_data'].filter(ee.Filter.eq('Fazenda',params.farm))
-var imgs = data.datasets[params.type+"_perc"].toBands()
+var imgs = data.datasets[params['type']+"_perc"].toBands()
 
 var gppdata = data.datasets['gpp']
   
 //Creating automated smaples
-var samplesautomated = func.automatedSamples(imgs,params.type,year,area,params.numberSamples,params.scale)
+var samplesautomated = func.automatedSamples(imgs,params['type'],year,area,params.numberSamples,params.scale)
   
 //Creating automated smaples
 //var samplesautomated = func.automatedSamples(imgs,type,year,area,numberSamples,scale)
