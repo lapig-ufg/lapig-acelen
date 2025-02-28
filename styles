@@ -8,7 +8,7 @@ exports.gpp_trend = {
 }
 
 exports.gpp = {
-  bands:["scale"],
+  bands:["gc_m2"],
   max:3500,
   min:0,
   opacity:1,
