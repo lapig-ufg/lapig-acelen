@@ -152,7 +152,7 @@ function run_classfication(carta, year,samples,target) {
 }
 
 // ##############CHECK#################
-function getRun(typegrass,year,farm){
+function getRun(typegrass,year,farm,maplayer){
   //Classification Params
   var year = year
 
