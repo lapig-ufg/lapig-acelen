@@ -42,9 +42,8 @@ var app = {
                     var typegrass = selType.getValue()
                     var year = selYear.getValue()
                     var farm = selFarm.getValue()
-                    print(typegrass)
-                    print(year)
-                    print(farm)
+                    getRun(typegrass,year,farm,maplayer)
+                    
                 })
             
             //Insert all panels into main panel
