@@ -184,7 +184,7 @@ function run_classfication(carta, year,samples,target) {
     //Map.addLayer(featureSpace.clip(cartas_buffer),{bands:['ndvi_wet_p90','ndvi_wet_median','ndvi_wet_p10'],min:0.2,max:0.8},
     //  'NDVI Perc Composition (90,50,10)')
     //Map.addLayer(classification.clip(cartas_area),{min:0,max:1},'Classification')
-    Map.addLayer(classification.clip(cartas_buffer),{min:0,max:1,palette:['gold']},'Classification')
+    Map.addLayer(classification.clip(cartas_buffer),{min:1,max:1,palette:['gold']},'Classification')
     Map.centerObject(cartas_buffer)
     
     return {'classification':classification.clip(cartas_buffer)}
