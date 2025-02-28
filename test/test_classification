@@ -177,7 +177,7 @@ var mask = area.map(function(feat){
     return feat.set('value',1)  
 }).reduceToImage({
   properties: ['value'],
-  reducer: ee.Reducer.sum()
+  reducer: ee.Reducer.first()
 }).selfMask();
 
 var classRF = run_classfication(area,year,samplesautomated['samples'],'targetMap')
