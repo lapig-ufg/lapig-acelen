@@ -124,7 +124,7 @@ function run_classfication(carta, year,samples,target,mask) {
     print(func.calcFeatureImportance(classifier))
     
     //Takes the trained classifier and use it to classify the entire feature space pixel by pixel
-    var classification = featureSpace.classify(classifier).select(0);
+    var classification = featureSpace.multiply(mask).classify(classifier).select(0);
         classification = classification.gte(0.51).selfMask().clip(cartas_area)
     
     
