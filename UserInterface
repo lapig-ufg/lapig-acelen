@@ -85,8 +85,9 @@ var app = {
             
             
             //Insert all panels into main panel
-            var listPanels = [pnTypePasture,pnYear,pnFarm,btnClassify,
-                              lblTool,pnGPPInitial,pnGPPFinal]
+            var listPanels = [lblClass,pnTypePasture,pnYear,
+                              pnFarm,btnClassify,lblTool,
+                              pnGPPInitial,pnGPPFinal]
             var painelMain = ui.Panel({style: {width: '250px'}})
             
             for (var i in listPanels){
