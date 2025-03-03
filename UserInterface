@@ -47,6 +47,20 @@ var app = {
                 })
             
             //Panel GPP trend
+            var lblGPPInitial = ui.Label('Ano Inicial')
+            var selGPPInitial = ui.Textbox({
+              placeholder:'Selecione o ano',
+              style:{'width':'120px'}
+            })
+            
+            
+            var lblGPPFinal = ui.Label('Ano Final')
+            var selGPPFinal = ui.Textbox({
+              placeholder:'Selecione o ano',
+              style:{'width':'120px'}
+            })
+            
+            
             
             //Insert all panels into main panel
             var listPanels = [pnTypePasture,pnYear,pnFarm,btnClassify]
