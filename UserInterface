@@ -84,6 +84,7 @@ var app = {
             )
             
             var btnGPP = ui.Button({label:'Visualização do GPP'})
+            var btnTrendGPP = ui.Button({label:'Gerar a tendência do GPP'})
             
             //Insert all panels into main panel
             var listPanels = [lblClass,pnTypePasture,pnYear,
