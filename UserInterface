@@ -49,6 +49,11 @@ var app = {
                 })
             
             //Panel GPP trend
+            //Split Tools
+            var lblTool = ui.Label({
+                        value:'PRODUTIVIDADE PRIMÁRIA BRUTA (GPP)',
+                        style:{fontSize:'20',fontWeight:'bold'}
+            })
             //GPP Initial
             var lblGPPInitial = ui.Label('Ano Inicial')
             var selGPPInitial = ui.Select({
@@ -80,7 +85,7 @@ var app = {
             
             //Insert all panels into main panel
             var listPanels = [pnTypePasture,pnYear,pnFarm,btnClassify,
-                              pnGPPInitial,pnGPPFinal]
+                              lblTool,pnGPPInitial,pnGPPFinal]
             var painelMain = ui.Panel({style: {width: '250px'}})
             
             for (var i in listPanels){
