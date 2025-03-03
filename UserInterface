@@ -51,7 +51,7 @@ var app = {
             //Panel GPP trend
             //GPP Initial
             var lblGPPInitial = ui.Label('Ano Inicial')
-            var selGPPInitial = ui.Textbox({
+            var selGPPInitial = ui.Select({
               placeholder:'Selecione o ano',
               items:styles.gppyears,
               style:{'width':'120px'}
@@ -63,7 +63,7 @@ var app = {
             
             //GPP Final
             var lblGPPFinal = ui.Label('Ano Final')
-            var selGPPFinal = ui.Textbox({
+            var selGPPFinal = ui.Select({
               placeholder:'Selecione o ano',
               items:styles.gppyears,
               style:{'width':'120px'}
