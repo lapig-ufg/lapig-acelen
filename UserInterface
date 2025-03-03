@@ -49,25 +49,38 @@ var app = {
                 })
             
             //Panel GPP trend
+            //GPP Initial
             var lblGPPInitial = ui.Label('Ano Inicial')
             var selGPPInitial = ui.Textbox({
               placeholder:'Selecione o ano',
               items:styles.gppyears,
               style:{'width':'120px'}
             })
+            var pnGPPInitial = ui.Panel([lblGPPInitial,selGPPInitial],
+                        ui.Panel.Layout.Flow('horizontal'),
+                        {stretch: 'both'}
+            )
             
-            
+            //GPP Final
             var lblGPPFinal = ui.Label('Ano Final')
             var selGPPFinal = ui.Textbox({
               placeholder:'Selecione o ano',
               items:styles.gppyears,
               style:{'width':'120px'}
             })
+            var pnGPPFinal = ui.Panel([lblGPPFinal,selGPPFinal],
+                        ui.Panel.Layout.Flow('horizontal'),
+                        {stretch: 'both'}
+            )
+            
+            
+            
             
             
             
             //Insert all panels into main panel
-            var listPanels = [pnTypePasture,pnYear,pnFarm,btnClassify]
+            var listPanels = [pnTypePasture,pnYear,pnFarm,btnClassify,
+                              pnGPPInitial,pnGPPFinal]
             var painelMain = ui.Panel({style: {width: '250px'}})
             
             for (var i in listPanels){
