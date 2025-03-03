@@ -125,7 +125,7 @@ function run_classfication(carta, year,samples,target,mask) {
     
     //Takes the trained classifier and use it to classify the entire feature space pixel by pixel
     var classification = featureSpace.multiply(mask).classify(classifier).select(0);
-        classification = classification.gte(0.51).selfMask().clip(cartas_area)
+        classification = classification.gte(0.51).selfMask()
     
     
     return {'classification':classification}
