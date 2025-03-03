@@ -52,7 +52,7 @@ var app = {
             var lblGPPInitial = ui.Label('Ano Inicial')
             var selGPPInitial = ui.Textbox({
               placeholder:'Selecione o ano',
-              items:
+              items:styles.gppyears,
               style:{'width':'120px'}
             })
             
@@ -60,7 +60,7 @@ var app = {
             var lblGPPFinal = ui.Label('Ano Final')
             var selGPPFinal = ui.Textbox({
               placeholder:'Selecione o ano',
-              items:
+              items:styles.gppyears,
               style:{'width':'120px'}
             })
             
