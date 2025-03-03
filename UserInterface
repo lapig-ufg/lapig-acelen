@@ -83,6 +83,7 @@ var app = {
                         {stretch: 'both'}
             )
             
+            var btnGPP = ui.Button({label:'Visualização do GPP'})
             
             //Insert all panels into main panel
             var listPanels = [lblClass,pnTypePasture,pnYear,
