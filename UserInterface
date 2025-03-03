@@ -7,6 +7,11 @@ var app = {
           gui:function(maplayer){
             
             //Panel of choose pasture type for classification in map
+            //Split Tools
+            var lblClass = ui.Label({
+                        value:'CLASSIFICAÇÃO AUTOMÁTICA DE PASTAGEM - SENTINEL',
+                        style:{fontSize:'20',fontWeight:'bold'}
+            })
             var lblType = ui.Label('Tipo de pastagem')
             var selType = ui.Select({
               items:['Cultivada'],
@@ -77,10 +82,6 @@ var app = {
                         ui.Panel.Layout.Flow('horizontal'),
                         {stretch: 'both'}
             )
-            
-            
-            
-            
             
             
             //Insert all panels into main panel
