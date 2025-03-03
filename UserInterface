@@ -46,6 +46,8 @@ var app = {
                     
                 })
             
+            //Panel GPP trend
+            
             //Insert all panels into main panel
             var listPanels = [pnTypePasture,pnYear,pnFarm,btnClassify]
             var painelMain = ui.Panel({style: {width: '250px'}})
