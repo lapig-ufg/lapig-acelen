@@ -1,5 +1,7 @@
 //Import modules
 var run = require('users/Amazonas21/acelen:runclassification')
+var styles = require('users/Amazonas21/acelen:styles')
+
 
 var app = {
           gui:function(maplayer){
