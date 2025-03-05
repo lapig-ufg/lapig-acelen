@@ -2,7 +2,7 @@
 var run = require('users/Amazonas21/acelen:runclassification')
 var styles = require('users/Amazonas21/acelen:styles')
 var data = require('users/Amazonas21/acelen:datasets')
-
+var func = require('users/Amazonas21/acelen:functions')
 
 
 //Variables
