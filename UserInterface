@@ -110,7 +110,9 @@ var app = {
                 
             var btnTrendGPP = ui.Button({label:'Gerar Tendência'})
                 btnTrendGPP.onClick(function(){
-                  maplayer()
+                  var initialYear = selGPPInitial.getValue()
+                  var FinalYear = selGPPInitial.getValue()
+                  maplayer(gppresult['trend'],styles.gpp_trend,'Tendencia - ('+initialYear+'/'+FinalYear+')')
                   
                 })
             
