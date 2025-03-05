@@ -112,7 +112,7 @@ var app = {
                 btnTrendGPP.onClick(function(){
                   var initialYear = selGPPInitial.getValue()
                   var FinalYear = selGPPInitial.getValue()
-                  maplayer(gppresult['trend'],styles.gpp_trend,'Tendencia - ('+initialYear+'/'+FinalYear+')')
+                  maplayer.addLayer(gppresult['trend'],styles.gpp_trend,'Tendencia - ('+initialYear+'/'+FinalYear+')')
                   
                 })
             
