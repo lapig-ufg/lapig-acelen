@@ -93,7 +93,7 @@ var app = {
                         {stretch: 'both'}
             )
             
-            var btnGPP = ui.Button({label:'Visualização'})
+            var btnGPP = ui.Button({label:' Gerar Visualização'})
                 btnGPP.onClick(function(){
                       
                       //Parameters
@@ -107,7 +107,7 @@ var app = {
                       maplayer.addLayer(trendgpp['final-gpp'],styles.gpp,'GPP - Final')
                 })
                 
-            var btnTrendGPP = ui.Button({label:'Tendência'})
+            var btnTrendGPP = ui.Button({label:'Gerar Tendência'})
             
             var pnGPPbtn = ui.Panel([btnGPP,btnTrendGPP],
                         ui.Panel.Layout.Flow('horizontal'),
