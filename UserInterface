@@ -104,8 +104,8 @@ var app = {
                       gppresult = func.trendgpp(gppdata,initialYear,FinalYear,classrf)
                                  
                       //Add layers in map
-                      maplayer.addLayer(trendgpp['initial-gpp'],styles.gpp,'GPP - Inicial')
-                      maplayer.addLayer(trendgpp['final-gpp'],styles.gpp,'GPP - Final')
+                      maplayer.addLayer(gppresult['initial-gpp'],styles.gpp,'GPP - Inicial')
+                      maplayer.addLayer(gppresult['final-gpp'],styles.gpp,'GPP - Final')
                 })
                 
             var btnTrendGPP = ui.Button({label:'Gerar Tendência'})
