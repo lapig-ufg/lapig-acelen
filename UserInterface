@@ -100,7 +100,8 @@ var app = {
                       var gppdata = data.datasets['gpp']
                       var initialYear = selGPPInitial.getValue()
                       var FinalYear = selGPPInitial.getValue()
-                      var trendgpp = func.trendgpp(gppdata,initialYear,FinalYear,classrf)
+                      
+                      gppresult = func.trendgpp(gppdata,initialYear,FinalYear,classrf)
                                  
                       //Add layers in map
                       maplayer.addLayer(trendgpp['initial-gpp'],styles.gpp,'GPP - Inicial')
