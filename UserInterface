@@ -6,7 +6,7 @@ var func = require('users/Amazonas21/acelen:functions')
 
 
 //Variables
-var classrf, gppdata
+var classrf, gppresult
 
 var app = {
           gui:function(maplayer){
