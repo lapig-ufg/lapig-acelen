@@ -2,6 +2,8 @@
 var run = require('users/Amazonas21/acelen:runclassification')
 var styles = require('users/Amazonas21/acelen:styles')
 
+//Variables
+var classrf
 
 var app = {
           gui:function(maplayer){
