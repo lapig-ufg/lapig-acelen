@@ -108,6 +108,12 @@ var app = {
                 })
                 
             var btnTrendGPP = ui.Button({label:'Tendência'})
+            
+            var pnGPPbtn = ui.Panel([btnGPP,btnTrendGPP],
+                        ui.Panel.Layout.Flow('horizontal'),
+                        {stretch: 'both'}
+            )
+            
             //Insert all panels into main panel
             var listPanels = [lblClass,pnTypePasture,pnYear,
                               pnFarm,btnClassify,lblTool,
