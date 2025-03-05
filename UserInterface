@@ -52,7 +52,9 @@ var app = {
                     var year = ee.Number.parse(selYear.getValue()).getInfo()
                     var farm = selFarm.getValue().toUpperCase()
                     classrf = run.getRun(typegrass,year,farm,maplayer)
-                    maplayer.addLayer(classRF['classification'],style.styleclass,'Classification')
+                    classrf = classrf['classification']
+                    maplayer.addLayer(classrf,style.styleclass,'Classification')
+                    maplayer.centerObject(classrf)
                     
                 })
             
