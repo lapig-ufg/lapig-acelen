@@ -88,11 +88,12 @@ var app = {
               items:styles.gppyears,
               style:{'width':'120px'}
             })
+            
             var pnGPPFinal = ui.Panel([lblGPPFinal,selGPPFinal],
                         ui.Panel.Layout.Flow('horizontal'),
                         {stretch: 'both'}
             )
-            
+            //Button GPP visualize
             var btnGPP = ui.Button({label:' Gerar Visualização'})
                 btnGPP.onClick(function(){
                       
