@@ -104,8 +104,8 @@ var app = {
               //Create map from app
               function newMap(){
                 var map = ui.Map().clear();
-                    //map.setOptions('SATELLITE');
-                    //map.setCenter(-53.23,-16.48, 4)
+                    map.setOptions('SATELLITE');
+                    map.setCenter(-53.23,-16.48, 4)
                     
                 return map
               }
