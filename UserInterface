@@ -114,6 +114,7 @@ var app = {
                   var initialYear = selGPPInitial.getValue()
                   var FinalYear = selGPPInitial.getValue()
                   
+                  //Add Layer Map
                   maplayer.addLayer(gppresult['trend'],styles.gpp_trend,'Tendencia - ('+initialYear+'/'+FinalYear+')')
                   
                 })
