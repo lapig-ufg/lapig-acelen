@@ -98,6 +98,7 @@ var app = {
                 btnTrendGPP.onClick(function(){
                       
                       //Parameters
+                      
                       var initialYear = selGPPInitial.getValue()
                       var FinalYear = selGPPInitial.getValue()
                       var trendgpp = func.trendgpp(gppdata,initialYear,FinalYear,classrf)
