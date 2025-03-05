@@ -108,7 +108,8 @@ var app = {
                       maplayer.addLayer(gppresult['initial-gpp'],styles.gpp,'GPP - Inicial')
                       maplayer.addLayer(gppresult['final-gpp'],styles.gpp,'GPP - Final')
                 })
-                
+            
+            //Button GPP Trend
             var btnTrendGPP = ui.Button({label:'Gerar Tendência'})
                 btnTrendGPP.onClick(function(){
                   //Parameters
