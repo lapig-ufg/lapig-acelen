@@ -109,6 +109,10 @@ var app = {
                 })
                 
             var btnTrendGPP = ui.Button({label:'Gerar Tendência'})
+                btnTrendGPP.onClick(function(){
+                  maplayer()
+                  
+                })
             
             var pnGPPbtn = ui.Panel([btnGPP,btnTrendGPP],
                         ui.Panel.Layout.Flow('horizontal'),
