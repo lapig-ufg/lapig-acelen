@@ -93,7 +93,7 @@ var app = {
                         {stretch: 'both'}
             )
             
-            var btnGPP = ui.Button({label:'Visualização do GPP'})
+            var btnGPP = ui.Button({label:'Visualização'})
                 btnGPP.onClick(function(){
                       
                       //Parameters
