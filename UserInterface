@@ -91,7 +91,7 @@ var app = {
                               pnFarm,btnClassify,lblTool,
                               pnGPPInitial,pnGPPFinal,btnGPP,
                               btnTrendGPP]
-            var painelMain = ui.Panel({style: {width: '250px',position:'top-left'}})
+            var painelMain = ui.Panel({style: {width: '300px',position:'top-left'}})
             
             for (var i in listPanels){
               painelMain.add(listPanels[i])
