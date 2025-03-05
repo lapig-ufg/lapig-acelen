@@ -110,7 +110,7 @@ var app = {
             var btnTrendGPP = ui.Button({label:'Tendência'})
             
             var pnGPPbtn = ui.Panel([btnGPP,btnTrendGPP],
-                        ui.Panel.Layout.Flow('horizontal'),
+                        ui.Panel.Layout.Flow('vertical'),
                         {stretch: 'both'}
             )
             
