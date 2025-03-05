@@ -51,10 +51,11 @@ var app = {
                     var typegrass = selType.getValue()
                     var year = ee.Number.parse(selYear.getValue()).getInfo()
                     var farm = selFarm.getValue().toUpperCase()
+                    var area = data.datasets['test_data'].filter(ee.Filter.eq('Fazenda',farm))
                     
                     classrf = run.getRun(typegrass,year,farm,maplayer)
                     maplayer.addLayer(classrf,styles.styleclass,'Classification')
-                   
+                    maplayer.centerObject(area)
                     
                 })
             
