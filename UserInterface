@@ -53,8 +53,6 @@ var app = {
                     var farm = selFarm.getValue().toUpperCase()
                     
                     classrf = run.getRun(typegrass,year,farm,maplayer)
-                    classrf = classrf['classification']
-                    
                     maplayer.addLayer(classrf,styles.styleclass,'Classification')
                     maplayer.centerObject(classrf)
                     
