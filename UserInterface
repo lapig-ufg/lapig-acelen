@@ -113,13 +113,14 @@ var app = {
         
               //Load all guis
               var gui = app.gui(maplayer) 
-              var listPanel = [gui,maplayer]
+              var mapPainel = maplayer.add(gui)
+              //var listPanel = [gui,maplayer]
   
               //Merge all painels
-              var mapPainel = ui.Panel(listPanel,
-                  ui.Panel.Layout.Flow('horizontal'), 
-                  {stretch: 'both',height:'100%',width:'100%'}
-              ); 
+              //var mapPainel = ui.Panel(listPanel,
+              //    ui.Panel.Layout.Flow('horizontal'), 
+              //    {stretch: 'both',height:'100%',width:'100%'}
+              //); 
               ui.root.widgets().reset([mapPainel]);
           }
 }
