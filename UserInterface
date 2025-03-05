@@ -99,7 +99,7 @@ var app = {
                       //Parameters
                       var gppdata = data.datasets['gpp']
                       var initialYear = selGPPInitial.getValue()
-                      var FinalYear = selGPPInitial.getValue()
+                      var FinalYear = selGPPFinal.getValue()
                       
                       gppresult = func.trendgpp(gppdata,initialYear,FinalYear,classrf)
                                  
@@ -112,7 +112,7 @@ var app = {
                 btnTrendGPP.onClick(function(){
                   //Parameters
                   var initialYear = selGPPInitial.getValue()
-                  var FinalYear = selGPPInitial.getValue()
+                  var FinalYear = selGPPFinal.getValue()
                   
                   //Add Layer Map
                   maplayer.addLayer(gppresult['trend'],styles.gpp_trend,'Tendencia - ('+initialYear+'/'+FinalYear+')')
