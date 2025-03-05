@@ -91,7 +91,7 @@ var app = {
                               pnFarm,btnClassify,lblTool,
                               pnGPPInitial,pnGPPFinal,btnGPP,
                               btnTrendGPP]
-            var painelMain = ui.Panel({style: {width: '250px'}})
+            var painelMain = ui.Panel({style: {width: '250px',position:'top-left'}})
             
             for (var i in listPanels){
               painelMain.add(listPanels[i])
@@ -106,6 +106,7 @@ var app = {
                 var map = ui.Map().clear();
                     map.setOptions('SATELLITE');
                     map.setCenter(-53.23,-16.48, 4)
+                    map.setControlVisibility({all: false});
                 return map
               }
         
