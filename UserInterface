@@ -55,7 +55,7 @@ var app = {
                     classrf = run.getRun(typegrass,year,farm,maplayer)
                     classrf = classrf['classification']
                     
-                    maplayer.addLayer(classrf,style.styleclass,'Classification')
+                    maplayer.addLayer(classrf,styles.styleclass,'Classification')
                     maplayer.centerObject(classrf)
                     
                 })
