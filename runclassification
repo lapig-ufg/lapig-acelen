@@ -150,7 +150,7 @@ exports.getRun = function(typegrass,year,farm,maplayer){
   var scale = 10
   
   
-  var gppdata = data.datasets['gpp']
+  //var gppdata = data.datasets['gpp']
   
   var mask = area.map(function(feat){
         return feat.set('value',1)  
