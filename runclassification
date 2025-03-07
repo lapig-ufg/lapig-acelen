@@ -133,6 +133,7 @@ function run_classfication(carta, year,samples,target,mask) {
     
     var load = ui.Panel()
         load.add(ui.Label('Carregando..'))
+    maplayer(load)
     //Trains the classifier using the training samples asociated with the feature space information
     //classifier = classifier.train(trainSamplesFeeded, target);//classFieldName);
     
