@@ -142,6 +142,10 @@ var app = {
             return painelMain
             
           },
+          loading:function(){
+            app.ui.form = ui.Panel()
+            app.ui.form.add(ui.Label('Carregando..'))
+          },
           init:function(){
               
               //Create map from app
