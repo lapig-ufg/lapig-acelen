@@ -142,10 +142,6 @@ var app = {
             return painelMain
             
           },
-          loading:function(){
-            var load = ui.Panel()
-                load.add(ui.Label('Carregando..'))
-          },
           init:function(){
               
               //Create map from app
