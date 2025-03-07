@@ -31,7 +31,7 @@ var BandsWet = ['blue_wet', 'green_wet', 'red_wet', 'rededge1_wet', 'rededge2_we
 //########################################
 
 //Main function, responsible to execute the classification. Accept as parameters the chart name (e.g. 'SE-22-X-A') and the year (e.g. 2022)
-function run_classfication(carta, year,samples,target,mask,maplayer) {
+function run_classfication(carta, year,samples,target,mask) {
 
     //var nm_carta = carta; //Changes the chart variable name
     
