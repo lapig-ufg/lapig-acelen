@@ -143,8 +143,8 @@ var app = {
             
           },
           loading:function(){
-            app.ui.form = ui.Panel()
-            app.ui.form.add(ui.Label('Carregando..'))
+            var load = ui.Panel()
+                load.add(ui.Label('Carregando..'))
           },
           init:function(){
               
