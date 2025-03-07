@@ -118,34 +118,19 @@ function run_classfication(carta, year,samples,target,mask) {
         
     }));
     
-    trainSamplesFeeded.evaluate(function(feat){
-      
-      //Trains the classifier using the training samples asociated with the feature space information
-      classifier = classifier.train(feat, target);//classFieldName);
-      
-      //Takes the trained classifier and use it to classify the entire feature space pixel by pixel
-      var classification = featureSpace.multiply(mask).classify(classifier).select(0);
-          classification = classification.gte(0.51).selfMask()
-          
-      return {'classification':classification}
-      
-    })
     
-    var load = ui.Panel()
-        load.add(ui.Label('Carregando..'))
-    maplayer(load)
     //Trains the classifier using the training samples asociated with the feature space information
-    //classifier = classifier.train(trainSamplesFeeded, target);//classFieldName);
+    classifier = classifier.train(trainSamplesFeeded, target);//classFieldName);
     
     //Visualization Feature Importance
     //print(func.calcFeatureImportance(classifier))
     
     //Takes the trained classifier and use it to classify the entire feature space pixel by pixel
-    //var classification = featureSpace.multiply(mask).classify(classifier).select(0);
-    //    classification = classification.gte(0.51).selfMask()
+    var classification = featureSpace.multiply(mask).classify(classifier).select(0);
+        classification = classification.gte(0.51).selfMask()
         
     
-    //return {'classification':classification}
+    return {'classification':classification}
    
 }
 
