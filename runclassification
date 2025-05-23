@@ -38,8 +38,6 @@ function run_classfication(carta, year,samples,target,mask) {
     var cartas_area = carta//cartas.filter(ee.Filter.eq('grid_name', nm_carta)); // Filters the main charts feature collection by the choosed chart
     var cartas_buffer = cartas_area.geometry().buffer(5000); // Selects the charts around the choosed chart
 
-    
-
     //OK
     var START_DATE = ee.Date(year+'-01-01')//ee.Date((year - 1) + '-07-01'); //Start date to filter the image collection (usually six months before the main year)
     var END_DATE = ee.Date(year+'-12-31')//ee.Date((year + 1) + '-06-30'); //End date to filter the image collection (usually six months after the main year)
