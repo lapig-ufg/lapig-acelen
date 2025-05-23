@@ -155,6 +155,7 @@ exports.getRun = function(typegrass,year,farm,maplayer){
   }).reduceToImage({properties: ['value'],reducer: ee.Reducer.first()}).selfMask();
   
   //Creating automated smaples
+  print('Automatico',imgs)
   var samplesautomated = func.automatedSamples(imgs,type,year,area,numberSamples,scale)
   
   //Run classification and GPP
