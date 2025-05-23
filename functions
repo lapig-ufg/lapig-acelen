@@ -102,7 +102,8 @@ exports.maskEdges = function(s2_img){
 exports.thresholdSamples = function(img,area,type,year){
   
   //Clip and select image from year
-  img = img.select(year+'_probability').clip(area)
+  img = img.filterBounds(area)
+           .select(year+'_probability')//.clip(area) Modificado
   
   //Threshold Values
   var dictype = {
