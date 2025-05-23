@@ -100,7 +100,7 @@ exports.maskEdges = function(s2_img){
 
 //Create thresholds from samples
 exports.thresholdSamples = function(img,area,type,year){
-  print(img)
+  
   //Clip and select image from year
   img = img.select(year+'_probability')//.clip(area) Modificado
   
