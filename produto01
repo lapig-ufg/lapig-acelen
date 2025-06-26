@@ -1,8 +1,8 @@
 //Importando os modulos
 //var procRun = require('users/Amazonas21/AppSaoMartinho:InterfaceFiles/runprocess')
-var func = require('users/Amazonas21/filesInterface/functions')
-var datasets = require('users/Amazonas21/filesInterface/datasets')
-var options = require('users/Amazonas21/filesInterface/styles')
+var func = require('users/Amazonas21/filesInterface:functions')
+var datasets = require('users/Amazonas21/filesInterface:datasets')
+var options = require('users/Amazonas21/filesInterface:styles')
 
 //Criando variáveis de tipagem dinâmica para alteração no mapa pelo usuário
 var result,buttonPopUp,buttonSeries,btnFilter,btnFarm,finalyear,edafo
