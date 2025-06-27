@@ -714,8 +714,8 @@ var app = {
                 var points = ee.Geometry.Point(lng,lat)
                 
                 var typeChart = options.chartSelect[selectCharttype.getValue()]
-                var dataValue = datasets.Dataset['Área de Restauração']
-                                .filter(ee.Filter.eq('estado',dataset))
+                var dataValue = ee.FeatureCollection(dataset)//datasets.Dataset['Área de Restauração']
+                                //.filter(ee.Filter.eq('estado',dataset))
                     dataValue = dataValue.filter(ee.Filter.bounds(points))
                 
                 var datasource = select_fonte.getValue()
