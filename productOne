@@ -320,7 +320,8 @@ var app = {
                 
                 //Adicionar o mapa de vigor
                 maplayer.addLayer(imgVigor,options.configVigor,'Vigor-'+year)
-          })
+                func.createLegend(maplayer,options.classes[fonteInfo],options.palette[fonteInfo],titulo) 
+              })
           
           var painelVigor = ui.Panel([selectVigorYear,btnVigor],
               ui.Panel.Layout.Flow('horizontal'),
