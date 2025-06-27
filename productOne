@@ -658,7 +658,7 @@ var app = {
           var listPainels = [
                              toolPanel,btnLapig,painelArea,
                              painelFonteDados,painelYear,painelAgregacao,
-                             button,legendImage,painelImage
+                             button,legendImage,painelImage,painelVigor
                             ]
           
           for(var i in listPainels){
