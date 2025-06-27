@@ -291,7 +291,7 @@ var app = {
                   textAlign : 'left',
                   padding: '4px 0px 0px 0%'
           });
-          
+          var years = ee.Image(datasets.Datasets[''])  
           var selectVigorYear =  ui.Select({
               items: Object.keys(options.ImagesTypes),
               placeholder:'Escolha o ano',
