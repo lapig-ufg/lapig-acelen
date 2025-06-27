@@ -598,7 +598,11 @@ var app = {
                 var fields = ee.FeatureCollection(select_area.getValue())
                              .first()
                              .propertyNames()
-                             
+                
+                var valuesFields = ee.FeatureCollection(select_area.getValue())
+                                   .aggregate_histogram(select_area.getValue())
+                                   .keys()
+                print(valuesFields)
                 var selectFarm = ui.Select({
                   placeholder:'Selecione a coluna',
                   items:fields.getInfo()//['Fazenda','Municipio','Quadra (código)']
