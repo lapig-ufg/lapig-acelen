@@ -309,7 +309,7 @@ var app = {
                 
           })
           
-          var painelVigor = ui.Panel([lblVigorTool,selectVigorYear],
+          var painelVigor = ui.Panel([selectVigorYear,btnVigor],
               ui.Panel.Layout.Flow('horizontal'),
               {stretch: 'both'}
           )
