@@ -324,7 +324,7 @@ var app = {
                 print(Object.keys(options.paletteVigor))
                 print(options.configVigor.palette)
                 
-                func.createLegend(maplayer,Object.keys(options.paletteVigor),options.configVigor.palette,titulo) 
+                func.createLegend(maplayer,Object.keys(options.paletteVigor),options.paletteVigor.palette,titulo) 
               })
           
           var painelVigor = ui.Panel([selectVigorYear,btnVigor],
