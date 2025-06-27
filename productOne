@@ -649,7 +649,7 @@ var app = {
                         //Verificar se algum registro foi selecionado
                         if(featFarm.size().getInfo() != 0){
                             var config = {
-                                          color:'yellow',
+                                          color:'cyan',
                                           fillColor: '#00000000',
                                           lineType: 'solid'
                             }
