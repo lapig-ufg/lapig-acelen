@@ -318,7 +318,7 @@ var app = {
                                .clip(ee.FeatureCollection(area))
                 
                 //Adicionar o mapa de vigor
-                maplayer.addLayer(imgVigor,{},'Vigor-'+year)
+                maplayer.addLayer(imgVigor,{palette:.values()},'Vigor-'+year)
           })
           
           var painelVigor = ui.Panel([selectVigorYear,btnVigor],
