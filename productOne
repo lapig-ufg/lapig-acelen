@@ -669,8 +669,10 @@ var app = {
           var mainPanel = ui.Panel({style: {width: '315px',position:'top-right'}});
           var listPainels = [
                              toolPanel,btnLapig,painelArea,
-                             painelFonteDados,painelYear,painelAgregacao,
-                             button,legendImage,painelImage,painelVigor
+                             painelFonteDados,painelYear,
+                             painelAgregacao,button,
+                             legendImage,painelImage,
+                             lblVigorTool,painelVigor
                             ]
           
           for(var i in listPainels){
