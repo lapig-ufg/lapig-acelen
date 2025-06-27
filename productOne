@@ -292,10 +292,10 @@ var app = {
                   padding: '4px 0px 0px 0%'
           });
           
-          var yearsVigor = ee.Image(datasets.Dataset['Vigor-Mapbiomas']).bandNames()
-              yearsVigor = yearsVigor.getInfo()
+          var yearsVigor = ee.Image(datasets.Dataset['Vigor-Mapbiomas']).bandNames().getInfo()
+              yearsVigor = ee.LisyearsVigor.getInfo()
           var selectVigorYear =  ui.Select({
-              items: yearsVigor[0],
+              items: yearsVigor,
               placeholder:'Escolha o ano',
               style:{width:'150px'}
           });
