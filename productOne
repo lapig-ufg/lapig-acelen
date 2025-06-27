@@ -47,7 +47,7 @@ var app = {
           
           //Criando o painel para inserir a logo do Lapig e UFG
           var logo = ui.Button({
-             imageUrl:'https://files.cercomp.ufg.br/weby/up/1313/o/Marca_Lapig_PNG_sem_descrição-removebg-preview.png?1626024108'
+             imageUrl:'https://files.cercomp.ufg.br/weby/up/1313/o/Marca_Lapig_PNG_sem_descrição-removebg-preview.png'
           })
           var toolPanel = ui.Panel(logo, 'flow', {width: '315px'});
           
