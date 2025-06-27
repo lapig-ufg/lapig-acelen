@@ -296,12 +296,20 @@ var app = {
               yearsVigor = yearsVigor.map(function(e){
                 return e.replace('vigor_','')
               })
-          var selectVigorYear =  ui.Select({
+          var selectVigorYear = ui.Select({
               items: yearsVigor,
               placeholder:'Escolha o ano',
               style:{width:'150px'}
           });
-           var painelVigor = ui.Panel([lblVigorTool,selectVigorYear],
+          
+          var btnVigor = ui.Button('Visualizar vigor')
+              btnVigor.onClick(function(){
+                var area = select_area.getValue()
+                var year = selectVigorYear.getValue()
+                
+          })
+          
+          var painelVigor = ui.Panel([lblVigorTool,selectVigorYear],
               ui.Panel.Layout.Flow('horizontal'),
               {stretch: 'both'}
           )
