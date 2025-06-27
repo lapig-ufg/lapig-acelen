@@ -605,17 +605,26 @@ var app = {
                   items:fields.getInfo()//['Fazenda','Municipio','Quadra (código)']
                   
                 })
-                
+                var nameFarm = ui.Select({//ui.Textbox({
+                        placeholder: 'Selecione o valor',
+                        style:{width:'150px'}
+                })
+                selectFarm.onchange(function(value){
+                   var valuesFields = ee.FeatureCollection(select_area.getValue())
+                                   .aggregate_histogram(selectFarm.getValue())
+                                   .keys()
+                                   .getInfo()
+                  
+                  nameFarm.items().reset(Object.keys(valuesFields));
+                  nameFarm.setValue(Object.keys(valuesFields)[0])
+                  
+                })
                 var valuesFields = ee.FeatureCollection(select_area.getValue())
                                    .aggregate_histogram(selectFarm.getValue())
                                    .keys()
                 print(valuesFields)
                 
-                var nameFarm = ui.Select({//ui.Textbox({
-                        placeholder: 'Selecione o valor',
-                        items:valuesFields.getInfo(),
-                        style:{width:'150px'}
-                })
+              
                 
                 var btnFilterFarm = ui.Button('Filtrar')
                     btnFilterFarm.onClick(function(){
