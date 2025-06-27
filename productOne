@@ -720,9 +720,10 @@ var app = {
                 
                 var datasource = select_fonte.getValue()
                 
-                var nameDataset = datasource+"_"+dataset
-                    nameDataset = nameDataset.replace(' (GO)','').replace(' (SP)','')
-                    nameDataset = nameDataset.replace(/ /g,"_")
+                //var nameDataset = ee.String(area).split('/').get(-1).getInfo()
+                //var nameDataset = datasource+"_"+dataset
+                //    nameDataset = nameDataset.replace(' (GO)','').replace(' (SP)','')
+                //    nameDataset = nameDataset.replace(/ /g,"_")
   
                 //var total = datasets.Imagescluster[dataset]
                 var total = datasets.Imagescluster['Brazil']//ee.Image('projects/saomartinho/assets/'+nameDataset)
