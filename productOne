@@ -188,7 +188,8 @@ var app = {
                 
                 //Criar a legenda
                 if (app.options.activeLegend == 0){
-                      func.createLegend(maplayer,options.classes[fonteInfo],options.palette[fonteInfo])
+                      var titulo = 'Classe do uso da terra'
+                      func.createLegend(maplayer,options.classes[fonteInfo],options.palette[fonteInfo],titulo)
                       app.options.activeLegend = 1
                 }      
                 
