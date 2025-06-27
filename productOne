@@ -605,7 +605,7 @@ var app = {
                   
                 })
                 
-                var nameFarm = ui.Textbox({
+                var nameFarm = ui.Select({//ui.Textbox({
                         placeholder: 'Digite o valor',
                         style:{width:'150px'}
                 })
