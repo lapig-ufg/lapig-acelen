@@ -637,9 +637,12 @@ var app = {
                         var idfarm = selectFarm.getValue()
                         
                         //Filtar as fazenda por selecao escolhida pelo usuário
-                        var featFarm = ee.FeatureCollection(select_area.getValue())
-                        print(featFarm)
-                            featFarm = featFarm.filter(ee.Filter.eq(selectFarm.getValue(),nameFarm.getValue()))
+                        var featFarm = ee.FeatureCollection(select_area.getValue()).map(function(feat){
+                          var f = selectFarm.getValue()
+                          var v = feat.get(selectFarm.getValue())
+                          return feat.set(f, ee.String(v))
+                        })
+                          featFarm = featFarm.filter(ee.Filter.eq(selectFarm.getValue(),nameFarm.getValue()))
                         print(featFarm)
                         print(selectFarm.getValue())
                         print(nameFarm.getValue())
