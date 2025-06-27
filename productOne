@@ -321,7 +321,7 @@ var app = {
                 //Adicionar o mapa de vigor
                 var titulo = 'Clase de vigor'
                 maplayer.addLayer(imgVigor,options.configVigor,'Vigor-'+year)
-                func.createLegend(maplayer,Object.keys(options.paletteVigor),Object.values(options.paletteVigor),titulo) 
+                func.createLegend(maplayer,Object.keys(options.paletteVigor),Ooptions.configVigor.palette,titulo) 
               })
           
           var painelVigor = ui.Panel([selectVigorYear,btnVigor],
