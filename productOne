@@ -307,9 +307,11 @@ var app = {
           
           var btnVigor = ui.Button('Visualizar vigor')
               btnVigor.onClick(function(){
+                //Coletando informações do asset e o ano selecionado do vigor
                 var area = select_area.getValue()
                 var year = selectVigorYear.getValue()
                 
+                //Selecionando o vigor do ano selecionado
                 var imgVigor = ee.Image(datasets.Dataset['Vigor-Mapbiomas'])
                                .select('vigor_'+year)
                                .clip(ee.FeatureCollection(area))
