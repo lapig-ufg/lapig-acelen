@@ -284,7 +284,7 @@ var app = {
               ui.Panel.Layout.Flow('horizontal'),
               {stretch: 'both'}
           )
-          //------------------------------Vigor Pastagem
+          //------------------------------Vigor Pastagem-----------------------------------------------
           var lblVigorTool = ui.Label('Vigor da pastagem');
               legendImage.style().set({
                   fontSize:'9',
@@ -297,6 +297,10 @@ var app = {
               placeholder:'Escolha o ano',
               style:{width:'150px'}
           });
+           var painelVigor = ui.Panel([lblVigorTool,selectVigorYear],
+              ui.Panel.Layout.Flow('horizontal'),
+              {stretch: 'both'}
+          )
           //-----------------------------Funções do Mapa------------------------------------------------
           //-----------------------------Informação da camada-------------------------------------------
           var popup = ui.Panel({style: {
