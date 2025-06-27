@@ -28,6 +28,7 @@ var app = {
       //Construção da interface gráfica
       guis: function(maplayer){
           //-------------------------------Logo-Lapig----------------------------------
+          /*
           var logo = ee.Image('projects/saomartinho/assets/logo').visualize({
               bands:  ['b1', 'b2', 'b3'],
               min: 0,
@@ -42,9 +43,13 @@ var app = {
                   },
                   style: {height: '50px', width: '200px',padding :'0'}
           });
+          */
           
           //Criando o painel para inserir a logo do Lapig e UFG
-          var toolPanel = ui.Panel(thumb, 'flow', {width: '315px'});
+          var logo = ui.Button({
+             imageUrl:'https://files.cercomp.ufg.br/weby/up/1313/o/Marca_Lapig_PNG_sem_descrição-removebg-preview.png?1626024108'
+          })
+          var toolPanel = ui.Panel(logo, 'flow', {width: '315px'});
           
           
           //--------------------------------Painel-Nome da ferramenta------------------
