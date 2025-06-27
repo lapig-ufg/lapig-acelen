@@ -94,7 +94,7 @@ var app = {
                 var nomeCamada = ee.String(value).split('/').getString(-1).getInfo()
                 
                 maplayer.centerObject(data.bounds())
-                maplayer.addLayer(data,{color:'cyan'},nomeCamada)
+                maplayer.addLayer(data,{color:'black'},nomeCamada)
               }
             })
             
