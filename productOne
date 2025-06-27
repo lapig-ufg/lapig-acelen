@@ -638,7 +638,7 @@ var app = {
                         
                         //Filtar as fazenda por selecao escolhida pelo usuário
                         var featFarm = ee.FeatureCollection(select_area.getValue())
-                            featFarm = featFarm.filter(ee.Filter.eq(selectFarm.getValue(),nameFarm.getValue()))
+                            featFarm = featFarm.filter(ee.Filter.eq(selectFarm.getValue(),ee.String(nameFarm.getValue())))
                         print(selectFarm.getValue())
                         print(nameFarm.getValue())
                         //Verificar se algum registro foi selecionado
