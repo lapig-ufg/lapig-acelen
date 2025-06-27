@@ -625,8 +625,6 @@ var app = {
                 var btnFilterFarm = ui.Button('Filtrar')
                     btnFilterFarm.onClick(function(){
                         
-                        
-                        
                         //Excluir selecao passada
                         var layers = maplayer.layers()
                               layers.forEach(function(lay) {
