@@ -614,17 +614,14 @@ var app = {
                                    .aggregate_histogram(selectFarm.getValue())
                                    .getInfo()
                   
-                  nameFarm.items().reset(Object.keys(valuesFields));
-                  nameFarm.setValue(Object.keys(valuesFields)[0])
+                   nameFarm.items().reset(Object.keys(valuesFields));
+                   nameFarm.setValue(Object.keys(valuesFields)[0])
                   
                 })
                 var valuesFields = ee.FeatureCollection(select_area.getValue())
                                    .aggregate_histogram(selectFarm.getValue())
                                    .keys()
-                print(valuesFields)
-                
               
-                
                 var btnFilterFarm = ui.Button('Filtrar')
                     btnFilterFarm.onClick(function(){
                         
