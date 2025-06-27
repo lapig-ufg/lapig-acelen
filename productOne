@@ -645,9 +645,7 @@ var app = {
                           return feat.set(f, ee.String(v))
                         })
                           featFarm = featFarm.filter(ee.Filter.eq(selectFarm.getValue(),nameFarm.getValue()))
-                        print(featFarm)
-                        print(selectFarm.getValue())
-                        print(nameFarm.getValue())
+                      
                         //Verificar se algum registro foi selecionado
                         if(featFarm.size().getInfo() != 0){
                             var config = {
