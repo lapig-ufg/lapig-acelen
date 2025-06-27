@@ -609,7 +609,7 @@ var app = {
                         placeholder: 'Selecione o valor',
                         style:{width:'150px'}
                 })
-                selectFarm.onchange(function(value){
+                selectFarm.onChange(function(value){
                    var valuesFields = ee.FeatureCollection(select_area.getValue())
                                    .aggregate_histogram(selectFarm.getValue())
                                    .keys()
