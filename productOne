@@ -310,6 +310,12 @@ var app = {
                 var area = select_area.getValue()
                 var year = selectVigorYear.getValue()
                 
+                var imgVigor = ee.Image(datasets.Dataset['Vigor-Mapbiomas'])
+                               .select('vigor_'+year)
+                               .clip(ee.FeatureCollection(area))
+                
+                //Adicionar o mapa de vigor
+                maplayer.addLayer(imgVigor,{},'Vigor-'+year)
           })
           
           var painelVigor = ui.Panel([selectVigorYear,btnVigor],
