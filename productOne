@@ -599,15 +599,17 @@ var app = {
                              .first()
                              .propertyNames()
                 
-                var valuesFields = ee.FeatureCollection(select_area.getValue())
-                                   .aggregate_histogram(select_area.getValue())
-                                   .keys()
-                print(valuesFields)
+                
                 var selectFarm = ui.Select({
                   placeholder:'Selecione a coluna',
                   items:fields.getInfo()//['Fazenda','Municipio','Quadra (código)']
                   
                 })
+                
+                var valuesFields = ee.FeatureCollection(select_area.getValue())
+                                   .aggregate_histogram(selectFarm.getValue())
+                                   .keys()
+                print(valuesFields)
                 
                 var nameFarm = ui.Select({//ui.Textbox({
                         placeholder: 'Selecione o valor',
