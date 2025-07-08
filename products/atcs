@@ -340,7 +340,7 @@ var app = {
                                       maxWidth:'300px'
                       }
                 })
-          buttonPopUp = ui.Button(confBtnPopup)
+          buttonPopUp = ui.Button(options.confBtnPopup)
           buttonPopUp.onClick(function(){
                 popup.add(ui.Label('Clique na área'))
                
