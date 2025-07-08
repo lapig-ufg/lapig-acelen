@@ -460,16 +460,7 @@ var app = {
           
           btnFilter =  ui.Button(options.confBtnFilter)
           
-          btnFarm = ui.Button({
-                               label:'Selecionar áreas',
-                               imageUrl: func.IconName('label'),
-                               disabled:true,
-                               style:{
-                                  position:'top-left',
-                                  fontStyle:'bold',
-                                  padding: '1px 1px'
-                              }
-          })
+          btnFarm = ui.Button()
           
           btnFilter.onClick(function(){
             
