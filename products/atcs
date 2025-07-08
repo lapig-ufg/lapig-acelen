@@ -7,8 +7,6 @@ var options = require('users/Amazonas21/filesInterface:styles')
 var result,buttonPopUp,buttonSeries,btnFilter,btnFarm,finalyear,edafo
 var select_year,selectChart,selectFilter,selectFarm,years,select_fonte
 
-
-
 //Objeto de atividades do app
 var app = {
     //Informaçõas de ativação das ações do usuário no Mapa
