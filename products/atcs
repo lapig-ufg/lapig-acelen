@@ -43,19 +43,16 @@ var app = {
                   style: {height: '50px', width: '200px',padding :'0'}
           });
          
-          
           //Criando o painel para inserir a logo do Lapig e UFG
-          
           var toolPanel = ui.Panel(thumb, 'flow', {width: '315px'});
-          
-          
+         
           //--------------------------------Painel-Nome da ferramenta------------------
           var btnLapig = ui.Label({
                         value:'ANÁLISE TEMPORAL DO USO E COBERTURA DO SOLO - AtCS',
                         style:{fontSize:'20',fontWeight:'bold'}
           })
           
-          //---------------------------------Painel-Área------------------------------
+          //---------------------------------Painel-Seleção da área------------------------------
           var legendArea = ui.Label('Área da análise');
               legendArea.style().set({
                 fontSize:'9',
