@@ -72,6 +72,7 @@ var app = {
                 app.options.activeChartSeries = 0
                 app.options.insertNewSeries = 0
               
+                //Reiniciar todas a funções e remoção de itens no mapa
                 painelChart.widgets().reset()
                 popup.widgets().reset()
                 ChartSeries.widgets().reset()
