@@ -22,7 +22,7 @@ var app = {
       activeBtnFilter:0,
       activeBtnFarm:0
     },
-    //Funções de intereção no mapa do app pelo usuáqio
+    //Funções de intereção no mapa do app pelo usuário
     functions:{
       //Construção da interface gráfica
       guis: function(maplayer){
