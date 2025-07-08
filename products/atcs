@@ -441,6 +441,8 @@ var app = {
                 }
                 
               });
+          
+          //O tipo de seleção do gráfico
           selectChart = ui.Select({
                 items:Object.keys(options.chartSelect) ,
                 value:Object.keys(options.chartSelect)[0],
