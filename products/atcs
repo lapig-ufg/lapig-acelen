@@ -72,17 +72,19 @@ var app = {
                 app.options.activeChartSeries = 0
                 app.options.insertNewSeries = 0
               
-                //Reiniciar todas a funções e remoção de itens no mapa
+                //Reiniciar todas a funções 
                 painelChart.widgets().reset()
                 popup.widgets().reset()
                 ChartSeries.widgets().reset()
               
+                //remoção de itens no mapa
                 maplayer.clear()
                 maplayer.add(buttonPopUp)
                 maplayer.add(buttonSeries)
                 maplayer.add(btnFilter)
                 maplayer.add(btnFarm)
               
+                //Desativar a função de onclick dos botões no mapa
                 buttonPopUp.setDisabled(false)
                 buttonSeries.setDisabled(true)
                 btnFilter.setDisabled(true)
