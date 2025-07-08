@@ -53,6 +53,7 @@ var app = {
           })
           
           //---------------------------------Painel-Seleção da área------------------------------
+          //Configuração do rótulo do painel da seleção da área
           var legendArea = ui.Label('Área da análise');
               legendArea.style().set({
                 fontSize:'9',
