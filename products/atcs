@@ -452,10 +452,10 @@ var app = {
                 var itemsFilter = []
             
                 layers.forEach(function(lyr){
-                    var namelyr = lyr.getName()
-                    if (namelyr.indexOf('Mapbiomas') != -1){
-                      itemsFilter.push(lyr.getName())
-                    }
+                    //var namelyr = lyr.getName()
+                    //if (namelyr.indexOf('Mapbiomas') != -1){
+                    itemsFilter.push(lyr.getName())
+                    //}
                 })
                 
                 selectFilter = ui.Select({
