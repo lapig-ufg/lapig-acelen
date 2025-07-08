@@ -737,7 +737,7 @@ var app = {
                     dataValue = dataValue.filter(ee.Filter.bounds(points))
                 
                 var datasource = select_fonte.getValue()
-                var total = datasets.Imagescluster['Brazil']
+                var total = datasets.Imagescluster['Mapbiomas']
                 
                 if(dataValue.size().getInfo() != 0){
                     var layers = maplayer.layers()
