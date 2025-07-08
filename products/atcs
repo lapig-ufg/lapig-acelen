@@ -375,16 +375,7 @@ var app = {
           })
           //--------------------------------Gráfico da série temporal--------------------------
           var ChartSeries = ui.Panel({style: {position: 'bottom-right',padding: '10px 10px'}});
-          buttonSeries = ui.Button({
-                                label:'Gráfico Série Temporal',
-                                imageUrl: func.IconName('timeline'),
-                                disabled:true,
-                                style:{
-                                    position:'top-left',
-                                    fontStyle:'bold',
-                                    padding: '1px 1px'
-                                }
-          })
+          buttonSeries = ui.Button(options.confBtnSeries)
           buttonSeries.onClick(function(){
                 
                 buttonSeries.style().set({
