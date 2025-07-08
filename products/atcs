@@ -458,16 +458,7 @@ var app = {
               {stretch: 'both',height:'45px',position: 'top-center',padding: '0px 0px'}
           );
           
-          btnFilter =  ui.Button({
-                                  label:'Filtro classe de uso do solo',
-                                  imageUrl: func.IconName('filter_alt'),
-                                  disabled:true,
-                                  style:{
-                                    position:'top-left',
-                                    fontStyle:'bold',
-                                    padding: '1px 1px'
-                                  }
-          })
+          btnFilter =  ui.Button(options.confBtnFilter)
           
           btnFarm = ui.Button({
                                label:'Selecionar áreas',
