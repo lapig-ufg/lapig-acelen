@@ -27,12 +27,12 @@ var app = {
       //Construção da interface gráfica
       guis: function(maplayer){
           //-------------------------------Logo-Lapig----------------------------------
-          
           var logo = ee.Image('projects/saomartinho/assets/logo').visualize({
               bands:  ['b1', 'b2', 'b3'],
               min: 0,
               max: 255
           });
+          
           //Gerando um Thumbnail da logo do Lapig e UFG
           var thumb = ui.Thumbnail({
                   image: logo,
