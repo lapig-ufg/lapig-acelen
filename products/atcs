@@ -300,6 +300,7 @@ var app = {
               yearsVigor = yearsVigor.map(function(e){
                 return e.replace('vigor_','')
               })
+          //Selecionar o ano do vigor
           var selectVigorYear = ui.Select({
               items: yearsVigor,
               placeholder:'Escolha o ano',
