@@ -608,7 +608,7 @@ var app = {
                 
                 var selectFarm = ui.Select({
                   placeholder:'Selecione a coluna',
-                  items:fields.getInfo()//['Fazenda','Municipio','Quadra (código)']
+                  items:fields.getInfo()
                   
                 })
                 var nameFarm = ui.Select({//ui.Textbox({
@@ -733,19 +733,11 @@ var app = {
                 var points = ee.Geometry.Point(lng,lat)
                 
                 var typeChart = options.chartSelect[selectCharttype.getValue()]
-                var dataValue = ee.FeatureCollection(dataset)//datasets.Dataset['Área de Restauração']
-                                //.filter(ee.Filter.eq('estado',dataset))
+                var dataValue = ee.FeatureCollection(dataset)
                     dataValue = dataValue.filter(ee.Filter.bounds(points))
                 
                 var datasource = select_fonte.getValue()
-                
-                //var nameDataset = ee.String(area).split('/').get(-1).getInfo()
-                //var nameDataset = datasource+"_"+dataset
-                //    nameDataset = nameDataset.replace(' (GO)','').replace(' (SP)','')
-                //    nameDataset = nameDataset.replace(/ /g,"_")
-  
-                //var total = datasets.Imagescluster[dataset]
-                var total = datasets.Imagescluster['Brazil']//ee.Image('projects/saomartinho/assets/'+nameDataset)
+                var total = datasets.Imagescluster['Brazil']
                 
                 if(dataValue.size().getInfo() != 0){
                     var layers = maplayer.layers()
