@@ -459,8 +459,7 @@ var app = {
           );
           
           btnFilter =  ui.Button(options.confBtnFilter)
-          
-          btnFarm = ui.Button()
+          btnFarm = ui.Button(options.confBtnFarm)
           
           btnFilter.onClick(function(){
             
