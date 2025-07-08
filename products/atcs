@@ -340,18 +340,7 @@ var app = {
                                       maxWidth:'300px'
                       }
                 })
-          buttonPopUp = ui.Button({
-                                label:'Informação da camada',
-                                imageUrl: func.IconName('info'),
-                                disabled:true,
-                                style:{
-                                    position:'top-left',
-                                    fontStyle:'bold',
-                                    padding: '1px 1px'
-                                }
-          })
-          
-          
+          buttonPopUp = ui.Button(confBtnPopup)
           buttonPopUp.onClick(function(){
                 popup.add(ui.Label('Clique na área'))
                
