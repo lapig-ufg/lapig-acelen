@@ -452,12 +452,10 @@ var app = {
                 var itemsFilter = []
             
                 layers.forEach(function(lyr){
-                    print('Aqui')
-                    print(ee.Algorithms.ObjectType(lyr.getEeObject()))
-                    //var namelyr = lyr.getName()
-                    //if (namelyr.indexOf('Mapbiomas') != -1){
-                    itemsFilter.push(lyr.getName())
-                    //}
+                    var typeData = ee.Algorithms.ObjectType(lyr.getEeObject())
+                    if (typeData.getInfo() == 'Image'){
+                      itemsFilter.push(lyr.getName())
+                    }
                 })
                 
                 selectFilter = ui.Select({
