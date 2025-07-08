@@ -306,6 +306,7 @@ var app = {
               style:{width:'150px'}
           });
           
+          //Botão para visualizar o vigor
           var btnVigor = ui.Button('Visualizar vigor')
               btnVigor.onClick(function(){
                 
