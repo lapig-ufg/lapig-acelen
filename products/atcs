@@ -452,6 +452,7 @@ var app = {
                 var itemsFilter = []
             
                 layers.forEach(function(lyr){
+                    print('Aqui')
                     print(lyr.getEeObject())
                     //var namelyr = lyr.getName()
                     //if (namelyr.indexOf('Mapbiomas') != -1){
