@@ -453,7 +453,7 @@ var app = {
             
                 layers.forEach(function(lyr){
                     var namelyr = lyr.getName()
-                    if namelyr.indexOf(select_fonte.getValue()) != -1){
+                    if (namelyr.indexOf(select_fonte.getValue()) != -1){
                       itemsFilter.push(lyr.getName())
                     }
                 })
