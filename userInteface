@@ -469,7 +469,7 @@ var app = {
                 
                 selectFilter.onChange(function(value){
                    
-                   var idfonte = 'Mapbiomas'
+                   var idfonte = select_fonte.getValue()
                    var classlist = options.classes[idfonte]
                    
                    selectClass.items().reset(classlist);
@@ -486,7 +486,7 @@ var app = {
                       
                               if(lyr.getName() == selectFilter.getValue()){
                                   
-                                  var idfonte = 'Mapbiomas'
+                                  var idfonte = select_fonte.getValue()
                                   var codClassFilter = selectClass.getValue()
                                       codClassFilter = (options.classes[idfonte].indexOf(codClassFilter))
                                   var palette = options.classesFilter[idfonte]
@@ -519,7 +519,7 @@ var app = {
                         layers.forEach(function(lyr){
                           if(lyr.getName() == selectFilter.getValue()){
                               
-                              var idfonte = 'Mapbiomas'
+                              var idfonte = select_fonte.getValue()
                               var codClassFilter = selectClass.getValue()
                                   codClassFilter = (options.classes[idfonte].indexOf(codClassFilter))
                               var palette = options.classesFilter[idfonte]
@@ -701,7 +701,7 @@ var app = {
                     dataValue = dataValue.filter(ee.Filter.bounds(points))
                 
                 var datasource = select_fonte.getValue()
-                var total = datasets.Imagescluster['Mapbiomas']
+                var total = datasets.Imagescluster[datasource]
                 
                 if(dataValue.size().getInfo() != 0){
                     var layers = maplayer.layers()
