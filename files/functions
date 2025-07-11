@@ -1,6 +1,6 @@
 //Importando modulos
-var datasets = require('users/Amazonas21/filesInterface:datasets') 
-var style = require('users/Amazonas21/filesInterface:styles')
+var datasets = require('users/Amazonas21/acelen:files/datasets') 
+var style = require('users/Amazonas21/acelen:files/styles')
   
 //--------------------------------------------FUNCTIONS----------------------------------------------
 //Reclassificação dos dados do Mapbiomas datasets para aplicação da são matinho
