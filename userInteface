@@ -1,7 +1,7 @@
 //Importando os modulos
-var func = require('users/Amazonas21/filesInterface:functions')
-var datasets = require('users/Amazonas21/filesInterface:datasets')
-var options = require('users/Amazonas21/filesInterface:styles')
+var func = require('users/Amazonas21/acelen:files/functions')
+var datasets = require('users/Amazonas21/acelen:files/datasets')
+var options = require('users/Amazonas21/acelen:files/styles')
 
 //Criando variáveis de tipagem dinâmica para alteração no mapa pelo usuário
 var result,buttonPopUp,buttonSeries,btnFilter,btnFarm,finalyear,edafo
