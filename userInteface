@@ -454,7 +454,7 @@ var app = {
                 layers.forEach(function(lyr){
                     var typeData = ee.Algorithms.ObjectType(lyr.getEeObject())
                     
-                    if (typeData.equals('Image')){//typeData.getInfo() == 'Image'){
+                    if (typeData.indexOf('Image') != -1){//typeData.getInfo() == 'Image'){
                       itemsFilter.push(lyr.getName())
                     }
                 })
