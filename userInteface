@@ -716,13 +716,13 @@ var app = {
                           'perconv':ee.Reducer.frequencyHistogram()
                     }
                     
-                    if (datasource == 'Mapbiomas'){
-                        var initial = 1985
-                        var classesConvert = {1:[4]}
-                    }else if(datasource == 'LAPIG'){
-                        var initial = 1997
-                        var classesConvert = {1:[3]}
-                    }    
+                    //if (datasource == 'Mapbiomas'){
+                    var initial = 1985
+                    var classesConvert = {1:[4]}
+                    //}else if(datasource == 'LAPIG'){
+                    //    var initial = 1997
+                    //    var classesConvert = {1:[3]}
+                    //}    
                     
                     if(typeChart == 'landcover'){
                       var cls =  options.codClass 
