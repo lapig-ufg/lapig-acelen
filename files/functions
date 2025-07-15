@@ -330,7 +330,5 @@ exports.RemoveAllLayers= function(map){
   })
 }
 
-exports.IconName= function(name){ 
-    return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/'+name+'/v11/24px.svg'
-}
+
 
