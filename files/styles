@@ -1,4 +1,4 @@
-//Importando os modulos
+//Função dos estilos
 var IconName= function(Name){ 
     return 'https://fonts.gstatic.com/s/i/materialiconsoutlined/'+Name+'/v11/24px.svg'
 }
