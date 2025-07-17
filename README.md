@@ -3,7 +3,7 @@
 # Toolkit - Análise Temporal da Dinâmica da Cobertura e Uso do Solo 
 
 ## Sobre
-Este repositório organiza os códigos do toolkit "Análise Temporal da Dinâmica da Cobertura e Uso da Terra", desenvolvido pelo [Laboratório de Processamento de Imagens e Geoprocessamento (LAPIG/UFG)](https://www.lapig.iesa.ufg.br/). O toolkit tem como objetivos principais analisar a dinâmica e cobertura do uso da terra, realizar mapeamentos em escala detalhada, e determinar o nível de vigor e a produtividade primária bruta das pastagens no Brasil.
+Este repositório organiza os códigos do toolkit "Análise Temporal da Dinâmica da Cobertura e Uso da Terra", desenvolvido pelo [Laboratório de Processamento de Imagens e Geoprocessamento (LAPIG/UFG)](https://lapig.iesa.ufg.br/). O toolkit tem como objetivos principais analisar a dinâmica e cobertura do uso da terra, realizar mapeamentos em escala detalhada, e determinar o nível de vigor e a produtividade primária bruta das pastagens no Brasil.
 
 
 **Requisito**:
