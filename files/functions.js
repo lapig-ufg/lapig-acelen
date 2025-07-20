@@ -1,6 +1,6 @@
 //Importando modulos
-var datasets = require('users/Amazonas21/acelen:files/datasets') 
-var style = require('users/Amazonas21/acelen:files/styles')
+var datasets = require('users/Amazonas21/acelen-prod:files/datasets') 
+var style = require('users/Amazonas21/acelen-prod:files/styles')
   
 //--------------------------------------------FUNCTIONS----------------------------------------------
 //Reclassificação dos dados do Mapbiomas datasets para aplicação da são matinho
@@ -76,7 +76,7 @@ exports.showLandsatImage = function(seasonType,maplayer,year,area,realce){
       }
       
       //Área de extensão do arquivo externo
-      bounds = ee.FeatureCollection(area)
+      bounds = area//ee.FeatureCollection(area)
       
       //Datas do período do ano
       var Season = {
@@ -230,7 +230,7 @@ exports.countParcels = function(data,typeClass){
     return data
 }
 
-exports.runprocess = function(map,area,year,type,datasource){
+exports.runprocess = function(map,area,nomeAsset,year,type,datasource){
   
   var Carregando = ui.Panel([ui.Label('Gerando a classificação...')])
   map.add(Carregando)
@@ -244,10 +244,10 @@ exports.runprocess = function(map,area,year,type,datasource){
   var max = minMax[datasource]['max']
  
   //Area de estudo
-  var vetor = ee.FeatureCollection(area)
+  var vetor = area//ee.FeatureCollection(area)
   
   //Nome da camada
-  var nameDataset = ee.String(area).split('/').get(-1).getInfo()
+  var nameDataset = ee.String(nomeAsset).split('/').get(-1).getInfo()
  
   //Importando imagem do mapbiomas
   var reclass = ee.Image('projects/ee-amazonas21/assets/datasets-app/us-brazil')
@@ -304,7 +304,7 @@ exports.runprocess = function(map,area,year,type,datasource){
     if (type != 'Original'){
       var layers = map.layers()
           layers.forEach(function(lay){
-                if(lay.getName() == area){
+                if(lay.getName() == nomeAsset){//area){
                         map.remove(lay)
                 }
           })
@@ -329,6 +329,3 @@ exports.RemoveAllLayers= function(map){
     map.remove(layer)
   })
 }
-
-
-
