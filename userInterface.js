@@ -1,11 +1,12 @@
 //Importando os modulos
-var func = require('users/Amazonas21/acelen:files/functions')
-var datasets = require('users/Amazonas21/acelen:files/datasets')
-var options = require('users/Amazonas21/acelen:files/styles')
+var func = require('users/Amazonas21/acelen:files/functions.js')
+var datasets = require('users/Amazonas21/acelen:files/datasets.js')
+var options = require('users/Amazonas21/acelen:files/styles.js')
 
 //Criando variáveis de tipagem dinâmica para alteração no mapa pelo usuário
 var result,buttonPopUp,buttonSeries,btnFilter,btnFarm,finalyear,edafo
-var select_year,selectChart,selectFilter,selectFarm,years,select_fonte
+var select_year,selectChart,selectFilter,selectFarm,years,select_fonte, fieldData, fieldValue
+var data
 
 //Objeto de atividades do app
 var app = {
@@ -42,72 +43,123 @@ var app = {
           });
          
           //Criando o painel para inserir a logo do Lapig e UFG
-          var toolPanel = ui.Panel(thumb, 'flow', {width: '315px'});
+          var toolPanel = ui.Panel(thumb, 'flow', {width: '310px'});
          
           //--------------------------------Painel-Nome da ferramenta------------------
           var btnLapig = ui.Label({
-                        value:'ANÁLISE TEMPORAL DO USO E COBERTURA DO SOLO - AtCS',
+                        value:'ANÁLISE TEMPORAL DA DINÂMICA DA COBERTURA E USO DA TERRA - AtDCT',
                         style:{fontSize:'20',fontWeight:'bold'}
           })
           
           //---------------------------------Painel-Seleção da área------------------------------
           //Configuração do rótulo do painel da seleção da área
-          var legendArea = ui.Label('Área da análise');
-              legendArea.style().set({
-                fontSize:'9',
-                textAlign : 'center',
-                padding: '4px 0px 0px 0%'
-              });
+          var legendArea = ui.Label('Dados de Entrada');
+              legendArea.style().set(options.labelStyle);
+          
+          //Ativar o filtro 
+          var chkFiltroAsset = ui.Checkbox({
+            label:'Filtro',
+            disabled:true,
+            onChange:function(checked){
+              if(checked){
+                 fieldData.setDisabled(false)
+                 fieldValue.setDisabled(false)
+                 var atrb = ee.FeatureCollection(select_area.getValue())
+                     atrb = atrb.first().propertyNames().getInfo()
+                 
+                 fieldData.items().reset(atrb);
+                 fieldData.setValue(atrb[0]);
+                 
+              }else{
+                fieldValue.setDisabled(true)
+                fieldData.setDisabled(true)
+              }
+              
+            }
+          })
+          chkFiltroAsset.setDisabled(true)
           
           //Upload do arquivo externo
           var select_area = ui.Textbox({
-            placeholder:'Endereço do asset',
+            placeholder:'Asset',
+            style:{
+              width:'100px'
+            },
             onChange:function(value){
-              
-                //Voltar a configuração das ações e os camadas do mapa
-                app.options.activeLegend = 0
-                app.options.activeChart = 0
-                app.options.activeChartSeries = 0
-                app.options.insertNewSeries = 0
-              
-                //Reiniciar todas a funções 
-                painelChart.widgets().reset()
-                popup.widgets().reset()
-                ChartSeries.widgets().reset()
-              
-                //Remoção de itens no mapa
-                maplayer.clear()
-                maplayer.add(buttonPopUp)
-                maplayer.add(buttonSeries)
-                maplayer.add(btnFilter)
-                maplayer.add(btnFarm)
-              
-                //Desativar a função de onclick dos botões no mapa
-                buttonPopUp.setDisabled(false)
-                buttonSeries.setDisabled(true)
-                btnFilter.setDisabled(true)
-                btnFarm.setDisabled(true)
-               
-                var data = ee.FeatureCollection(value)
-                var nomeCamada = ee.String(value).split('/').getString(-1).getInfo()
-                
-                maplayer.centerObject(data.bounds())
-                maplayer.addLayer(data,{color:'black'},nomeCamada)
+                chkFiltroAsset.setDisabled(false)
               }
             })
             
-          var painelArea = ui.Panel([legendArea,select_area],
+          
+          fieldData = ui.Select({placeholder:'Escolha o Atributo',style:{maxWidth:'100px'}})
+          fieldValue = ui.Select({placeholder:'Escolha o Valor',style:{maxWidth:'100px'}})
+          fieldData.onChange(function(value){
+               var data = ee.FeatureCollection(select_area.getValue())
+                          .aggregate_histogram(value)
+                          .getInfo()
+               fieldValue.items().reset(Object.keys(data))
+               fieldValue.setValue(Object.keys(data)[0])
+            
+          })
+          
+          fieldValue.setDisabled(true)
+          fieldData.setDisabled(true)
+          
+          var fieldButton = ui.Button({
+                  label:'Carregar',
+                  onClick:function(){
+                    //Voltar a configuração das ações e os camadas do mapa
+                    app.options.activeLegend = 0
+                    app.options.activeChart = 0
+                    app.options.activeChartSeries = 0
+                    app.options.insertNewSeries = 0
+              
+                    //Reiniciar todas a funções 
+                    painelChart.widgets().reset()
+                    popup.widgets().reset()
+                    ChartSeries.widgets().reset()
+              
+                    //Remoção de itens no mapa
+                    maplayer.clear()
+                    maplayer.add(buttonPopUp)
+                    maplayer.add(buttonSeries)
+                    maplayer.add(btnFilter)
+                    maplayer.add(btnFarm)
+              
+                    //Desativar a função de onclick dos botões no mapa
+                    buttonPopUp.setDisabled(false)
+                    buttonSeries.setDisabled(true)
+                    btnFilter.setDisabled(true)
+                    btnFarm.setDisabled(true)
+                    
+                    //Dado selecionado pelo usuário
+                    data = ee.FeatureCollection(select_area.getValue())
+                    
+                    //Ativação do filtro da camada de entrada
+                    if(chkFiltroAsset.getValue()){
+                      data = data.filter(ee.Filter.eq(fieldData.getValue(),fieldValue.getValue()))
+                    }
+                    
+                    //Nome da camada de entrada para adicionar no mapa do Google Earth Engine
+                    var nomeCamada = ee.String(select_area.getValue()).split('/').getString(-1).getInfo()
+                
+                    //Adicionando a camada e centralizando o mapa
+                    maplayer.centerObject(data.bounds())
+                    maplayer.addLayer(data,{color:'black'},nomeCamada)
+                  }
+          })
+          //--------------------------------Painel do filtro de dados
+          var painelArea = ui.Panel([legendArea,select_area,chkFiltroAsset],
               ui.Panel.Layout.Flow('horizontal'),
               {stretch: 'both'}
-          ) 
-          
+          )
+          var painelFieldFilter = ui.Panel([fieldData,fieldValue,fieldButton],
+              ui.Panel.Layout.Flow('horizontal'),
+              {stretch: 'both'}
+          )
           //---------------------------------Painel da base de dados---------------------
           var legendBase = ui.Label('Fonte de dados');
-              legendBase.style().set({
-                fontSize:'8',
-                textAlign : 'center',
-                padding: '4px 0px 0px 0%'
-              });
+              legendBase.style().set(options.labelStyle);
           
           select_fonte = ui.Select({
               items: ['Escolha a fonte','Mapbiomas'],
@@ -136,11 +188,7 @@ var app = {
           
           //---------------------------------Painel-Ano------------------------------
           var legendYear = ui.Label('Ano da análise');
-              legendYear.style().set({
-                  fontSize:'9',
-                  textAlign : 'center',
-                  padding: '4px 0px 0px 0%'
-          });
+              legendYear.style().set(options.labelStyle);
           
           select_year = ui.Select()
           
@@ -151,11 +199,7 @@ var app = {
           
           //---------------------------------Painel-Tipo Agregação------------------------------
           var legendAgregacao = ui.Label('Tipo de classificação');
-              legendAgregacao.style().set({
-                fontSize:'8',
-                textAlign : 'center',
-                padding: '4px 0px 0px 0%'
-              });
+              legendAgregacao.style().set(options.labelStyle);
           
           var select_agregacao = ui.Select({
               items: Object.keys(options.AggregationTypes),
@@ -167,8 +211,10 @@ var app = {
               {stretch: 'both'}
           )
           
+          //Criação do painel de gráficos
           var painelChart = ui.Panel({style: {position: 'bottom-right',width:'450px',padding: '1px 1px'}});
           
+          //Criação do botão de gerar a classificação
           var button = ui.Button({label:'Gerar a classificação do ano de análise'})
               button.onClick(function(){
                 
@@ -182,7 +228,7 @@ var app = {
                 var fonteInfo = select_fonte.getValue()
                 
                 //Função para adquirir imagem classificada do ano sob a área da usina da São Martinho
-                result = func.runprocess(maplayer,areaInfo,yearInfo,typeclass,fonteInfo)
+                result = func.runprocess(maplayer,data,areaInfo,yearInfo,typeclass,fonteInfo)
                 
                 //Criar a legenda
                 if (app.options.activeLegend == 0){
@@ -260,11 +306,7 @@ var app = {
            })
           //-------------------------------------Painel Imagem Landsat--------------------------------------
           var legendImage = ui.Label('Imagem Landsat de fundo (Background)');
-              legendImage.style().set({
-                  fontSize:'9',
-                  textAlign : 'left',
-                  padding: '4px 0px 0px 0%'
-          });
+              legendImage.style().set(options.labelStyle);
           
           var select_image = ui.Select({
               items: Object.keys(options.ImagesTypes),
@@ -274,12 +316,13 @@ var app = {
           
           var buttonImgBack = ui.Button('Gerar imagem')
               buttonImgBack.onClick(function(){
-                var area = select_area.getValue()
+                //var area = select_area.getValue()
                 var year = select_year.getValue()
                 var season = select_image.getValue()
                     season = options.ImagesTypes[season]
                 
-                func.showLandsatImage(season,maplayer,year,area,options.realce)
+                //func.showLandsatImage(season,maplayer,year,area,options.realce)
+                func.showLandsatImage(season,maplayer,year,data,options.realce)
           })
           
           var painelImage = ui.Panel([select_image,buttonImgBack],
@@ -288,11 +331,7 @@ var app = {
           )
           //------------------------------Vigor Pastagem-----------------------------------------------
           var lblVigorTool = ui.Label('Vigor da pastagem');
-              legendImage.style().set({
-                  fontSize:'9',
-                  textAlign : 'left',
-                  padding: '4px 0px 0px 0%'
-          });
+              legendImage.style().set(options.labelStyle);
           
           var yearsVigor = ee.Image(datasets.Dataset['Vigor-Mapbiomas']).bandNames().getInfo()
               yearsVigor = yearsVigor.map(function(e){
@@ -311,20 +350,18 @@ var app = {
               btnVigor.onClick(function(){
                 
                 //Coletando informações do asset e o ano selecionado do vigor
-                var area = select_area.getValue()
                 var year = selectVigorYear.getValue()
                 
                 //Selecionando o vigor do ano selecionado
                 var imgVigor = ee.Image(datasets.Dataset['Vigor-Mapbiomas'])
                                .select('vigor_'+year)
-                               .clip(ee.FeatureCollection(area))
+                               .clip(data)
                 
                 //Adicionar o mapa de vigor
                 var titulo = 'Clase de vigor'
                 maplayer.addLayer(imgVigor,options.configVigor,'Vigor-'+year)
-                print(Object.keys(options.paletteVigor))
-                print(options.configVigor.palette)
                 
+                //Criar a legenda no mapa
                 func.createLegend(maplayer,Object.keys(options.paletteVigor),options.paletteVigor,titulo) 
               })
           
@@ -468,14 +505,11 @@ var app = {
                 })
                 
                 selectFilter.onChange(function(value){
-                   
                    var idfonte = select_fonte.getValue()
                    var classlist = options.classes[idfonte]
-                   
-                   selectClass.items().reset(classlist);
-                   selectClass.setValue(classlist[0]);
-                   
+                   selectClass.items().reset(classlist)
                 })
+                
                 
                 //Inserir e configurar o botão 'filtrar'
                 var btngetFilter = ui.Button('Filtrar')
@@ -565,7 +599,7 @@ var app = {
             })
             if (app.options.activeBtnFarm == 0){
                 app.options.activeBtnFarm = 1
-                var fields = ee.FeatureCollection(select_area.getValue())
+                var fields = ee.FeatureCollection(data)//select_area.getValue())
                              .first()
                              .propertyNames()
                 
@@ -580,7 +614,7 @@ var app = {
                         style:{width:'150px'}
                 })
                 selectFarm.onChange(function(value){
-                   var valuesFields = ee.FeatureCollection(select_area.getValue())
+                   var valuesFields = ee.FeatureCollection(data)//select_area.getValue())
                                    .aggregate_histogram(selectFarm.getValue())
                                    .getInfo()
                   
@@ -588,7 +622,7 @@ var app = {
                    nameFarm.setValue(Object.keys(valuesFields)[0])
                   
                 })
-                var valuesFields = ee.FeatureCollection(select_area.getValue())
+                var valuesFields = ee.FeatureCollection(data)//select_area.getValue())
                                    .aggregate_histogram(selectFarm.getValue())
                                    .keys()
               
@@ -607,7 +641,7 @@ var app = {
                         var idfarm = selectFarm.getValue()
                         
                         //Filtar as fazenda por selecao escolhida pelo usuário
-                        var featFarm = ee.FeatureCollection(select_area.getValue()).map(function(feat){
+                        var featFarm = ee.FeatureCollection(data).map(function(feat){
                           var f = selectFarm.getValue()
                           var v = feat.get(selectFarm.getValue())
                           return feat.set(f, ee.String(v))
@@ -664,8 +698,8 @@ var app = {
           var mainPanel = ui.Panel({style: {width: '315px',position:'top-right'}});
           var listPainels = [
                              toolPanel,btnLapig,painelArea,
-                             painelFonteDados,painelYear,
-                             painelAgregacao,button,
+                             painelFieldFilter,painelFonteDados,
+                             painelYear,painelAgregacao,button,
                              legendImage,painelImage,
                              lblVigorTool,painelVigor
                             ]
@@ -713,16 +747,11 @@ var app = {
                     maplayer.addLayer(dataValue,{color:'blue'},'Camada selecionada')
                     var aggreType = {
                           'landcover': ee.Reducer.mode(),
-                          'perconv':ee.Reducer.frequencyHistogram()
+                          'perconv':ee.Reducer.frequencyHistogram(),
+                          'percpasture':ee.Reducer.frequencyHistogram()
                     }
                     
-                    //if (datasource == 'Mapbiomas'){
                     var initial = 1985
-                    var classesConvert = {1:[4]}
-                    //}else if(datasource == 'LAPIG'){
-                    //    var initial = 1997
-                    //    var classesConvert = {1:[3]}
-                    //}    
                     
                     if(typeChart == 'landcover'){
                       var cls =  options.codClass 
@@ -770,7 +799,19 @@ var app = {
                                           })
                               panelChart.widgets().reset([chart])
                       })
-                    }else if(typeChart == 'perconv'){
+                    }else if(typeChart == 'perconv' || typeChart == 'percpasture'){
+                      
+                      //Seleção do tipo de gráfico para conversão de área natural para antrópica e/ou conversão das áreas de pastagens
+                      if (typeChart == 'perconv'){
+                        
+                        //Classe de conversão de área natural para antrópica
+                        var classesConvert = {1:[4]}
+                    
+                      }else if(typeChart == 'percpasture'){
+                        
+                        //conversão das áreas de pastagens
+                        var classesConvert = {1:[3],2:[4]}
+                      }
                       
                       var classes = classesConvert
                       var outros = 0
@@ -781,39 +822,84 @@ var app = {
                               reducer: aggreType[typeChart],
                               scale: 30
                       })
-                      
-                     
+                      print(statstotal)
                       statstotal = statstotal.map(function(feature){
                             var dicColumn = {}
                             for (var i = initial;i <= finalyear;i = i +1){
                                   var bandname = 'classification_' + i
                                   var dados = ee.Dictionary(feature.get(bandname))
                                   var total = dados.values().reduce(ee.Reducer.sum())
-                                  var perc = ee.Number(dados.get('0')).divide(total)
-                                      perc = perc.multiply(100.00)
+                                  var area = ee.Number(feature.area()).divide(10000.00)
                                   
-                                  dicColumn[String(i)] = perc.round()
+                                  if(typeChart == 'perconv'){
+                                    var perc = ee.Number(dados.get('0')).divide(total)
+                                        perc = perc.multiply(100.00)
+                                    dicColumn[String(i)] = ee.List([String(i),perc.round()])
+                                  }else{
+                                    dados = dados.set('total',total)
+                                    dicColumn[String(i)] = dados.set('Areatotal',area)
+                                   
+                                  }
                             }
-                            return ee.Feature(feature.geometry(),dicColumn)
+                            return ee.Feature(null,dicColumn)
                       })
                       dataValue = statstotal.first().toDictionary()
+                      
+                      var keysYear = dataValue.keys().getInfo()
                       var values = dataValue.values()
-                      var years = dataValue.keys()
                       
                       var columnHeader = ee.List([['Year','Value']])
-                      var zipdata = years.zip(values)
-                  
-                      var dataTable = columnHeader.cat(zipdata)
+                      if (typeChart == 'percpasture'){
+                          columnHeader = ee.List([['Year','Outras Classes','Pastagem','Vegetação Natural']])
+                          values = values.getInfo()
+                        
+                          var valuesPerc = []
+                        
+                          for(var i in values){
+                            var dicClasse = {'0':0,'1':0,'2':0}
+                            var valuesClass = []
+                            var keys = Object.keys(values[i])
+                          
+                            for(var j in keys){
+                              var perc = (values[i][String(keys[j])]/values[i]['total'])
+                              var areatotalperc = perc * values[i]['Areatotal']
+                              dicClasse[String(keys[j])] = areatotalperc
+                            }
+                            for(var k in Object.keys(dicClasse)){
+                              valuesClass.push(dicClasse[k])
+                            }
+                            valuesClass.unshift(keysYear[i])
+                            valuesClass = valuesClass.slice(0, -2);
+                            valuesPerc.push(valuesClass)
+                          }
+                          values = valuesPerc
+                      }
+                      var dataTable = columnHeader.cat(values)
                           dataTable.evaluate(function(dataTableClient){ 
-                              var chart = ui.Chart(dataTableClient)
+                              if(typeChart == 'perconv'){
+                                var chart = ui.Chart(dataTableClient)
                                           .setChartType('AreaChart')
                                           .setOptions({
                                                   title:'Proporção de área convertida ('+initial+'-'+finalyear+')',
                                                   legend: {position: 'none'},
                                                   vAxis: {title: '(%)',viewWindow: {min: 0, max: 100}},
-                                                  colors: ['red']
+                                                  colors: ['red'],
+                                                  
                                             
                                           })
+                              
+                              }else if(typeChart == 'percpasture'){
+                                var chart = ui.Chart(dataTableClient)
+                                          .setChartType('ColumnChart')
+                                          .setOptions({
+                                                  title:'Proporção de área convertida de pastagem,vegetação natural e outros classe ('+initial+'-'+finalyear+')',
+                                                  legend: {position: 'none'},
+                                                  vAxis: {title: '(hectare)'},//viewWindow: {min: 0,max: 100}},
+                                                  colors: ['red','#fee500','#33a02c'],
+                                                  isStacked:true,
+                                                  legend:true
+                                          })  
+                              }
                               panelChart.widgets().reset([chart])
                       })
                       
