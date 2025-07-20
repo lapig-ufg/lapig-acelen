@@ -81,7 +81,8 @@ exports.AggregationTypes = {
 exports.chartSelect = {
         'Escolha a variável para plotar a série temporal':'Choose options',
         'Cobertura da terra':'landcover',
-        'Proporção Área convertida':'perconv'
+        'Proporção Área convertida':'perconv',
+        'Evolução das áreas de pastagens':'percpasture'
 }
 
 //Opções do ano de vigor
@@ -168,3 +169,8 @@ exports.confBtnSeries = {
     }
 }
 
+exports.labelStyle = {
+                fontSize:'8',
+                textAlign : 'center',
+                padding: '4px 0px 0px 0%'
+              }
