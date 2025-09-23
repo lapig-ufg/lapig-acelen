@@ -2,6 +2,8 @@
 var func = require('users/Amazonas21/acelen:files/functions.js')
 var datasets = require('users/Amazonas21/acelen:files/datasets.js')
 var options = require('users/Amazonas21/acelen:files/styles.js')
+var classfunc = require('users/Amazonas21/acelen:files/runclassification.js')
+
 
 //Criando variáveis de tipagem dinâmica para alteração no mapa pelo usuário
 var result,buttonPopUp,buttonSeries,btnFilter,btnFarm,finalyear,edafo
@@ -52,7 +54,13 @@ var app = {
           })
           
           //---------------------------------Painel-Seleção da área------------------------------
-          //Configuração do rótulo do painel da seleção da área
+           //Configuração do rótulo do painel da seleção da área
+          var lblCls = ui.Label({
+              value:'Entrada dos dados e Parâmetros da Classificação',
+              style:options.labelTitleTool
+          })
+          
+          
           var legendArea = ui.Label('Dados de Entrada');
               legendArea.style().set(options.labelStyle);
           
@@ -62,37 +70,35 @@ var app = {
             disabled:true,
             onChange:function(checked){
               if(checked){
-                 fieldData.setDisabled(false)
-                 fieldValue.setDisabled(false)
+                 fieldData.style().set('shown', true);
+                 fieldValue.style().set('shown', true);
                  var atrb = ee.FeatureCollection(select_area.getValue())
-                     atrb = atrb.first().propertyNames().getInfo()
-                 
+                     atrb = atrb.first().propertyNames().getInfo()  
+                     
                  fieldData.items().reset(atrb);
-                 fieldData.setValue(atrb[0]);
+                 fieldValue.items().reset();
                  
               }else{
-                fieldValue.setDisabled(true)
-                fieldData.setDisabled(true)
+                fieldValue.style().set('shown', false)
+                fieldData.style().set('shown', false)
+                
               }
-              
             }
           })
           chkFiltroAsset.setDisabled(true)
           
           //Upload do arquivo externo
           var select_area = ui.Textbox({
-            placeholder:'Asset',
-            style:{
-              width:'100px'
-            },
+            placeholder:'Asset da camada vetorial',
+            style:{width:'75%'},
             onChange:function(value){
                 chkFiltroAsset.setDisabled(false)
               }
             })
             
           
-          fieldData = ui.Select({placeholder:'Escolha o Atributo',style:{maxWidth:'100px'}})
-          fieldValue = ui.Select({placeholder:'Escolha o Valor',style:{maxWidth:'100px'}})
+          fieldData = ui.Select({placeholder:'Escolha o Atributo da camada',style:{width:'45%',shown: false}})
+          fieldValue = ui.Select({placeholder:'Escolha o Valor do atributo',style:{width:'45%',shown: false}})
           fieldData.onChange(function(value){
                var data = ee.FeatureCollection(select_area.getValue())
                           .aggregate_histogram(value)
@@ -102,11 +108,9 @@ var app = {
             
           })
           
-          fieldValue.setDisabled(true)
-          fieldData.setDisabled(true)
-          
           var fieldButton = ui.Button({
-                  label:'Carregar',
+                  label:'Carregar a camada no mapa',
+                  style:{width:'94%'},
                   onClick:function(){
                     //Voltar a configuração das ações e os camadas do mapa
                     app.options.activeLegend = 0
@@ -142,28 +146,37 @@ var app = {
                     
                     //Nome da camada de entrada para adicionar no mapa do Google Earth Engine
                     var nomeCamada = ee.String(select_area.getValue()).split('/').getString(-1).getInfo()
-                
+                    
                     //Adicionando a camada e centralizando o mapa
                     maplayer.centerObject(data.bounds())
                     maplayer.addLayer(data,{color:'black'},nomeCamada)
                   }
           })
           //--------------------------------Painel do filtro de dados
-          var painelArea = ui.Panel([legendArea,select_area,chkFiltroAsset],
+          var painelArea = ui.Panel([select_area,chkFiltroAsset],
               ui.Panel.Layout.Flow('horizontal'),
               {stretch: 'both'}
           )
-          var painelFieldFilter = ui.Panel([fieldData,fieldValue,fieldButton],
+          var painelFieldFilter = ui.Panel([fieldData,fieldValue],//fieldButton],
+              ui.Panel.Layout.Flow('horizontal'),
+              {stretch: 'both'}
+          )
+          
+          var painelFieldButton = ui.Panel([fieldButton],
               ui.Panel.Layout.Flow('horizontal'),
               {stretch: 'both'}
           )
           //---------------------------------Painel da base de dados---------------------
-          var legendBase = ui.Label('Fonte de dados');
-              legendBase.style().set(options.labelStyle);
+          var legendBase = ui.Label({
+              value:'Fonte de dados',
+              style:{width:'30%'}
+          });
+              //legendBase.style().set(options.labelStyle);
           
           select_fonte = ui.Select({
               items: ['Escolha a fonte','Mapbiomas'],
               placeholder:'Escolha a fonte',
+              style:{width:'60%'},
               onChange:function(value){
             
                   years = {}
@@ -187,23 +200,34 @@ var app = {
           )
           
           //---------------------------------Painel-Ano------------------------------
-          var legendYear = ui.Label('Ano da análise');
-              legendYear.style().set(options.labelStyle);
+          var legendYear = ui.Label({
+              value:'Ano análise',
+              style:{width:'25%'}
+          });
+              //legendYear.style().set(options.labelStyle);
           
-          select_year = ui.Select()
+          //Opção de seleção dos anos para classificação
+          select_year = ui.Select({
+            style:{width:'65%'}
+          })
           
+          //Painel do rótulo do ano da análise e a opção da seleção dos anos da classificação
           var painelYear = ui.Panel([legendYear,select_year],
               ui.Panel.Layout.Flow('horizontal'),
               {stretch: 'both'}
           )
           
           //---------------------------------Painel-Tipo Agregação------------------------------
-          var legendAgregacao = ui.Label('Tipo de classificação');
-              legendAgregacao.style().set(options.labelStyle);
+          var legendAgregacao = ui.Label({
+              value:'Tipo de classificação',
+              style:{width:'30%'}
+          });
+              //legendAgregacao.style().set(options.labelStyle);
           
           var select_agregacao = ui.Select({
               items: Object.keys(options.AggregationTypes),
-              placeholder:'Escolha o tipo'
+              placeholder:'Escolha o tipo',
+              style:{width:'60%'},
           });
           
           var painelAgregacao = ui.Panel([legendAgregacao,select_agregacao],
@@ -215,7 +239,11 @@ var app = {
           var painelChart = ui.Panel({style: {position: 'bottom-right',width:'450px',padding: '1px 1px'}});
           
           //Criação do botão de gerar a classificação
-          var button = ui.Button({label:'Gerar a classificação do ano de análise'})
+          var button = ui.Button({
+              label:'Gerar a classificação do ano de análise',
+              style:{width:'95%'},          
+          })
+              
               button.onClick(function(){
                 
                 
@@ -305,23 +333,29 @@ var app = {
                 }  
            })
           //-------------------------------------Painel Imagem Landsat--------------------------------------
-          var legendImage = ui.Label('Imagem Landsat de fundo (Background)');
-              legendImage.style().set(options.labelStyle);
+          var legendImage = ui.Label({
+                value:'Imagem Landsat de fundo (Background)',
+                style:options.labelTitleTool
+            
+          });
+              
           
           var select_image = ui.Select({
               items: Object.keys(options.ImagesTypes),
               placeholder:Object.keys(options.ImagesTypes)[0],
-              style:{width:'150px'}
+              style:{width:'45%'}
           });
           
-          var buttonImgBack = ui.Button('Gerar imagem')
+          var buttonImgBack = ui.Button({
+                  label:'Gerar imagem',
+                  style:{width:'45%'}
+              })
               buttonImgBack.onClick(function(){
-                //var area = select_area.getValue()
+               
                 var year = select_year.getValue()
                 var season = select_image.getValue()
                     season = options.ImagesTypes[season]
                 
-                //func.showLandsatImage(season,maplayer,year,area,options.realce)
                 func.showLandsatImage(season,maplayer,year,data,options.realce)
           })
           
@@ -330,7 +364,10 @@ var app = {
               {stretch: 'both'}
           )
           //------------------------------Vigor Pastagem-----------------------------------------------
-          var lblVigorTool = ui.Label('Vigor da pastagem');
+          var lblVigorTool = ui.Label({
+                value:'Vigor da pastagem',
+                style:options.labelTitleTool
+              });
               legendImage.style().set(options.labelStyle);
           
           var yearsVigor = ee.Image(datasets.Dataset['Vigor-Mapbiomas']).bandNames().getInfo()
@@ -342,33 +379,238 @@ var app = {
           var selectVigorYear = ui.Select({
               items: yearsVigor,
               placeholder:'Escolha o ano',
-              style:{width:'150px'}
+              style:{width:'28%'}
           });
           
+          //Selecionar a região
+          var selectVigorRegion = ui.Select({
+              items: yearsVigor,
+              placeholder:'Escolha a regiao',
+              items:['Brasil','MG','BA'],
+              style:{width:'28%'}
+          });
+          
+          
           //Botão para visualizar o vigor
-          var btnVigor = ui.Button('Visualizar vigor')
+          var btnVigor = ui.Button({
+                label:'Visualizar vigor',
+                style:{width:'28%'},
+              })
               btnVigor.onClick(function(){
+                
+                //Selecionando a região para o vigor
+                var regionVigor = selectVigorRegion.getValue()
                 
                 //Coletando informações do asset e o ano selecionado do vigor
                 var year = selectVigorYear.getValue()
                 
+                //Selecionar a imagem a partir da região selecionada
+                if (regionVigor == 'Brasil'){
+                  
+                  //Nomeado o endereço do arquivo e sua respectiva banda
+                  var idVigorImg = datasets.Dataset['Vigor-Mapbiomas']
+                  var bandVigor = 'vigor_'+year
+              
+                }else{
+                  
+                  //Nomeado o endereço do arquivo e sua respectiva banda
+                  var idVigorImg = 'projects/ee-amazonas21/assets/Acelen/Vigor/'+regionVigor+'/cvp_states_pasture_br_Y'+year+'_'+regionVigor
+                  var bandVigor = 'b1'
+                  
+                }
                 //Selecionando o vigor do ano selecionado
-                var imgVigor = ee.Image(datasets.Dataset['Vigor-Mapbiomas'])
-                               .select('vigor_'+year)
+                var imgVigor = ee.Image(idVigorImg)//ee.Image(datasets.Dataset['Vigor-Mapbiomas'])
+                               .select(bandVigor)//.select('vigor_'+year)
                                .clip(data)
                 
                 //Adicionar o mapa de vigor
                 var titulo = 'Clase de vigor'
-                maplayer.addLayer(imgVigor,options.configVigor,'Vigor-'+year)
+                maplayer.addLayer(imgVigor,options.configVigor,'Vigor-'+year+'-'+regionVigor)
                 
-                //Criar a legenda no mapa
-                func.createLegend(maplayer,Object.keys(options.paletteVigor),options.paletteVigor,titulo) 
+                //Criar a legenda
+                if (app.options.activeLegendVigor == 0){
+                      
+                      //Criar a legenda do vigor
+                      func.createLegend(maplayer,Object.keys(options.paletteVigor),options.paletteVigor,titulo) 
+                      app.options.activeLegendVigor = 1
+                }
               })
           
-          var painelVigor = ui.Panel([selectVigorYear,btnVigor],
+          var painelVigor = ui.Panel([selectVigorYear,selectVigorRegion,btnVigor],
               ui.Panel.Layout.Flow('horizontal'),
               {stretch: 'both'}
           )
+          //-----------------------------------Mapemaneto detalhado automático-------------------------------
+          var lblClsAuto = ui.Label({
+              value:'Mapeamento automático detalhado - Pastagem',
+              style:options.labelTitleTool,
+          })
+          
+          //Rótulo da opção amostra
+          var lblAmostras = ui.Label({
+              value:'Amostras',
+              style:{width:'20%'}//style:options.labelStyle
+          })
+          
+          //Controle deslizante para selecionar a quanrtidade de amostras
+          var sliderAmostras = ui.Slider({
+            value:100,
+            min:0,
+            max:2000,
+            step:100,
+            style:{width:'70%'}
+          })
+          
+          //Painel da amostra
+          var painelAmostras = ui.Panel([lblAmostras,sliderAmostras],
+              ui.Panel.Layout.Flow('horizontal'),
+              {stretch: 'both'}
+          )
+          
+          //Rótulo da opção de buffer
+          var lblBuffer = ui.Label({
+              value:'Buffer (m)',
+              style:{width:'20%'}//style:options.labelStyle
+          })
+          
+          //Controle deslizante para selecionar a distância do buffer em metros
+          var sliderBuffer = ui.Slider({
+            value:100,
+            min:0,
+            max:2000,
+            step:100,
+            style:{width:'70%'}
+          })
+          
+          //Painel do buffer
+          var painelBuffer = ui.Panel([lblBuffer,sliderBuffer],
+              ui.Panel.Layout.Flow('horizontal'),
+              {stretch: 'both'}
+          )
+          //Ano de Classificação da pastagem
+          var anoClsPast = ui.Select({
+            placeholder:'Escolha o ano',
+            items:['2017','2018','2019','2020','2021','2022'],
+            style:{width:'27%'}
+          })
+          
+          //Base de dados usados no mapeamento detalhado
+          var classData = ui.Select({
+            placeholder:'Escolha o dados',
+            items:['Sentinel-2','Embeddings'],
+            style:{width:'27%'}
+          })
+          
+          //Dados de pastagem utilizados como amostras para classificação
+          var pastureData = ui.Select({
+            placeholder:'Escolha a base',
+            items:['Global Pasture Watch','Mapbiomas','Todas'],
+            style:{width:'27%'}
+          })
+          
+          //Painel dos dados utilizados para a classificação
+          var painelGetClass = ui.Panel([classData,anoClsPast,pastureData],
+              ui.Panel.Layout.Flow('horizontal'),
+              {stretch: 'both'}
+          )
+          
+          //Botão para classificar automaticamente
+          var btnClspasture = ui.Button({
+            label:'Classificar pastagem',
+            style:{width:'90%'},
+            onClick:function(){
+                
+                //Informações para classificação
+                var DataClassUse = classData.getValue()
+                var Nsamples = sliderAmostras.getValue()
+                var Buffer = sliderBuffer.getValue()
+                var YearPastureClass = anoClsPast.getValue()//select_year.getValue()
+                var fonteData = pastureData.getValue()
+                
+                var classmap = classfunc.getRun(YearPastureClass,data,Nsamples,Buffer,fonteData,DataClassUse)
+                maplayer.addLayer(classmap[0],{palette:['gold'],max:1},'Pasture -'+YearPastureClass+' '+DataClassUse+' '+fonteData+' Amostras:'+Nsamples+' Buffer:'+Buffer)
+                
+            }
+          })
+          //-------------------------------------------RUSLE--------------------------------------------
+          var lblRusle = ui.Label({
+              value:'Método RUSLE (versão beta)',
+              style:options.labelTitleTool
+          })
+          
+          //Ano de Cálculo da RuSLE
+          var anoRusle = ui.Select({
+            placeholder:'Escolha o ano',
+            items:['2017','2018','2019','2020','2021','2022','2023','2024'],
+            style:{width:'45%'}
+          })
+          
+          //Ano de Cálculo da RuSLE
+          var produtosRusle = ui.Select({
+            placeholder:'Escolha o produto',
+            items:['A - Perda Média Anual de Solo','R - Fator de Erosividade','K - Fator Erodibilidade do Solo',
+                  'LS - Fator Topográfico','C - Fator de Manejo do Solo','P - Fator de Prática de Suporte'],
+            style:{width:'45%'}
+          })
+          
+          var painelRusle = ui.Panel([anoRusle,produtosRusle],
+              ui.Panel.Layout.Flow('horizontal'),
+              {stretch: 'both'}
+          )
+          
+          var btnRusle = ui.Button({
+            label:'Calcular',
+            style:{width:'95%'},
+            onClick:function(){
+              var idBacia = 'projects/mapbiomas-territories/assets/TERRITORIES-OLD/LULC/BRAZIL/COLLECTION9/WORKSPACE/BASIN_LEVEL_2_PNRH'
+              var ano = parseInt(anoRusle.getValue()) 
+              var produto = produtosRusle.getValue()
+              var startDate =  ano+'-01-01'
+              var endDate = (ano+1)+'-01-01'
+              var aoi = ee.FeatureCollection(idBacia)
+                            .filterBounds(data)
+              
+              var dicproduto = {
+                'A - Perda Média Anual de Solo':'',
+                'R - Fator de Erosividade': func.calcR(aoi,ano),
+                'K - Fator Erodibilidade do Solo':func.calcK(aoi),
+                'LS - Fator Topográfico':func.calcLS(aoi),
+                'C - Fator de Manejo do Solo':func.calcC(startDate,endDate,aoi),
+                'P - Fator de Prática de Suporte':func.calcP(startDate,endDate,aoi)
+              }
+              if (produto == 'A - Perda Média Anual de Solo'){
+                 
+                  //Calculando os fatores da RusLE
+                  var R = func.calcR(aoi,ano)
+                  var C = func.calcC(startDate,endDate,aoi)
+                  var K = func.calcK(aoi)
+                  var P = func.calcP(startDate,endDate,aoi)
+                  var LS = func.calcLS(aoi)
+                 
+                  var prod = ee.Image(R.multiply(K).multiply(LS).multiply(C).multiply(P)).rename("Soil Loss").selfMask()
+                      prod = prod.expression(
+                            "(b('Soil Loss') < 5) ? 1" +   // Class 1
+                            ": (b('Soil Loss') < 10) ? 2" +  // Class 2
+                            ": (b('Soil Loss') < 20) ? 3" +  // Class 3
+                            ": (b('Soil Loss') < 50) ? 4" +  // Class 4
+                            ": 5")                         // Class 5 (>= 200)
+                            .rename('Perda-Solo_classe').clip(aoi);
+                  print(prod)
+                  func.createLegend(maplayer,Object.keys(options.paletteRusle),options.paletteRusle,'Perda média anual do solo (t/ha/ano)') 
+                  app.options.activeLegendRusle = 1
+                
+              }else{
+                var prod = dicproduto[produto]
+               
+              }
+              //Criar a legenda do vigor
+              var paletteRusle = ee.Dictionary(options.paletteRusle).values()
+                  paletteRusle = paletteRusle.getInfo()
+              maplayer.addLayer(prod,{palette:paletteRusle},produto+"-"+ano)
+             
+            }
+           })
+          
           //-----------------------------Funções do Mapa------------------------------------------------
           //-----------------------------Informação da camada-------------------------------------------
           var popup = ui.Panel({style: {
@@ -695,13 +937,22 @@ var app = {
           
           
           //--------------------------------Junção dos paineis da aplicacao
-          var mainPanel = ui.Panel({style: {width: '315px',position:'top-right'}});
+          var mainPanel = ui.Panel({
+              style: {width: '22%',stretch: 'both'}
+          })//,position:'top-right'}});
+  
+          
           var listPainels = [
-                             toolPanel,btnLapig,painelArea,
-                             painelFieldFilter,painelFonteDados,
-                             painelYear,painelAgregacao,button,
+                             toolPanel,btnLapig,lblCls,painelArea,
+                             painelFieldFilter,painelFieldButton,
+                             painelFonteDados,painelYear,
+                             painelAgregacao,button,
                              legendImage,painelImage,
-                             lblVigorTool,painelVigor
+                             lblVigorTool,painelVigor,
+                             lblClsAuto,painelAmostras,
+                             painelBuffer,painelGetClass,
+                             btnClspasture,lblRusle,
+                             painelRusle,btnRusle
                             ]
           
           for(var i in listPainels){
@@ -822,7 +1073,7 @@ var app = {
                               reducer: aggreType[typeChart],
                               scale: 30
                       })
-                      print(statstotal)
+                      
                       statstotal = statstotal.map(function(feature){
                             var dicColumn = {}
                             for (var i = initial;i <= finalyear;i = i +1){
