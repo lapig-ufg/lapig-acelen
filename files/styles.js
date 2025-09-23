@@ -169,8 +169,38 @@ exports.confBtnSeries = {
     }
 }
 
+//Estilos dos rótulos
 exports.labelStyle = {
                 fontSize:'8',
                 textAlign : 'center',
                 padding: '4px 0px 0px 0%'
               }
+
+//Estilos do título das ferramentas
+exports.labelTitleTool = {
+                fontSize:'13px',
+                fontWeight:'bold',
+                textAlign:'center'
+}
+
+//Estilos da toolkit versão 2.0
+//Dados do GPW
+exports.pastureYearGPW = ['2000','2001','2002','2003','2004','2005',
+                    '2006','2007','2008','2009','2010','2011',
+                    '2012','2013','2014','2015','2016','2017',
+                    '2018','2019','2020','2021','2022']
+
+//Cor do mapa de pastagem
+exports.styleclass = {
+      min:1,
+      max:1,
+      palette:['gold']
+}
+//Paleta de cores do Vigor
+exports.paletteRusle = {
+  '0-5':'00FF00',
+  '5-10':'FFFF00',
+  '10-20':'FF7F00',
+  '20-50':'FF0000',
+  '>50':'8B0000'
+}
