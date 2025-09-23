@@ -23,5 +23,10 @@ Este repositório organiza os códigos do toolkit "Análise Temporal da Dinâmic
     * Upload de dados externos via asset do Google Earth Engine. 
     * Cobertura e uso da terra, e nivel de vigor da pastagem com pixel de 30m entre 1985 à 2023.
     * Dinâmica do uso da terra e a taxa de conversão da área natural para antrópica.
+
+* v 2.0
+    * Mapeamento à nível de propriedade com dados Sentinel-2 e Embeddings. 
+    * Cálculo da perda média anual do solo (RUSLE).
+    * Dados de vigor para os estados de Minas Gerais e Bahia.
     
   
