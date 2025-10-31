@@ -28,5 +28,10 @@ Este repositório organiza os códigos do toolkit "Análise Temporal da Dinâmic
     * Mapeamento à nível de propriedade com dados Sentinel-2 e Embeddings. 
     * Cálculo da perda média anual do solo (RUSLE).
     * Dados de vigor para os estados de Minas Gerais e Bahia.
+
+* v 3.0
+    * Análise de tendência das áreas de pastagens usando dados de NDVI em série temporal. 
+    * Adição de novas bacias hidrográficas no cálculo da RUSLE.
+    * Ferramenta de download das camadas para o google drive.
     
   
