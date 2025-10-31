@@ -6,7 +6,7 @@ var classfunc = require('users/Amazonas21/acelen:files/runclassification.js')
 
 
 //Criando variáveis de tipagem dinâmica para alteração no mapa pelo usuário
-var result,buttonPopUp,buttonSeries,btnFilter,btnFarm,finalyear,edafo
+var result,buttonPopUp,buttonSeries,btnFilter,btnFarm,finalyear,edafo,btnDown
 var select_year,selectChart,selectFilter,selectFarm,years,select_fonte, fieldData, fieldValue
 var data
 
@@ -21,7 +21,10 @@ var app = {
       activeinformation:0,
       activeGrafParc:0,
       activeBtnFilter:0,
-      activeBtnFarm:0
+      activeBtnFarm:0, 
+      activeLegendVigor:0,
+      activeDown:0,
+      activeLegendRusle:0
     },
     //Funções de intereção no mapa do app pelo usuário
     functions:{
@@ -56,7 +59,7 @@ var app = {
           //---------------------------------Painel-Seleção da área------------------------------
            //Configuração do rótulo do painel da seleção da área
           var lblCls = ui.Label({
-              value:'Entrada dos dados e Parâmetros da Classificação',
+              value:'ENTRADA DOS DADOS E PARÂMETROS DA CLASSIFICAÇÃO',
               style:options.labelTitleTool
           })
           
@@ -117,6 +120,8 @@ var app = {
                     app.options.activeChart = 0
                     app.options.activeChartSeries = 0
                     app.options.insertNewSeries = 0
+                    app.options.activeDown = 0,
+                    app.options.activeLegendRusle = 0
               
                     //Reiniciar todas a funções 
                     painelChart.widgets().reset()
@@ -129,7 +134,8 @@ var app = {
                     maplayer.add(buttonSeries)
                     maplayer.add(btnFilter)
                     maplayer.add(btnFarm)
-              
+                    maplayer.add(btnDown)
+                    
                     //Desativar a função de onclick dos botões no mapa
                     buttonPopUp.setDisabled(false)
                     buttonSeries.setDisabled(true)
@@ -204,8 +210,7 @@ var app = {
               value:'Ano análise',
               style:{width:'25%'}
           });
-              //legendYear.style().set(options.labelStyle);
-          
+              
           //Opção de seleção dos anos para classificação
           select_year = ui.Select({
             style:{width:'65%'}
@@ -222,14 +227,15 @@ var app = {
               value:'Tipo de classificação',
               style:{width:'30%'}
           });
-              //legendAgregacao.style().set(options.labelStyle);
           
+          //Selecionar os tipos de agregação    
           var select_agregacao = ui.Select({
               items: Object.keys(options.AggregationTypes),
               placeholder:'Escolha o tipo',
               style:{width:'60%'},
           });
           
+          //Criação do painel de agregação
           var painelAgregacao = ui.Panel([legendAgregacao,select_agregacao],
               ui.Panel.Layout.Flow('horizontal'),
               {stretch: 'both'}
@@ -237,6 +243,23 @@ var app = {
           
           //Criação do painel de gráficos
           var painelChart = ui.Panel({style: {position: 'bottom-right',width:'450px',padding: '1px 1px'}});
+          
+          //Rótulo do buffer na Classe
+          var lblBufferCls = ui.Label({value:'Buffer (m)',style:{width:'20%'}})
+          
+          //Controle deslizante para selecionar a distância do buffer em metros para visualizar a classificação
+          var sliderBufferCls = ui.Slider({
+            value:100,
+            min:0,
+            max:2000,
+            step:100,
+            style:{width:'72%'}
+          })
+          
+          var painelBufferCls = ui.Panel([lblBufferCls,sliderBufferCls],
+              ui.Panel.Layout.Flow('horizontal'),
+              {stretch: 'both'}
+          )
           
           //Criação do botão de gerar a classificação
           var button = ui.Button({
@@ -250,13 +273,15 @@ var app = {
                 btnFilter.setDisabled(false)
                 btnFarm.setDisabled(false)
                 
+                //Parâmetros da classificar as áreas de análise
                 var typeclass = select_agregacao.getValue()
                 var areaInfo = select_area.getValue()
                 var yearInfo = select_year.getValue()
                 var fonteInfo = select_fonte.getValue()
+                var bfCls = sliderBufferCls.getValue()
                 
                 //Função para adquirir imagem classificada do ano sob a área da usina da São Martinho
-                result = func.runprocess(maplayer,data,areaInfo,yearInfo,typeclass,fonteInfo)
+                result = func.runprocess(maplayer,data,areaInfo,yearInfo,typeclass,fonteInfo,bfCls)
                 
                 //Criar a legenda
                 if (app.options.activeLegend == 0){
@@ -333,19 +358,20 @@ var app = {
                 }  
            })
           //-------------------------------------Painel Imagem Landsat--------------------------------------
+          //Rótulo de identificação do bloco do Painel da seleção de imagem landsat como plano de fundo
           var legendImage = ui.Label({
-                value:'Imagem Landsat de fundo (Background)',
+                value:'IMAGENS LANDSAT DE FUNDO (Background)',
                 style:options.labelTitleTool
-            
           });
               
-          
+          //Selecionar o período de aquisição da imagem
           var select_image = ui.Select({
               items: Object.keys(options.ImagesTypes),
               placeholder:Object.keys(options.ImagesTypes)[0],
               style:{width:'45%'}
           });
           
+          //Botão para adicionar a imagem landsat no mapa 
           var buttonImgBack = ui.Button({
                   label:'Gerar imagem',
                   style:{width:'45%'}
@@ -359,16 +385,17 @@ var app = {
                 func.showLandsatImage(season,maplayer,year,data,options.realce)
           })
           
+          //Criar o painel de seleção da imagem landsat de plano de fundo
           var painelImage = ui.Panel([select_image,buttonImgBack],
               ui.Panel.Layout.Flow('horizontal'),
               {stretch: 'both'}
           )
           //------------------------------Vigor Pastagem-----------------------------------------------
           var lblVigorTool = ui.Label({
-                value:'Vigor da pastagem',
+                value:'VIGOR DA PASTAGEM',
                 style:options.labelTitleTool
               });
-              legendImage.style().set(options.labelStyle);
+              
           
           var yearsVigor = ee.Image(datasets.Dataset['Vigor-Mapbiomas']).bandNames().getInfo()
               yearsVigor = yearsVigor.map(function(e){
@@ -379,7 +406,7 @@ var app = {
           var selectVigorYear = ui.Select({
               items: yearsVigor,
               placeholder:'Escolha o ano',
-              style:{width:'28%'}
+              style:{width:'45%'}
           });
           
           //Selecionar a região
@@ -387,14 +414,36 @@ var app = {
               items: yearsVigor,
               placeholder:'Escolha a regiao',
               items:['Brasil','MG','BA'],
-              style:{width:'28%'}
+              style:{width:'45%'}
           });
           
+          //Criar o painel de seleção do área e ano do vigor da pastagem 
+          var painelVigor = ui.Panel([selectVigorYear,selectVigorRegion],
+              ui.Panel.Layout.Flow('horizontal'),
+              {stretch: 'both'}
+          )
           
+          //Rótulo de buffer em metros de selecionar o vigor
+          var lblBufferVigor = ui.Label({value:'Buffer (m)',style:{width:'20%'}})
+          
+          //Controle deslizante para selecionar a distância do buffer em metros para visualizar a classificação
+          var sliderBufferVigor = ui.Slider({
+            value:100,
+            min:0,
+            max:2000,
+            step:100,
+            style:{width:'72%'}
+          })
+          
+          //Criar o painel de escolher o valor de buffer da área para visualização do vigor da pastagem
+          var painelBufferVigor = ui.Panel([lblBufferVigor,sliderBufferVigor],
+              ui.Panel.Layout.Flow('horizontal'),
+              {stretch: 'both'}
+          )
           //Botão para visualizar o vigor
           var btnVigor = ui.Button({
                 label:'Visualizar vigor',
-                style:{width:'28%'},
+                style:{width:'95%'},
               })
               btnVigor.onClick(function(){
                 
@@ -404,6 +453,15 @@ var app = {
                 //Coletando informações do asset e o ano selecionado do vigor
                 var year = selectVigorYear.getValue()
                 
+                //Buffer da área
+                var bfVigor = sliderBufferVigor.getValue()
+                
+                //Verificando se o valor de buffer é igual da zero
+                if (parseInt(bfVigor) > 0){
+                  var bfVigorData = data.geometry().buffer(parseInt(bfVigor))
+                }else{
+                  var bfVigorData = data
+                }
                 //Selecionar a imagem a partir da região selecionada
                 if (regionVigor == 'Brasil'){
                   
@@ -421,7 +479,7 @@ var app = {
                 //Selecionando o vigor do ano selecionado
                 var imgVigor = ee.Image(idVigorImg)//ee.Image(datasets.Dataset['Vigor-Mapbiomas'])
                                .select(bandVigor)//.select('vigor_'+year)
-                               .clip(data)
+                               .clip(bfVigorData)
                 
                 //Adicionar o mapa de vigor
                 var titulo = 'Clase de vigor'
@@ -436,13 +494,10 @@ var app = {
                 }
               })
           
-          var painelVigor = ui.Panel([selectVigorYear,selectVigorRegion,btnVigor],
-              ui.Panel.Layout.Flow('horizontal'),
-              {stretch: 'both'}
-          )
+         
           //-----------------------------------Mapemaneto detalhado automático-------------------------------
           var lblClsAuto = ui.Label({
-              value:'Mapeamento automático detalhado - Pastagem',
+              value:'MAPEAMENTO AUTOMÁTICO DETALHADO - PASTAGEM',
               style:options.labelTitleTool,
           })
           
@@ -534,7 +589,7 @@ var app = {
           })
           //-------------------------------------------RUSLE--------------------------------------------
           var lblRusle = ui.Label({
-              value:'Método RUSLE (versão beta)',
+              value:'MÉTODO RUSLE (versão beta)',
               style:options.labelTitleTool
           })
           
@@ -542,27 +597,37 @@ var app = {
           var anoRusle = ui.Select({
             placeholder:'Escolha o ano',
             items:['2017','2018','2019','2020','2021','2022','2023','2024'],
-            style:{width:'45%'}
+            style:{width:'28%'}
           })
+          
+          
+          var baciaRusle = ui.Select({
+            placeholder:'Escolha a bacia',
+            items:Object.keys(datasets.Dataset['Bacias Hidrográficas']),
+            style:{width:'29%'}
+          })
+          
           
           //Ano de Cálculo da RuSLE
           var produtosRusle = ui.Select({
             placeholder:'Escolha o produto',
             items:['A - Perda Média Anual de Solo','R - Fator de Erosividade','K - Fator Erodibilidade do Solo',
                   'LS - Fator Topográfico','C - Fator de Manejo do Solo','P - Fator de Prática de Suporte'],
-            style:{width:'45%'}
+            style:{width:'29%'}
           })
           
-          var painelRusle = ui.Panel([anoRusle,produtosRusle],
+          var painelRusle = ui.Panel([anoRusle,baciaRusle,produtosRusle],
               ui.Panel.Layout.Flow('horizontal'),
               {stretch: 'both'}
           )
           
           var btnRusle = ui.Button({
             label:'Calcular',
-            style:{width:'95%'},
+            style:{width:'92%'},
             onClick:function(){
-              var idBacia = 'projects/mapbiomas-territories/assets/TERRITORIES-OLD/LULC/BRAZIL/COLLECTION9/WORKSPACE/BASIN_LEVEL_2_PNRH'
+              
+              //Parâmetros para o cálculo da RUSLE
+              var idBacia = datasets.Dataset['Bacias Hidrográficas'][baciaRusle.getValue()]
               var ano = parseInt(anoRusle.getValue()) 
               var produto = produtosRusle.getValue()
               var startDate =  ano+'-01-01'
@@ -570,6 +635,7 @@ var app = {
               var aoi = ee.FeatureCollection(idBacia)
                             .filterBounds(data)
               
+              //Dicionário dos produtos
               var dicproduto = {
                 'A - Perda Média Anual de Solo':'',
                 'R - Fator de Erosividade': func.calcR(aoi,ano),
@@ -590,15 +656,18 @@ var app = {
                   var prod = ee.Image(R.multiply(K).multiply(LS).multiply(C).multiply(P)).rename("Soil Loss").selfMask()
                       prod = prod.expression(
                             "(b('Soil Loss') < 5) ? 1" +   // Class 1
-                            ": (b('Soil Loss') < 10) ? 2" +  // Class 2
-                            ": (b('Soil Loss') < 20) ? 3" +  // Class 3
-                            ": (b('Soil Loss') < 50) ? 4" +  // Class 4
-                            ": 5")                         // Class 5 (>= 200)
-                            .rename('Perda-Solo_classe').clip(aoi);
-                  print(prod)
-                  func.createLegend(maplayer,Object.keys(options.paletteRusle),options.paletteRusle,'Perda média anual do solo (t/ha/ano)') 
-                  app.options.activeLegendRusle = 1
-                
+                            ": (b('Soil Loss') < 1.5) ? 2" +  // Class 2
+                            ": (b('Soil Loss') < 3) ? 3" +  // Class 3
+                            ": (b('Soil Loss') < 5) ? 4" +  // Class 4
+                            ": (b('Soil Loss') < 10) ? 5" +  // Class 5
+                            ": (b('Soil Loss') < 20) ? 6" +  // Class 6
+                            ": (b('Soil Loss') < 50) ? 7" +  // Class 7
+                            ": 8")                         // Class 8 (>= 200)
+                  
+                  if (app.options.activeLegendRusle == 0){
+                    func.createLegend(maplayer,Object.keys(options.paletteRusle),options.paletteRusle,'Perda média anual do solo (t/ha/ano)') 
+                    app.options.activeLegendRusle = 1
+                  }
               }else{
                 var prod = dicproduto[produto]
                
@@ -606,11 +675,106 @@ var app = {
               //Criar a legenda do vigor
               var paletteRusle = ee.Dictionary(options.paletteRusle).values()
                   paletteRusle = paletteRusle.getInfo()
-              maplayer.addLayer(prod,{palette:paletteRusle},produto+"-"+ano)
+              maplayer.addLayer(prod.clip(aoi),{palette:paletteRusle},produto+"-"+ano)
              
             }
            })
+          //-------------------------------------------ANALISE DE TENDENCIA DAS PASTAGENS---------------
+          var lblAnaliseTendencia = ui.Label({
+              value:'ANÁLISE DE TENDÊNCIA DAS PASTAGENS',
+              style:options.labelTitleTool
+          })
+          var anoInicialTrend = ui.Select({
+                    placeholder:'Ano Inicial',
+                    items:['2016','2017','2018','2019','2020','2021','2022','2023','2024'],
+                    style:{width:'45%'}
+          })
           
+          var anoFinalTrend = ui.Select({
+                    placeholder:'Ano Final',
+                    items:['2016','2017','2018','2019','2020','2021','2022','2023','2024'],
+                    style:{width:'45%'}
+          })
+          
+          var painelAnoTrend = ui.Panel([anoInicialTrend,anoFinalTrend],
+              ui.Panel.Layout.Flow('horizontal'),
+              {stretch: 'both'}
+          )
+          
+          var windowYear = ui.Select({
+                    placeholder:'Tamanho da Janela - Anos',
+                    items:['1','2','3','4','5'],
+                    style:{width:'45%'}
+          })
+          
+          var windowDays = ui.Select({
+                    placeholder:'Tamanho da Janela - Dias',
+                    items:['30','60','90','120','150','180'],
+                    style:{width:'45%'}
+          })
+          
+          var painelWindTrend = ui.Panel([windowYear,windowDays],
+              ui.Panel.Layout.Flow('horizontal'),
+              {stretch: 'both'}
+          )
+      
+      
+          var btnTrend = ui.Button({
+            label:'Calcular tendência',
+            style:{width:'92%'},
+            onClick:function(){
+               
+              //Criando o painel para inserir a tendência no mapa
+              var ChartTrend = ui.Panel({style: {position: 'bottom-right',padding: '.1% .1%'}});
+              ChartTrend.add(ui.Label('Gerando a análise de tendência...'))
+              maplayer.add(ChartTrend)
+              
+              //Criando o botão para fechar a janela da tendência 
+              var btcClose = ui.Button({
+                    label:'Fechar',
+                    onClick:function(){
+                      ChartTrend.widgets().reset([])
+                      maplayer.remove(ChartTrend)
+                    }
+              })
+               
+              //Parâmetros de entrada
+              var ini = parseInt(anoInicialTrend.getValue())
+              var fin = parseInt(anoFinalTrend.getValue())
+              var winAno = ee.List.sequence(1,parseInt(windowYear.getValue()),1).getInfo()
+              var winDia = ee.List.sequence(30,parseInt(windowDays.getValue()),30).getInfo()
+              var idCollection = "LANDSAT/LC08/C02/T1_TOA";
+              var lulc = ee.Image('projects/ee-amazonas21/assets/datasets-app/us-brazil')
+               
+               //Executando o gapfill
+               var img = func.runTMWMFilter(data, idCollection, ini, fin, winAno, winDia,lulc) 
+                   img = img['gapfill-data']
+               
+               //Calculando a tendência
+               var featTrend = func.getTrend(img)
+               
+               //Criando o gráfico da tendência
+               var chart = ui.Chart.feature
+                        .byFeature({
+                            features: featTrend,
+                            xProperty: 'system:time_start',
+                            yProperties:['NDVI-trend','median-ndvi']
+                        })
+                        .setSeriesNames(['Tendência', 'NDVI mediano'])
+                        .setOptions({
+                          title: 'Tendência do NDVI sobre a área de pastagem',
+                          hAxis:{
+                              title: 'Data'
+                          },
+                          vAxis: {
+                              title: 'Valor de NDVI',
+                          }
+                        })
+               //Adicionando o resultado da tendência
+               ChartTrend.widgets().reset([chart,btcClose])
+               ChartTrend.style().set('width', '35%');
+            }
+          })
           //-----------------------------Funções do Mapa------------------------------------------------
           //-----------------------------Informação da camada-------------------------------------------
           var popup = ui.Panel({style: {
@@ -688,8 +852,7 @@ var app = {
                               maplayer.remove(lay)
                           }
                     })
-                    
-                    //Reinicializando o painel do gráfico
+                   //Reinicializando o painel do gráfico
                     ChartSeries.widgets().reset()
                     
                     //Removendo o painel de seleção do tipo e do gráfico no mapa
@@ -915,7 +1078,7 @@ var app = {
                                     })
                             }
                   })
-                  
+                
                 FilterPainelFarm.add(selectFarm)
                 FilterPainelFarm.add(nameFarm)
                 FilterPainelFarm.add(btnFilterFarm)
@@ -930,29 +1093,108 @@ var app = {
             
           })
           
+          var OptionLayerDown = ui.Select({placeholder:'Escolha a camada',style:{Width:'30%'}})
+          var OptionDown = ui.Select({
+            placeholder:'Escolha a origem para download',
+            items:['Camada do mapa','Camada da base de dados'],
+            style:{Width:'30%'},
+            onChange:function(value){
+              if(value == 'Camada do mapa'){
+                var listCamadas = []
+                var layers = maplayer.layers()
+                    layers.forEach(function(lay){
+                       listCamadas.push(lay.getName())
+                    })
+                    OptionLayerDown.items().reset(listCamadas)
+              }else{
+                    OptionLayerDown.items().reset([
+                                            'Vigor-Mapbiomas',
+                                            'Mapbiomas',
+                                            ])
+              }
+            }
+          })
+          
+          var btnDownload = ui.Button({
+                        label:'Download',
+                        style:{Width:'30%'},
+                        onClick:function(){
+                          var chooseLayer = OptionLayerDown.getValue()
+                          if (OptionDown.getValue() == 'Camada do mapa'){
+                              var lyr = maplayer.layers()
+                              lyr.forEach(function(layer){
+                              if(layer.getName() == chooseLayer){
+                                  var lyrdown = layer.getEeObject()
+                                  print(lyrdown)
+                                  var lyrdesc = layer.getName()
+                                  var lyrscale = layer.getEeObject().projection().nominalScale().getInfo()
+                                  Export.image.toDrive({
+                                        image:lyrdown,
+                                        description:lyrdesc,
+                                        folder:'GEEX',
+                                        region:data,
+                                        scale:lyrscale
+                                  })
+                                  
+                              }
+                              })
+                          }else{
+                             var lyrdown = datasets.Dataset[OptionLayerDown.getValue()]
+                             var lyrdesc = OptionLayerDown.getValue()
+                             var lyrscale = 30
+                          }
+                          Export.image.toDrive({
+                                        image:lyrdown,
+                                        description:lyrdesc,
+                                        folder:'GEEX',
+                                        region:data,
+                                        scale:lyrscale
+                          })
+                          
+                        }
+          })
+          var DownPanel = ui.Panel([OptionDown,OptionLayerDown,btnDownload],ui.Panel.Layout.Flow('horizontal'),
+              {stretch: 'both',width:'40%',position: 'bottom-center',padding: '.5% .5%'}
+          );
+         
+          
+          btnDown = ui.Button(options.confBtnDown)
+          btnDown.onClick(function(){
+             print(app.options.activeDown)
+             if (app.options.activeDown == 0){
+               app.options.activeDown = 1
+               maplayer.add(DownPanel)
+               
+             }else{
+               app.options.activeDown = 0
+               maplayer.remove(DownPanel)
+             }
+          })
           maplayer.add(buttonPopUp)
           maplayer.add(buttonSeries)
           maplayer.add(btnFilter)
           maplayer.add(btnFarm)
+          maplayer.add(btnDown)
           
           
           //--------------------------------Junção dos paineis da aplicacao
           var mainPanel = ui.Panel({
-              style: {width: '22%',stretch: 'both'}
+              style: {width: '25%',stretch: 'both'}
           })//,position:'top-right'}});
   
           
           var listPainels = [
-                             toolPanel,btnLapig,lblCls,painelArea,
-                             painelFieldFilter,painelFieldButton,
-                             painelFonteDados,painelYear,
-                             painelAgregacao,button,
-                             legendImage,painelImage,
-                             lblVigorTool,painelVigor,
-                             lblClsAuto,painelAmostras,
-                             painelBuffer,painelGetClass,
-                             btnClspasture,lblRusle,
-                             painelRusle,btnRusle
+                            toolPanel,btnLapig,lblCls,painelArea,
+                            painelFieldFilter,painelFieldButton,
+                            painelFonteDados,painelYear,
+                            painelAgregacao,painelBufferCls,
+                            button,legendImage,painelImage,
+                            lblVigorTool,painelVigor,painelBufferVigor,
+                            btnVigor,lblClsAuto,painelAmostras,
+                            painelBuffer,painelGetClass,
+                            btnClspasture,lblRusle,
+                            painelRusle,btnRusle,lblAnaliseTendencia,
+                            painelAnoTrend,painelWindTrend,btnTrend
                             ]
           
           for(var i in listPainels){
