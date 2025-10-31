@@ -176,11 +176,24 @@ exports.labelStyle = {
                 padding: '4px 0px 0px 0%'
               }
 
+//Configuração do Botão de download
+exports.confBtnDown = {
+    label:'Download das camadas',
+    imageUrl: IconName('vertical_align_bottom'),
+    disabled:false,
+    style:{
+        position:'top-left',
+        fontStyle:'bold',
+        padding: '1px 1px'
+    }
+  
+}
 //Estilos do título das ferramentas
 exports.labelTitleTool = {
                 fontSize:'13px',
                 fontWeight:'bold',
-                textAlign:'center'
+                textAlign:'center',
+                width:'95%'
 }
 
 //Estilos da toolkit versão 2.0
@@ -197,10 +210,13 @@ exports.styleclass = {
       palette:['gold']
 }
 //Paleta de cores do Vigor
+//Paleta de cores do Vigor
 exports.paletteRusle = {
-  '0-5':'00FF00',
-  '5-10':'FFFF00',
-  '10-20':'FF7F00',
-  '20-50':'FF0000',
-  '>50':'8B0000'
+  '0 - 1.5':'#006837',
+  '1.5 - 3.0':'#31a354',
+  '3.0 - 5.0':'#addd8e',
+  '5.0 - 10':'#ffffb2',
+  '10 - 20':'#feb24c',
+  '20 - 50':'#f03b20',
+  '> 50':'#bd0026'
 }
