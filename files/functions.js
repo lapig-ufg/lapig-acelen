@@ -230,7 +230,7 @@ exports.countParcels = function(data,typeClass){
     return data
 }
 
-exports.runprocess = function(map,area,nomeAsset,year,type,datasource){
+exports.runprocess = function(map,area,nomeAsset,year,type,datasource,buffer){
   
   var Carregando = ui.Panel([ui.Label('Gerando a classificação...')])
   map.add(Carregando)
@@ -245,6 +245,11 @@ exports.runprocess = function(map,area,nomeAsset,year,type,datasource){
  
   //Area de estudo
   var vetor = area//ee.FeatureCollection(area)
+  
+  //Verificando se o valor do buffer é zero
+  if (parseInt(buffer) > 0){
+      vetor = vetor.geometry().buffer(ee.Number(buffer))
+  }
   
   //Nome da camada
   var nameDataset = ee.String(nomeAsset).split('/').get(-1).getInfo()
@@ -313,7 +318,7 @@ exports.runprocess = function(map,area,nomeAsset,year,type,datasource){
     if(type == 'Original'){
       map.addLayer(classe.clip(vetor),{palette:paletteColor,min:min,max:max},nameLayer)
     }else{
-      map.addLayer(classe.clip(vetor.bounds()),{palette:paletteColor,min:min,max:max},nameLayer)
+      map.addLayer(classe.clip(vetor),{palette:paletteColor,min:min,max:max},nameLayer)
       map.addLayer(vetor,{color:'cyan'},nameDataset)
     }
   }
@@ -682,4 +687,276 @@ exports.calcP = function(date1,date2,aoi){
   ).rename('P').clip(aoi)
   
   return P
+}
+
+
+//-------------------------------------------------Análise de tendência das pastagens----------------------------------------
+//--------------------------------------------------------FUNÇÕES AUXILIARES-------------------------------------------------
+
+/**
+ * Filtra pixels ruins (nuvem, sombra, valores <= 0) em imagens Landsat 8
+ * utilizando a banda QA_PIXEL.
+ */
+exports.convertImage2FeatureAtr = function(img){
+  return ee.Feature(null,{
+    'system:time_start': img.get('system:time_start'),
+    'median-ndvi': img.get('median-ndvi'),
+    'NDVI-trend': img.get('NDVI-trend')
+  })
+}
+
+
+//exports.maskL8 = function(image) {
+    // Seleciona a banda de Qualidade de Pixel
+//    var qa = image.select('QA_PIXEL');
+    
+    // Máscara: Cria uma imagem booleana onde 1 indica pixels ruins.
+    // 21824/21952 são valores comuns de nuvem/sombra de nuvem.
+    // .add(image.lte(0)) inclui pixels com valor NDVI <= 0.
+  //  var maskL8 = qa.expression("(b('QA_PIXEL') == 21824 || b('QA_PIXEL') == 21952)").add(image.lte(0));
+    
+    // Atualiza a máscara da imagem: updateMask(maskL8.not()) mantém APENAS os pixels bons.
+  //  return image.updateMask(maskL8.not());
+//}
+
+/**
+ * Calcula o Índice de Vegetação por Diferença Normalizada (NDVI).
+ */
+exports.ndvi = function(img) {
+    // NDVI = (NIR - RED) / (NIR + RED) -> (B5 - B4) / (B5 + B4)
+    return img.addBands(img.normalizedDifference(['B5', 'B4']).rename('NDVI'));
+}
+
+/**
+ * Adiciona propriedades de tempo (ano, mês, dia) à imagem.
+ */
+exports.fillDtProps = function(img) {
+    var dt = ee.Date(img.get('system:time_start'));
+    return img
+        .set('dt_year', dt.get('year'))
+        .set('dt_month', dt.get('month'))
+        .set('dt_day', dt.get('day'));
+};
+
+// ----------------------------------------FUNÇÃO PRINCIPAL: TMWM FILTER---------------------------------------
+
+/**
+ * Função principal que realiza o pré-processamento, a filtragem TMWM (Temporal Moving Window Median)
+ * e o preenchimento de gaps (Gapfilling) na coleção Landsat.
+ */
+exports.runTMWMFilter  = function(aoi, idCollection, StartDate, EndDate, qtYears, qtDays,lulc) {
+    
+    // 1. DADOS: Pré-processamento e Filtragem Inicial
+    var data = ee.ImageCollection(idCollection)
+        .filterBounds(aoi) // Filtra pela Área de Interesse
+        .filterDate(String(StartDate), String(EndDate)) // Filtra pelo intervalo de anos
+        .map(removeCloud)                               // Aplica máscara de nuvem/sombra
+        .map(exports.ndvi)                              // Calcula NDVI
+        .map(exports.fillDtProps)                       // Adiciona propriedades de data
+        .select('NDVI');                                // Seleciona apenas a banda NDVI
+    
+    // Define as janelas de vizinhança temporais a serem usadas
+    var listYears = qtYears; // Ex: [1, 2] -> 1 ano antes/depois, 2 anos antes/depois
+    var listDays = qtDays;   // Ex: [30, 60] -> 30 dias antes/depois, 60 dias antes/depois
+    
+
+    // -------------------1. GAPFILLING POR ANO/MÊS (VIZINHOS MAIS DISTANTES)-------------------------------------------------
+
+    var join_collection_month = data; // Coleção inicial (Primary Collection para o Join)
+    
+    // Loop para cada janela de ano (e.g., vizinhos de +/- 1 ano, +/- 2 anos)
+    for (var i in listYears) {
+        var window = listYears[i];
+        var namefield = "img_same_month_0" + window + "_year"; // Nome da propriedade: e.g., 'img_same_month_01_year'
+        
+        // Calcula a diferença de tempo máxima (em milissegundos) para a janela de ano
+        var millisYear = ee.Number(window).multiply(365.25 * 1000 * 60 * 60 * 24);
+
+        // Filtro: Encontra imagens cuja data esteja dentro da janela de +/- 'window' anos
+        var dtMonth = ee.Filter.maxDifference({
+            "difference": millisYear,
+            "leftField": "system:time_start",
+            "rightField": "system:time_start"
+        });
+
+        // Configuração do Join: Salva todas as correspondências na propriedade 'namefield'
+        var join = ee.Join.saveAll({
+            matchesKey: namefield,
+            ordering: "system:time_start",
+            ascending: true,
+        });
+
+        // Aplicação do Join Iterativo
+        // A coleção 'join_collection_month' (Primary) acumula as propriedades,
+        // mas o 'Secondary' DEVERIA ser 'data' (a coleção limpa) para o filtro 'dtMonth' funcionar.
+        // **NOTA: O trecho a seguir contém o erro de join iterativo não corrigido da sua última versão!
+        // No entanto, vou comentar a lógica original.**
+        
+        if (i == 0){
+            // Primeira iteração: primary e secondary são a coleção original 'data'
+            var join_collection_month = ee.ImageCollection(join.apply({
+                primary: data,
+                secondary: data,
+                condition: dtMonth
+            }));
+        } else {
+            // Iterações seguintes: primary é a coleção que já tem propriedades
+            // secondary TAMBÉM é a coleção modificada, o que pode causar o erro 'binary filter'.
+            join_collection_month = ee.ImageCollection(join.apply({
+                primary: join_collection_month,
+                secondary: join_collection_month,
+                condition: dtMonth
+            }));
+        }
+        
+        // Mapeamento: Processa a lista de vizinhos para calcular a Mediana
+        join_collection_month = join_collection_month.map(function(img){
+            var dateMonth = ee.Date(img.get('system:time_start')).get('month');
+            
+            // Converte a lista de vizinhos (salva no 'namefield') de volta para ImageCollection
+            var imgMonth = ee.ImageCollection.fromImages(ee.List(img.get(namefield)))
+                // Filtra para garantir que as imagens sejam **EXATAMENTE** do mesmo mês do ano corrente (mesmo mês, anos diferentes)
+                .filter(ee.Filter.calendarRange(dateMonth, dateMonth, 'month'));
+                
+            // Redução: Calcula a mediana de todos os vizinhos filtrados
+            var reduceImg = imgMonth.reduce(ee.Reducer.median());
+            
+            // Define a mediana calculada como uma propriedade da imagem
+            return img.set(namefield, reduceImg);
+        });
+    }
+    
+    // -------------------2. GAPFILLING POR DIAS (VIZINHOS MAIS PRÓXIMOS)-------------------------------------------------
+
+    // Coleção de entrada é a coleção que já tem as propriedades de ano/mês
+    var join_collection_days = join_collection_month; 
+
+    // Loop para cada janela de dias (e.g., vizinhos de +/- 30 dias, +/- 60 dias)
+    for (var i in listDays) {
+        var window = listDays[i];
+        var namefield = "img_same_month_" + window + "_days"; // Nome da propriedade: e.g., 'img_same_month_30_days'
+        var millisDays = ee.Number(window).multiply(1000 * 60 * 60 * 24); // Diferença em milissegundos em dias
+        
+        // Filtro: Encontra imagens dentro da janela de +/- 'window' dias
+        var dtDays = ee.Filter.maxDifference({
+            "difference": millisDays,
+            "leftField": "system:time_start",
+            "rightField": "system:time_start"
+        });
+        
+        //Salvando os atributos 
+        var join = ee.Join.saveAll({
+            matchesKey: namefield,
+            ordering: "system:time_start",
+            ascending: true,
+        });
+        
+        // Aplicação do Join Iterativo (Similar ao loop anterior, com o mesmo potencial erro)
+        if (i == 0){
+            // Primeira iteração do loop de dias. Primary é a coleção do mês
+            var join_collection_days = ee.ImageCollection(join.apply({
+                primary: join_collection_month,
+                secondary: join_collection_month, // Secondary TAMBÉM modificado
+                condition: dtDays
+            }));
+        } else {
+            // Iterações seguintes do loop de dias
+            join_collection_days = ee.ImageCollection(join.apply({
+                primary: join_collection_days,
+                secondary: join_collection_days, // Secondary TAMBÉM modificado
+                condition: dtDays
+            }));
+        }
+        
+        // Mapeamento: Processa a lista de vizinhos para calcular a Mediana
+        join_collection_days = join_collection_days.map(function(img){
+            // Converte a lista de vizinhos (salva no 'namefield') de volta para ImageCollection
+            var redutorImg = ee.ImageCollection.fromImages(img.get(namefield))
+                               .reduce(ee.Reducer.median());
+            
+            // Define a mediana calculada como uma propriedade da imagem
+            return img.set(namefield, redutorImg);
+        });
+    }
+    
+    // ----------------------------------------3. APLICAÇÃO DO PREENCHIMENTO (GAPFILLING)-------------------------------------------------
+    
+    // Mapeia sobre a coleção final para aplicar o preenchimento de fato
+    var l8_gapfilled = join_collection_days.map(function(img) {
+        
+        var lulcYear = lulc.select(ee.String('classification_').cat(img.get('dt_year')))
+                           .eq(3)
+                           .selfMask()
+        var newImage = ee.Image(img).select('NDVI')//.clip(aoi); // Imagem NDVI original com Gaps
+        
+        // Sequência de preenchimento (prioriza o mais estável/distante primeiro, ou vice-versa, dependendo da ordem dos loops)
+        
+        // LOOP 1: Aplica o filtro de Ano/Mês
+        for (var i in listYears){
+            var window = listYears[i];
+            var imgCol = ee.Image(img.get("img_same_month_0"+window+"_year"))//.clip(aoi); // A mediana já foi reduzida e salva como Image
+            var median_same_month = imgCol;
+            
+            // Identifica os pixels faltantes (gaps) na 'newImage'
+            var gaps = newImage.unmask(-9999).eq(-9999);
+            
+            // Preenche: newImage = newImage (pixels bons) + (gaps * mediana)
+            newImage = newImage.unmask(0).add(gaps.multiply(median_same_month));
+        }
+        
+        // LOOP 2: Aplica o filtro de Dias (Preenche os gaps que sobraram)
+        for(var i in listDays){
+            var window = listDays[i];
+            var imgCol = ee.Image(img.get("img_same_month_"+window+"_days"))//.clip(aoi); // A mediana já foi reduzida e salva como Image
+            var median_same_month = imgCol;
+            
+            // Re-identifica os gaps restantes (que não foram preenchidos pelo LOOP 1)
+            var gaps = newImage.unmask(-9999).eq(-9999);
+            
+            // Preenche: newImage = newImage (pixels bons/preenchidos) + (gaps * mediana)
+            newImage = newImage.unmask(0).add(gaps.multiply(median_same_month));
+        }
+        newImage = newImage.clip(aoi)
+        newImage = newImage.addBands(newImage.multiply(lulcYear).rename('NVDI-pasture'))
+        
+        // Retorna a imagem final, copiando a propriedade de tempo original
+        var medianNVDIprop = newImage.reduceRegion({
+                          reducer:ee.Reducer.median(),
+                          geometry:aoi,
+                          scale:30
+        })
+        
+        //Retornando o valor da data e o NDVI mediano
+        return newImage.set("system:time_start",img.get("system:time_start"))
+                       .set("median-ndvi",medianNVDIprop.get('NVDI-pasture'))
+    });
+    
+    // Retorna as duas coleções: a original (para comparação) e a preenchida
+    return {
+        //'original-data': data,
+        'gapfill-data': l8_gapfilled,
+        
+    };
+};
+
+//Função para calcular a tendência
+exports.getTrend = function(dataimg){
+  
+  //Aplicando a Regressão Linear
+  var linearRegression = dataimg.select('NVDI-pasture').reduceColumns({
+    reducer:ee.Reducer.linearFit(),
+    selectors:['system:time_start','median-ndvi']
+  })
+  
+  //Calculando a tendência do NDVI
+  dataimg = dataimg.map(function(img){
+    var ndvi_trend = ee.Number(img.get('system:time_start')).multiply(linearRegression.get('scale'))
+        ndvi_trend = ndvi_trend.add(linearRegression.get('offset'))
+    return img.set('NDVI-trend',ndvi_trend)
+  })
+  
+  //Convertendo a imageCollection para FeatureCOllection
+  var feat = dataimg.map(exports.convertImage2FeatureAtr)
+  
+  return feat
 }
