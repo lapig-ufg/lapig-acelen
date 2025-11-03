@@ -93,17 +93,20 @@ exports.showLandsatImage = function(seasonType,maplayer,year,area,realce){
                 'end':'-04-30'
             }
       }
+      
+      //Verificando qual o tipo da estação
       if(seasonType == 'Wet'){
           finalyear = parseInt(year)+1
       }else{
           finalyear = year
       }
-        
+      //Filtrando, excluinod as nuvens e calculando a mediana da imagem do Landsat
       var imgMap = img.filterDate(year+Season[seasonType].initial,finalyear+Season[seasonType].end)
                           .map(exports.clearCloud)
                           .median()
                           .clip(bounds.bounds())
-               
+      
+      //Inserindo a imagem no Mapa          
           imgMap = ui.Map.Layer(imgMap,realceImg,seasonType+" "+sateliteName+" "+year).setShown(1)
       maplayer.layers().insert(0,imgMap)
   
@@ -235,9 +238,9 @@ exports.runprocess = function(map,area,nomeAsset,year,type,datasource,buffer){
   var Carregando = ui.Panel([ui.Label('Gerando a classificação...')])
   map.add(Carregando)
   
-  var minMax = {
-    'Mapbiomas':{min:1,max:9}
-  }
+  var minMax = style.minMax//{
+  //  'Mapbiomas':{min:1,max:9}
+  //}
   
   //Configuração dos valores máximos e mínimos
   var min = minMax[datasource]['min']
@@ -246,7 +249,7 @@ exports.runprocess = function(map,area,nomeAsset,year,type,datasource,buffer){
   //Area de estudo
   var vetor = area//ee.FeatureCollection(area)
   
-  //Verificando se o valor do buffer é zero
+  //Verificar se o valor do buffer é 0 
   if (parseInt(buffer) > 0){
       vetor = vetor.geometry().buffer(ee.Number(buffer))
   }
@@ -255,9 +258,9 @@ exports.runprocess = function(map,area,nomeAsset,year,type,datasource,buffer){
   var nameDataset = ee.String(nomeAsset).split('/').get(-1).getInfo()
  
   //Importando imagem do mapbiomas
-  var reclass = ee.Image('projects/ee-amazonas21/assets/datasets-app/us-brazil')
+  var reclass = datasets.Dataset[datasource]//ee.Image('projects/ee-amazonas21/assets/datasets-app/us-brazil')
       reclass = reclass.select('classification_'+year)
-  
+      
   //----------------------Classes 01
   /* Novas classes da coleção 09 Floresta alagável foi adicionado na vegetação natural
      e Dênde, adicionado em Outras lavouras
@@ -284,7 +287,7 @@ exports.runprocess = function(map,area,nomeAsset,year,type,datasource,buffer){
       
       //Calcular a moda das classes de cada talhão e/ou propriedade
       var stats = reclass.reduceRegions({
-          collection: vetor.filterBounds(vetor.bounds()),
+          collection: vetor,//.bounds()//vetor.filterBounds(vetor.bounds()),
           reducer: ee.Reducer.mode(),
           scale: 30
       });
@@ -318,8 +321,8 @@ exports.runprocess = function(map,area,nomeAsset,year,type,datasource,buffer){
     if(type == 'Original'){
       map.addLayer(classe.clip(vetor),{palette:paletteColor,min:min,max:max},nameLayer)
     }else{
-      map.addLayer(classe.clip(vetor),{palette:paletteColor,min:min,max:max},nameLayer)
-      map.addLayer(vetor,{color:'cyan'},nameDataset)
+      map.addLayer(classe.clip(vetor.bounds()),{palette:paletteColor,min:min,max:max},nameLayer)
+      //map.addLayer(vetor,{color:'cyan'},nameDataset)
     }
   }
   classe.evaluate(function(results){
