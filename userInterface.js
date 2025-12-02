@@ -280,7 +280,7 @@ var app = {
                 var fonteInfo = select_fonte.getValue()
                 var bfCls = sliderBufferCls.getValue()
                 
-                //Função para adquirir imagem classificada do ano sob a área da usina da São Martinho
+                //Função para adquirir imagem classificada do ano sob a área selecionada
                 result = func.runprocess(maplayer,data,areaInfo,yearInfo,typeclass,fonteInfo,bfCls)
                 
                 //Criar a legenda
