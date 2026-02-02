@@ -115,21 +115,27 @@ exports.showLandsatImage = function(seasonType,maplayer,year,area,realce){
 //Criação da Legenda do mapa
 exports.createLegend = function(maplayer,names,palette,title){
           
+          
           // Posição da legenda no mapa
           var legend = ui.Panel({style: {position: 'bottom-left',padding: '8px 15px'}});
           
           // Criar o título do legenda do mapa
-          var legendTitle = ui.Label({
-                  value:title,
+          var legendTitle = ui.Button({
+                  label:'▼ '+title+' (Ocultar)',
                   style: {
                       fontWeight: 'normal',
                       fontSize: '12px',
                       margin: '0 0 4px 0',
                       padding: '0'
+                  },
+                  onClick:function(){
+                          var estaAberto = panelClass.style().get('shown')
+                          panelClass.style().set('shown', !estaAberto)
+                          legendTitle.set('label',estaAberto ? '▲ '+title+' (Mostrar)' : '▼ '+title+' (Ocultar)')
                   }
-          });
- 
-          //Adicionar o título da legenda
+          })
+          
+
           legend.add(legendTitle);
           
           //Função para criar uma linha da legenda
@@ -164,14 +170,15 @@ exports.createLegend = function(maplayer,names,palette,title){
           var names = names
           var palette = palette
           
+          var panelClass = ui.Panel()
           // Adicionando cores e nomes na legenda
           for (var i = 0; i< names.length; i++) {
                 
                 //Adicionando cada classe na legenda
-                legend.add(makeRow(palette[names[i]], names[i]));
-                 
+                //legend.add(makeRow(palette[names[i]], names[i]));
+                panelClass.add(makeRow(palette[names[i]], names[i]))
           }  
-          
+          legend.add(panelClass)
           //Adicionando a legenda no mapa
           maplayer.add(legend);
           
@@ -448,8 +455,6 @@ exports.automatedSamples = function(img,year,area,numSamples,scale,buffer,fonte)
                 sharedInputs: true
   });
   
-  print(img)
-  
   //Selecionando as fontes para amostragem
   if(fonte == 'Global Pasture Watch'){
     var target = img.filterDate(year+'-01-01',year+'-12-31')
@@ -481,11 +486,6 @@ exports.automatedSamples = function(img,year,area,numSamples,scale,buffer,fonte)
   var classPasture = ee.Number(classData.get('1')).divide(total).multiply(numSamples)
   var classNotPasture = ee.Number(classData.get('0')).divide(total).multiply(numSamples)
   
-  
-  print(classPasture.toInt())
-  print(classNotPasture.toInt())
-  print(classData)
-  
   ////Create points from samples positive and negative from GPW maps
   var samples = target.stratifiedSample({
     numPoints:numSamples,
@@ -496,8 +496,6 @@ exports.automatedSamples = function(img,year,area,numSamples,scale,buffer,fonte)
     classValues:[0,1],
     classPoints:[classNotPasture.round(),classPasture.round()]
   })
-  
-  print(samples.aggregate_histogram('targetMap'))
   
   return {'samples':samples}//'target-data':target,'samples':samples}
 }
@@ -692,7 +690,7 @@ exports.calcP = function(date1,date2,aoi){
   return P
 }
 
-
+//----------------------------------------------------------Função versão 3.0 Toolkit---------------------------------------------------
 //-------------------------------------------------Análise de tendência das pastagens----------------------------------------
 //--------------------------------------------------------FUNÇÕES AUXILIARES-------------------------------------------------
 
@@ -707,20 +705,6 @@ exports.convertImage2FeatureAtr = function(img){
     'NDVI-trend': img.get('NDVI-trend')
   })
 }
-
-
-//exports.maskL8 = function(image) {
-    // Seleciona a banda de Qualidade de Pixel
-//    var qa = image.select('QA_PIXEL');
-    
-    // Máscara: Cria uma imagem booleana onde 1 indica pixels ruins.
-    // 21824/21952 são valores comuns de nuvem/sombra de nuvem.
-    // .add(image.lte(0)) inclui pixels com valor NDVI <= 0.
-  //  var maskL8 = qa.expression("(b('QA_PIXEL') == 21824 || b('QA_PIXEL') == 21952)").add(image.lte(0));
-    
-    // Atualiza a máscara da imagem: updateMask(maskL8.not()) mantém APENAS os pixels bons.
-  //  return image.updateMask(maskL8.not());
-//}
 
 /**
  * Calcula o Índice de Vegetação por Diferença Normalizada (NDVI).
@@ -830,10 +814,9 @@ exports.runTMWMFilter  = function(aoi, idCollection, StartDate, EndDate, qtYears
     }
     
     // -------------------2. GAPFILLING POR DIAS (VIZINHOS MAIS PRÓXIMOS)-------------------------------------------------
-
     // Coleção de entrada é a coleção que já tem as propriedades de ano/mês
     var join_collection_days = join_collection_month; 
-
+    
     // Loop para cada janela de dias (e.g., vizinhos de +/- 30 dias, +/- 60 dias)
     for (var i in listDays) {
         var window = listDays[i];
@@ -931,9 +914,9 @@ exports.runTMWMFilter  = function(aoi, idCollection, StartDate, EndDate, qtYears
         
         //Retornando o valor da data e o NDVI mediano
         return newImage.set("system:time_start",img.get("system:time_start"))
-                       .set("median-ndvi",medianNVDIprop.get('NVDI-pasture'))
+                       //.set("median-ndvi",medianNVDIprop.get('NVDI-pasture'))
+                       .set("median",medianNVDIprop.get('NVDI-pasture'))
     });
-    
     // Retorna as duas coleções: a original (para comparação) e a preenchida
     return {
         //'original-data': data,
@@ -943,23 +926,94 @@ exports.runTMWMFilter  = function(aoi, idCollection, StartDate, EndDate, qtYears
 };
 
 //Função para calcular a tendência
-exports.getTrend = function(dataimg){
+exports.convertImage2FeatureAtr = function(img){
+                  return ee.Feature(null,{
+                    'system:time_start': img.get('system:time_start'),
+                    'median': img.get('median'),
+                    'trend': img.get('trend')
+                  })
+              }
+
+
+//Função para calcular a tendência
+exports.getTrend = function(dataimg,bandTime,field){//band,bandTime,field){
   
-  //Aplicando a Regressão Linear
-  var linearRegression = dataimg.select('NVDI-pasture').reduceColumns({
-    reducer:ee.Reducer.linearFit(),
-    selectors:['system:time_start','median-ndvi']
-  })
+      //Aplicando a Regressão Linear
+      var linearRegression = dataimg.reduceColumns({//dataimg.select(band).reduceColumns({
+                              reducer:ee.Reducer.linearFit(),
+                              selectors:[bandTime,field]
+      })
   
-  //Calculando a tendência do NDVI
-  dataimg = dataimg.map(function(img){
-    var ndvi_trend = ee.Number(img.get('system:time_start')).multiply(linearRegression.get('scale'))
-        ndvi_trend = ndvi_trend.add(linearRegression.get('offset'))
-    return img.set('NDVI-trend',ndvi_trend)
-  })
+      //Calculando a tendência do NDVI
+      dataimg = dataimg.map(function(img){
+                var ndvi_trend = ee.Number(img.get(bandTime)).multiply(linearRegression.get('scale'))
+                    ndvi_trend = ndvi_trend.add(linearRegression.get('offset'))
+                    return img.set('trend',ndvi_trend)
+                })
   
-  //Convertendo a imageCollection para FeatureCOllection
-  var feat = dataimg.map(exports.convertImage2FeatureAtr)
-  
-  return feat
+      //Convertendo a imageCollection para FeatureCOllection
+      var feat = dataimg.map(exports.convertImage2FeatureAtr)
+      
+      return feat
 }
+
+//----------------------------------------------------------Função versão 4.0 Toolkit---------------------------------------------------
+
+exports.getTrendGPP = function(intial,final,data){
+  //Parâmetros de entrada
+  var ini = parseInt(intial)
+  var fin = parseInt(final)
+              
+  //Dados do bimestre
+  var bimestres = ee.List(['-01-01','-03-01','-05-01','-07-01','-09-01','-11-01'])
+  var anos = ee.List.sequence(2000,2024,1)
+
+  //Criando a Lista de Bimestre
+  var name = anos.map(function(ano){
+                return bimestres.map(function(bimestre){
+                        return ee.String(ee.Number(ano).int()).cat(bimestre)
+                })
+  }).flatten()
+
+  //Renomeando as bandas
+  var folder = ee.data.listAssets('projects/ee-amazonas21/assets/Acelen/uGPP/BA/')
+  var listAssets = []
+  var assets = folder['assets']
+      assets.forEach(function(asset){
+                      listAssets.push(ee.Image(asset.id))
+      })
+
+  var col = ee.ImageCollection.fromImages(listAssets)
+  var gpp = col.filterBounds(data.geometry()).toBands().multiply(0.1).rename(name)
+              
+  //Criando a ImageCollection
+  var imgCollection = ee.ImageCollection.fromImages(name.map(function(n){
+              return gpp.select(ee.String(n)).rename('uGPP')
+                          .set('system:time_start',ee.Date(ee.String(n)).millis())
+                          .set('year',ee.Date(ee.String(n)).get('year'))
+  })).filter(ee.Filter.calendarRange(ini,fin,'year'))
+  var lulc = datasets.Dataset['Mapbiomas']
+  var gppPasture = imgCollection.map(function(img){
+      var mask = lulc.select(ee.String('classification_').cat(ee.String(img.get('year'))))
+                     .eq(3)
+                       
+      var newImage = img.multiply(mask).rename('gpp-pasture').selfMask()
+      var medianGPP = newImage.reduceRegion({
+                        reducer:ee.Reducer.median(),
+                        geometry:data.geometry(),
+                        scale:30
+                      })
+      return img.set('system:time_start',img.get('system:time_start'))
+                .set('year',img.get('year'))
+                .set('median',medianGPP.get('gpp-pasture'))
+  }).filter(ee.Filter.calendarRange(ini,fin,'year'))
+             
+  //Criando a ImageCollection
+  var trendGPP = exports.getTrend(gppPasture,'system:time_start','median')
+      trendGPP = trendGPP.map(function(feat){
+                    return feat.set('median',feat.get('median'))
+      })
+  return trendGPP
+}
+
+
