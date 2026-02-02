@@ -33,5 +33,8 @@ Este repositório organiza os códigos do toolkit "Análise Temporal da Dinâmic
     * Análise de tendência das áreas de pastagens usando dados de NDVI em série temporal. 
     * Adição de novas bacias hidrográficas no cálculo da RUSLE.
     * Ferramenta de download das camadas para o google drive.
-    
+
+* v 4.0
+    * Análise de tendência das áreas de pastagens usando dados de Produtivade Primária Bruta (GPP) bimestral em série temporal. 
+    * Atualização da interface gráfica.    
   
