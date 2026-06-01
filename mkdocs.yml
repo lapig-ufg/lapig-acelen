@@ -1,0 +1,12 @@
+site_name: Acelen - Desenvolvimento de Metodologias e Protocolos para o Mapeamento de Áreas de Pastagem, Produtividade e Classes de Degradação em Regiões da Bahia e Minas Gerais
+site_author: Bernard Silva de Oliveira
+theme:
+  name: material
+ 
+nav:
+  - 'Introdução': 'index.md'
+  - 'Base Teórica': '02_BASE_TEORICA.md'
+  - 'Descrição e Abordagem do Algoritmo': '03_DESCRICAO_ABORDAGEM_DO_ALGORITMO.md'
+  - 'Considerações de Implementação': '04_CONSIDERACOES_DE_IMPLEMENTACAO.md'
+  - 'Referências Bibliográficas': '05_REFERENCIAS.md'
+ 
