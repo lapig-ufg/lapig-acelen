@@ -60,14 +60,22 @@ Inicialmente os dados do índice de vegetação EVI passam por um preenchimento 
 
 A análise envolve a extração de pixels de EVI medianos anuais em áreas identificadas como pastagem nos mapas, os quais são submetidos à um filtro temporal mediano (5 anos), seguida de uma normalização. O processo de normalização consiste no cálculo dos valores de EVI máximo e mínimo, onde o valor máximo é a média do 1% dos valores mais altos de EVI e o valor mínimo, a média do 1% dos valores mais baixos de EVI, conforme a equação 01. O resultado da equação corresponde a valores entre 0 e 1.
 
-**Eq.01**
+$$
+EVI{norm} = \frac{EVI{i}  - EVI{min}}{EVI{min}  - EVI{max}} \tag{Eq. 01}                                                        
+$$
 
 Onde:
+<small>
 
-- EVInorm = Valor do EVI normalizado entre 0 e 1
-- EVI i = Valor do EVI da série temporal.
-- EVI min = Valor médio de 1% dos máximos de todos os valores de EVI na série temporal.
-- EVI max = Valor médio de 1% dos mínimos de todos os valores de EVI na série temporal.
+* $EVI{\text{norm}}$: Valor do EVI normalizado entre 0 e 1
+
+* $EVI{\text{i}}$: Valor do EVI da série temporal.
+
+* $EVI{\text{min}}$: Valor médio de 1% dos máximos de todos os valores de EVI na série temporal.
+
+* $EVI{\text{max}}$: Valor médio de 1% dos mínimos de todos os valores de EVI na série temporal.
+
+</small>
 
 Às imagens normalizadas são estratificadas em três níveis de vigor:
 
@@ -83,13 +91,20 @@ Conforme Aragão (2004), a Produtividade Primária Bruta (GPP) quantifica o C at
 
 Os valores de GPP (Produtividade Primária Bruta) podem ser determinados pelo modelo que considera a Eficiência do Uso de Luz Absorvida (LUE - Light Use Efficiency), no qual a quantidade de energia absorvida da radiação solar visível disponível pelas plantas determina o carbono fixado por meio das atividades fotossintéticas (Monteith, 1972; Veloso, 2018; Su et al., 2022). Essencialmente, o cálculo do GPP é aplicado conforme a equação 02.
 
-**Eq.02**
+$$
+GPP = PAR \times fAPAR \times LUE_{max} \tag{Eq. 02}                                                        
+$$
 
 Onde:
+<small>
 
-- PAR: radiação fotossinteticamente
-- fPAR:fração da radiação fotossinteticamente
-- LUEmax: Eficiência da Luz
+* $PAR$: Radiação fotossinteticamente
+
+* $fPAR$: Fração da radiação fotossinteticamente
+
+* $LUEmax$: Eficiência da Luz
+
+</small>
 
 Isik et al., 2024, no âmbito da iniciativa Global Pasture Watch, produziram um conjunto de dados de GPP com a resolução espacial de 30 metros bimestral nas áreas de pastagem globais no período de 2000 a 2024. Para calcular o GPP bimestral, foram utilizados um repositório Landsat reconstruído e disponível bimestralmente (Consoli et al.,2024), combinado com dados de temperatura do MODIS com 1 Km de resolução espacial e a Radiação Fotossinteticamente Ativa (PAR) do sensor CERES (a bordo da plataforma Terra), com resolução espacial aproximada de 100 km.
 
@@ -101,16 +116,26 @@ A Equação Universal de Perda do Solo Revisada (RUSLE) é um modelo matemático
 
 Este modelo é uma versão revisada da USLE (Universal Soil Losses Equation) por Renard et. al (1997), descrita conforme a equação 03.
 
-**Eq.03**
+$$
+A = R \times K \times LS \times C \times P \tag{Eq. 03}                                                        
+$$
 
 Onde :
+<small>
 
-- A : Perda média anual do solo;
-- R: fator de Erodibilidade, que quantifica o potencial de desprendimento de sedimentos causado pela chuva (CHIRPS) e pelo escoamento superficial;
-- K: fator de Erosividade, que avalia a suscetibilidade do solo à erosão, considerando sua textura (proporção de argila, areia e silte) (Tomislav, 2018);
-- LS: fator topográfico, que mede o impacto da inclinação e do comprimento da encosta na velocidade do escoamento superficial, a partir dos dados do SRTM;
-- C: fator de Manejo do Solo, que considera a influência da cobertura vegetal, por meio do NDVI;
-- P: fator de Práticas de Uso do Solo, que avalia a eficácia de intervenções humanas na redução da erosão, através dos dados de declividade do SRTM, e uso e cobertura da terra do produto MCD12Q1 do sensor MODIS a bordo dos satélites TERRA e AQUA .
+* $A$: Perda média anual do solo.
+
+* $R$: Fração da radiação fotossinteticamente.
+
+* $K$: Fator de Erodibilidade, que quantifica o potencial de desprendimento de sedimentos causado pela chuva (CHIRPS) e pelo escoamento superficial.
+
+* $LS$: Fator topográfico, que mede o impacto da inclinação e do comprimento da encosta na velocidade do escoamento superficial, a partir dos dados do SRTM.
+
+* $C$: Fator de Manejo do Solo, que considera a influência da cobertura vegetal, por meio do NDVI.
+
+* $P$: Eficiência da Luz.
+
+</small>
 
 Conforme Barbosa (2024), os cinco fatores da RUSLE são utilizados para determinar o potencial de erosão do solo, sendo que:
 
@@ -140,7 +165,5 @@ O TMWM tenta derivar um valor para pixels ausentes em três fases sequenciais. E
 - **Média das medianas de períodos adjacentes:** caso a fase 1 falhar, o TMWM deriva o valor a partir de uma média das medianas do período anterior e seguinte do mesmo ano. Caso necessário, a janela de busca se expande novamente para incluir esses períodos anterior e seguinte em anos progressivamente adjacentes.
 
 - **Mediana de todos os períodos:** se as fases anteriores falharem, a janela de busca abrange todos os valores em toda série temporal do pixel, e o valor imputado é a mediana desses valores.
-
-.
 
 Na opção de Análise de tendência das pastagem do toolkit, é feito a exclusão dos pixels contaminados por nuvens e/ou sombra utilizando a banda de qualidade, do satélite, seja Landsat ou Sentinel, e após a exclusão dos pixels contaminado, esse são preenchidos usando o Método TMWM (implementado no Google Earth Engine) e depois é calculado o coeficiente angular nas áreas de pastagem da propriedade inserida pelo usuário, no qual informa magnitude e a direção da mudança que ocorre ao longo do tempo. Quando o valor do coeficiente angular é positivo, indica uma tendência positiva, ou seja, um aumento no vigor ou na produtividade das pastagens, e os valores negativos, sugere que há um processo de queda do vigor da pastagem.

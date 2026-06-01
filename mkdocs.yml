@@ -1,12 +1,25 @@
-site_name: Acelen - Desenvolvimento de Metodologias e Protocolos para o Mapeamento de Áreas de Pastagem, Produtividade e Classes de Degradação em Regiões da Bahia e Minas Gerais
+site_name: Acelen - Algorithm Theoretical Basis Document (ATBD)
 site_author: Bernard Silva de Oliveira
 theme:
   name: material
- 
+  logo: figures/logo.png # <--- Logo que vai aparecer na ESQUERDA
+
+repo_name: LAPIG-UFG/toolkit-acelen  # Nome que aparecerá ao lado do ícone
+repo_url: https://github.com/lapig-ufg/lapig-acelen
+
 nav:
-  - 'Introdução': 'index.md'
+  - 'Introdução': '01_INTRODUCAO.md'
   - 'Base Teórica': '02_BASE_TEORICA.md'
   - 'Descrição e Abordagem do Algoritmo': '03_DESCRICAO_ABORDAGEM_DO_ALGORITMO.md'
   - 'Considerações de Implementação': '04_CONSIDERACOES_DE_IMPLEMENTACAO.md'
   - 'Referências Bibliográficas': '05_REFERENCIAS.md'
  
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.blocks.caption
+  - pymdownx.arithmatex:   
+      generic: true
+
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js

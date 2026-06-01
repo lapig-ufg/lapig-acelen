@@ -8,6 +8,8 @@ O toolkit versão 4.0 permite ao usuário explorar a série histórica dos mapas
 
 A Figura 01 mostra o fluxograma do processo de usabilidade da Análise Temporal da Dinâmica de Cobertura e Uso da Terra.
 
+![](/figures/figure_01.png)
+
 **Figura 01 - Fluxograma de processo da Análise da Dinâmica de Cobertura e Uso da Terra.**
 
 ## 3.1.1 - Variáveis e Parâmetros
@@ -90,23 +92,31 @@ O campo Tipo de Classificação, possui três opções, sendo elas:
 
 Depois da seleção do tipo de classificação, clique no botão Gerar classificação do ano da análise para visualizar o mapa na tela da ferramenta. A tela traz a informação das classes de cobertura e uso da terra, legenda e os gráficos do quantitativo das classes no arquivo inserido, conforme o respectivo ano selecionado pelo usuário. O gráfico gerado pode ser exportado nos formatos: CSV (tabela de dados), SVG e PNG (figura 02).
 
+![](/figures/figure_02.png)
+
 **Figura 02 - Visualização do arquivo no mapa da ferramenta Análise Temporal da Dinâmica de Cobertura e Uso da Terra.**
 
 ## 3.1.5 - Visualização da dinâmica de cobertura e uso da terra, conversão para uso antrópico e evolução das áreas de pastagens
 
 Para visualizar a dinâmica das classes de cobertura e uso da terra, é necessário que a opção escolhida no campo Tipo de Classificação seja a moda. Clique no ícone e aparecerá no centro superior da tela as opções das informações que o usuário deseja visualizar (figura 03):
 
-(a)                                                           (b)
+(a)![](/figures/figure_03_a.png)                    (b)![](/figures/figure_03_b.png)
 
-**Figura 03 - (a) O menu da ferramenta de gráfico, e (b) opções de visualização dos gráficos.**
+Figura 03 - (a) O menu da ferramenta de gráfico, e (b) opções de visualização dos gráficos.
 
 Após selecionar a opção de visualização do gráfico, clique na propriedade do arquivo externo que você deseja analisar. As figuras 04, 05 e 06 ilustram os resultados dos gráficos de Cobertura da Terra, Proporção de Área Convertida e Evolução das áreas de pastagens
 
-**Figura 04 - Dinâmica da Cobertura e Uso da Terra do elemento selecionado**
+![](/figures/figure_04.png)
 
-**Figura 05 - Proporção de área convertida do elemento selecionado**
+Figura 04 - Dinâmica da Cobertura e Uso da Terra do elemento selecionado
 
-**Figura 06 - Evolução das áreas de pastagem**
+![](/figures/figure_05.png)
+
+Figura 05 - Proporção de área convertida do elemento selecionado
+
+![](/figures/figure_06.png)
+
+Figura 06 - Evolução das áreas de pastagem
 
 ## 3.1.6 - Vigor da pastagem
 
@@ -119,7 +129,9 @@ Para visualizar os níveis de vigor da pastagem, siga os seguintes passos no men
 
 A figura 07 mostra a visualização do Vigor da pastagem:
 
-**Figura 07 - Visualização do Vigor da Pastagem em 2000 no nível Baixo (Vermelho), Médio (Ocre) e Alto (Verde).**
+![](/figures/figure_07.png)
+
+Figura 07 - Visualização do Vigor da Pastagem em 2000 no nível Baixo (Vermelho), Médio (Ocre) e Alto (Verde).
 
 Os dados de vigor utilizado neste toolkit são disponibilizados pelo MapBiomas, sendo gerados pelo Laboratório de Sensoriamento Remoto e Geoprocessamento - LAPIG da Universidade Federal de Goiás (conforme metodologia proposta por Santos et al., 2022 e modificada por Ferreira Jr et al., 2023).
 
@@ -131,13 +143,17 @@ Após a seleção, o usuário define a quantidade de amostras, o buffer (em metr
 
 As fontes de mapeamento existentes incluem dados do MapBiomas, dados da iniciativa Global Pasture Watch (Parente et al., 2024) e a sobreposição das áreas de pastagem de ambas as fontes. A figura 08 apresenta o resultado do mapeamento automático de pastagem em nível de propriedade.
 
-**Figura 08 - Exemplo do mapeamento automático das pastagens em nível de propriedade.**
+![](/figures/figure_08.png)
+
+Figura 08 - Exemplo do mapeamento automático das pastagens em nível de propriedade.
 
 ## 3.1.8 - Cálculo da perda média anual do solo (RUSLE)
 
 Para calcular a perda média anual de solo, no menu Método RUSLE, selecione um ano no período de 2017 a 2024. Em seguida, escolha qual fator deseja visualizar ou a própria perda média anual de solo e posteriormente, o usuário selecionará qual divisão da bacia hidrográfica deseja calcular, sendo as opções a divisão do DHN e do DNAEE. A figura 09 apresenta um exemplo do resultado.
 
-**Figura 09 - Exemplo da perda média potencial anual de solo (t/ha/ano).**
+![](/figures/figure_09.png)
+
+Figura 09 - Exemplo da perda média potencial anual de solo (t/ha/ano).
 
 ## 3.1.9 - Análise de tendência da pastagem na propriedade
 
@@ -163,9 +179,13 @@ Com os arquivos de GPP na plataforma do Google Earth Engine, o usuário pode faz
 
 As figuras 10 e 11 apresentam exemplos do resultado da Análise de tendência da pastagem usando o produto Produtividade Primária Bruta (GPP).
 
-**Figura 10 - Ocupação da área de uso e cobertura da terra em 2001**
+![](/figures/figure_10.png)
 
-**Figura 11 - Tendência de GPP da pastagem da propriedade rural de 2001 à 2023**
+Figura 10 - Ocupação da área de uso e cobertura da terra em 2001
+
+![](/figures/figure_11.png)
+
+Figura 11 - Tendência de GPP da pastagem da propriedade rural de 2001 à 2023
 
 ### 3.1.9.2 - Análise de tendência do NDVI
 
@@ -185,9 +205,13 @@ Para verificar a tendência dos valores de índice de vegetação (NDVI) nas ár
 
 As figuras 12 e 13 apresentam exemplos do resultado da Análise de tendência da pastagem usando o Índice de Vegetação (NDVI).
 
-**Figura 12 - Área ocupada por pastagem em 2016**
+![](/figures/figure_12.png)
 
-**Figura 13 - Tendência da pastagem da propriedade rural de 2016 à 2024**
+Figura 12 - Área ocupada por pastagem em 2016
+
+![](/figures/figure_13.png)
+
+Figura 13 - Tendência da pastagem da propriedade rural de 2016 à 2024
 
 ## 3.1.10 - Download das camadas no toolkit
 
@@ -195,6 +219,8 @@ No toolkit, o usuário pode fazer o download tanto das camadas geradas por sua i
 
 Na parte central inferior da tela, surgirá uma janela (conforme a Figura 12), onde é possível selecionar as camadas da base de dados estática ou as camadas geradas que estão sendo visualizadas no mapa. Após selecionar a camada desejada, clique no botão "Download". Em seguida, acesse a aba "Tasks" e clique no botão "Run" referente à camada selecionada para iniciar a exportação. O arquivo será exportado para a pasta "GEEX" no Google Drive pessoal do usuário.
 
-A Figura 12 mostra o painel de download do toolkit.
+A Figura 14 mostra o painel de download do toolkit.
 
-**Figura 12 - Painel de download da camada do toolkit.**
+![](/figures/figure_14.png)
+
+Figura 14 - Painel de download da camada do toolkit.
