@@ -8,7 +8,7 @@ O toolkit versão 4.0 permite ao usuário explorar a série histórica dos mapas
 
 A Figura 01 mostra o fluxograma do processo de usabilidade da Análise Temporal da Dinâmica de Cobertura e Uso da Terra.
 
-![](/figures/figure_01.png)
+![](./figures/figure_01.png)
 
 **Figura 01 - Fluxograma de processo da Análise da Dinâmica de Cobertura e Uso da Terra.**
 
