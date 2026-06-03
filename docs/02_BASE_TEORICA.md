@@ -8,31 +8,31 @@ Os dados de sensoriamento remoto a serem utilizados neste projeto incluem tanto 
 
 Em relação aos satélites Sentinel-2 (a, b, e c), estes oferecem uma resolução espacial máxima de 10 metros, permitindo um mapeamento significativamente mais detalhado (~ 0.1 hectare). Com suas 12 bandas de resolução espectral, o Sentinel-2 consegue diferenciar objetos com maior precisão em comparação aos sensores da série Landsat; contudo, os seus dados estão disponíveis apenas a partir de 2016, o que limita a análise de séries históricas mais longas.
 
-Mais recentemente, com o avanço da Inteligência Artificial e tecnologias e desenvolvimentos associados, novas maneiras de acessar dados e informações de sensoriamento remoto, a exemplo dos Embeddings, se tornaram possíveis. Os Embeddings são uma forma de representação espaço-temporal altamente precisa e compacta, utilizada para mapear e monitorar objetos na superfície terrestre. Em essência, os embeddings são vetores que resumem grandes quantidades de informações geográficas complexas, incluindo dados de satélites (como o Sentinel-2), textos, vídeos e etc. Essa capacidade de integração de dados tem o potencial de tornar os mapeamentos baseados em embeddings mais eficientes e precisos (Brown et al., 2025).
+Mais recentemente, com o avanço da Inteligência Artificial e tecnologias e desenvolvimentos associados, novas maneiras de acessar dados e informações de sensoriamento remoto, a exemplo dos *Embeddings*, se tornaram possíveis. Os *Embeddings* são uma forma de representação espaço-temporal altamente precisa e compacta, utilizada para mapear e monitorar objetos na superfície terrestre. Em essência, os *embeddings* são vetores que resumem grandes quantidades de informações geográficas complexas, incluindo dados de satélites (como o Sentinel-2), textos, vídeos e etc. Essa capacidade de integração de dados tem o potencial de tornar os mapeamentos baseados em embeddings mais eficientes e precisos (Brown et al., 2025).
 
 As principais características dos embeddings são:
 
-- Assimilação de contexto: Esse dados são capazes de avaliar a similaridade entre pixels a partir do seu contexto (vizinhança) no espaço e no tempo;
-- Universalidade: Os embeddings são desenvolvidos com o objetivo de resolver problemas de mapeamento global, gerando um espaço de características gerais e universais;
-- Sumarização compacta dos dados: Atuam como síntese temporal, descrevendo de forma compacta as propriedades da superfície terrestre e encapsulando informações que representam a trajetória temporal das variáveis (dados utilizados).
+- **Assimilação de contexto:** Esse dados são capazes de avaliar a similaridade entre pixels a partir do seu contexto (vizinhança) no espaço e no tempo;
+- **Universalidade:** Os embeddings são desenvolvidos com o objetivo de resolver problemas de mapeamento global, gerando um espaço de características gerais e universais;
+- **Sumarização compacta dos dados:** Atuam como síntese temporal, descrevendo de forma compacta as propriedades da superfície terrestre e encapsulando informações que representam a trajetória temporal das variáveis (dados utilizados).
 
-Especificamente, para a produção dos Alpha Earth Embeddings, a Google Deepmind utilizou diversas fontes para o treinamento do respectivo foundation model, com destaque para:
+Especificamente, para a produção dos Alpha Earth Embeddings, a Google Deepmind utilizou diversas fontes para o treinamento do respectivo *foundation model*, com destaque para:
 
-- Imagens dos satélites: das séries Landsat (8 e 9) e Sentinel (1 e 2);
-- Dados geoespaciais: Dados de altimetria, climáticos, campo gravitacional, cobertura e uso da terra;
-- Outras informações auxiliares: textos da Wikipedia e bases relacionadas à biodiversidade.
+- **Imagens dos satélites:** das séries Landsat (8 e 9) e Sentinel (1 e 2);
+- **Dados geoespaciais:** Dados de altimetria, climáticos, campo gravitacional, cobertura e uso da terra;
+- **Outras informações auxiliares:** textos da Wikipedia e bases relacionadas à biodiversidade.
 
 Estes embeddings anuais, disponibilizados a partir do ano 2017 por meio da plataforma Google Earth Engine, são compostos por 64 dimensões (bandas) com uma resolução espacial de 10 metros.
 
 ## 2.2 - Plataforma Google Earth Engine
 
-O Google Earth Engine é uma plataforma para o processamento de dados geoespaciais em nuvem, em escala planetária, a qual traz enormes recursos computacionais da Google para lidar com uma variedade de questões de alto impacto, incluindo desmatamento, monitoramento climático e proteção ambiental. O catálogo de dados no Google Earth Engine abriga um grande repositório de dados geoespaciais que são disponíveis publicamente, incluindo, imagens de satélite, dados meteorológicos e climáticos, mapeamentos da cobertura e uso da terra (local e global), dados topográficos e socioeconômicos, que podem ser acessados de forma pública e gratuita (Gorelick et al., 2017).
+O *Google Earth Engine* é uma plataforma para o processamento de dados geoespaciais em nuvem, em escala planetária, a qual traz enormes recursos computacionais da Google para lidar com uma variedade de questões de alto impacto, incluindo desmatamento, monitoramento climático e proteção ambiental. O catálogo de dados no *Google Earth Engine* abriga um grande repositório de dados geoespaciais que são disponíveis publicamente, incluindo, imagens de satélite, dados meteorológicos e climáticos, mapeamentos da cobertura e uso da terra (local e global), dados topográficos e socioeconômicos, que podem ser acessados de forma pública e gratuita (Gorelick et al., 2017).
 
 Nesta plataforma, os usuários podem utilizar funções que vão desde a matemática simples até níveis avançados de classificação de imagens por meio de algoritmos de aprendizagem de máquina (Amani, 2020).
 
-No trabalho de Souza et al. (2020) foi descrito uma nova abordagem de mapeamento anual da cobertura e uso da terra, a partir de 1985, para o Brasil, com base no algoritmo Random Forest aplicado às imagens da série Landsat usando a plataforma Google Earth Engine. Esta abordagem é a base da iniciativa MapBiomas, já em sua Coleção 10 de mapas.
+No trabalho de Souza et al. (2020) foi descrito uma nova abordagem de mapeamento anual da cobertura e uso da terra, a partir de 1985, para o Brasil, com base no algoritmo *Random Forest* aplicado às imagens da série Landsat usando a plataforma *Google Earth Engine*. Esta abordagem é a base da iniciativa [MapBiomas](https://brasil.mapbiomas.org/), já em sua Coleção 10 de mapas.
 
-Para acessar a plataforma do Google Earth Engine, basta ter uma conta do Google (gmail), e fazer o registro disponível no link: <https://earthengine.google.com/>.
+Para acessar a plataforma do *Google Earth Engine*, basta ter uma conta do Google (gmail), e fazer o registro disponível no link: <https://earthengine.google.com/>.
 
 ## 2.3 - Classificação do Uso e Cobertura da Terra
 
@@ -56,7 +56,7 @@ Conforme MapBiomas (2024), os mapas de cobertura e uso da terra disponíveis na 
 
 O vigor da pastagem é uma medida que reflete o desenvolvimento da planta forrageira, auxiliando na avaliação da produtividade ou estágio de degradação das pastagens (Santos et al., 2022; Ferreira Jr et al., 2023). Sua medição é feita a partir de imagens do sensor MODIS a bordo do satélite Terra, com dados disponíveis desde o ano 2000.
 
-Inicialmente os dados do índice de vegetação EVI passam por um preenchimento de dados faltantes (lacunas) ocasionado pela contaminação de nuvens e/ou sombras, através de um algoritmo de preenchimento dessas lacunas (i.e. gap filling). Em seguida é feito um ajuste sazonal (dessazonalização), removendo os efeitos sazonais dos valores das séries temporais, para evitar distorções na análise. Após a dessazonalização, são gerados imagens medianas anuais do conjunto de dados, cobrindo um período de 2000 à 2024. A mediana foi escolhida por ser uma medida estatística que minimiza a influência de valores anômalos (outliers) na análise.
+Inicialmente os dados do índice de vegetação EVI passam por um preenchimento de dados faltantes (lacunas) ocasionado pela contaminação de nuvens e/ou sombras, através de um algoritmo de preenchimento dessas lacunas (i.e. *gap filling*). Em seguida é feito um ajuste sazonal (dessazonalização), removendo os efeitos sazonais dos valores das séries temporais, para evitar distorções na análise. Após a dessazonalização, são gerados imagens medianas anuais do conjunto de dados, cobrindo um período de 2000 à 2024. A mediana foi escolhida por ser uma medida estatística que minimiza a influência de valores anômalos (outliers) na análise.
 
 A análise envolve a extração de pixels de EVI medianos anuais em áreas identificadas como pastagem nos mapas, os quais são submetidos à um filtro temporal mediano (5 anos), seguida de uma normalização. O processo de normalização consiste no cálculo dos valores de EVI máximo e mínimo, onde o valor máximo é a média do 1% dos valores mais altos de EVI e o valor mínimo, a média do 1% dos valores mais baixos de EVI, conforme a equação 01. O resultado da equação corresponde a valores entre 0 e 1.
 
@@ -79,9 +79,9 @@ Onde:
 
 Às imagens normalizadas são estratificadas em três níveis de vigor:
 
-- Baixo Vigor: menor que 0,4;
-- Médio Vigor: maior que 0,4 e menor que 0,6; e
-- Alto Vigor: maior que 0,6
+- **Baixo Vigor**: menor que 0,4;
+- **Médio Vigor:** maior que 0,4 e menor que 0,6; e
+- **Alto Vigor:** maior que 0,6
 
 Todo o processo de geração de dados de vigor é feito em regiões com características ambientais similares.
 
@@ -112,9 +112,9 @@ Neste projeto, teremos por referência as estratégias adotadas por Isik et al.(
 
 ## 2.6 - Equação Revisada Universal de Perda do Solo (RUSLE)
 
-A Equação Universal de Perda do Solo Revisada (RUSLE) é um modelo matemático desenvolvido pelo Departamento da Agricultura dos Estados Unidos (USDA), com o intuito de estimar a erosão laminar do solo a partir de fatores como erodibilidade (precipitação), erosividade do solo, declividade, cobertura da terra e práticas de controle da erosão (Alebachew et. al, 2025). A implementação da RUSLE em ambiente cloud (processamento na nuvem), como o Google Earth Engine, utiliza dados de satélites de diversas resoluções espaciais para o cálculo preciso de seus fatores, por exemplo: [CHIRPS](https://www.chc.ucsb.edu/data/chirps) **(para Precipitação)**, [Textura do Solo](https://zenodo.org/records/2525817) (Tomislav, 2018), **Altimetria e Declividade** [(SRTM)](https://www.earthdata.nasa.gov/data/instruments/srtm), e o índice de vegetação [(NDVI)](https://ntrs.nasa.gov/api/citations/19750020419/downloads/19750020419.pdf) calculado a partir do do sensor OLI a bordo do satélite Landsat 8, com resoluções espaciais de 5.566, 250 e 30 metros, respectivamente.
+A Equação Universal de Perda do Solo Revisada (RUSLE) é um modelo matemático desenvolvido pelo Departamento da Agricultura dos Estados Unidos (USDA), com o intuito de estimar a erosão laminar do solo a partir de fatores como erodibilidade (precipitação), erosividade do solo, declividade, cobertura da terra e práticas de controle da erosão (Alebachew et. al, 2025). A implementação da RUSLE em ambiente *cloud* (processamento na nuvem), como o Google Earth Engine, utiliza dados de satélites de diversas resoluções espaciais para o cálculo preciso de seus fatores, por exemplo: [CHIRPS](https://www.chc.ucsb.edu/data/chirps) **(para Precipitação)**, [Textura do Solo](https://zenodo.org/records/2525817) (Tomislav, 2018), **Altimetria e Declividade** [(SRTM)](https://www.earthdata.nasa.gov/data/instruments/srtm), e o índice de vegetação [(NDVI)](https://ntrs.nasa.gov/api/citations/19750020419/downloads/19750020419.pdf) calculado a partir do do sensor OLI a bordo do satélite Landsat 8, com resoluções espaciais de 5.566, 250 e 30 metros, respectivamente.
 
-Este modelo é uma versão revisada da USLE (Universal Soil Losses Equation) por Renard et. al (1997), descrita conforme a equação 03.
+Este modelo é uma versão revisada da USLE (*Universal Soil Losses Equation*) por Renard et. al (1997), descrita conforme a equação 03.
 
 $$
 A = R \times K \times LS \times C \times P \tag{Eq. 03}                                                        
@@ -127,7 +127,7 @@ Onde :
 
 * $R$: **Fração de Erodibilidade**, que quantifica o potencial de desprendimento de sedimentos causado pela chuva [(CHIRPS)](https://www.chc.ucsb.edu/data/chirps) e pelo escoamento superficial.
 
-* $K$: **Fator de Erodibilidade**, que avalia a suscetibilidade so solo à erosão, considerando sua textura (proporção de argila, areia e silte) [(Tomislav.2018)](https://zenodo.org/records/2525817)
+* $K$: **Fator de Erodibilidade**, que avalia a suscetibilidade do solo à erosão, considerando sua textura (proporção de argila, areia e silte) [(Tomislav.2018)](https://zenodo.org/records/2525817)
 
 * $LS$: **Fator Topográfico**, que mede o impacto da inclinação e do comprimento da encosta na velocidade do escoamento superficial, a partir dos dados do [SRTM](https://www.earthdata.nasa.gov/data/instruments/srtm).
 
@@ -146,17 +146,17 @@ A Rusle é aplicada em uma bacia hidrográfica, a qual, conforme a Política Nac
 
 A divisão do território brasileiro em bacias hidrográficas evoluiu com as crescentes necessidades de gestão da água. Em 1972, o Departamento Nacional de Águas e Energia Elétrica (DNAEE) estabeleceu a primeira proposta de divisão hidrográfica usando o método hierárquico de Otto Pfafstetter (baseado em áreas de drenagem) para otimizar a oferta e o processamento de dados. Já em 2003, conforme a resolução Federal nº32 do Conselho Nacional de Recursos Hídricos instituiu a Divisão Hidrográfica Nacional (DHN), com o objetivo de organizar o país em grandes 12 regiões hidrográficas. Essa divisão foi definida com base nos limites naturais das bacias e na semelhança das características ambientais, sociais e econômicas dos territórios vizinhos.
 
-O cálculo da RUSLE no toolkit é aplicado nos níveis 1 à 3 da divisão do DHN e níveis 1 e 2 do DNAEE, onde os níveis 1 das bacias são mais amplas (generalizadas), enquanto os níveis 2 e 3 possuem um detalhamento maior.
+O cálculo da RUSLE no *toolkit* é aplicado nos níveis 1 à 3 da divisão do DHN e níveis 1 e 2 do DNAEE, onde os níveis 1 das bacias são mais amplas (generalizadas), enquanto os níveis 2 e 3 possuem um detalhamento maior.
 
 ## 2.7 - Análise de Tendência em Sensoriamento Remoto
 
-O uso de imagens de satélites em séries temporais na medição de vigor e produtividade das pastagens estão correlacionados as metodologias da análise de tendência e/ou detecção de mudança do uso e cobertura da terra, que auxiliam na compreensão do seu processo de degradação (Souza, 2017). No estudo de Andrade (2014), foram identificadas áreas de pastagens potencialmente em processo de degradação, por meio dos valores (magnitude) da tendência da regressão linear (slope) ajustada, pixel a pixel, às imagens do sensor Terra MODIS.
+O uso de imagens de satélites em séries temporais na medição de vigor e produtividade das pastagens estão correlacionados as metodologias da análise de tendência e/ou detecção de mudança do uso e cobertura da terra, que auxiliam na compreensão do seu processo de degradação (Souza, 2017). No estudo de Andrade (2014), foram identificadas áreas de pastagens potencialmente em processo de degradação, por meio dos valores (magnitude) da tendência da regressão linear (*slope*) ajustada, pixel a pixel, às imagens do sensor Terra MODIS.
 
 O propósito de analisar tendências em séries temporais de imagens de satélite é importante para várias aplicações em larga escala e de longo prazo; por isso, é necessária a harmonização e o preenchimento de lacunas (buracos) nas imagens, causados por contaminação de nuvens e/ou sombras no pixel, a fim de garantir consistência espacial e ao longo do tempo na série temporal das imagens de satélite.
 
-A Mediana Temporal de Janela móvel (**T**emporal **M**oving **W**indow **M**edian) é um método personalizado de preenchimento de lacunas (gap-filling) que foi desenvolvido e implementado para preencher valores ausentes (NoData). O algoritmo é projetado para ser computacionalmente rápido e adequado para preencher dados destinados ao mapeamento anuais em escala continental e multidecenal. Este método foi utilizado no contexto da criação do EcoDataCube para imputar dados ausentes na série temporal do Landsat (2000–2020), especificamente nos agregados trimestrais (Witjes,2023) .
+A Mediana Temporal de Janela móvel (**T**emporal **M**oving **W**indow **M**edian) é um método personalizado de preenchimento de lacunas (gap-filling) que foi desenvolvido e implementado para preencher valores ausentes (*NoData*). O algoritmo é projetado para ser computacionalmente rápido e adequado para preencher dados destinados ao mapeamento anuais em escala continental e multidecenal. Este método foi utilizado no contexto da criação do EcoDataCube para imputar dados ausentes na série temporal do Landsat (2000–2020), especificamente nos agregados trimestrais (Witjes,2023) .
 
-A principal diferenciação do TMWM de outros modelos de gapfiling é que ele utiliza apenas valores existentes no conjunto de dados, como medianas de pixels vizinhos temporais. Isso garante que os valores imputados permaneçam no mesmo espaço de características no qual os modelos subsequentes de aprendizado de máquina serão treinados.
+A principal diferenciação do TMWM de outros modelos de *gapfiling* é que ele utiliza apenas valores existentes no conjunto de dados, como medianas de pixels vizinhos temporais. Isso garante que os valores imputados permaneçam no mesmo espaço de características no qual os modelos subsequentes de aprendizado de máquina serão treinados.
 
 O TMWM tenta derivar um valor para pixels ausentes em três fases sequenciais. Em cada fase, o algoritmo segue uma lógica de expansão da janela de busca.
 
