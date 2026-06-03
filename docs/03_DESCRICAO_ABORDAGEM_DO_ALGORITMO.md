@@ -181,7 +181,7 @@ As figuras 10 e 11 apresentam exemplos do resultado da Análise de tendência da
 
 ![](figures/figure_10.png)
 
-Figura 10 - Ocupação da área de uso e cobertura da terra em 2001
+**Figura 10** - Ocupação da área de uso e cobertura da terra em 2001
 
 ![](figures/figure_11.png)
 
