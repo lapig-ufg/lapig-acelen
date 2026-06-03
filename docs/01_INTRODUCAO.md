@@ -14,7 +14,7 @@ Desenvolvimento de um toolkit para Análise Temporal da Dinâmica do Uso e Cober
 
 A Tabela 01 mostra as atividades detalhadas que serão executadas no âmbito do desenvolvimento do toolkit e da geração de protocolos para a coleta de informações em campo.
 
-### **Tabela 01** - Descrição das atividades relacionadas ao desenvolvimento do toolkit e às estratégias de amostragem de campo
+### Tabela 01 - Descrição das atividades relacionadas ao desenvolvimento do toolkit e às estratégias de amostragem de campo
 
 | Atividades | Descrição das Atividades |
 |---|---|
