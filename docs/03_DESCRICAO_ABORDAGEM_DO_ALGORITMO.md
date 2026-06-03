@@ -10,7 +10,7 @@ A Figura 01 mostra o fluxograma do processo de usabilidade da Análise Temporal 
 
 ![](figures/figure_01.png)
 
-**Figura 01 - Fluxograma de processo da Análise da Dinâmica de Cobertura e Uso da Terra.**
+**Figura 01** - Fluxograma de processo da Análise da Dinâmica de Cobertura e Uso da Terra.
 
 ## 3.1.1 - Variáveis e Parâmetros
 
@@ -94,7 +94,7 @@ Depois da seleção do tipo de classificação, clique no botão Gerar classific
 
 ![](figures/figure_02.png)
 
-**Figura 02 - Visualização do arquivo no mapa da ferramenta Análise Temporal da Dinâmica de Cobertura e Uso da Terra.**
+**Figura 02** - Visualização do arquivo no mapa da ferramenta Análise Temporal da Dinâmica de Cobertura e Uso da Terra.
 
 ## 3.1.5 - Visualização da dinâmica de cobertura e uso da terra, conversão para uso antrópico e evolução das áreas de pastagens
 
@@ -102,21 +102,21 @@ Para visualizar a dinâmica das classes de cobertura e uso da terra, é necessá
 
 (a)![](figures/figure_03_a.png)                    (b)![](figures/figure_03_b.png)
 
-Figura 03 - (a) O menu da ferramenta de gráfico, e (b) opções de visualização dos gráficos.
+**Figura 03** - (a) O menu da ferramenta de gráfico, e (b) opções de visualização dos gráficos.
 
 Após selecionar a opção de visualização do gráfico, clique na propriedade do arquivo externo que você deseja analisar. As figuras 04, 05 e 06 ilustram os resultados dos gráficos de Cobertura da Terra, Proporção de Área Convertida e Evolução das áreas de pastagens
 
 ![](figures/figure_04.png)
 
-Figura 04 - Dinâmica da Cobertura e Uso da Terra do elemento selecionado
+**Figura 04** - Dinâmica da Cobertura e Uso da Terra do elemento selecionado
 
 ![](figures/figure_05.png)
 
-Figura 05 - Proporção de área convertida do elemento selecionado
+**Figura 05** - Proporção de área convertida do elemento selecionado
 
 ![](figures/figure_06.png)
 
-Figura 06 - Evolução das áreas de pastagem
+**Figura 06** - Evolução das áreas de pastagem
 
 ## 3.1.6 - Vigor da pastagem
 
@@ -131,7 +131,7 @@ A figura 07 mostra a visualização do Vigor da pastagem:
 
 ![](figures/figure_07.png)
 
-Figura 07 - Visualização do Vigor da Pastagem em 2000 no nível Baixo (Vermelho), Médio (Ocre) e Alto (Verde).
+**Figura 07** - Visualização do Vigor da Pastagem em 2000 no nível Baixo (Vermelho), Médio (Ocre) e Alto (Verde).
 
 Os dados de vigor utilizado neste toolkit são disponibilizados pelo MapBiomas, sendo gerados pelo Laboratório de Sensoriamento Remoto e Geoprocessamento - LAPIG da Universidade Federal de Goiás (conforme metodologia proposta por Santos et al., 2022 e modificada por Ferreira Jr et al., 2023).
 
@@ -145,7 +145,7 @@ As fontes de mapeamento existentes incluem dados do MapBiomas, dados da iniciati
 
 ![](figures/figure_08.png)
 
-Figura 08 - Exemplo do mapeamento automático das pastagens em nível de propriedade.
+**Figura 08** - Exemplo do mapeamento automático das pastagens em nível de propriedade.
 
 ## 3.1.8 - Cálculo da perda média anual do solo (RUSLE)
 
@@ -153,7 +153,7 @@ Para calcular a perda média anual de solo, no menu Método RUSLE, selecione um 
 
 ![](figures/figure_09.png)
 
-Figura 09 - Exemplo da perda média potencial anual de solo (t/ha/ano).
+**Figura 09** - Exemplo da perda média potencial anual de solo (t/ha/ano).
 
 ## 3.1.9 - Análise de tendência da pastagem na propriedade
 
@@ -185,7 +185,7 @@ As figuras 10 e 11 apresentam exemplos do resultado da Análise de tendência da
 
 ![](figures/figure_11.png)
 
-Figura 11 - Tendência de GPP da pastagem da propriedade rural de 2001 à 2023
+**Figura 11** - Tendência de GPP da pastagem da propriedade rural de 2001 à 2023
 
 ### 3.1.9.2 - Análise de tendência do NDVI
 
@@ -207,11 +207,11 @@ As figuras 12 e 13 apresentam exemplos do resultado da Análise de tendência da
 
 ![](figures/figure_12.png)
 
-Figura 12 - Área ocupada por pastagem em 2016
+**Figura 12** - Área ocupada por pastagem em 2016
 
 ![](figures/figure_13.png)
 
-Figura 13 - Tendência da pastagem da propriedade rural de 2016 à 2024
+**Figura 13** - Tendência da pastagem da propriedade rural de 2016 à 2024
 
 ## 3.1.10 - Download das camadas no toolkit
 
