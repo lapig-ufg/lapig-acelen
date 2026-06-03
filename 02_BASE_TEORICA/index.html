@@ -1,0 +1,807 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Bernard Silva de Oliveira">
+      
+      
+      
+        <link rel="prev" href="../01_INTRODUCAO/">
+      
+      
+        <link rel="next" href="../03_DESCRICAO_ABORDAGEM_DO_ALGORITMO/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Base Teórica - Acelen - Algorithm Theoretical Basis Document (ATBD)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#2-base-teorica-do-algoritmo" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Acelen - Algorithm Theoretical Basis Document (ATBD)" class="md-header__button md-logo" aria-label="Acelen - Algorithm Theoretical Basis Document (ATBD)" data-md-component="logo">
+      
+  <img src="../figures/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Acelen - Algorithm Theoretical Basis Document (ATBD)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Base Teórica
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/lapig-ufg/lapig-acelen" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    LAPIG-UFG/toolkit-acelen
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Acelen - Algorithm Theoretical Basis Document (ATBD)" class="md-nav__button md-logo" aria-label="Acelen - Algorithm Theoretical Basis Document (ATBD)" data-md-component="logo">
+      
+  <img src="../figures/logo.png" alt="logo">
+
+    </a>
+    Acelen - Algorithm Theoretical Basis Document (ATBD)
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/lapig-ufg/lapig-acelen" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    LAPIG-UFG/toolkit-acelen
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_INTRODUCAO/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base Teórica
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base Teórica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21-dados-satelitarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 - Dados satelitários
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-plataforma-google-earth-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 - Plataforma Google Earth Engine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-classificacao-do-uso-e-cobertura-da-terra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 - Classificação do Uso e Cobertura da Terra
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-vigor-da-pastagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 - Vigor da Pastagem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-produtividade-primaria-bruta-gross-primary-productivity-gpp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 - Produtividade Primária Bruta ( Gross Primary Productivity - GPP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-equacao-revisada-universal-de-perda-do-solo-rusle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 - Equação Revisada Universal de Perda do Solo (RUSLE)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-analise-de-tendencia-em-sensoriamento-remoto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 - Análise de Tendência em Sensoriamento Remoto
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_DESCRICAO_ABORDAGEM_DO_ALGORITMO/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrição e Abordagem do Algoritmo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_CONSIDERACOES_DE_IMPLEMENTACAO/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Considerações de Implementação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_REFERENCIAS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referências Bibliográficas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21-dados-satelitarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 - Dados satelitários
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-plataforma-google-earth-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 - Plataforma Google Earth Engine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-classificacao-do-uso-e-cobertura-da-terra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 - Classificação do Uso e Cobertura da Terra
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-vigor-da-pastagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 - Vigor da Pastagem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-produtividade-primaria-bruta-gross-primary-productivity-gpp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 - Produtividade Primária Bruta ( Gross Primary Productivity - GPP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-equacao-revisada-universal-de-perda-do-solo-rusle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 - Equação Revisada Universal de Perda do Solo (RUSLE)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-analise-de-tendencia-em-sensoriamento-remoto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 - Análise de Tendência em Sensoriamento Remoto
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="2-base-teorica-do-algoritmo">2. BASE TEÓRICA DO ALGORITMO</h1>
+<p>As metodologias empregadas são baseadas em princípios de sensoriamento remoto, inteligência artificial, modelo linear e análise de séries temporais, incluindo: Uso de imagens de satélites com diferentes resoluções espaciais, uso de técnicas de aprendizagem de máquina e aprendizado profundo (DeepLearning) para classificação automática, aplicação de modelos lineares no cálculo da perda média do solo, cálculo de índices de vegetação e produtividade, e análises de tendência.</p>
+<h2 id="21-dados-satelitarios">2.1 - Dados satelitários</h2>
+<p>Os dados de sensoriamento remoto a serem utilizados neste projeto incluem tanto imagens públicas e gratuitas, a exemplo daquelas adquiridas pelos sensores a bordo dos satélites Landsat e Sentinel, bem como imagens comerciais (ex. Planet Scope). No caso das imagens Landsat, estas serão obtidas dos satélites Landsat 5, 8 e 9, com resoluções espaciais de 30 metros, e resoluções espectrais de 8 e 11 bandas espectrais, respectivamente. A resolução espacial é a capacidade que o sensor a bordo de um satélite tem de detectar e separar um alvo de interesse na superfície terrestre; já a resolução espectral diz respeito à quantidade de “canais” (bandas) que o sensor tem para diferenciar, espectralmente, objetos na superfície terrestre. Os satélites da série Landsat fornecem informações sistemáticas desde 1985, sendo os seus dados ideais para análises baseadas em séries históricas, com vistas a se entender a dinâmica do uso e cobertura da terra em uma determinada região.</p>
+<p>Em relação aos satélites Sentinel-2 (a, b, e c), estes oferecem uma resolução espacial máxima de 10 metros, permitindo um mapeamento significativamente mais detalhado (~ 0.1 hectare). Com suas 12 bandas de resolução espectral, o Sentinel-2 consegue diferenciar objetos com maior precisão em comparação aos sensores da série Landsat; contudo, os seus dados estão disponíveis apenas a partir de 2016, o que limita a análise de séries históricas mais longas.</p>
+<p>Mais recentemente, com o avanço da Inteligência Artificial e tecnologias e desenvolvimentos associados, novas maneiras de acessar dados e informações de sensoriamento remoto, a exemplo dos <em>Embeddings</em>, se tornaram possíveis. Os <em>Embeddings</em> são uma forma de representação espaço-temporal altamente precisa e compacta, utilizada para mapear e monitorar objetos na superfície terrestre. Em essência, os <em>embeddings</em> são vetores que resumem grandes quantidades de informações geográficas complexas, incluindo dados de satélites (como o Sentinel-2), textos, vídeos e etc. Essa capacidade de integração de dados tem o potencial de tornar os mapeamentos baseados em embeddings mais eficientes e precisos (Brown et al., 2025).</p>
+<p>As principais características dos embeddings são:</p>
+<ul>
+<li><strong>Assimilação de contexto:</strong> Esse dados são capazes de avaliar a similaridade entre pixels a partir do seu contexto (vizinhança) no espaço e no tempo;</li>
+<li><strong>Universalidade:</strong> Os embeddings são desenvolvidos com o objetivo de resolver problemas de mapeamento global, gerando um espaço de características gerais e universais;</li>
+<li><strong>Sumarização compacta dos dados:</strong> Atuam como síntese temporal, descrevendo de forma compacta as propriedades da superfície terrestre e encapsulando informações que representam a trajetória temporal das variáveis (dados utilizados).</li>
+</ul>
+<p>Especificamente, para a produção dos Alpha Earth Embeddings, a Google Deepmind utilizou diversas fontes para o treinamento do respectivo <em>foundation model</em>, com destaque para:</p>
+<ul>
+<li><strong>Imagens dos satélites:</strong> das séries Landsat (8 e 9) e Sentinel (1 e 2);</li>
+<li><strong>Dados geoespaciais:</strong> Dados de altimetria, climáticos, campo gravitacional, cobertura e uso da terra;</li>
+<li><strong>Outras informações auxiliares:</strong> textos da Wikipedia e bases relacionadas à biodiversidade.</li>
+</ul>
+<p>Estes embeddings anuais, disponibilizados a partir do ano 2017 por meio da plataforma Google Earth Engine, são compostos por 64 dimensões (bandas) com uma resolução espacial de 10 metros.</p>
+<h2 id="22-plataforma-google-earth-engine">2.2 - Plataforma Google Earth Engine</h2>
+<p>O <em>Google Earth Engine</em> é uma plataforma para o processamento de dados geoespaciais em nuvem, em escala planetária, a qual traz enormes recursos computacionais da Google para lidar com uma variedade de questões de alto impacto, incluindo desmatamento, monitoramento climático e proteção ambiental. O catálogo de dados no <em>Google Earth Engine</em> abriga um grande repositório de dados geoespaciais que são disponíveis publicamente, incluindo, imagens de satélite, dados meteorológicos e climáticos, mapeamentos da cobertura e uso da terra (local e global), dados topográficos e socioeconômicos, que podem ser acessados de forma pública e gratuita (Gorelick et al., 2017).</p>
+<p>Nesta plataforma, os usuários podem utilizar funções que vão desde a matemática simples até níveis avançados de classificação de imagens por meio de algoritmos de aprendizagem de máquina (Amani, 2020).</p>
+<p>No trabalho de Souza et al. (2020) foi descrito uma nova abordagem de mapeamento anual da cobertura e uso da terra, a partir de 1985, para o Brasil, com base no algoritmo <em>Random Forest</em> aplicado às imagens da série Landsat usando a plataforma <em>Google Earth Engine</em>. Esta abordagem é a base da iniciativa <a href="https://brasil.mapbiomas.org/">MapBiomas</a>, já em sua Coleção 10 de mapas.</p>
+<p>Para acessar a plataforma do <em>Google Earth Engine</em>, basta ter uma conta do Google (gmail), e fazer o registro disponível no link: <a href="https://earthengine.google.com/">https://earthengine.google.com/</a>.</p>
+<h2 id="23-classificacao-do-uso-e-cobertura-da-terra">2.3 - Classificação do Uso e Cobertura da Terra</h2>
+<p>As classificações de cobertura e uso da terra são geradas a partir de dados de sensoriamento remoto, por exemplo, satélites Landsat 5, 7 e 8, onde cada informação associada à cada elemento de imagem (pixel) é fundamentada no comportamento espectral dos diferentes alvos terrestres (vegetação, pastagem, água, etc). Este comportamento, relacionado à capacidade de cada objeto na superfície em em absorver e/ou refletir a radiação eletromagnética em seus vários comprimentos de onda e que varia sazonalmente, é base para a discriminação e classificação de objetos em qualquer algoritmo.</p>
+<p>Em geral, para a classificação dos tipos de uso e cobertura da terra se utiliza algoritmos baseados em técnicas de aprendizado de máquina, aplicadas pixel à pixel, onde o algoritmo identifica padrões específicos, conforme os tipos de cobertura da Terra, através das diferenças espectrais (e temporais) associadas à cada objeto (i.e. classe de cobertura e/ou uso).</p>
+<p>De acordo com Mitchell (1997), a aprendizagem de máquina está relacionada à construção de soluções computacionais que melhoram suas percepções automaticamente com a experiência (amostras). Isso significa que, ao inserir novos dados, esses sistemas computacionais são treinados para melhorar seu desempenho e precisão preditiva.</p>
+<p>Conforme MapBiomas (2024), os mapas de cobertura e uso da terra disponíveis na plataforma do MapBiomas são elaboradas da seguinte forma:</p>
+<ul>
+<li>
+<p><strong>Mosaico Anual - Landsat:</strong> Para cada ano, todas as imagens landsat são selecionadas para o cálculo de índices espectrais e frações espectrais. Em seguida, são calculados as médias, máximos, mínimos, amplitude para cada pixel da imagem, resultando em 105 imagens no ano. Esse processo é repetido anualmente; se o período de tempo for de 1985 à 2024, essa operação será repetida 40 vezes.</p>
+</li>
+<li>
+<p><strong>Aplicação do Modelo de Aprendizagem de Máquina:</strong> Após a geração dos mosaicos anuais, o algoritmo Random Forest (Breiman, 2001) é aplicado no processo de classificação, usando a infraestrutura de nuvem da Google. O algoritmo emprega amostras inspecionadas visualmente a partir das imagens de satélite para seu treinamento e teste. Nesta etapa, é realizada a análise da acurácia do algoritmo e, se a precisão for satisfatória, a classificação das imagens é executada.</p>
+</li>
+<li>
+<p><strong>Pós-processamento:</strong> Esta etapa consiste na aplicação de filtros para remover ruídos gerados pela classificação das imagens durante o mapeamento da cobertura e uso do solo. O primeiro filtro aplicado é o espacial, que visa manter a consistência dos dados espaciais, eliminando pixels classificados de forma isolada ou em bordas de transição entre classes. Em seguida, para garantir a consistência temporal e reduzir mudanças de uso e cobertura que sejam impossíveis ou não permitidas (por exemplo, transições abruptas de "Floresta Natural" para "Não Floresta" e novamente para "Floresta Natural"), são aplicados filtros de consistência temporal.</p>
+</li>
+<li>
+<p>A validação do resultado final dos mapas gerados automáticamente é feita por meio da análise de acurácia, com base em pontos amostrais obtidos via interpretação visual das imagens utilizadas no processo de classificação.</p>
+</li>
+</ul>
+<h2 id="24-vigor-da-pastagem">2.4 - Vigor da Pastagem</h2>
+<p>O vigor da pastagem é uma medida que reflete o desenvolvimento da planta forrageira, auxiliando na avaliação da produtividade ou estágio de degradação das pastagens (Santos et al., 2022; Ferreira Jr et al., 2023). Sua medição é feita a partir de imagens do sensor MODIS a bordo do satélite Terra, com dados disponíveis desde o ano 2000.</p>
+<p>Inicialmente os dados do índice de vegetação EVI passam por um preenchimento de dados faltantes (lacunas) ocasionado pela contaminação de nuvens e/ou sombras, através de um algoritmo de preenchimento dessas lacunas (i.e. <em>gap filling</em>). Em seguida é feito um ajuste sazonal (dessazonalização), removendo os efeitos sazonais dos valores das séries temporais, para evitar distorções na análise. Após a dessazonalização, são gerados imagens medianas anuais do conjunto de dados, cobrindo um período de 2000 à 2024. A mediana foi escolhida por ser uma medida estatística que minimiza a influência de valores anômalos (outliers) na análise.</p>
+<p>A análise envolve a extração de pixels de EVI medianos anuais em áreas identificadas como pastagem nos mapas, os quais são submetidos à um filtro temporal mediano (5 anos), seguida de uma normalização. O processo de normalização consiste no cálculo dos valores de EVI máximo e mínimo, onde o valor máximo é a média do 1% dos valores mais altos de EVI e o valor mínimo, a média do 1% dos valores mais baixos de EVI, conforme a equação 01. O resultado da equação corresponde a valores entre 0 e 1.</p>
+<div class="arithmatex">\[
+EVI{norm} = \frac{EVI{i}  - EVI{min}}{EVI{min}  - EVI{max}} \tag{Eq. 01}                                                        
+\]</div>
+<p>Onde:
+<small></p>
+<ul>
+<li>
+<p><span class="arithmatex">\(EVI{\text{norm}}\)</span>: Valor do EVI normalizado entre 0 e 1</p>
+</li>
+<li>
+<p><span class="arithmatex">\(EVI{\text{i}}\)</span>: Valor do EVI da série temporal.</p>
+</li>
+<li>
+<p><span class="arithmatex">\(EVI{\text{min}}\)</span>: Valor médio de 1% dos máximos de todos os valores de EVI na série temporal.</p>
+</li>
+<li>
+<p><span class="arithmatex">\(EVI{\text{max}}\)</span>: Valor médio de 1% dos mínimos de todos os valores de EVI na série temporal.</p>
+</li>
+</ul>
+<p></small></p>
+<p>Às imagens normalizadas são estratificadas em três níveis de vigor:</p>
+<ul>
+<li><strong>Baixo Vigor</strong>: menor que 0,4;</li>
+<li><strong>Médio Vigor:</strong> maior que 0,4 e menor que 0,6; e</li>
+<li><strong>Alto Vigor:</strong> maior que 0,6</li>
+</ul>
+<p>Todo o processo de geração de dados de vigor é feito em regiões com características ambientais similares.</p>
+<h2 id="25-produtividade-primaria-bruta-gross-primary-productivity-gpp">2.5 - Produtividade Primária Bruta ( Gross Primary Productivity - GPP)</h2>
+<p>Conforme Aragão (2004), a Produtividade Primária Bruta (GPP) quantifica o C atmosférico convertido em matéria orgânica via fotossíntese. Isso nos permite não só verificar a quantidade de C fixado pelas pastagens, conforme diferentes níveis de vigor, mas também identificar ganhos e perdas de produtividade ao longo do tempo.</p>
+<p>Os valores de GPP (Produtividade Primária Bruta) podem ser determinados pelo modelo que considera a Eficiência do Uso de Luz Absorvida (LUE - Light Use Efficiency), no qual a quantidade de energia absorvida da radiação solar visível disponível pelas plantas determina o carbono fixado por meio das atividades fotossintéticas (Monteith, 1972; Veloso, 2018; Su et al., 2022). Essencialmente, o cálculo do GPP é aplicado conforme a equação 02.</p>
+<div class="arithmatex">\[
+GPP = PAR \times fAPAR \times LUE_{max} \tag{Eq. 02}                                                        
+\]</div>
+<p>Onde:
+<small></p>
+<ul>
+<li>
+<p><span class="arithmatex">\(PAR\)</span>: Radiação fotossinteticamente</p>
+</li>
+<li>
+<p><span class="arithmatex">\(fPAR\)</span>: Fração da radiação fotossinteticamente</p>
+</li>
+<li>
+<p><span class="arithmatex">\(LUEmax\)</span>: Eficiência da Luz</p>
+</li>
+</ul>
+<p></small></p>
+<p>Isik et al., 2024, no âmbito da iniciativa Global Pasture Watch, produziram um conjunto de dados de GPP com a resolução espacial de 30 metros bimestral nas áreas de pastagem globais no período de 2000 a 2024. Para calcular o GPP bimestral, foram utilizados um repositório Landsat reconstruído e disponível bimestralmente (Consoli et al.,2024), combinado com dados de temperatura do MODIS com 1 Km de resolução espacial e a Radiação Fotossinteticamente Ativa (PAR) do sensor CERES (a bordo da plataforma Terra), com resolução espacial aproximada de 100 km.</p>
+<p>Neste projeto, teremos por referência as estratégias adotadas por Isik et al.(2024). Contudo, essas estratégias também serão adaptadas para os Landsat; da mesma forma, utilizaremos valores de LUE mais próximos à realidade das regiões de interesse.</p>
+<h2 id="26-equacao-revisada-universal-de-perda-do-solo-rusle">2.6 - Equação Revisada Universal de Perda do Solo (RUSLE)</h2>
+<p>A Equação Universal de Perda do Solo Revisada (RUSLE) é um modelo matemático desenvolvido pelo Departamento da Agricultura dos Estados Unidos (USDA), com o intuito de estimar a erosão laminar do solo a partir de fatores como erodibilidade (precipitação), erosividade do solo, declividade, cobertura da terra e práticas de controle da erosão (Alebachew et. al, 2025). A implementação da RUSLE em ambiente <em>cloud</em> (processamento na nuvem), como o Google Earth Engine, utiliza dados de satélites de diversas resoluções espaciais para o cálculo preciso de seus fatores, por exemplo: <a href="https://www.chc.ucsb.edu/data/chirps">CHIRPS</a> <strong>(para Precipitação)</strong>, <a href="https://zenodo.org/records/2525817">Textura do Solo</a> (Tomislav, 2018), <strong>Altimetria e Declividade</strong> <a href="https://www.earthdata.nasa.gov/data/instruments/srtm">(SRTM)</a>, e o índice de vegetação <a href="https://ntrs.nasa.gov/api/citations/19750020419/downloads/19750020419.pdf">(NDVI)</a> calculado a partir do do sensor OLI a bordo do satélite Landsat 8, com resoluções espaciais de 5.566, 250 e 30 metros, respectivamente.</p>
+<p>Este modelo é uma versão revisada da USLE (<em>Universal Soil Losses Equation</em>) por Renard et. al (1997), descrita conforme a equação 03.</p>
+<div class="arithmatex">\[
+A = R \times K \times LS \times C \times P \tag{Eq. 03}                                                        
+\]</div>
+<p>Onde :
+<small></p>
+<ul>
+<li>
+<p><span class="arithmatex">\(A\)</span>: <strong>Perda média anual do solo</strong>.</p>
+</li>
+<li>
+<p><span class="arithmatex">\(R\)</span>: <strong>Fração de Erodibilidade</strong>, que quantifica o potencial de desprendimento de sedimentos causado pela chuva <a href="https://www.chc.ucsb.edu/data/chirps">(CHIRPS)</a> e pelo escoamento superficial.</p>
+</li>
+<li>
+<p><span class="arithmatex">\(K\)</span>: <strong>Fator de Erodibilidade</strong>, que avalia a suscetibilidade do solo à erosão, considerando sua textura (proporção de argila, areia e silte) <a href="https://zenodo.org/records/2525817">(Tomislav.2018)</a></p>
+</li>
+<li>
+<p><span class="arithmatex">\(LS\)</span>: <strong>Fator Topográfico</strong>, que mede o impacto da inclinação e do comprimento da encosta na velocidade do escoamento superficial, a partir dos dados do <a href="https://www.earthdata.nasa.gov/data/instruments/srtm">SRTM</a>.</p>
+</li>
+<li>
+<p><span class="arithmatex">\(C\)</span>: <strong>Fator de Manejo do Solo</strong>, que considera a influência da cobertura vegetal, por meio do <a href="https://ntrs.nasa.gov/api/citations/19750020419/downloads/19750020419.pdf">NDVI</a>.</p>
+</li>
+<li>
+<p><span class="arithmatex">\(P\)</span>: <strong>Fator de Prática de Uso do Solo</strong>, que avalia a eficácia de intervenções humanas na redução da erosão, através dos dados de declividade do <a href="https://www.earthdata.nasa.gov/data/instruments/srtm">SRTM</a>, e uso e cobertura da terra do produtos <a href="https://ladsweb.modaps.eosdis.nasa.gov/missions-and-measurements/products/MCD12Q1">MCD12Q1</a> do sensor MODIS a borda dos satélites TERRA e AQUA.</p>
+</li>
+</ul>
+<p></small></p>
+<p>Conforme Barbosa (2024), os cinco fatores da RUSLE são utilizados para determinar o potencial de erosão do solo, sendo que:</p>
+<ul>
+<li>Os fatores R, K e LS avaliam o potencial natural de erosão;</li>
+<li>Já os fatores C e P determinam a influência de ações antrópicas (ou seja, humanas) na erosão do solo.</li>
+</ul>
+<p>A Rusle é aplicada em uma bacia hidrográfica, a qual, conforme a Política Nacional de Recursos Hídricos (Lei 9.433, de 08 de janeiro de 1997), é unidade territorial para o gerenciamento dos recursos hídricos, sendo que a água drenada nessas bacias deve ser gerenciada como um patrimônio público finito e com valor econômico.</p>
+<p>A divisão do território brasileiro em bacias hidrográficas evoluiu com as crescentes necessidades de gestão da água. Em 1972, o Departamento Nacional de Águas e Energia Elétrica (DNAEE) estabeleceu a primeira proposta de divisão hidrográfica usando o método hierárquico de Otto Pfafstetter (baseado em áreas de drenagem) para otimizar a oferta e o processamento de dados. Já em 2003, conforme a resolução Federal nº32 do Conselho Nacional de Recursos Hídricos instituiu a Divisão Hidrográfica Nacional (DHN), com o objetivo de organizar o país em grandes 12 regiões hidrográficas. Essa divisão foi definida com base nos limites naturais das bacias e na semelhança das características ambientais, sociais e econômicas dos territórios vizinhos.</p>
+<p>O cálculo da RUSLE no <em>toolkit</em> é aplicado nos níveis 1 à 3 da divisão do DHN e níveis 1 e 2 do DNAEE, onde os níveis 1 das bacias são mais amplas (generalizadas), enquanto os níveis 2 e 3 possuem um detalhamento maior.</p>
+<h2 id="27-analise-de-tendencia-em-sensoriamento-remoto">2.7 - Análise de Tendência em Sensoriamento Remoto</h2>
+<p>O uso de imagens de satélites em séries temporais na medição de vigor e produtividade das pastagens estão correlacionados as metodologias da análise de tendência e/ou detecção de mudança do uso e cobertura da terra, que auxiliam na compreensão do seu processo de degradação (Souza, 2017). No estudo de Andrade (2014), foram identificadas áreas de pastagens potencialmente em processo de degradação, por meio dos valores (magnitude) da tendência da regressão linear (<em>slope</em>) ajustada, pixel a pixel, às imagens do sensor Terra MODIS.</p>
+<p>O propósito de analisar tendências em séries temporais de imagens de satélite é importante para várias aplicações em larga escala e de longo prazo; por isso, é necessária a harmonização e o preenchimento de lacunas (buracos) nas imagens, causados por contaminação de nuvens e/ou sombras no pixel, a fim de garantir consistência espacial e ao longo do tempo na série temporal das imagens de satélite.</p>
+<p>A Mediana Temporal de Janela móvel (<strong>T</strong>emporal <strong>M</strong>oving <strong>W</strong>indow <strong>M</strong>edian) é um método personalizado de preenchimento de lacunas (gap-filling) que foi desenvolvido e implementado para preencher valores ausentes (<em>NoData</em>). O algoritmo é projetado para ser computacionalmente rápido e adequado para preencher dados destinados ao mapeamento anuais em escala continental e multidecenal. Este método foi utilizado no contexto da criação do EcoDataCube para imputar dados ausentes na série temporal do Landsat (2000–2020), especificamente nos agregados trimestrais (Witjes,2023) .</p>
+<p>A principal diferenciação do TMWM de outros modelos de <em>gapfiling</em> é que ele utiliza apenas valores existentes no conjunto de dados, como medianas de pixels vizinhos temporais. Isso garante que os valores imputados permaneçam no mesmo espaço de características no qual os modelos subsequentes de aprendizado de máquina serão treinados.</p>
+<p>O TMWM tenta derivar um valor para pixels ausentes em três fases sequenciais. Em cada fase, o algoritmo segue uma lógica de expansão da janela de busca.</p>
+<ul>
+<li>
+<p><strong>Mediana do mesmo período em diferentes anos:</strong> O algoritmo tenta primeiro calcular a mediana do mesmo período (por exemplo, trimestre) nos anos adjacentes (anterior e/ou seguinte). Se não houver valores no ano anterior ou seguinte, a janela de busca se expande para incluir valores desse período em anos progressivamente anteriores e posteriores.</p>
+</li>
+<li>
+<p><strong>Média das medianas de períodos adjacentes:</strong> caso a fase 1 falhar, o TMWM deriva o valor a partir de uma média das medianas do período anterior e seguinte do mesmo ano. Caso necessário, a janela de busca se expande novamente para incluir esses períodos anterior e seguinte em anos progressivamente adjacentes.</p>
+</li>
+<li>
+<p><strong>Mediana de todos os períodos:</strong> se as fases anteriores falharem, a janela de busca abrange todos os valores em toda série temporal do pixel, e o valor imputado é a mediana desses valores.</p>
+</li>
+</ul>
+<p>Na opção de Análise de tendência das pastagem do toolkit, é feito a exclusão dos pixels contaminados por nuvens e/ou sombra utilizando a banda de qualidade, do satélite, seja Landsat ou Sentinel, e após a exclusão dos pixels contaminado, esse são preenchidos usando o Método TMWM (implementado no Google Earth Engine) e depois é calculado o coeficiente angular nas áreas de pastagem da propriedade inserida pelo usuário, no qual informa magnitude e a direção da mudança que ocorre ao longo do tempo. Quando o valor do coeficiente angular é positivo, indica uma tendência positiva, ou seja, um aumento no vigor ou na produtividade das pastagens, e os valores negativos, sugere que há um processo de queda do vigor da pastagem.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

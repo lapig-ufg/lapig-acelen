@@ -1,0 +1,1067 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Bernard Silva de Oliveira">
+      
+      
+      
+        <link rel="prev" href="../02_BASE_TEORICA/">
+      
+      
+        <link rel="next" href="../04_CONSIDERACOES_DE_IMPLEMENTACAO/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Descrição e Abordagem do Algoritmo - Acelen - Algorithm Theoretical Basis Document (ATBD)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3-descricao-e-abordagem-do-algoritmo" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Acelen - Algorithm Theoretical Basis Document (ATBD)" class="md-header__button md-logo" aria-label="Acelen - Algorithm Theoretical Basis Document (ATBD)" data-md-component="logo">
+      
+  <img src="../figures/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Acelen - Algorithm Theoretical Basis Document (ATBD)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Descrição e Abordagem do Algoritmo
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/lapig-ufg/lapig-acelen" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    LAPIG-UFG/toolkit-acelen
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Acelen - Algorithm Theoretical Basis Document (ATBD)" class="md-nav__button md-logo" aria-label="Acelen - Algorithm Theoretical Basis Document (ATBD)" data-md-component="logo">
+      
+  <img src="../figures/logo.png" alt="logo">
+
+    </a>
+    Acelen - Algorithm Theoretical Basis Document (ATBD)
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/lapig-ufg/lapig-acelen" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    LAPIG-UFG/toolkit-acelen
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_INTRODUCAO/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_BASE_TEORICA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base Teórica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrição e Abordagem do Algoritmo
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrição e Abordagem do Algoritmo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31-analise-temporal-da-dinamica-da-cobertura-e-uso-da-terra-toolkit-40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 - Análise Temporal da Dinâmica da Cobertura e Uso da Terra (toolkit 4.0)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#311-variaveis-e-parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.1 - Variáveis e Parâmetros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#312-processamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.2 - Processamento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1.2 - Processamento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tabela-02-classes-agrupadas-conforme-as-nove-classes-de-interesse-consideradas-neste-estudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 02 - Classes agrupadas conforme as nove classes de interesse consideradas neste estudo.
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#313-dados-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.3 - Dados de entrada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#314-visualizacao-dos-mapas-de-cobertura-e-uso-da-terra-no" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.4 - Visualização dos mapas de cobertura e uso da terra no
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#315-visualizacao-da-dinamica-de-cobertura-e-uso-da-terra-conversao-para-uso-antropico-e-evolucao-das-areas-de-pastagens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.5 - Visualização da dinâmica de cobertura e uso da terra, conversão para uso antrópico e evolução das áreas de pastagens
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#316-vigor-da-pastagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.6 - Vigor da pastagem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#317-mapeamento-automatico-de-pastagens-em-nivel-de-propriedade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.7 - Mapeamento automático de pastagens em nível de propriedade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#318-calculo-da-perda-media-anual-do-solo-rusle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.8 - Cálculo da perda média anual do solo (RUSLE)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#319-analise-de-tendencia-da-pastagem-na-propriedade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.9 - Análise de tendência da pastagem na propriedade
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1.9 - Análise de tendência da pastagem na propriedade">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3191-analise-de-tendencia-da-produtividade-primaria-bruta-gpp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.9.1 - Análise de tendência da Produtividade Primária Bruta (GPP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3192-analise-de-tendencia-do-ndvi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.9.2 - Análise de tendência do NDVI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3110-download-das-camadas-no-toolkit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.10 - Download das camadas no toolkit
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_CONSIDERACOES_DE_IMPLEMENTACAO/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Considerações de Implementação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_REFERENCIAS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referências Bibliográficas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31-analise-temporal-da-dinamica-da-cobertura-e-uso-da-terra-toolkit-40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 - Análise Temporal da Dinâmica da Cobertura e Uso da Terra (toolkit 4.0)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#311-variaveis-e-parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.1 - Variáveis e Parâmetros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#312-processamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.2 - Processamento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1.2 - Processamento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tabela-02-classes-agrupadas-conforme-as-nove-classes-de-interesse-consideradas-neste-estudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 02 - Classes agrupadas conforme as nove classes de interesse consideradas neste estudo.
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#313-dados-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.3 - Dados de entrada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#314-visualizacao-dos-mapas-de-cobertura-e-uso-da-terra-no" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.4 - Visualização dos mapas de cobertura e uso da terra no
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#315-visualizacao-da-dinamica-de-cobertura-e-uso-da-terra-conversao-para-uso-antropico-e-evolucao-das-areas-de-pastagens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.5 - Visualização da dinâmica de cobertura e uso da terra, conversão para uso antrópico e evolução das áreas de pastagens
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#316-vigor-da-pastagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.6 - Vigor da pastagem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#317-mapeamento-automatico-de-pastagens-em-nivel-de-propriedade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.7 - Mapeamento automático de pastagens em nível de propriedade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#318-calculo-da-perda-media-anual-do-solo-rusle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.8 - Cálculo da perda média anual do solo (RUSLE)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#319-analise-de-tendencia-da-pastagem-na-propriedade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.9 - Análise de tendência da pastagem na propriedade
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1.9 - Análise de tendência da pastagem na propriedade">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3191-analise-de-tendencia-da-produtividade-primaria-bruta-gpp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.9.1 - Análise de tendência da Produtividade Primária Bruta (GPP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3192-analise-de-tendencia-do-ndvi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.9.2 - Análise de tendência do NDVI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3110-download-das-camadas-no-toolkit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.10 - Download das camadas no toolkit
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="3-descricao-e-abordagem-do-algoritmo">3. DESCRIÇÃO E ABORDAGEM DO ALGORITMO</h1>
+<p>Nesta seção serão abordados todas as funcionalidades do toolkit, versão 4.0, especificamente voltado à Análise Temporal da Dinâmica da Cobertura e Uso da Terra, tendo por referência os mapas de cobertura e uso da terra, vigor das pastagens da Coleção MapBiomas 9.0, bem como imagens das séries Landsat, mapeamento detalhado das pastagens à nível de propriedade e o cálculo da perda anual média do solo</p>
+<h2 id="31-analise-temporal-da-dinamica-da-cobertura-e-uso-da-terra-toolkit-40">3.1 - Análise Temporal da Dinâmica da Cobertura e Uso da Terra (toolkit 4.0)</h2>
+<p>O <em>toolkit</em> versão 4.0 permite ao usuário explorar a série histórica dos mapas de cobertura e uso da terra da Coleção 9 do MapBiomas, mapear à nível de propriedade as pastagens e calcular a perda anual média do solo. Ao fazer o upload de um arquivo vetorial, o usuário pode analisar instantaneamente a dinâmica da cobertura da terra entre 1985 e 2023 para as classes: Soja, Cana, Pastagem, Vegetação Natural, Silvicultura, Outras Lavouras, Outros, Água e Mosaico de Uso. Além disso, é possível acessar imagens Landsat de diferentes anos e períodos (seco, chuvoso e anual), e identificar o nível de vigor das pastagens.</p>
+<p>A Figura 01 mostra o fluxograma do processo de usabilidade da Análise Temporal da Dinâmica de Cobertura e Uso da Terra.</p>
+<p><img alt="" src="../figures/figure_01.png" /></p>
+<p><strong>Figura 01</strong> - Fluxograma de processo da Análise da Dinâmica de Cobertura e Uso da Terra.</p>
+<h2 id="311-variaveis-e-parametros">3.1.1 - Variáveis e Parâmetros</h2>
+<p>A entrada principal do <em>toolkit</em> é um arquivo poligonal das áreas de interesse da <strong>Acelen Renováveis</strong>. O usuário insere esse arquivo fazendo o upload dele como um asset no Google Earth Engine.</p>
+<p>O usuário pode interagir com os seguintes parâmetros do <em>toolkit</em>:</p>
+<ul>
+<li>
+<p><strong>Filtro da camada de entrada:</strong> Permite ao usuário filtrar a camada de entrada a partir do conjunto de atributos, antes da inserção no mapa;</p>
+</li>
+<li>
+<p><strong>Visualização da camada a partir de um raio de Influência:</strong> Permite que o usuário visualize sua área de interesse sobre um raio de influência (buffer)</p>
+</li>
+<li>
+<p><strong>Data de análise da cobertura e uso da terra:</strong> O período específico para a análise temporal;</p>
+</li>
+<li>
+<p><strong>Período de aquisição das cenas Landsat:</strong> O período (chuvoso, seca ou anual) de visualização das imagens dos satélites Landsat (5, 7, 8 e 9);</p>
+</li>
+<li>
+<p><strong>Tipo de classificação:</strong> Forma de visualização das classes de cobertura e uso da terra na propriedade, sendo: <strong>Moda, Original e Original - Área Total</strong>;</p>
+</li>
+<li>
+<p><strong>Visualização do vigor de pastagens:</strong> Visualização dos níveis de vigor das áreas de interesse da <strong>Acelen Renováveis</strong>, a partir dos dados do vigor da vegetação normalizados por biomas (Brasil) e por estados (no momento, disponível apenas para Minas Gerais e Bahia);</p>
+</li>
+<li>
+<p><strong>Mapeamento automático das pastagens ao nível de propriedade:</strong> O mapeamento automático das pastagens é realizado sobre a camada de entrada. O usuário pode selecionar a quantidade de amostras, a área de influência (buffer) e as bases de dados de uso e cobertura da terra, a fim de coletar informações das pastagens usadas no processo de classificação;</p>
+</li>
+<li>
+<p><strong>Cálculo da perda média anual de solo:</strong> O cálculo da perda média anual de solo, usando a equação RUSLE, é aplicado na bacia hidrográfica onde a área de interesse do usuário está inserida;</p>
+</li>
+<li>
+<p><strong>Análise de tendência da pastagem na propriedade:</strong> Analisa-se a tendência dos valores de NDVI e dos valores de produtividade primária bruta (GPP), derivados de séries temporais de imagens Landsat, nas áreas de pastagem contidas na camada de entrada definida pelo usuário.</p>
+</li>
+<li>
+<p><strong>Série temporal de cobertura e uso da terra (gráfico):</strong> Gera um gráfico (para a área de interesse) que mostra a evolução do uso e cobertura da terra ao longo do tempo;</p>
+</li>
+<li>
+<p><strong>Taxa de conversão:</strong> Verifica a taxa de conversão de áreas naturais para antrópicas para cada área de interesse;</p>
+</li>
+<li>
+<p><strong>Análise temporal da evolução das áreas de pastagem sobre áreas naturais e outros:</strong> Visualização dos valores das áreas em hectares das classes (pastagem, vegetação natural e outras), ao longo do tempo, para cada área de interesse.</p>
+</li>
+<li>
+<p><strong>Download das camadas do toolkit:</strong> Permite o usuário fazer download da camada que está presente no mapa e/ou a série temporal das bases de dados contidas no toolkit, como: Vigor das pastagens e o uso e cobertura da terra (Mapbiomas)</p>
+</li>
+</ul>
+<h2 id="312-processamento">3.1.2 - Processamento</h2>
+<p>Os mapas de cobertura e uso da terra compreendem 29 classes, as quais, com o intuito de melhorar o entendimento e as análises da dinâmica e uso da terra nas áreas de interesse da <strong>Acelen Renováveis</strong>, foram agrupadas em nove classes: Soja, Cana, Pastagem, Vegetação Natural, Silvicultura, Outras Lavouras, Outros, Água e Mosaico de Uso. A tabela 02 mostra o agrupamento das classes de cobertura e uso da terra em relação à base de dados original:</p>
+<h3 id="tabela-02-classes-agrupadas-conforme-as-nove-classes-de-interesse-consideradas-neste-estudo">Tabela 02 - Classes agrupadas conforme as nove classes de interesse consideradas neste estudo.</h3>
+<table>
+<thead>
+<tr>
+<th>Classe Agrupada</th>
+<th>Classe Original</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Soja</td>
+<td>Soja</td>
+</tr>
+<tr>
+<td>Cana</td>
+<td>Cana</td>
+</tr>
+<tr>
+<td>Pastagem</td>
+<td>Pastagem</td>
+</tr>
+<tr>
+<td>Vegetação Natural</td>
+<td>Formação Florestal, Formação Savânica, Mangue, Restinga Arbórea, Campo Alagado e Área Pantanosa, Formação Campestre e Restinga Herbácea</td>
+</tr>
+<tr>
+<td>Silvicultura</td>
+<td>Silvicultura</td>
+</tr>
+<tr>
+<td>Outras lavouras</td>
+<td>Lavoura temporária, Arroz, Algodão, Outras lavouras temporárias, Café, Citrus, Outras Lavouras perenes</td>
+</tr>
+<tr>
+<td>Água</td>
+<td>Rio, lago, oceano e aquicultura</td>
+</tr>
+<tr>
+<td>Mosaico de usos</td>
+<td>Mosaico de usos</td>
+</tr>
+<tr>
+<td>Outros</td>
+<td>Todas as classes que restaram e que não foram adicionadas nas anteriores</td>
+</tr>
+</tbody>
+</table>
+<p>Quando o usuário opta por visualizar a moda das classes dentro de uma área de interesse, a ferramenta identifica e classifica essa área com base na classe de cobertura e uso da terra que mais se repete. Isso proporciona uma visão clara da cobertura dominante na região selecionada.</p>
+<h2 id="313-dados-de-entrada">3.1.3 - Dados de entrada</h2>
+<p>Os dados de entrada para o <em>toolkit</em> são informações vetoriais de estrutura poligonal. Inicialmente, o dado de entrada deve estar no formato de arquivo vetorial <em>shapefile</em>, e compactado no formato .zip. Com o dado no formato .zip, é necessário fazer o <em>upload</em> desse arquivo na plataforma <em>Google Earth Engine</em>, com o usuário já autenticado nessa mesma plataforma.</p>
+<p>Uma vez que o arquivo vetorial tenha sido adicionado ao <em>toolkit</em>, o usuário pode filtrar áreas de interesse a partir das informações contidas no respectivo conjunto de atributos. Especificamente, no menu <strong>Entrada de Dados</strong>, cole o link do asset para integrá-lo à ferramenta. Após a visualização no mapa, você pode refinar a análise utilizando filtros específicos. Basta clicar na opção e filtro e depois, selecionar o campo e o valor desejado para isolar a área geográfica de interesse dentro do seu conjunto de dados.</p>
+<h2 id="314-visualizacao-dos-mapas-de-cobertura-e-uso-da-terra-no">3.1.4 - Visualização dos mapas de cobertura e uso da terra no</h2>
+<p>Para visualizar os mapas de cobertura e uso da terra na ferramenta a partir de um arquivo externo, no <strong>menu Classificação Uso da Terra</strong>, o usuário deve seguir estas etapas:</p>
+<ul>
+<li>
+<p>Na opção <strong>"Fonte de dados"</strong>, selecione a fonte de dados de uso da terra que deseja visualizar. Atualmente, o toolkit suporta apenas a fonte <strong>MapBiomas</strong>;</p>
+</li>
+<li>
+<p>No campo <strong>"Ano de Análise"</strong>, deve-se escolher o ano da análise, que está ligado à fonte de dados selecionada;</p>
+</li>
+<li>
+<p>Na opção <strong>"Buffer (m)"</strong>, o usuário pode expandir o limite (raio de influência) da camada de entrada. O objetivo é visualizar os dados de classificação em uma área que se estende além dos limites originais da camada;</p>
+</li>
+<li>
+<p>Após isso, selecione o <strong>tipo de classificação</strong> que deseja visualizar.</p>
+</li>
+</ul>
+<p>O campo Tipo de Classificação, possui três opções, sendo elas:</p>
+<ul>
+<li>
+<p><strong>Moda:</strong> O limite de cada área de interesse será classificado a partir da classe majoritária, ou seja, a classe de cobertura e uso da terra que mais se repetir na propriedade / área de interesse;</p>
+</li>
+<li>
+<p><strong>Original:</strong> Cada elemento do arquivo externo mostrará todas as classificações em seu interior;</p>
+</li>
+<li>
+<p><strong>Original - Área total:</strong> Serão visualizadas todas as classes de cobertura e uso da terra de toda a extensão geográfica do arquivo externo inserido.</p>
+</li>
+</ul>
+<p>Depois da seleção do tipo de classificação, clique no botão <strong>Gerar classificação do ano da análise</strong> para visualizar o mapa na tela da ferramenta. A tela traz a informação das classes de cobertura e uso da terra, legenda e os gráficos do quantitativo das classes no arquivo inserido, conforme o respectivo ano selecionado pelo usuário. O gráfico gerado pode ser exportado nos formatos: CSV (tabela de dados), SVG e PNG (figura 02).</p>
+<p><img alt="" src="../figures/figure_02.png" /></p>
+<p><strong>Figura 02</strong> - Visualização do arquivo no mapa da ferramenta Análise Temporal da Dinâmica de Cobertura e Uso da Terra.</p>
+<h2 id="315-visualizacao-da-dinamica-de-cobertura-e-uso-da-terra-conversao-para-uso-antropico-e-evolucao-das-areas-de-pastagens">3.1.5 - Visualização da dinâmica de cobertura e uso da terra, conversão para uso antrópico e evolução das áreas de pastagens</h2>
+<p>Para visualizar a dinâmica das classes de cobertura e uso da terra, é necessário que a opção escolhida no campo <strong>Tipo de Classificação</strong> seja a moda. Clique no ícone e aparecerá no centro superior da tela as opções das informações que o usuário deseja visualizar (figura 03):</p>
+<p>(a)<img alt="" src="../figures/figure_03_a.png" />                    (b)<img alt="" src="../figures/figure_03_b.png" /></p>
+<p><strong>Figura 03</strong> - (a) O menu da ferramenta de gráfico, e (b) opções de visualização dos gráficos.</p>
+<p>Após selecionar a opção de visualização do gráfico, clique na propriedade do arquivo externo que você deseja analisar. As figuras 04, 05 e 06 ilustram os resultados dos gráficos de Cobertura da Terra, Proporção de Área Convertida e Evolução das áreas de pastagens</p>
+<p><img alt="" src="../figures/figure_04.png" /></p>
+<p><strong>Figura 04</strong> - Dinâmica da Cobertura e Uso da Terra do elemento selecionado</p>
+<p><img alt="" src="../figures/figure_05.png" /></p>
+<p><strong>Figura 05</strong> - Proporção de área convertida do elemento selecionado</p>
+<p><img alt="" src="../figures/figure_06.png" /></p>
+<p><strong>Figura 06</strong> - Evolução das áreas de pastagem</p>
+<h2 id="316-vigor-da-pastagem">3.1.6 - Vigor da pastagem</h2>
+<p>Para visualizar os níveis de vigor da pastagem, siga os seguintes passos no menu "Análise de Vigor":</p>
+<ul>
+<li>Selecione o <strong>Ano do Vigor</strong> (a série temporal disponível vai de 2000 a 2023).</li>
+<li>Defina a <strong>região para Análise</strong> (selecionando entre Brasil e Unidades da Federação - UF's).</li>
+<li>Ajuste o valor do <strong>Buffer</strong> em metros para a análise.</li>
+<li>Por fim, clique no botão "Visualizar Vigor"..</li>
+</ul>
+<p>A figura 07 mostra a visualização do Vigor da pastagem:</p>
+<p><img alt="" src="../figures/figure_07.png" /></p>
+<p><strong>Figura 07</strong> - Visualização do Vigor da Pastagem em 2000 no nível Baixo (Vermelho), Médio (Ocre) e Alto (Verde).</p>
+<p>Os dados de vigor utilizado neste <em>toolkit</em> são disponibilizados pelo MapBiomas, sendo gerados pelo Laboratório de Sensoriamento Remoto e Geoprocessamento - LAPIG da Universidade Federal de Goiás (conforme metodologia proposta por Santos et al., 2022 e modificada por Ferreira Jr et al., 2023).</p>
+<h2 id="317-mapeamento-automatico-de-pastagens-em-nivel-de-propriedade">3.1.7 - Mapeamento automático de pastagens em nível de propriedade</h2>
+<p>Para o mapeamento automatizado das pastagens em nível de propriedade, o usuário deve, inicialmente, acessar o Menu <strong>Mapeamento Automático Detalhado - Pastagem</strong>, selecionar a base de dados para a classificação. As opções disponíveis são Sentinel-2 e Embeddings, ambas com resolução espacial de 10 metros.</p>
+<p>Após a seleção, o usuário define a quantidade de amostras, o <em>buffer</em> (em metros) e o ano para o mapeamento. Por fim, ele escolhe a fonte de dados de pastagem existentes para a geração de amostras, as quais serão usadas pelo algoritmo Random Forest para o mapeamento final.</p>
+<p>As fontes de mapeamento existentes incluem dados do MapBiomas, dados da iniciativa Global Pasture Watch (Parente et al., 2024) e a sobreposição das áreas de pastagem de ambas as fontes. A figura 08 apresenta o resultado do mapeamento automático de pastagem em nível de propriedade.</p>
+<p><img alt="" src="../figures/figure_08.png" /></p>
+<p><strong>Figura 08</strong> - Exemplo do mapeamento automático das pastagens em nível de propriedade.</p>
+<h2 id="318-calculo-da-perda-media-anual-do-solo-rusle">3.1.8 - Cálculo da perda média anual do solo (RUSLE)</h2>
+<p>Para calcular a perda média anual de solo, no menu Método RUSLE, selecione um ano no período de 2017 a 2024. Em seguida, escolha qual fator deseja visualizar ou a própria perda média anual de solo e posteriormente, o usuário selecionará qual divisão da bacia hidrográfica deseja calcular, sendo as opções a divisão do DHN e do DNAEE. A figura 09 apresenta um exemplo do resultado.</p>
+<p><img alt="" src="../figures/figure_09.png" /></p>
+<p><strong>Figura 09</strong> - Exemplo da perda média potencial anual de solo (t/ha/ano).</p>
+<h2 id="319-analise-de-tendencia-da-pastagem-na-propriedade">3.1.9 - Análise de tendência da pastagem na propriedade</h2>
+<p>Nesta etapa é possível avaliar a tendência dos valores de produtividade primária bruta e NDVI, conforme a mancha de pastagem identificada nas áreas de interesse na Acelen. Para realizar a análise de tendência da pastagem, <strong>acesse o menu "Análise de Tendência das Pastagens"</strong>.</p>
+<h3 id="3191-analise-de-tendencia-da-produtividade-primaria-bruta-gpp">3.1.9.1 - Análise de tendência da Produtividade Primária Bruta (GPP)</h3>
+<p>Na análise de tendência da produtividade das pastagens nas áreas de interesse da Acelen, tivemos que organizar uma base de dados histórica bimestral de GPP, cobrindo o período de 2000 a 2024. A inserção desses dados no toolkit seguiu três grandes etapas:</p>
+<ol>
+<li>
+<p><strong>Coleta de Dados:</strong> Baixamos as imagens via shell que estão armazenados no servidor da OpenGeoHub, que é uma fundação de Pesquisa sediada em Doorwerth, localizada nos Países Baixos, que se dedica a promover o acesso aberto a dados geoespaciais e softwares de código aberto. Os dados possuem uma resolução espacial de 30 metros, e o cálculo do GPP segue a metodologia adotadas por Isik et al. (2024).</p>
+</li>
+<li>
+<p><strong>Junção das imagens e um único arquivo:</strong> Em vez de manipular centenas de arquivos individuais, agrupamos todas as imagens baixadas em um único arquivo georreferenciado (formato multibanda). Nele, cada registro bimestral do GPP é armazenado como uma banda distinta, facilitando o processamento e a organização espacial.</p>
+</li>
+<li>
+<p><strong>Upload dos arquivos no Google Earth Engine:</strong> Por fim, fizemos o <em>upload</em> desse arquivo para o Google Earth Engine. Para usuários de conta gratuita, o Google Earth Engine limita a quantidade de upload por imagem em 10GB, com isso, tivemos que recortar as imagens do GPP bimestral em pedaços inferior ao tamanho permitido pela Google.</p>
+</li>
+</ol>
+<p>Com os arquivos de GPP na plataforma do Google Earth Engine, o usuário pode fazer a análise da tendência nas áreas de pastagem na propriedade, acessando o <strong>menu de Análise de Tendência das Pastagem</strong>. De acordo com as seguintes etapas:</p>
+<ol>
+<li>
+<p>Selecione o produto <strong>Produtividade Primária Bruta (GPP)</strong></p>
+</li>
+<li>
+<p>Selecione o período de análise nos campos <strong>Ano Inicial</strong> e <strong>Ano Final</strong>.</p>
+</li>
+<li>
+<p>Após a seleção de todos os parâmetros, clique no botão <strong>"Calcular Tendência"</strong> para gerar o gráfico que indica se a tendência do GPP nas áreas de pastagem é positiva ou negativa.</p>
+</li>
+</ol>
+<p>As figuras 10 e 11 apresentam exemplos do resultado da Análise de tendência da pastagem usando o produto Produtividade Primária Bruta (GPP).</p>
+<p><img alt="" src="../figures/figure_10.png" /></p>
+<p><strong>Figura 10</strong> - Ocupação da área de uso e cobertura da terra em 2001</p>
+<p><img alt="" src="../figures/figure_11.png" /></p>
+<p><strong>Figura 11</strong> - Tendência de GPP da pastagem da propriedade rural de 2001 à 2023</p>
+<h3 id="3192-analise-de-tendencia-do-ndvi">3.1.9.2 - Análise de tendência do NDVI</h3>
+<p>Para verificar a tendência dos valores de índice de vegetação (NDVI) nas áreas de pastagem da propriedade, acesse o menu <strong>Análise de Tendência das Pastagem</strong>.</p>
+<ol>
+<li>
+<p>Selecione o produto <strong>Índice de Vegetação (NDVI)</strong></p>
+</li>
+<li>
+<p>Selecione o período de análise nos campos Ano <strong>Inicial</strong> e <strong>Ano Final</strong>.</p>
+</li>
+<li>
+<p>Em seguida, escolha os parâmetros <strong>Janelas de Análise do Algoritmo TMWM</strong>:</p>
+</li>
+<li>
+<p>O campo <strong>"Tamanho da Janela - Anos"</strong> representa o número máximo de anos do mesmo mês utilizado no <em>gap filling</em>.</p>
+</li>
+<li>
+<p>O campo <strong>"Tamanho da Janela - Dias"</strong> define o valor em dias dos vizinhos adjacentes do mesmo ano.</p>
+</li>
+<li>
+<p>Após a seleção de todos os parâmetros, clique no botão <strong>"Calcular Tendência"</strong> para gerar o gráfico que indica se a tendência do NDVI nas áreas de pastagem é positiva ou negativa</p>
+</li>
+</ol>
+<p>As figuras 12 e 13 apresentam exemplos do resultado da Análise de tendência da pastagem usando o Índice de Vegetação (NDVI).</p>
+<p><img alt="" src="../figures/figure_12.png" /></p>
+<p><strong>Figura 12</strong> - Área ocupada por pastagem em 2016</p>
+<p><img alt="" src="../figures/figure_13.png" /></p>
+<p><strong>Figura 13</strong> - Tendência da pastagem da propriedade rural de 2016 à 2024</p>
+<h2 id="3110-download-das-camadas-no-toolkit">3.1.10 - Download das camadas no toolkit</h2>
+<p>No toolkit, o usuário pode <strong>fazer o download</strong> tanto das camadas geradas por sua interação com a ferramenta quanto das bases de dados estáticas, como os dados de uso e cobertura da terra do MapBiomas e os dados de vigor da pastagem. Para executar o <em>download</em>, o usuário deve clicar no ícone.</p>
+<p>Na parte central inferior da tela, surgirá uma janela (conforme a Figura 14), onde é possível selecionar as camadas da base de dados estática ou as camadas geradas que estão sendo visualizadas no mapa. Após selecionar a camada desejada, clique no botão <strong>"Download"</strong>. Em seguida, acesse a aba <strong>"Tasks"</strong> e clique no botão <strong>"Run"</strong> referente à camada selecionada para iniciar a exportação. O arquivo será exportado para a pasta <strong>"GEEX"</strong> no <strong>Google Drive pessoal</strong> do usuário.</p>
+<p>A Figura 14 mostra o painel de <em>download</em> do <em>toolkit</em>.</p>
+<p><img alt="" src="../figures/figure_14.png" /></p>
+<p><strong>Figura 14</strong> - Painel de download da camada do toolkit.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
