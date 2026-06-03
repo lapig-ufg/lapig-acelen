@@ -125,15 +125,15 @@ Onde :
 
 * $A$: Perda média anual do solo.
 
-* $R$: Fração da radiação fotossinteticamente.
+* $R$: **Fração de Erodibilidade**, que quantifica o potencial de desprendimento de sedimentos causado pela chuva [(CHIRPS)](https://www.chc.ucsb.edu/data/chirps) e pelo escoamento superficial.
 
-* $K$: Fator de Erodibilidade, que quantifica o potencial de desprendimento de sedimentos causado pela chuva (CHIRPS) e pelo escoamento superficial.
+* $K$: **Fator de Erodibilidade**, que avalia a suscetibilidade so solo à erosão, considerando sua textura (proporção de argila, areia e silte) [(Tomislav.2018)](https://zenodo.org/records/2525817)
 
-* $LS$: Fator topográfico, que mede o impacto da inclinação e do comprimento da encosta na velocidade do escoamento superficial, a partir dos dados do SRTM.
+* $LS$: **Fator Topográfico**, que mede o impacto da inclinação e do comprimento da encosta na velocidade do escoamento superficial, a partir dos dados do [SRTM](https://www.earthdata.nasa.gov/data/instruments/srtm).
 
-* $C$: Fator de Manejo do Solo, que considera a influência da cobertura vegetal, por meio do NDVI.
+* $C$: **Fator de Manejo do Solo**, que considera a influência da cobertura vegetal, por meio do [NDVI](https://ntrs.nasa.gov/api/citations/19750020419/downloads/19750020419.pdf).
 
-* $P$: Eficiência da Luz.
+* $P$: **Fator de Prática de Uso do Solo**, que avalia a eficácia de intervenções humanas na redução da erosão, através dos dados de declividade do [SRTM](https://www.earthdata.nasa.gov/data/instruments/srtm), e uso e cobertura da terra do produtos [MCD12Q1](https://ladsweb.modaps.eosdis.nasa.gov/missions-and-measurements/products/MCD12Q1) do sensor MODIS a borda dos satélites TERRA e AQUA.
 
 </small>
 
