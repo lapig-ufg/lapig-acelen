@@ -110,7 +110,7 @@ Após selecionar a opção de visualização do gráfico, clique na propriedade 
 
 Figura 04 - Dinâmica da Cobertura e Uso da Terra do elemento selecionado
 
-![](/figures/figure_05.png)
+![](figures/figure_05.png)
 
 Figura 05 - Proporção de área convertida do elemento selecionado
 
