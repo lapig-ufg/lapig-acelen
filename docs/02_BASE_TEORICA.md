@@ -123,7 +123,7 @@ $$
 Onde :
 <small>
 
-* $A$: Perda média anual do solo.
+* $A$: **Perda média anual do solo**.
 
 * $R$: **Fração de Erodibilidade**, que quantifica o potencial de desprendimento de sedimentos causado pela chuva [(CHIRPS)](https://www.chc.ucsb.edu/data/chirps) e pelo escoamento superficial.
 
