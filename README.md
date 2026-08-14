@@ -38,3 +38,7 @@ Este repositório organiza os códigos do toolkit "Análise Temporal da Dinâmic
     * Análise de tendência das áreas de pastagens usando dados de Produtivade Primária Bruta (GPP) bimestral em série temporal. 
     * Atualização da interface gráfica.    
   
+* v 5.0
+    * Análise de tendência da biomassa seca das áreas de pastagens usando dados de Produtivade Primária Bruta (GPP) mensal obtidas pelo satélite Sentinel-2 (resolução espacial de 10m) em série temporal. 
+        
+  
