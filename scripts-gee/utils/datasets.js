@@ -2,12 +2,12 @@
 //Dados
 exports.Dataset = {
   //Dataset versão 1.0 toolkit
-  'Vigor-Mapbiomas':ee.Image('projects/mapbiomas-public/assets/brazil/lulc/collection9/mapbiomas_collection90_pasture_vigor_v1'),
-  'Mapbiomas':ee.Image('projects/ee-amazonas21/assets/datasets-app/us-brazil'),
+  'Vigor-Mapbiomas':ee.Image('projects/mapbiomas-public/assets/brazil/lulc/collection10/mapbiomas_brazil_collection10_pasture_vigor_v3'),
+  'Mapbiomas':ee.Image('users/Amazonas21/datasets-app/us-brazil'),
   
   //Dataset versão 2.0 toolkit
   'Embeddings':ee.ImageCollection("GOOGLE/SATELLITE_EMBEDDING/V1/ANNUAL"),
-  'Global Pasture Watch':ee.ImageCollection("projects/global-pasture-watch/assets/ggc-30m/v1/grassland_c"),
+  'Global Pasture Watch':ee.ImageCollection("projects/global-pasture-watch/assets/ggc-30m/v1-1/grassland_c"),
   
   //Dataset versão 3.0 toolkit - Dados das bacias hidrográficas
   'Bacias Hidrográficas':{
@@ -23,7 +23,7 @@ exports.Dataset = {
 
 //Imagens das classes agrupadas
 exports.Imagescluster = {
-  'Mapbiomas':ee.Image('projects/ee-amazonas21/assets/datasets-app/us-brazil'),
+  'Mapbiomas':ee.Image('users/Amazonas21/datasets-app/us-brazil')
 }
 
 //Imagesn background
