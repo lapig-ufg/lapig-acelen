@@ -12,7 +12,7 @@ Para ter acesso ao código fonte e a interface do toolkit desenvolvido, acesse o
 
 ### 4.1.1 - Material de apoio à operação
 
-Complementando esta documentação, um vídeo tutorial registra a operação do toolkit de ponta a ponta, com narração e demonstração em tela de todas as funcionalidades descritas na Seção 3.1. O material está disponível em video_tutorial neste link [link-video](https://drive.google.com/file/d/1_GYqF-2kMnPF4Lnsrr97450Kq_Bqhhvy/view?usp=sharing).
+Complementando esta documentação, um vídeo tutorial registra a operação do toolkit de ponta a ponta, com narração e demonstração em tela de todas as funcionalidades descritas na Seção 3.1. O material está disponível em vídeo_tutorial neste link [link-video](https://drive.google.com/file/d/1_GYqF-2kMnPF4Lnsrr97450Kq_Bqhhvy/view?usp=sharing). A base de entrada no vídeo tutorial é a Malha Fundiária Ambiental, desenvolvida pelo LAPIG/UFG e descrita, quanto à metodologia de construção, na Seção 2.8. Para as análises deste projeto, foi preparado um recorte específico, disponível no Google Earth Engine sob o identificador projects/ee-amazonas21/assets/Acelen/Datasets/propriedade_montes_claros_lapig. Esse recorte abrange os imóveis rurais privados com área igual ou superior a 2 hectares situados na Região Intermediária de Montes Claros, no trecho que faz interseção com o bioma Cerrado. É essa camada que delimita a unidade de análise do toolkit — a propriedade rural — e que constitui o quadro amostral da estratégia de verificação em campo, conforme a Seção 3.2.2
 
 ## 4.2 - Estratégia de Amostragem em Campo
 
