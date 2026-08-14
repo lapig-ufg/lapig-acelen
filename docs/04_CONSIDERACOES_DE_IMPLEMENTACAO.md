@@ -8,7 +8,7 @@ O toolkit versão 5.0 (Análise Temporal da Dinâmica de Cobertura e Uso da Terr
 
 É importante enfatizar que a qualidade e nível de informação acessível nesta versão do toolkit é função dos dados utilizados, i.e. Coleção 10 do Mapbiomas, cuja acurácia global está em torno de 93% e imagens da série Landsat, com resolução de 30 metros e cuja disponibilidade e qualidade dos dados variam entre os sensores Thematic Mapper (Landsat 5), ETM+ (Landsat 7) e OLI (Landsat 8 e 9). Da mesma forma, é importante reiterar que a velocidade de visualização e consulta aos dados depende da complexidade dos dados poligonais, da conexão ao Google Earth Engine e da própria capacidade de processamento da plataforma da Google.
 
-Para ter acesso ao código fonte e a interface do toolkit desenvolvido, acesse os links do GitHub no endereço [https://github.com/lapig-ufg/lapig-acelen](https://github.com/lapig-ufg/lapig-acelen) e o do Google Earth Engine [https://code.earthengine.google.com/bfad226b58bbb70d9524c9b6f9bb7462?hideCode=true](https://code.earthengine.google.com/bfad226b58bbb70d9524c9b6f9bb7462?hideCode=true) respectivamente.
+Para ter acesso ao código fonte e a interface do toolkit desenvolvido, acesse os links do GitHub no endereço [https://github.com/lapig-ufg/lapig-acelen](https://github.com/lapig-ufg/lapig-acelen) e o do Google Earth Engine [https://code.earthengine.google.com/bfad226b58bbb70d9524c9b6f9bb7462](https://code.earthengine.google.com/bfad226b58bbb70d9524c9b6f9bb7462) respectivamente.
 
 ### 4.1.1 - Material de apoio à operação
 
