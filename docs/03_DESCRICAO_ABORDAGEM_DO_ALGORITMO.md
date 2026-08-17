@@ -9,11 +9,10 @@ O toolkit versão 5.0 permite ao usuário explorar a série histórica dos mapas
 A Figura 03 mostra o fluxograma do processo de usabilidade da Análise Temporal da Dinâmica de Cobertura e Uso da Terra.
 
 <center>
-<img width="600px" src="https://github.com/lapig-ufg/lapig-acelen/blob/master/docs/figures/figure_01.png"/>
+<img width="600px" title="" src="figures/figure_01.png"/>
 <div>Figura 03 - Fluxograma de processo da Análise da Dinâmica de Cobertura e Uso da Terra.</div>
 <p></p>
 </center>
-
 
 ### 3.1.1 - Variáveis e Parâmetros
 
