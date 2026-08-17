@@ -49,6 +49,7 @@ exports.classesFilter ={
               })
 }
 
+//Mapa inverso de classes.js: código numérico (1-9) -> nome da classe, por fonte de dados
 exports.codClass = {
                     'Mapbiomas':ee.Dictionary({
                                     1:'Soja',
@@ -201,7 +202,8 @@ exports.labelTitleTool = {
 exports.pastureYearGPW = ['2000','2001','2002','2003','2004','2005',
                     '2006','2007','2008','2009','2010','2011',
                     '2012','2013','2014','2015','2016','2017',
-                    '2018','2019','2020','2021','2022']
+                    '2018','2019','2020','2021','2022','2023',
+                    '2024']
 
 //Cor do mapa de pastagem
 exports.styleclass = {
@@ -209,8 +211,7 @@ exports.styleclass = {
       max:1,
       palette:['gold']
 }
-//Paleta de cores do Vigor
-//Paleta de cores do Vigor
+//Paleta de cores das classes de perda anual de solo (RUSLE), em t/ha/ano
 exports.paletteRusle = {
   '0 - 1.5':'#006837',
   '1.5 - 3.0':'#31a354',
@@ -220,3 +221,9 @@ exports.paletteRusle = {
   '20 - 50':'#f03b20',
   '> 50':'#bd0026'
 }
+//Anos disponíveis para a análise de tendência de GPP
+exports.yearsGPP = [
+                   '2000','2001','2002','2003','2004','2005','2006','2007','2008',
+                   '2009','2010','2011','2012','2013','2014','2015','2016','2017',
+                   '2018','2019','2020','2021','2022','2023','2024'
+                  ]

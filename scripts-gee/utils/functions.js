@@ -1,7 +1,7 @@
 //Importando modulos
-var datasets = require('users/Amazonas21/acelen:files/datasets.js') 
+var datasets = require('users/Amazonas21/acelen:files/datasets.js')
 var style = require('users/Amazonas21/acelen:files/styles.js')
-  
+
 //--------------------------------------------FUNCTIONS----------------------------------------------
 //Reclassificação dos dados do Mapbiomas datasets para aplicação da são matinho
 exports.ReClassFromImages = function(image,classes,defaultValue){
@@ -39,16 +39,19 @@ exports.clearCloud = function(img){
   //Verificar o ano da imagem
   var year = ee.Date(img.get('system:time_start')).get('year')
   
-  //Mascara da imagem do Landsat 5
-  var maskL5 = img.expression("(b('QA_PIXEL') == 5440 || b('QA_PIXEL') == 5504)").add(img.lte(0));
-  
-  //Mascara da imagem do Landsat 8
-  var maskL8 = img.expression("(b('QA_PIXEL') == 21824 || b('QA_PIXEL') == 21952)").add(img.lte(0));   
-  
-  //Condicao para selecionar a image Landsat 5 ou Landsat 8 
+  //Mascara de QA (pixel limpo) da imagem do Landsat 5
+  var maskL5 = img.expression("(b('QA_PIXEL') == 5440 || b('QA_PIXEL') == 5504)");
+
+  //Mascara de QA (pixel limpo) da imagem do Landsat 8
+  var maskL8 = img.expression("(b('QA_PIXEL') == 21824 || b('QA_PIXEL') == 21952)");
+
+  //Condicao para selecionar a image Landsat 5 ou Landsat 8
   var condition =  year.lt(2013)
-  var result = ee.Algorithms.If(condition,maskL5,maskL8)
-  
+  var qaMask = ee.Image(ee.Algorithms.If(condition,maskL5,maskL8))
+
+  //Máscara final: pixel com QA bom E com valor de banda válido (>0)
+  var result = qaMask.and(img.gt(0))
+
   // Returna a imagem sem pixels contimanados por nuvens
   return img.updateMask(result);
   
@@ -244,7 +247,10 @@ exports.runprocess = function(map,area,nomeAsset,year,type,datasource,buffer){
   
   var Carregando = ui.Panel([ui.Label('Gerando a classificação...')])
   map.add(Carregando)
-  
+
+  //Resultado default para os tipos 'Original'/'Original - Área total', que não calculam estatística por talhão
+  var stats = null
+
   var minMax = style.minMax//{
   //  'Mapbiomas':{min:1,max:9}
   //}
@@ -293,7 +299,7 @@ exports.runprocess = function(map,area,nomeAsset,year,type,datasource,buffer){
   if(type == 'Moda'){
       
       //Calcular a moda das classes de cada talhão e/ou propriedade
-      var stats = reclass.reduceRegions({
+      stats = reclass.reduceRegions({
           collection: vetor,//.bounds()//vetor.filterBounds(vetor.bounds()),
           reducer: ee.Reducer.mode(),
           scale: 30
@@ -338,6 +344,7 @@ exports.runprocess = function(map,area,nomeAsset,year,type,datasource,buffer){
   return stats
 }
 
+//Remove todas as camadas atualmente adicionadas ao mapa
 exports.RemoveAllLayers= function(map){
   var layers = map.layers()
   layers.forEach(function(layer){
@@ -443,13 +450,15 @@ exports.maskEdges = function(s2_img){
         s2_img.select('B8A').mask().updateMask(s2_img.select('B9').mask())) //Defined
 }
 
+//Gera amostras estratificadas (pastagem/não-pastagem) para treinar o classificador Random Forest,
+//balanceando a quantidade de pontos de cada classe proporcionalmente à área ocupada por ela
 exports.automatedSamples = function(img,year,area,numSamples,scale,buffer,fonte){
-  
- 
+
+
   //Area images
   var cliparea = area.geometry().buffer(parseInt(buffer))
 
-  //Calculation samples        
+  //Calculation samples
   var reducers = ee.Reducer.sum().combine({
                 reducer2: ee.Reducer.frequencyHistogram(),
                 sharedInputs: true
@@ -481,6 +490,8 @@ exports.automatedSamples = function(img,year,area,numSamples,scale,buffer,fonte)
   
   
   
+  //Distribui numSamples proporcionalmente entre as classes 0 (não-pastagem) e 1 (pastagem),
+  //conforme a frequência de cada uma dentro da área de interesse
   var classData = ee.Dictionary(prop.get('targetMap_histogram'))
   var total = ee.Number(classData.get('0')).add(ee.Number(classData.get('1')))
   var classPasture = ee.Number(classData.get('1')).divide(total).multiply(numSamples)
@@ -571,6 +582,8 @@ exports.calcR = function(aoi,year){
   var listR = month.map(function(date){
       
       var precipMonth = ee.ImageCollection(id)
+                .filterDate(year+'-01-01',year+1+'-01-01')
+                .filterBounds(aoi)
                 .filter(ee.Filter.calendarRange(date, date, 'month'))
                 .mean()
                 .clip(aoi)
@@ -666,8 +679,16 @@ exports.calcP = function(date1,date2,aoi){
   
   var modisLandCoverCollection = ee.ImageCollection("MODIS/061/MCD12Q1")//ee.ImageCollection("MODIS/006/MCD12Q1");
   // --- P Factor Calculation (from MODIS LULC & Slope) ---
-  var lulc = modisLandCoverCollection.filterDate(date1, date2).select('LC_Type1')
-        .first() // Gets the LULC map for the year defined by date1/date2
+  // O MCD12Q1 tem atraso de publicação (o ano mais recente escolhido no menu RUSLE pode ainda não
+  // ter imagem disponível); nesse caso, usa a imagem mais recente existente em vez de falhar com coleção vazia.
+  var filteredLulc = modisLandCoverCollection.filterDate(date1, date2).select('LC_Type1')
+  var hasLulcImage = filteredLulc.size().gt(0)
+  var lulcImage = ee.Image(ee.Algorithms.If(
+        hasLulcImage,
+        filteredLulc.first(),
+        modisLandCoverCollection.select('LC_Type1').sort('system:time_start', false).first()
+  ))
+  var lulc = lulcImage // Gets the LULC map for the year defined by date1/date2 (ou o mais recente disponível)
         .clip(aoi).rename('lulc');
   // Map.addLayer (lulc, {}, 'LULC (MODIS)', false); // Optional display
   var lulc_slope = lulc.addBands(slope);
@@ -693,18 +714,6 @@ exports.calcP = function(date1,date2,aoi){
 //----------------------------------------------------------Função versão 3.0 Toolkit---------------------------------------------------
 //-------------------------------------------------Análise de tendência das pastagens----------------------------------------
 //--------------------------------------------------------FUNÇÕES AUXILIARES-------------------------------------------------
-
-/**
- * Filtra pixels ruins (nuvem, sombra, valores <= 0) em imagens Landsat 8
- * utilizando a banda QA_PIXEL.
- */
-exports.convertImage2FeatureAtr = function(img){
-  return ee.Feature(null,{
-    'system:time_start': img.get('system:time_start'),
-    'median-ndvi': img.get('median-ndvi'),
-    'NDVI-trend': img.get('NDVI-trend')
-  })
-}
 
 /**
  * Calcula o Índice de Vegetação por Diferença Normalizada (NDVI).
@@ -774,28 +783,14 @@ exports.runTMWMFilter  = function(aoi, idCollection, StartDate, EndDate, qtYears
         });
 
         // Aplicação do Join Iterativo
-        // A coleção 'join_collection_month' (Primary) acumula as propriedades,
-        // mas o 'Secondary' DEVERIA ser 'data' (a coleção limpa) para o filtro 'dtMonth' funcionar.
-        // **NOTA: O trecho a seguir contém o erro de join iterativo não corrigido da sua última versão!
-        // No entanto, vou comentar a lógica original.**
-        
-        if (i == 0){
-            // Primeira iteração: primary e secondary são a coleção original 'data'
-            var join_collection_month = ee.ImageCollection(join.apply({
-                primary: data,
-                secondary: data,
-                condition: dtMonth
-            }));
-        } else {
-            // Iterações seguintes: primary é a coleção que já tem propriedades
-            // secondary TAMBÉM é a coleção modificada, o que pode causar o erro 'binary filter'.
-            join_collection_month = ee.ImageCollection(join.apply({
-                primary: join_collection_month,
-                secondary: join_collection_month,
-                condition: dtMonth
-            }));
-        }
-        
+        // 'primary' acumula as propriedades a cada iteração; 'secondary' é sempre a coleção
+        // limpa 'data', que é o universo de imagens candidatas a vizinhas para o filtro 'dtMonth'.
+        join_collection_month = ee.ImageCollection(join.apply({
+            primary: join_collection_month,
+            secondary: data,
+            condition: dtMonth
+        }));
+
         // Mapeamento: Processa a lista de vizinhos para calcular a Mediana
         join_collection_month = join_collection_month.map(function(img){
             var dateMonth = ee.Date(img.get('system:time_start')).get('month');
@@ -837,23 +832,14 @@ exports.runTMWMFilter  = function(aoi, idCollection, StartDate, EndDate, qtYears
             ascending: true,
         });
         
-        // Aplicação do Join Iterativo (Similar ao loop anterior, com o mesmo potencial erro)
-        if (i == 0){
-            // Primeira iteração do loop de dias. Primary é a coleção do mês
-            var join_collection_days = ee.ImageCollection(join.apply({
-                primary: join_collection_month,
-                secondary: join_collection_month, // Secondary TAMBÉM modificado
-                condition: dtDays
-            }));
-        } else {
-            // Iterações seguintes do loop de dias
-            join_collection_days = ee.ImageCollection(join.apply({
-                primary: join_collection_days,
-                secondary: join_collection_days, // Secondary TAMBÉM modificado
-                condition: dtDays
-            }));
-        }
-        
+        // Aplicação do Join Iterativo: 'primary' acumula as propriedades a cada iteração;
+        // 'secondary' é sempre a coleção limpa 'data' (mesmo padrão do loop de ano/mês acima).
+        join_collection_days = ee.ImageCollection(join.apply({
+            primary: join_collection_days,
+            secondary: data,
+            condition: dtDays
+        }));
+
         // Mapeamento: Processa a lista de vizinhos para calcular a Mediana
         join_collection_days = join_collection_days.map(function(img){
             // Converte a lista de vizinhos (salva no 'namefield') de volta para ImageCollection
@@ -953,7 +939,10 @@ exports.getTrend = function(dataimg,bandTime,field){//band,bandTime,field){
   
       //Convertendo a imageCollection para FeatureCOllection
       var feat = dataimg.map(exports.convertImage2FeatureAtr)
-      
+
+      //Ordenando por data para o gráfico não ligar pontos fora de ordem cronológica
+      feat = feat.sort(bandTime)
+
       return feat
 }
 
@@ -963,7 +952,19 @@ exports.getTrendGPP = function(intial,final,data){
   //Parâmetros de entrada
   var ini = parseInt(intial)
   var fin = parseInt(final)
-              
+
+  //Anos que realmente existem como banda 'classification_<ano>' no dataset Mapbiomas (lulc).
+  //Usado para restringir o período pedido apenas aos anos com máscara de pastagem disponível,
+  //evitando selecionar uma banda inexistente mais abaixo (causa do erro "Image.multiply: ...
+  //Got 0 and 1" quando lulc.select() não encontrava a banda do ano).
+  var lulc = datasets.Dataset['Mapbiomas']
+  var lulcYears = lulc.bandNames().getInfo()
+        .filter(function(b){ return b.indexOf('classification_') === 0 })
+        .map(function(b){ return parseInt(b.replace('classification_','')) })
+
+  //Interseção entre o período pedido pelo usuário e os anos disponíveis em lulc
+  var validYears = lulcYears.filter(function(y){ return y >= ini && y <= fin })
+
   //Dados do bimestre
   var bimestres = ee.List(['-01-01','-03-01','-05-01','-07-01','-09-01','-11-01'])
   var anos = ee.List.sequence(2000,2024,1)
@@ -976,12 +977,16 @@ exports.getTrendGPP = function(intial,final,data){
   }).flatten()
 
   //Renomeando as bandas
-  var folder = ee.data.listAssets('projects/ee-amazonas21/assets/Acelen/uGPP/BA/')
+  var folder = ee.data.listAssets('projects/ee-amazonas21/assets/Acelen/uGPP/')
   var listAssets = []
   var assets = folder['assets']
-      assets.forEach(function(asset){
-                      listAssets.push(ee.Image(asset.id))
-      })
+      assets.forEach(function(src){
+        var files = ee.data.listAssets(src.id)
+            files['assets'].forEach(function(asset){
+                    listAssets.push(ee.Image(asset.id))
+        })
+   
+  })
 
   var col = ee.ImageCollection.fromImages(listAssets)
   var gpp = col.filterBounds(data.geometry()).toBands().multiply(0.1).rename(name)
@@ -991,8 +996,7 @@ exports.getTrendGPP = function(intial,final,data){
               return gpp.select(ee.String(n)).rename('uGPP')
                           .set('system:time_start',ee.Date(ee.String(n)).millis())
                           .set('year',ee.Date(ee.String(n)).get('year'))
-  })).filter(ee.Filter.calendarRange(ini,fin,'year'))
-  var lulc = datasets.Dataset['Mapbiomas']
+  })).filter(ee.Filter.inList('year', validYears))
   var gppPasture = imgCollection.map(function(img){
       var mask = lulc.select(ee.String('classification_').cat(ee.String(img.get('year'))))
                      .eq(3)
@@ -1006,7 +1010,7 @@ exports.getTrendGPP = function(intial,final,data){
       return img.set('system:time_start',img.get('system:time_start'))
                 .set('year',img.get('year'))
                 .set('median',medianGPP.get('gpp-pasture'))
-  }).filter(ee.Filter.calendarRange(ini,fin,'year'))
+  }).filter(ee.Filter.inList('year', validYears))
              
   //Criando a ImageCollection
   var trendGPP = exports.getTrend(gppPasture,'system:time_start','median')
@@ -1016,4 +1020,56 @@ exports.getTrendGPP = function(intial,final,data){
   return trendGPP
 }
 
+//--------------------------------------------------------Função versão 5.0 Toolkit--------------------------------------------- 
+exports.analisarBiomassa = function(param) {
+  
+  var DRY_BIOMASS_FACTOR = param.GRASS_LUEMAX_FACTOR * param.IPCC_FACTOR
+  var grassland_mask = param.mask_grass.filterDate('2024-01-01','2024-12-31').first().gte(1)
 
+  // Definir o período de análise (Janeiro de 2025 a Abril de 2026)
+  var startDate = ee.Date('2025-01-01');
+  var endDate = ee.Date('2026-05-31'); // Data limite exclusiva (garante a inclusão de abril de 2026)
+
+  // Calcular o número total de meses no período
+  var numberOfMonths = endDate.difference(startDate, 'month').round();
+  var monthlyOffsets = ee.List.sequence(0, numberOfMonths.subtract(1));
+
+  // Criar a coleção de imagens mensais de uGPP
+  var monthlyCollection = ee.ImageCollection.fromImages(monthlyOffsets.map(function(n) {
+    n = ee.Number(n);
+    var start = startDate.advance(n, 'month');
+    var end = start.advance(1, 'month');
+    var daysInMonth = end.difference(start, 'day'); // Conta os dias dinamicamente
+
+    // Filtra ugpp para o mês específico
+    var ugppMonth = param.ugpp
+        ugppMonth = ugppMonth.filterBounds(param.geom)
+                             .filterDate(start, end);
+
+    // Calcula a média mensal, aplica os fatores e multiplica pelos dias do mês
+    var meanImg = ugppMonth.mean()
+      .multiply(param.UGPP_SCALE_FACTOR)
+      .multiply(0.01) // gC/m²/dia  para toneladas C/ha
+      .multiply(daysInMonth) // Multiplica pelo número de dias do mês
+      .rename('tC_ha_month');
+
+    // Retorna a imagem com propriedades temporais para controle
+    return meanImg.set({
+      'month': start.get('month'),
+      'year': start.get('year'),
+      'days': daysInMonth,
+      'system:time_start': start.millis()
+    });
+  }));
+
+  // Criar a coleção mensal de biomassa seca aplicando a máscara e o fator correspondente
+  var monthlyBiomass = monthlyCollection.map(function(img) {
+    return img.updateMask(grassland_mask)
+      .multiply(DRY_BIOMASS_FACTOR)
+      .rename('tC_ha_month')
+      .copyProperties(img, ['month', 'year', 'system:time_start']);
+  });
+
+  return monthlyBiomass
+ 
+}

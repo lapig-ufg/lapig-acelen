@@ -156,16 +156,17 @@ exports.getRun = function(year,area,numberSamples,Buffer,fonteSamples,classDataU
   var numberSamples = parseInt(numberSamples)
   var scale = 10
   
+  //Rasteriza a área de entrada (1 dentro dos talhões, mascarado fora) para restringir a classificação a essa região
   var mask = area.map(function(feat){
-        return feat.set('value',1)  
+        return feat.set('value',1)
   }).reduceToImage({properties: ['value'],reducer: ee.Reducer.first()}).selfMask();
-  
+
   //Creating automated smaples
   var samplesautomated = func.automatedSamples(imgs,year,area,numberSamples,scale,Buffer,fonteSamples)
-  
+
   print(samplesautomated['samples'])
-  
-  //Run classification and GPP
+
+  //Run classification and GPP (Sentinel-2 ou Satellite Embeddings, conforme escolha do usuário)
   if (classDataUse == 'Sentinel-2'){
     
     var classRF = run_classfication(area,year,samplesautomated['samples'],'targetMap',mask)
@@ -201,6 +202,7 @@ exports.getRun = function(year,area,numberSamples,Buffer,fonteSamples,classDataU
     var classRF =  {'classification':classRF}
   }
   
+  //Retorna a imagem classificada (probabilidade >= 0.51 = pastagem) e as amostras usadas no treino
   return [classRF['classification'],samplesautomated['samples']]
 }
 
