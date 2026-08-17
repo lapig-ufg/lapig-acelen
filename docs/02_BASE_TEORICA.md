@@ -259,7 +259,7 @@ O funcionamento é iterativo: fixado *k*, escolhem-se *k* centroides iniciais; n
 O número ideal de estratos ($k$), esperado entre 6 e 8 para capturar os gradientes de degradação da paisagem, é determinado pela combinação do método Elbow, do índice de Davies-Bouldin e de validação visual em mapa. O método Elbow (Figura 01) avalia a taxa de decréscimo da WCSS (soma dos quadrados dentro dos clusters), identificando no ponto de inflexão da curva o ganho marginal decrescente ao adicionar grupos; contudo, por ser uma leitura gráfica sujeita à subjetividade, é complementado pelo índice de Davies-Bouldin, uma medida escalar objetiva que confronta a dispersão interna dos agrupamentos com a separação entre eles
 
 <center>
-<img src="/figures/figure_2_08_1.png" width="500px" title="Figura 01 - Método Elbow"/>
+<img width="500px" src="figures/figure_2_08_1.png"/>
 <div>Figura 01 - Método Elbow</div>
 <p></p>
 </center>
