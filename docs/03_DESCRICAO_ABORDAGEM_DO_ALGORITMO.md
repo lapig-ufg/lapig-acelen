@@ -9,7 +9,7 @@ O toolkit versão 5.0 permite ao usuário explorar a série histórica dos mapas
 A Figura 03 mostra o fluxograma do processo de usabilidade da Análise Temporal da Dinâmica de Cobertura e Uso da Terra.
 
 <center>
-<img width="600px" title="" src="figures/figure_01.png"/>
+<img width="600px" title="" src="../figures/figure_01.png"/>
 <div>Figura 03 - Fluxograma de processo da Análise da Dinâmica de Cobertura e Uso da Terra.</div>
 <p></p>
 </center>
@@ -106,8 +106,8 @@ Depois da seleção do tipo de classificação, clique no botão Gerar classific
 Para visualizar a dinâmica das classes de cobertura e uso da terra, é necessário que a opção escolhida no campo Tipo de Classificação seja a moda. Clique no ícone e aparecerá no centro superior da tela as opções das informações que o usuário deseja visualizar (Figura 05):
 
 <center>
-<img width="300px" src="figures/figure_03_a.png"/>
-<img width="300px" src="figures/figure_03_b.png"/>
+<img width="300px" src="../figures/figure_03_a.png"/>
+<img width="300px" src="../figures/figure_03_b.png"/>
 <div>Figura 05 - (a) O menu da ferramenta de gráfico, e (b) opções de visualização do gráfico.</div>
 <p></p>
 </center>
@@ -115,19 +115,19 @@ Para visualizar a dinâmica das classes de cobertura e uso da terra, é necessá
 Após selecionar a opção de visualização do gráfico, clique na propriedade do arquivo externo que você deseja analisar. As Figuras 04, 05 e 06 ilustram os resultados dos gráficos de Cobertura da Terra, Proporção de Área Convertida e Evolução das áreas de pastagens.
 
 <center>
-<img width="400px" src="figures/figure_04.png"/>
+<img width="400px" src="../figures/figure_04.png"/>
 <div>Figura 06 - Dinâmica da Cobertura e Uso da Terra do elemento selecionado.</div>
 <p></p>
 </center>
 
 <center>
-<img width="400px" src="figures/figure_05.png"/>
+<img width="400px" src="../figures/figure_05.png"/>
 <div>Figura 07 - Proporção de área convertida do elemento selecionado.</div>
 <p></p>
 </center>
 
 <center>
-<img width="400px" src="figures/figure_06.png"/>
+<img width="400px" src="../figures/figure_06.png"/>
 <div>Figura 08 - Evolução das áreas de pastagem.</div>
 <p></p>
 </center>
@@ -145,7 +145,7 @@ Para visualizar os níveis de vigor da pastagem, siga os seguintes passos no men
 A Figura 09 mostra a visualização do Vigor da pastagem:
 
 <center>
-<img width="500px" src="figures/figure_07.png"/>
+<img width="500px" src="../figures/figure_07.png"/>
 <div>Figura 09 - Visualização do Vigor da Pastagem em 2000 no nível Baixo (Vermelho), Médio (Ocre) e Alto (Verde).</div>
 <p></p>
 </center>
@@ -162,7 +162,7 @@ Após a seleção, o usuário define a quantidade de amostras, o buffer (em metr
 As fontes de mapeamento existentes incluem dados do MapBiomas, dados da iniciativa Global Pasture Watch (Parente et al., 2024) e a sobreposição das áreas de pastagem de ambas as fontes. A Figura 10 apresenta o resultado do mapeamento automático de pastagem em nível de propriedade.
 
 <center>
-<img width="500px" src="figures/figure_08.png"/>
+<img width="500px" src="../figures/figure_08.png"/>
 <div>Figura 10 - Exemplo do mapeamento automático das pastagens em nível de propriedade.</div>
 <p></p>
 </center>
@@ -172,7 +172,7 @@ As fontes de mapeamento existentes incluem dados do MapBiomas, dados da iniciati
 Para calcular a perda média anual de solo, no menu Método RUSLE, selecione um ano no período de 2017 a 2024. Em seguida, escolha qual fator deseja visualizar ou a própria perda média anual de solo e posteriormente, o usuário selecionará qual divisão da bacia hidrográfica deseja calcular, sendo as opções a divisão do DHN e do DNAEE. A Figura 11 apresenta um exemplo do resultado.
 
 <center>
-<img width="500px" src="figures/figure_09.png"/>
+<img width="500px" src="../figures/figure_09.png"/>
 <div>Figura 11 - Exemplo da perda média potencial anual de solo (t/ha/ano).</div>
 <p></p>
 </center>
@@ -203,13 +203,13 @@ Com os arquivos de GPP na plataforma do Google Earth Engine, o usuário pode faz
 As figuras 10 e 11 apresentam exemplos do resultado da Análise de tendência da pastagem usando o produto Produtividade Primária Bruta (GPP).
 
 <center>
-<img width="500px" src="figures/figure_10.png"/>
+<img width="500px" src="../figures/figure_10.png"/>
 <div>Figura 12 - Ocupação da área de uso e cobertura da terra em 2001.</div>
 <p></p>
 </center>
 
 <center>
-<img width="600px" src="figures/figure_11.png"/>
+<img width="600px" src="../figures/figure_11.png"/>
 <div>Figura 13 - Tendência de GPP da pastagem da propriedade rural de 2001 à 2023.</div>
 <p></p>
 </center>
@@ -233,13 +233,13 @@ Para verificar a tendência dos valores de índice de vegetação (NDVI) nas ár
 As figuras 12 e 13 apresentam exemplos do resultado da Análise de tendência da pastagem usando o Índice de Vegetação (NDVI).
 
 <center>
-<img width="550px" src="figures/figure_12.png"/>
+<img width="550px" src="../figures/figure_12.png"/>
 <div>Figura 14 - Área ocupada por pastagem a partir 2016.</div>
 <p></p>
 </center>
 
 <center>
-<img width="650px" src="figures/figure_13.png"/>
+<img width="650px" src="../figures/figure_13.png"/>
 <div>Figura 15 - Tendência da pastagem da propriedade rural de 2016 à 2024</div>
 <p></p>
 </center>
@@ -275,7 +275,7 @@ Na parte central inferior da tela, surgirá uma janela (conforme a Figura 14), o
 A Figura 16 mostra o painel de download do toolkit.
 
 <center>
-<img width="350px" src="figures/figure_14.png"/>
+<img width="350px" src="../figures/figure_14.png"/>
 <div>Figura 16 - Painel de download da camada do toolkit.</div>
 <p></p>
 </center>
