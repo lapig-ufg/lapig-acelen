@@ -1,11 +1,20 @@
 site_name: Acelen - Algorithm Theoretical Basis Document (ATBD)
 site_author: Bernard Silva de Oliveira
+copyright: ATBD versão 5.0 — agosto de 2026 · LAPIG/UFG–FUNAPE × Acelen Renováveis
 theme:
-  name: material
+  name: material # O estilo material
   logo: figures/logo.png # <--- Logo que vai aparecer na ESQUERDA
 
+  # Recursos visuais (Habilita a barra de pesquisa que expande e abas se necessário)
+  features:
+    - navigation.tabs       # Adiciona o menu horizontal no topo (Home, Setup, Plugins...)
+    - navigation.sections   # Organiza o menu lateral em blocos visuais
+    - search.suggest        # Sugestões inteligentes na busca
+    - search.highlight      # Destaca o texto que o usuário buscou
+    - toc.integrate
+
 repo_name: LAPIG-UFG/toolkit-acelen  # Nome que aparecerá ao lado do ícone
-repo_url: https://github.com/lapig-ufg/lapig-acelen
+repo_url: https://github.com/lapig-ufg/lapig-acelen #O link do endereço do github do lapig na acelen
 
 nav:
   - 'Introdução': '01_INTRODUCAO.md'
@@ -18,7 +27,7 @@ markdown_extensions:
   - attr_list
   - md_in_html
   - pymdownx.blocks.caption
-  - pymdownx.arithmatex:   
+  - pymdownx.arithmatex:    #Ativar as fórmulas matemáticas no github.io
       generic: true
 
 extra_javascript:
