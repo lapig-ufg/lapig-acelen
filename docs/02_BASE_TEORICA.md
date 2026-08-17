@@ -259,7 +259,7 @@ O funcionamento é iterativo: fixado *k*, escolhem-se *k* centroides iniciais; n
 O número ideal de estratos ($k$), esperado entre 6 e 8 para capturar os gradientes de degradação da paisagem, é determinado pela combinação do método Elbow, do índice de Davies-Bouldin e de validação visual em mapa. O método Elbow (Figura 01) avalia a taxa de decréscimo da WCSS (soma dos quadrados dentro dos clusters), identificando no ponto de inflexão da curva o ganho marginal decrescente ao adicionar grupos; contudo, por ser uma leitura gráfica sujeita à subjetividade, é complementado pelo índice de Davies-Bouldin, uma medida escalar objetiva que confronta a dispersão interna dos agrupamentos com a separação entre eles
 
 <center>
-<img width="500px" title="" src="figures/figure_2_08_1.png"/>
+<img width="500px" title="" src="../figures/figure_2_08_1.png"/>
 <div>Figura 01 - Método Elbow</div>
 <p></p>
 </center>
@@ -335,7 +335,7 @@ O algoritmo GRTS (Stevens & Olsen, 2004) resolve esse impasse sem abandonar o ca
 Duas propriedades operacionais decorrem do método. A primeira é que a ordenação produzida é uma **lista sequencial**, e não apenas um conjunto: percorrê-la além do tamanho nominal da amostra fornece unidades de substituição que preservam o balanceamento espacial e a estrutura de estratos do sorteio original. Isso importa porque, em levantamentos de campo, parte das unidades sorteadas se revela inobservável por razões alheias ao desenho — acesso não autorizado, obstrução persistente da imagem, mudança de uso —, e a substituição precisa ocorrer sem que a amostra perca suas propriedades. A segunda é que o método se aplica recursivamente: uma vez selecionada uma unidade, o mesmo procedimento pode sortear subunidades em seu interior, e assim sucessivamente, o que permite construir desenhos aninhados de custo decrescente por nível. A Figura 02 descreve a metodologia do algoritmo GRTS
 
 <center>
-<img width="500px" title="" src="figures/figure_2_08.png"/>
+<img width="500px" title="" src="../figures/figure_2_08.png"/>
 <div>Figura 02 - Método do algoritmo GRTS</div>
 <p></p>
 
