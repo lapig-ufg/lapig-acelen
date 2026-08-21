@@ -6,7 +6,7 @@ Este capítulo reúne as condições práticas de operação dos dois componente
 
 O toolkit versão 5.0 (Análise Temporal da Dinâmica de Cobertura e Uso da Terra) foi desenvolvido no ambiente do Google Earth Engine, a partir do Javascript, que é uma linguagem open source e gratuita. Para acessar o toolkit é necessária uma conexão à internet, um navegador compatível com o Google Earth Engine e uma conta da Google (Gmail).
 
-É importante enfatizar que a qualidade e nível de informação acessíveis nesta versão do toolkit são função dos dados utilizados, i.e. Coleção 10 do Mapbiomas, cuja acurácia global está em torno de 93% e imagens da série Landsat, com resolução de 30 metros e cuja disponibilidade e qualidade dos dados variam entre os sensores Thematic Mapper (Landsat 5), ETM+ (Landsat 7) e OLI (Landsat 8 e 9). Da mesma forma, é importante reiterar que a velocidade de visualização e consulta aos dados depende da complexidade dos dados poligonais, da conexão ao Google Earth Engine e da própria capacidade de processamento da plataforma da Google.
+É importante enfatizar que a qualidade e nível de informação acessível nesta versão do toolkit é função dos dados utilizados, i.e. Coleção 10.1 do Mapbiomas, cuja acurácia global está em torno de 93% e imagens da série Landsat, com resolução de 30 metros e cuja disponibilidade e qualidade dos dados variam entre os sensores Thematic Mapper (Landsat 5), ETM+ (Landsat 7) e OLI (Landsat 8 e 9). Da mesma forma, é importante reiterar que a velocidade de visualização e consulta aos dados depende da complexidade dos dados poligonais, da conexão ao Google Earth Engine e da própria capacidade de processamento da plataforma da Google.
 
 Para ter acesso ao código fonte e a interface do toolkit desenvolvido, acesse os links do GitHub no endereço [https://github.com/lapig-ufg/lapig-acelen](https://github.com/lapig-ufg/lapig-acelen) e o do Google Earth Engine [https://code.earthengine.google.com/bfad226b58bbb70d9524c9b6f9bb7462](https://code.earthengine.google.com/bfad226b58bbb70d9524c9b6f9bb7462) respectivamente.
 
@@ -22,9 +22,9 @@ O detalhamento operacional completo da estratégia consta do [Plano Amostral LAP
 
 ### 4.2.1 - Plataformas e ambientes computacionais
 
-A Tabela 40 relaciona cada etapa do algoritmo de campo à plataforma que a executa e ao produto que dela resulta.
+A Tabela 23 relaciona cada etapa do algoritmo de campo à plataforma que a executa e ao produto que dela resulta.
 
-#### Tabela 40 - Plataformas empregadas na execução do algoritmo de campo
+#### Tabela 23 - Plataformas empregadas na execução do algoritmo de campo
 
 | Etapa (Seção 3.2) | Plataforma | Produto |
 | --- | --- | --- |
@@ -71,18 +71,18 @@ Os **fatores de correção sazonal são, inicialmente, valores de referência re
 
 ## 4.3 - Próximos Passos
 
-O *toolkit* permanece em desenvolvimento ativo, em regime de **atualização constante até outubro de 2026**. Duas dessas atualizações incidem diretamente sobre os dados de entrada descritos neste documento e já têm prazo definido, conforme a Tabela 41.
+O *toolkit* permanece em desenvolvimento ativo, em regime de **atualização constante até outubro de 2026**. Duas dessas atualizações incidem diretamente sobre os dados de entrada descritos neste documento e já têm prazo definido, conforme a Tabela 24.
 
-#### Tabela 41 - Atualizações previstas do toolkit
+#### Tabela 24 - Atualizações previstas do toolkit
 
 | Prazo | Atualização | Seções afetadas |
 | --- | --- | --- |
-| Primeira quinzena de setembro de 2026 | Migração dos dados do MapBiomas da Coleção 10 para a **Coleção 11**, com série estendida até 2025 | 2.3, 3.1.4, 3.1.5 e 4.1 |
+| Primeira quinzena de setembro de 2026 | Migração dos dados do MapBiomas da Coleção 10.1 para a **Coleção 11**, com série estendida até 2025 | 2.3, 3.1.4, 3.1.5 e 4.1 |
 | Final de outubro de 2026 | Atualização dos dados de **biomassa** para o ano de 2026 para as áreas de interesse da ACELEN, com cobertura até outubro | 3.1.10 |
 
 ### 4.3.1 - Migração para a Coleção 11 do MapBiomas
 
-Até a primeira quinzena de setembro de 2026, o LAPIG/UFG atualizará a base de cobertura e uso da terra da Coleção 10 para a **Coleção 11 do MapBiomas**, cuja série histórica se estende até 2025. A migração amplia em um ano o período analisável e incorpora as revisões metodológicas e os ganhos de acurácia introduzidos pela nova coleção.
+Até a primeira quinzena de setembro de 2026, o LAPIG/UFG atualizará a base de cobertura e uso da terra da Coleção 10.1 para a **Coleção 11 do MapBiomas**, cuja série histórica se estende até 2025. A migração amplia em um ano o período analisável e incorpora as revisões metodológicas e os ganhos de acurácia introduzidos pela nova coleção.
 
 O efeito se propaga por todos os produtos que derivam dessa base: a classificação de uso e cobertura, os gráficos de dinâmica e de conversão para uso antrópico, a evolução das áreas de pastagem e a máscara que delimita as áreas de vigor. As menções à coleção e ao período da série neste documento — em especial na Seção 4.1, onde consta a declaração de acurácia do dado de entrada — deverão ser revistas quando a migração for concluída.
 

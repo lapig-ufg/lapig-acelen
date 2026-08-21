@@ -1,7 +1,7 @@
 # Desenvolvimento de Metodologias e Protocolos para o Mapeamento de Áreas de Pastagem, Produtividade e Classes de Degradação em Regiões da Bahia e Minas Gerais
 
 **Documento Base Teórico do Algoritmo (ATBD) — Versão 5.0**  
-**Agosto de 2026** · LAPIG/UFG–FUNAPE × Acelen Renováveis  
+**Agosto de 2026** · LAPIG/UFG × Acelen Renováveis  
 Referente ao *toolkit* AtDCT versão 5.0 (Google Earth Engine)
 
 ## Sobre 

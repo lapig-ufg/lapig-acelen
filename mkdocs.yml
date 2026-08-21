@@ -1,6 +1,6 @@
 site_name: Acelen - Algorithm Theoretical Basis Document (ATBD)
 site_author: Bernard Silva de Oliveira
-copyright: ATBD versão 5.0 — agosto de 2026 · LAPIG/UFG × Acelen Renováveis
+copyright: ATBD versão 5.0 — agosto de 2026 · LAPIG/UFG–FUNAPE × Acelen Renováveis
 theme:
   name: material # O estilo material
   logo: figures/logo.png # <--- Logo que vai aparecer na ESQUERDA

@@ -10,8 +10,6 @@ Aragão, L. E. O. C. *Modelagem dos Padrões Temporal e Espacial da produtividad
 
 Barbosa, W. C. de S et al. Soil erosion modeling using the revised universal soil loss equation and a geographic information system in a watershed in the northeastern Brazilian Cerrado. *Geosciences*, v. 14, n. 3, p. 78, 2024.
 
-Brandão, A. M. et al. Principais aspectos da nova regulamentação do Cadastro Ambiental Rural (CAR). *Revista do BNDES*, n. 45, 2016.
-
 Breiman, L. Random forests. *Machine learning*, v. 45, n. 1, p. 5-32, 2001.
 
 Brown, C. F. et al. AlphaEarth Foundations: An embedding field model for accurate and efficient global mapping from sparse label data. *arXiv preprint arXiv:2507.22291*, 2025.
@@ -24,8 +22,6 @@ Cohen, J. A coefficient of agreement for nominal scales. *Educational and Psycho
 
 Consoli, D., Parente, L., Simoes, R., S¸ Ahin,M., Tian, X.,Witjes, M., Hengl, T. (2024). A computational framework for processing time-series of earth observation data based on discrete convolution: global-scale historical landsat cloud-free aggregates at 30 m spatial resolution. *PeerJ*, 12, e18585. doi: 10.7717/peerj.18585.
 
-Coutinho, P. A. Q.; Fernandes, P. G.; Scarabello, M. C.; Barretto, A. G. O. P. et al. *Malha Fundiária: Nota Técnica 2025*. 2. ed. São Paulo: Instituto para Governança Territorial e Políticas Públicas (iGPP), Imaflora e Grupo de Políticas Públicas ESALQ/USP, 2025. Disponível em: <https://storage.googleapis.com/cartas-da-terra/2025/NOTA_TECNICA_2025.pdf>.
-
 Dias-Filho, M. B. *Degradação de pastagens: processos, causas e estratégias de recuperação*. 4. ed. Belém: Edição do Autor, 2011.
 
 Ewunetu, A.; Abebe, G. Integrating google earth engine and random forest for land use and land cover change detection and analysis in the upper Tekeze Basin. *Earth Science Informatics*, v. 18, n. 2, p. 1-16, 2025.
@@ -33,8 +29,6 @@ Ewunetu, A.; Abebe, G. Integrating google earth engine and random forest for lan
 Ferreira Jr., L. G; Mesquita, V. V. (Coords.) et al. *Pasture Appendix Collection 9 Version 1*. [S.l.]: MapBiomas, 2023.
 
 Freitas, F. L. M.; Guidotti, V.; Sparovek, G.; Hamamura, C. *Nota técnica: Malha fundiária do Brasil*, v. 1812. In: Atlas — A Geografia da Agropecuária Brasileira. Piracicaba: Imaflora, 2018. Disponível em: <https://www.imaflora.org/atlasagropecuario>.
-
-Freitas, F. L. M.; Guidotti, V.; Sparovek, G.; Hamamura, C. Nota técnica: Malha fundiária do Brasil, v.1812. In: Atlas - A Geografia da Agropecuária Brasileira, 2018. Disponível em: www.imaflora.org/atlasagropecuario
 
 Gorelick, N. et al. Google Earth Engine: Planetary-scale geospatial analysis for everyone. *Remote sensing of Environment*, v. 202, p. 18-27, 2017.
 
@@ -55,8 +49,6 @@ ISCC. *ISCC EU 202: Sustainability Requirements*. Cologne: ISCC System GmbH. Dis
 Isik, M. S. et al. *Light Use Efficiency (LUE) based bimonthly Gross Primary Productivity (GPP) for global grasslands at 30 m spatial resolution (2000-2022)*. 2025.
 
 Jeffreys, H. An invariant form for the prior probability in estimation problems. *Proceedings of the Royal Society of London. Series A, Mathematical and Physical Sciences*, v. 186, n. 1007, p. 453-461, 1946. doi: 10.1098/rspa.1946.0056.
-
-LAPIG. *Malha Fundiária Ambiental*. Goiânia: Laboratório de Processamento de Imagens e Geoprocessamento, UFG. Disponível em: <https://malhafundiaria.lapig.iesa.ufg.br/>.
 
 LAPIG. *Malha Fundiária Ambiental: documentação técnica*. Goiânia: Laboratório de Processamento de Imagens e Geoprocessamento, UFG, 2026. Disponível em: <https://lapig-ufg.github.io/malha-fundiaria-ambiental/>.
 
@@ -80,15 +72,11 @@ RSB. *RSB Principles & Criteria (RSB Standard 03)*. Geneva: Roundtable on Sustai
 
 Saaty, R. W. The analytic hierarchy process - what it is and how it is used. Mathematical Modelling, v. 9, n. 3-5, p. 161-76, 1987. Disponível em: https://www.sciencedirect.com/science/article/pii/0270025587904738
 
-Saaty, R. W. The analytic hierarchy process — what it is and how it is used. *Mathematical Modelling*, v. 9, n. 3-5, p. 161-176, 1987. doi: 10.1016/0270-0255(87)90473-8.
-
 Santos, C. O. DOS; Mesquita, V. V. ; Parente, L. L.; Pinto, A. de S.; Ferreira Jr, L. G. Assessing the Wall-to-Wall Spatial and Qualitative Dynamics of the Brazilian Pasturelands 2010-2018, Based on the Analysis of the Landsat Data Archive. *Remote Sensing*, v. 14, p. 1024-1039, 2022.
 
 Souza, C. M. et al. Reconstructing three decades of land use and land cover changes in brazilian biomes with landsat archive and earth engine. *Remote Sens* 12 (17): 2735. *Landsc Urban Plan*, v. 86, n. 3-4, p. 219-225, 2020.
 
 Souza, G. F. A. et al. *Padrões e tendências das pastagens do Brasil: uma análise a partir de imagens índice de vegetação MODIS e algoritmos de detecção de mudanças*, 2017
-
-Sparovek, G.; Reydon, B. P.; Pinto, L. F. G. et al. Who owns Brazilian lands? *Land Use Policy*, v. 87, p. 104062, 2019. doi: 10.1016/j.landusepol.2019.104062.
 
 Stevens, D. L.; Olsen, A. R. Spatially balanced sampling of natural resources. Journal of the American Statistical Association, 99(465), 262-278, 2004.
 
