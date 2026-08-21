@@ -56,8 +56,6 @@ Isik, M. S. et al. *Light Use Efficiency (LUE) based bimonthly Gross Primary Pro
 
 Jeffreys, H. An invariant form for the prior probability in estimation problems. *Proceedings of the Royal Society of London. Series A, Mathematical and Physical Sciences*, v. 186, n. 1007, p. 453-461, 1946. doi: 10.1098/rspa.1946.0056.
 
-LAPIG. *Malha Fundiária Ambiental*. Goiânia: Laboratório de Processamento de Imagens e Geoprocessamento, UFG. Disponível em: <https://malhafundiaria.lapig.iesa.ufg.br/>.
-
 LAPIG. *Malha Fundiária Ambiental: documentação técnica*. Goiânia: Laboratório de Processamento de Imagens e Geoprocessamento, UFG, 2026. Disponível em: <https://lapig-ufg.github.io/malha-fundiaria-ambiental/>.
 
 MapBiomas. *MapBiomas General "Handbook" Algorithm Theoretical Basis Document (ATBD) Collection 9*. v.2, p.62, 2024.
