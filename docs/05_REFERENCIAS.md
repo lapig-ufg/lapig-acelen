@@ -80,8 +80,6 @@ RSB. *RSB Principles & Criteria (RSB Standard 03)*. Geneva: Roundtable on Sustai
 
 Saaty, R. W. The analytic hierarchy process - what it is and how it is used. Mathematical Modelling, v. 9, n. 3-5, p. 161-76, 1987. Disponível em: https://www.sciencedirect.com/science/article/pii/0270025587904738
 
-Saaty, R. W. The analytic hierarchy process — what it is and how it is used. *Mathematical Modelling*, v. 9, n. 3-5, p. 161-176, 1987. doi: 10.1016/0270-0255(87)90473-8.
-
 Santos, C. O. DOS; Mesquita, V. V. ; Parente, L. L.; Pinto, A. de S.; Ferreira Jr, L. G. Assessing the Wall-to-Wall Spatial and Qualitative Dynamics of the Brazilian Pasturelands 2010-2018, Based on the Analysis of the Landsat Data Archive. *Remote Sensing*, v. 14, p. 1024-1039, 2022.
 
 Souza, C. M. et al. Reconstructing three decades of land use and land cover changes in brazilian biomes with landsat archive and earth engine. *Remote Sens* 12 (17): 2735. *Landsc Urban Plan*, v. 86, n. 3-4, p. 219-225, 2020.
