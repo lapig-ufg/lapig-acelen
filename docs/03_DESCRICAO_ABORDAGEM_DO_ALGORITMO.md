@@ -290,9 +290,9 @@ Nessa estratégia de campo, é aplicado um detalhamento de amostragem em uma est
 
 O ponto de partida do algoritmo não é uma escolha metodológica interna, mas um conjunto de evidências que precisam existir ao final do processo. A aviação civil responde por aproximadamente 2,5% das emissões diretas de CO₂ globais, com impacto climático total ainda maior quando considerados os efeitos não-CO₂ (IPCC, 2022; IEA, 2023; ICAO, 2022). O Combustível Sustentável de Aviação (SAF) emerge como a alternativa mais viável no curto e médio prazo, e marcos regulatórios como o ReFuelEU Aviation (Regulamento UE 2023/2405), o *SAF Blending Mandate* do Reino Unido e o CORSIA/ICAO já impõem mandatos progressivos de incorporação de SAF, exigindo comprovação rigorosa de sustentabilidade de toda a cadeia produtiva.
 
-A aplicação que motiva o plano de amostragem de campo é a identificação de pastagens degradadas elegíveis ao cultivo da macaúba (*Acrocomia aculeata*), palmeira nativa do Cerrado com emissões de 19,32 gCO₂eq/MJ ao longo do ciclo de vida e capacidade comprovada de recuperação do solo, implantada **exclusivamente em áreas de pastagem degradada**. Para que essa premissa seja reconhecida pelos sistemas de certificação internacionais, a simples declaração de degradação não é suficiente: exige-se metodologia de verificação transparente, auditável e replicável. Cada sistema estabelece critérios próprios sobre a condição da terra antes da conversão, e é a partir deles que se define o que precisa ser medido, com que rastreabilidade e em que nível do funil. A Tabela 20 explicita essa correspondência.
+A aplicação que motiva o plano de amostragem de campo é a identificação de pastagens degradadas elegíveis ao cultivo da macaúba (*Acrocomia aculeata*), palmeira nativa do Cerrado com emissões de 19,32 gCO₂eq/MJ ao longo do ciclo de vida e capacidade comprovada de recuperação do solo, implantada **exclusivamente em áreas de pastagem degradada**. Para que essa premissa seja reconhecida pelos sistemas de certificação internacionais, a simples declaração de degradação não é suficiente: exige-se metodologia de verificação transparente, auditável e replicável. Cada sistema estabelece critérios próprios sobre a condição da terra antes da conversão, e é a partir deles que se define o que precisa ser medido, com que rastreabilidade e em que nível do funil. A tabela 03 explicita essa correspondência.
 
-#### Tabela 20 - Requisitos de certificação e evidências correspondentes produzidas pelo algoritmo de campo
+#### Tabela 03 - Requisitos de certificação e evidências correspondentes produzidas pelo algoritmo de campo
 
 | Certificação / Diretiva | Critério aplicável | Evidências exigidas — atendidas pelo algoritmo |
 | --- | --- | --- |
@@ -313,9 +313,9 @@ Três critérios restritivos e concorrentes são aplicados na filtragem:
 2. **Aptidão temática.** A propriedade deve intersectar áreas de pastagem mapeadas no ano de referência pelo produto de cobertura de 10 m adotado pelo projeto. O arquivo raster e a legenda correspondentes permanecem anexados ao dossiê técnico, de modo que a composição do quadro amostral seja reconstituível.
 3. **Limiar de dimensão.** Apenas propriedades com área igual ou superior a 2 hectares, o que exclui minifúndios e ruídos de vetorização.
 
-Na área piloto, o resultado é um quadro amostral de **N = 52.719 propriedades**. Sobre esse quadro são aplicados o agrupamento K-Means e o sorteio GRTS. As variáveis empregadas na estratificação, listadas na Tabela 21, combinam os próprios produtos gerados pelo *toolkit* — vigor da pastagem (Seção 3.1.6) e tendência de vigor (Seção 3.1.9) — com variáveis complementares de degradação agronômica e de pressão pecuária.
+Na área piloto, o resultado é um quadro amostral de **N = 52.719 propriedades**. Sobre esse quadro são aplicados o agrupamento K-Means e o sorteio GRTS. As variáveis empregadas na estratificação, listadas na tabela 04, combinam os próprios produtos gerados pelo *toolkit* — vigor da pastagem (Seção 3.1.6) e tendência de vigor (Seção 3.1.9) — com variáveis complementares de degradação agronômica e de pressão pecuária.
 
-#### Tabela 21 - Variáveis utilizadas no agrupamento K-Means para estratificação das propriedades
+#### Tabela 04 - Variáveis utilizadas no agrupamento K-Means para estratificação das propriedades
 
 | Variável | Fonte | Resolução | Papel na estratificação |
 | --- | --- | --- | --- |
@@ -337,9 +337,9 @@ Definidos os estratos, o tamanho amostral total é calculado pela Eq. 08 e distr
 
 ### 3.2.4 - Estrutura Hierárquica do Funil
 
-A inovação do desenho em relação a planos amostrais convencionais está na introdução do nível N0B. Inspecionar visualmente a totalidade da área de pastagem de uma propriedade grande não é viável em gabinete: uma fazenda com 500 ha de pastagem corresponde a uma janela de aproximadamente 1.118 × 1.118 pixels em um sensor de 2 m. Sorteia-se, portanto, um conjunto de pontos de inspeção dentro de cada propriedade selecionada. O mesmo princípio de subamostragem interna se repete em todos os níveis subsequentes — pontos dentro de propriedades visitadas, subpontos dentro de sítios de drone — e é o que mantém o custo controlado sem quebrar a cadeia probabilística. A Tabela 22 sintetiza a estrutura completa.
+A inovação do desenho em relação a planos amostrais convencionais está na introdução do nível N0B. Inspecionar visualmente a totalidade da área de pastagem de uma propriedade grande não é viável em gabinete: uma fazenda com 500 ha de pastagem corresponde a uma janela de aproximadamente 1.118 × 1.118 pixels em um sensor de 2 m. Sorteia-se, portanto, um conjunto de pontos de inspeção dentro de cada propriedade selecionada. O mesmo princípio de subamostragem interna se repete em todos os níveis subsequentes — pontos dentro de propriedades visitadas, subpontos dentro de sítios de drone — e é o que mantém o custo controlado sem quebrar a cadeia probabilística. A tabela 05 sintetiza a estrutura completa.
 
-#### Tabela 22 - Estrutura hierárquica do funil de amostragem de campo (7 níveis)
+#### Tabela 05 - Estrutura hierárquica do funil de amostragem de campo (7 níveis)
 
 | Nível | Unidade | N amostral (referência) | Método de seleção | Custo relativo |
 | --- | --- | --- | --- | --- |
@@ -363,9 +363,9 @@ Caso a ACELEN disponibilize acesso às imagens Planet, estas oferecem duas vanta
 
 O uso combinado dessas fontes só é válido após o co-registro sub-pixel descrito na Seção 2.12. A necessidade é concreta: o erro de co-registro do Sentinel-2 é inferior a 6 m em escala global (Rengarajan et al., 2024), enquanto o erro posicional absoluto das imagens CBERS-4B pode atingir cerca de 400 m (Akiyama et al., 2018) — deslocamento que supera a própria janela de inspeção. A correção é executada com o software AROSICS, que alinha as cenas CBERS à base Sentinel-2 por correlação de fase com eliminação de falsos positivos por RANSAC, alcançando co-registro residual inferior a 2 m, isto é, menos de um pixel CBERS. *Tiles* cujo RMSE residual exceda 3 m são reprocessados com pontos de controle adicionais, e o relatório de RMSE por *tile* integra a documentação de qualidade do levantamento.
 
-A janela de aquisição das imagens e a janela de coleta em campo são condicionadas pela fenologia e pela cobertura de nuvens, conforme a Tabela 23. 
+A janela de aquisição das imagens e a janela de coleta em campo são condicionadas pela fenologia e pela cobertura de nuvens, conforme a tabela 06. 
 
-#### Tabela 23 - Calendário fenológico para aquisição de imagens e coleta de campo
+#### Tabela 06 - Calendário fenológico para aquisição de imagens e coleta de campo
 
 | Período | Cobertura de nuvens | Imagens de alta resolução (N0B) | Sentinel-2 | Campo (N1B-N4) | Observações |
 | --- | --- | --- | --- | --- | --- |
@@ -383,9 +383,9 @@ Dentro de cada propriedade N0A, os pontos de inspeção são sorteados por GRTS 
 k_i = \max\left(k_{\min},\ \min\left(k_{\max},\ \left\lceil A_i / d \right\rceil\right)\right) \tag{Eq. 16}
 \]
 
-com \(k_{\min} = 3\) (mínimo necessário para avaliar heterogeneidade espacial), \(k_{\max} = 20\) (teto operacional por propriedade) e \(d = 20\) ha/ponto (densidade de referência, correspondente à cobertura de cerca de 20% da área por janelas de 4 ha). A Tabela 24 detalha os quantitativos por faixa de área e a justificativa de cada faixa.
+com \(k_{\min} = 3\) (mínimo necessário para avaliar heterogeneidade espacial), \(k_{\max} = 20\) (teto operacional por propriedade) e \(d = 20\) ha/ponto (densidade de referência, correspondente à cobertura de cerca de 20% da área por janelas de 4 ha). A tabela 07 detalha os quantitativos por faixa de área e a justificativa de cada faixa.
 
-#### Tabela 24 - Número de pontos N0B por faixa de área de pastagem
+#### Tabela 07 - Número de pontos N0B por faixa de área de pastagem
 
 | Área de pastagem (\(A_i\)) | Pontos N0B (\(k_i\)) | Janela visual por ponto | Cobertura total estimada | Justificativa estatística |
 | --- | --- | --- | --- | --- |
@@ -419,9 +419,9 @@ O ponto é **inelegível** quando o uso foi convertido para agricultura ou área
 
 #### 3.2.6.3 Aplicação da normalização sazonal
 
-Os critérios acima só são comparáveis entre propriedades inspecionadas em épocas distintas do ano se os índices forem previamente normalizados pelos fatores de correção sazonal definidos nas Eq. 13 e Eq. 14 (Seção 2.13). A aplicação é **obrigatória** sempre que a imagem inspecionada tiver data de aquisição fora do período de referência. O analista registra o mês da imagem no formulário digital, os valores normalizados são calculados na rotina de pós-processamento, e a decisão de elegibilidade é sempre tomada sobre os índices normalizados. A Tabela 25 apresenta valores regionais típicos dos dois fatores para o Cerrado norte-mineiro.
+Os critérios acima só são comparáveis entre propriedades inspecionadas em épocas distintas do ano se os índices forem previamente normalizados pelos fatores de correção sazonal definidos nas Eq. 13 e Eq. 14 (Seção 2.13). A aplicação é **obrigatória** sempre que a imagem inspecionada tiver data de aquisição fora do período de referência. O analista registra o mês da imagem no formulário digital, os valores normalizados são calculados na rotina de pós-processamento, e a decisão de elegibilidade é sempre tomada sobre os índices normalizados. A tabela 08 apresenta valores regionais típicos dos dois fatores para o Cerrado norte-mineiro.
 
-#### Tabela 25 - Fatores de correção sazonal para inspeção de imagens (N0B), referência jun-set
+#### Tabela 08 - Fatores de correção sazonal para inspeção de imagens (N0B), referência jun-set
 
 | Mês | Estação | Viés no solo exposto observado | Viés no vigor observado | FCS<sub>EVI2</sub> | FCS<sub>BS</sub> | Ação recomendada |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -438,9 +438,9 @@ Os valores da Tabela 25 são aproximações climatológicas regionais. Proprieda
 
 Concluída a inspeção dos \(k_i\) pontos de uma propriedade, seja \(x_i\) o número de pontos elegíveis. Como cada ponto tem resultado binário, \(x_i\) segue distribuição Binomial de parâmetros \(k_i\) e \(p_i\). Dado que \(k_i\) é pequeno por construção — entre 3 e 20 —, a incerteza sobre \(p_i\) é quantificada por inferência Bayesiana com *a priori* de Jeffreys, conforme a Eq. 10, e a estimativa pontual \(\hat p_i\) é a média da posteriori (Eq. 11, Seção 2.10). O intervalo de credibilidade de 95% é obtido diretamente dos quantis da distribuição Beta posterior.
 
-A estimativa \(\hat p_i\) define a classe de prioridade da propriedade, conforme a Tabela 26. A priorização em três classes, em lugar de um corte binário, é o que permite ao GRTS selecionar as propriedades de campo cobrindo todo o gradiente de degradação, e não apenas os casos extremos.
+A estimativa \(\hat p_i\) define a classe de prioridade da propriedade, conforme a tabela 09. A priorização em três classes, em lugar de um corte binário, é o que permite ao GRTS selecionar as propriedades de campo cobrindo todo o gradiente de degradação, e não apenas os casos extremos.
 
-#### Tabela 26 - Critérios de priorização de propriedades para o nível N1A
+#### Tabela 09 - Critérios de priorização de propriedades para o nível N1A
 
 | Proporção estimada de pontos N0B elegíveis (\(\hat p_i\)) | Decisão N1A | Justificativa |
 | --- | --- | --- |
@@ -466,9 +466,9 @@ Um filtro baseado exclusivamente em evidência de degradação produz, por const
 
 #### 3.2.7.2 Seleção de Pontos de Campo dentro de cada Fazenda N1A
 
-Dentro de cada propriedade N1A, os pontos de validação são sorteados por GRTS aninhado, tendo como base prioritária os pontos N0B já classificados como elegíveis naquela propriedade. Isso concentra as visitas em locais com pré-evidência de degradação, o que maximiza a taxa de confirmação e a eficiência logística. A Tabela 27 define o número de pontos e as restrições de espaçamento por faixa de área.
+Dentro de cada propriedade N1A, os pontos de validação são sorteados por GRTS aninhado, tendo como base prioritária os pontos N0B já classificados como elegíveis naquela propriedade. Isso concentra as visitas em locais com pré-evidência de degradação, o que maximiza a taxa de confirmação e a eficiência logística. A tabela 10 define o número de pontos e as restrições de espaçamento por faixa de área.
 
-#### Tabela 27 - Critérios de seleção de pontos N1B por faixa de área de pastagem
+#### Tabela 10 - Critérios de seleção de pontos N1B por faixa de área de pastagem
 
 | Área de pastagem (\(A_i\)) | Pontos N1B (\(n_i\)) | Base de seleção | Distância mínima entre pontos | Critério de posicionamento |
 | --- | --- | --- | --- | --- |
@@ -481,9 +481,9 @@ Os pontos N1B são exportados como waypoints GPS (formato GPX) para os receptore
 
 ####  3.2.7.3 Protocolo de Campo — Janela Temporal e Equipes
 
-A coleta de campo é concentrada no período de junho a outubro, com prioridade para julho–setembro (período de estiagem do Cerrado). Duas equipes de campo simultâneas, cada uma composta por: técnico líder (SR + avaliação de pastagens), técnico de campo (biomassa + solo) e motorista com veículo 4×4. Cada equipe cobre aproximadamente 3–5 fazendas por dia (1–2 fazendas com coleta extensiva N3/N4). A Tabela 28 lista os materiais por equipe.
+A coleta de campo é concentrada no período de junho a outubro, com prioridade para julho–setembro (período de estiagem do Cerrado). Duas equipes de campo simultâneas, cada uma composta por: técnico líder (SR + avaliação de pastagens), técnico de campo (biomassa + solo) e motorista com veículo 4×4. Cada equipe cobre aproximadamente 3–5 fazendas por dia (1–2 fazendas com coleta extensiva N3/N4). A Tabela 11 lista os materiais por equipe.
 
-#### Tabela 28 - Equipamentos e materiais por equipe de campo
+#### Tabela 11 - Equipamentos e materiais por equipe de campo
 
 | Categoria | Itens |
 | --- | --- |
@@ -496,9 +496,9 @@ A coleta de campo é concentrada no período de junho a outubro, com prioridade 
 
 #### 3.2.7.4 Sistema de IDs e Rastreabilidade
 
-A Tabela 29 apresenta a convenção adotada para identificação e rastreabilidade das amostras.
+A Tabela 12 apresenta a convenção adotada para identificação e rastreabilidade das amostras.
 
-#### Tabela 29 - Sistema de identificação e rastreabilidade de amostras
+#### Tabela 12 - Sistema de identificação e rastreabilidade de amostras
 
 | Entidade | Formato do identificador | Exemplo |
 | --- | --- | --- |
@@ -520,9 +520,9 @@ Cada visita registra também o contexto de manejo que condiciona a interpretaç�
 
 #### 3.2.7.7 Sistema de Escores Visuais (0–10) e Método LPI
 
-O escore visual integra cinco atributos (cobertura por forragem; solo exposto; invasoras; altura e uniformidade do dossel; sinais de compactação/erosão), cada um com peso de 0–2, totalizando até 10. A avaliação é feita por dois observadores independentes; discrepâncias > 1,5 ponto são dirimidas pelo Método LPI (Tabela 30).
+O escore visual integra cinco atributos (cobertura por forragem; solo exposto; invasoras; altura e uniformidade do dossel; sinais de compactação/erosão), cada um com peso de 0–2, totalizando até 10. A avaliação é feita por dois observadores independentes; discrepâncias > 1,5 ponto são dirimidas pelo Método LPI (tabela 13).
 
-#### Tabela 30 - Sistema de escores visuais para avaliação de pastagens em campo (adaptado de Teles et al., 2025)
+#### Tabela 13 - Sistema de escores visuais para avaliação de pastagens em campo (adaptado de Teles et al., 2025)
 
 | Escore | Categoria | Solo exposto | Invasoras | Vigor (EVI2) | Classe | Indicação de manejo |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -533,9 +533,9 @@ O escore visual integra cinco atributos (cobertura por forragem; solo exposto; i
 | 1-2 | Degradação severa | > 40% | Dominante | < 0,10 | D3-D4 | Reforma completa ou integração lavoura-pecuária |
 | 0 | Solo degradado / erosão ativa | > 60% | Solo nu | Nulo | D4 | Recuperação de área degradada e controle de erosão |
 
-O escore bruto assim obtido está sujeito ao mesmo viés sazonal discutido na Seção 2.13 e é convertido em escore corrigido pela Eq. 15, com os valores de \(\Delta s\) da Tabela 31. O escore corrigido é o valor utilizado em todos os critérios de seleção dos níveis subsequentes, nas análises de calibração e nos relatórios de certificação; o escore bruto, o \(\Delta s\) aplicado e o mês da visita são sempre preservados no banco de dados como dado primário, o que garante rastreabilidade e permite reanálise futura com fatores recalibrados.
+O escore bruto assim obtido está sujeito ao mesmo viés sazonal discutido na Seção 2.13 e é convertido em escore corrigido pela Eq. 15, com os valores de \(\Delta s\) da tabela 14. O escore corrigido é o valor utilizado em todos os critérios de seleção dos níveis subsequentes, nas análises de calibração e nos relatórios de certificação; o escore bruto, o \(\Delta s\) aplicado e o mês da visita são sempre preservados no banco de dados como dado primário, o que garante rastreabilidade e permite reanálise futura com fatores recalibrados.
 
-#### Tabela 31 - Fator de ajuste sazonal do escore de campo (\(\Delta s\)), referência jun-set
+#### Tabela 14 - Fator de ajuste sazonal do escore de campo (\(\Delta s\)), referência jun-set
 
 | Mês da visita | Estação | \(\Delta s\) | Confiança na avaliação visual | Justificativa e cuidados |
 | --- | --- | --- | --- | --- |
@@ -551,9 +551,9 @@ Acumulados 20 ou mais pares de visitas ao mesmo ponto em épocas distintas — p
 ### 3.2.8 - Nível N2 - Sobrevoo de Drone
 #### 3.2.8.1 Critério de Seleção dos Sítios N2
 
-Cerca de 80 sítios de voo são selecionados por GRTS entre os pontos N1B já visitados e validados, com estratificação pelo escore corrigido de campo. A seleção é estratificada pelo escore de campo (0–10) para garantir que o conjunto de sítios N2 cubra toda a amplitude do gradiente de degradação — de pastagens severamente degradadas (escore 0–2) a pastagens regulares (5–6), evitando o viés de amostrar apenas os casos extremos. A Tabela 32 define a proporcionalidade por faixa de escore.
+Cerca de 80 sítios de voo são selecionados por GRTS entre os pontos N1B já visitados e validados, com estratificação pelo escore corrigido de campo. A seleção é estratificada pelo escore de campo (0–10) para garantir que o conjunto de sítios N2 cubra toda a amplitude do gradiente de degradação — de pastagens severamente degradadas (escore 0–2) a pastagens regulares (5–6), evitando o viés de amostrar apenas os casos extremos. A Tabela 15 define a proporcionalidade por faixa de escore.
 
-#### Tabela 32 - Critério de seleção e proporcionalidade dos sítios N2 por classe de escore de campo
+#### Tabela 15 - Critério de seleção e proporcionalidade dos sítios N2 por classe de escore de campo
 
 | Escore de campo (ponto N1B) | Classe de degradação | Elegibilidade para N2 | Proporção N2/N1B por estrato | Justificativa |
 | --- | --- | --- | --- | --- |
@@ -581,7 +581,7 @@ A posição nadir é obrigatória e não é uma preferência operacional: ângul
 
 Dentro de cada sítio de drone N2 selecionado para coleta de biomassa (≈ 40 sítios = 50% de N2), o posicionamento dos subpontos de amostragem não é arbitrário: é executado via GRTS sobre a grade de pixels de 10 m do footprint do drone, respeitando um buffer de borda de 10 m e distância mínima entre subpontos conforme o tamanho do footprint. A estratificação interna é feita com base nos valores de NDVI do ortomosaico de drone (zona de maior NDVI vs. zona de menor NDVI dentro do sítio), garantindo que os subpontos cubram a heterogeneidade de vigor detectada no drone.
 
-#### Tabela 33 - Grade de subpontos N3 por tamanho de *footprint* de drone
+#### Tabela 16 - Grade de subpontos N3 por tamanho de *footprint* de drone
 
 | *Footprint* e gatilho de enquadramento | Subpontos N3 por sítio | Quadrados por subponto | Método deposicionamento | Total por sítio |
 | --- | --- | --- | --- | --- |
@@ -589,9 +589,9 @@ Dentro de cada sítio de drone N2 selecionado para coleta de biomassa (≈ 40 s�
 | 150 × 150 m — semi-heterogênea (dossel > 30 cm ou CV > 25% ou cobertura arbustiva de 10-30%) | 4 subpontos (±30 m espaçamento) | 5 quadrados 1,0 m²(usar 1,0 m² quando: pastagem com touceiras, vegetação nativa intercalada ou dossel > 30 cm — heterogeneidade exige área maior para representatividade) | GRTS na grade 10 m; estratificação por zona (EVI2 do drone) |20 quadrados (20 m²) |
 | 250 × 250 m — heterogênea ou silvipastoril (cobertura lenhosa > 30% ou dossel > 60 cm ou campo nativo) | 5 subpontos (±40 m espaçamento) |5 quadrados 1,0 m² por subponto + 1 parcela lenhosa 100 m² | GRTS na grade 10 m; 1 parcela lenhosa por subponto | 25 quadrados (25 m²) + 5 parcelas lenhosas |
 
-A escolha do tamanho do quadrado segue o princípio metrológico discutido na Seção 2.14: conforme a Tabela 34, além do Método LPI no transecto de 100 m passando pelo subponto central.
+A escolha do tamanho do quadrado segue o princípio metrológico discutido na Seção 2.14: conforme a Tabela 17, além do Método LPI no transecto de 100 m passando pelo subponto central.
 
-#### Tabela 34 - Protocolo de amostragem de biomassa por tipo de pastagem
+#### Tabela 17 - Protocolo de amostragem de biomassa por tipo de pastagem
 
 | Tipo de pastagem | Quadrado | Altura de corte | Repetições mínimas por subponto | Pós-coleta |
 | --- | --- | --- | --- | --- |
@@ -620,9 +620,9 @@ O registro fotográfico segue dois padrões complementares. A **fotografia nadir
 ### 3.2.10 - Classificação Integrada da Condição das Pastagens
 #### 3.2.10.1 - Categorias de Degradação D0 - D4
 
-Com base na metodologia LAPIG/UFG (Teles et al., 2025, base metodológica LAPIG/UFG a documentar), as pastagens são classificadas em cinco categorias (D0 a D4), obtidas pela integração dos escores visuais de campo, frações PV/NPV/BS (LPI), índices espectrais (EVI2, NDTI de imagens Sentinel-2/CBERS) e análises laboratoriais de biomassa e solo (Tabela 35).
+Com base na metodologia LAPIG/UFG (Teles et al., 2025, base metodológica LAPIG/UFG a documentar), as pastagens são classificadas em cinco categorias (D0 a D4), obtidas pela integração dos escores visuais de campo, frações PV/NPV/BS (LPI), índices espectrais (EVI2, NDTI de imagens Sentinel-2/CBERS) e análises laboratoriais de biomassa e solo (Tabela 18).
 
-#### Tabela 35 - Categorias de degradação de pastagens (D0-D4), adaptado de Teles et al. (2025)
+#### Tabela 18 - Categorias de degradação de pastagens (D0-D4), adaptado de Teles et al. (2025)
 
 | Categoria | Denominação | Solo exposto + invasoras | EVI2 médio (estação seca) | Indicador agronômico / biológico |
 | --- | --- | --- | --- | --- |
@@ -647,9 +647,9 @@ Os dados coletados retroalimentam diretamente a calibração dos modelos orbitai
 
 #### 3.2.10.4 - Matriz de confusão e métricas de acurácia do sistema de classificação
 
-A acurácia do sistema hierárquico de classificação de pastagens — que integra inspeção visual de imagens (N0B), avaliação de campo (N1B) e imageamento de drone (N2) — é avaliada pela comparação entre a predição do modelo de gabinete (baseada em índices de SR) e a verdade de campo (ground truth, obtida nos níveis N1B e N2). Para que essa avaliação seja válida e não enviesada, é imprescindível que a amostra de validação inclua tanto áreas positivas (degradadas) quanto áreas negativas (não degradadas) — o que justifica as subamostras de controle descritas nas XXX . A Tabela 36 apresenta a estrutura da matriz de confusão binária (degradada vs. não degradada) que será calculada ao final das campanhas de campo, com as métricas derivadas e as metas de desempenho estabelecidas para este projeto. 
+A acurácia do sistema hierárquico de classificação de pastagens — que integra inspeção visual de imagens (N0B), avaliação de campo (N1B) e imageamento de drone (N2) — é avaliada pela comparação entre a predição do modelo de gabinete (baseada em índices de SR) e a verdade de campo (ground truth, obtida nos níveis N1B e N2). Para que essa avaliação seja válida e não enviesada, é imprescindível que a amostra de validação inclua tanto áreas positivas (degradadas) quanto áreas negativas (não degradadas) — o que justifica as subamostras de controle descritas nas XXX . A Tabela 19 apresenta a estrutura da matriz de confusão binária (degradada vs. não degradada) que será calculada ao final das campanhas de campo, com as métricas derivadas e as metas de desempenho estabelecidas para este projeto. 
 
-#### Tabela 36 - Matriz de confusão e métricas de acurácia do sistema de classificação (modelo de gabinete × verdade de campo).
+#### Tabela 19 - Matriz de confusão e métricas de acurácia do sistema de classificação (modelo de gabinete × verdade de campo).
 
 | | Campo confirma degradada (D1-D4) | Campo confirma não degradada (D0) | Métrica derivada |
 | --- | --- | --- | --- |
@@ -668,9 +668,9 @@ O fluxo de dados percorre quatro etapas encadeadas: coleta digital off-line em c
 
 #### 3.2.11.2 - Controle da Qualidade por Nível
 
-O controle de qualidade é aplicado nível a nível, com limiares de aceitação e ações corretivas predefinidas, conforme a Tabela 37.
+O controle de qualidade é aplicado nível a nível, com limiares de aceitação e ações corretivas predefinidas, conforme a Tabela 20.
 
-#### Tabela 37 - Métricas de QA/QC, limiares de aceitação e ações corretivas
+#### Tabela 20 - Métricas de QA/QC, limiares de aceitação e ações corretivas
 
 | Nível | Métrica | Limiar de aceitação | Ação corretiva |
 | --- | --- | --- | --- |
@@ -694,9 +694,9 @@ O controle de qualidade é aplicado nível a nível, com limiares de aceitação
 
 ### 3.2.12 - Cronograma de execução
 
-O cronograma de execução do plano de campo é organizada em cinco fases encadeadas. A Tabela 38 apresenta o sequenciamento tomando como referência a campanha da área piloto.
+O cronograma de execução do plano de campo é organizada em cinco fases encadeadas. A Tabela 21 apresenta o sequenciamento tomando como referência a campanha da área piloto.
 
-#### Tabela 38 - Cronograma de execução por fase
+#### Tabela 21 - Cronograma de execução por fase
 
 | Fase | Atividade principal | Período de referência | Responsável |
 | --- | --- | --- | --- |
@@ -713,7 +713,7 @@ O período de campo coincide com a transição da estação seca para a chuvosa,
 
 O formulário é implementado como perfil de coleta digital e preenchido pelo analista durante a inspeção descrita em 3.2.6. Campos assinalados com asterisco são obrigatórios: o aplicativo bloqueia o envio enquanto houver campo obrigatório vazio, o que garante que nenhuma decisão de elegibilidade seja registrada sem a evidência que a sustenta.
 
-### Tabela 39 - Campos do formulário digital de inspeção visual por ponto N0B
+### Tabela 22 - Campos do formulário digital de inspeção visual por ponto N0B
 
 | Campo | Tipo de dado | Valores / critérios |
 | --- | --- | --- |
