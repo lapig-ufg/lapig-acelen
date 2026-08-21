@@ -95,11 +95,10 @@ O campo Tipo de Classificação, possui três opções, sendo elas:
 Depois da seleção do tipo de classificação, clique no botão Gerar classificação do ano da análise para visualizar o mapa na tela da ferramenta. A tela traz a informação das classes de cobertura e uso da terra, legenda e os gráficos do quantitativo das classes no arquivo inserido, conforme o respectivo ano selecionado pelo usuário. O gráfico gerado pode ser exportado nos formatos: CSV (tabela de dados), SVG e PNG (Figura 04).
 
 <center>
-<img width="500px" src="figures/figure_02.png"/>
+<img width="500px" src="../figures/figure_02.png"/>
 <div>Figura 04 - Visualização do arquivo no mapa da ferramenta Análise Temporal da Dinâmica de Cobertura e Uso da Terra.</div>
 <p></p>
 </center>
-
 
 ### 3.1.5 - Visualização da dinâmica de cobertura e uso da terra, conversão para uso antrópico e evolução das áreas de pastagens
 
