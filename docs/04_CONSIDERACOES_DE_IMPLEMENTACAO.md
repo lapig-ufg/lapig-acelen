@@ -22,9 +22,9 @@ O detalhamento operacional completo da estratégia consta do [Plano Amostral LAP
 
 ### 4.2.1 - Plataformas e ambientes computacionais
 
-A Tabela 40 relaciona cada etapa do algoritmo de campo à plataforma que a executa e ao produto que dela resulta.
+A Tabela 23 relaciona cada etapa do algoritmo de campo à plataforma que a executa e ao produto que dela resulta.
 
-#### Tabela 40 - Plataformas empregadas na execução do algoritmo de campo
+#### Tabela 23 - Plataformas empregadas na execução do algoritmo de campo
 
 | Etapa (Seção 3.2) | Plataforma | Produto |
 | --- | --- | --- |
@@ -71,9 +71,9 @@ Os **fatores de correção sazonal são, inicialmente, valores de referência re
 
 ## 4.3 - Próximos Passos
 
-O *toolkit* permanece em desenvolvimento ativo, em regime de **atualização constante até outubro de 2026**. Duas dessas atualizações incidem diretamente sobre os dados de entrada descritos neste documento e já têm prazo definido, conforme a Tabela 41.
+O *toolkit* permanece em desenvolvimento ativo, em regime de **atualização constante até outubro de 2026**. Duas dessas atualizações incidem diretamente sobre os dados de entrada descritos neste documento e já têm prazo definido, conforme a Tabela 24.
 
-#### Tabela 41 - Atualizações previstas do toolkit
+#### Tabela 24 - Atualizações previstas do toolkit
 
 | Prazo | Atualização | Seções afetadas |
 | --- | --- | --- |
