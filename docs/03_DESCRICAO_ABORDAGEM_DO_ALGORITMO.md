@@ -48,7 +48,7 @@ O usuário pode interagir com os seguintes parâmetros do toolkit:
 
 ### 3.1.2 - Processamento
 
-Os mapas de cobertura e uso da terra compreendem 29 classes, as quais, com o intuito de melhorar o entendimento e as análises da dinâmica e uso da terra nas áreas de interesse da Acelen Renováveis, foram agrupadas em nove classes: Soja, Cana, Pastagem, Vegetação Natural, Silvicultura, Outras Lavouras, Outros, Água e Mosaico de Uso. A tabela 02 mostra o agrupamento das classes de cobertura e uso da terra em relação à base de dados original:
+Os mapas de cobertura e uso da terra compreendem 29 classes, as quais, com o intuito de melhorar o entendimento e as análises da dinâmica e uso da terra nas áreas de interesse da Acelen Renováveis, foram agrupadas em nove classes: Soja, Cana, Pastagem, Vegetação Natural, Silvicultura, Outras Lavouras, Outros, Água e Mosaico de Uso. A Tabela 02 mostra o agrupamento das classes de cobertura e uso da terra em relação à base de dados original:
 
 #### Tabela 02 - Classes agrupadas conforme as nove classes de interesse consideradas neste estudo.
 
@@ -290,7 +290,7 @@ Nessa estratégia de campo, é aplicado um detalhamento de amostragem em uma est
 
 O ponto de partida do algoritmo não é uma escolha metodológica interna, mas um conjunto de evidências que precisam existir ao final do processo. A aviação civil responde por aproximadamente 2,5% das emissões diretas de CO₂ globais, com impacto climático total ainda maior quando considerados os efeitos não-CO₂ (IPCC, 2022; IEA, 2023; ICAO, 2022). O Combustível Sustentável de Aviação (SAF) emerge como a alternativa mais viável no curto e médio prazo, e marcos regulatórios como o ReFuelEU Aviation (Regulamento UE 2023/2405), o *SAF Blending Mandate* do Reino Unido e o CORSIA/ICAO já impõem mandatos progressivos de incorporação de SAF, exigindo comprovação rigorosa de sustentabilidade de toda a cadeia produtiva.
 
-A aplicação que motiva o plano de amostragem de campo é a identificação de pastagens degradadas elegíveis ao cultivo da macaúba (*Acrocomia aculeata*), palmeira nativa do Cerrado com emissões de 19,32 gCO₂eq/MJ ao longo do ciclo de vida e capacidade comprovada de recuperação do solo, implantada **exclusivamente em áreas de pastagem degradada**. Para que essa premissa seja reconhecida pelos sistemas de certificação internacionais, a simples declaração de degradação não é suficiente: exige-se metodologia de verificação transparente, auditável e replicável. Cada sistema estabelece critérios próprios sobre a condição da terra antes da conversão, e é a partir deles que se define o que precisa ser medido, com que rastreabilidade e em que nível do funil. A tabela 03 explicita essa correspondência.
+A aplicação que motiva o plano de amostragem de campo é a identificação de pastagens degradadas elegíveis ao cultivo da macaúba (*Acrocomia aculeata*), palmeira nativa do Cerrado com emissões de 19,32 gCO₂eq/MJ ao longo do ciclo de vida e capacidade comprovada de recuperação do solo, implantada **exclusivamente em áreas de pastagem degradada**. Para que essa premissa seja reconhecida pelos sistemas de certificação internacionais, a simples declaração de degradação não é suficiente: exige-se metodologia de verificação transparente, auditável e replicável. Cada sistema estabelece critérios próprios sobre a condição da terra antes da conversão, e é a partir deles que se define o que precisa ser medido, com que rastreabilidade e em que nível do funil. A Tabela 03 explicita essa correspondência.
 
 #### Tabela 03 - Requisitos de certificação e evidências correspondentes produzidas pelo algoritmo de campo
 
@@ -313,7 +313,7 @@ Três critérios restritivos e concorrentes são aplicados na filtragem:
 2. **Aptidão temática.** A propriedade deve intersectar áreas de pastagem mapeadas no ano de referência pelo produto de cobertura de 10 m adotado pelo projeto. O arquivo raster e a legenda correspondentes permanecem anexados ao dossiê técnico, de modo que a composição do quadro amostral seja reconstituível.
 3. **Limiar de dimensão.** Apenas propriedades com área igual ou superior a 2 hectares, o que exclui minifúndios e ruídos de vetorização.
 
-Na área piloto, o resultado é um quadro amostral de **N = 52.719 propriedades**. Sobre esse quadro são aplicados o agrupamento K-Means e o sorteio GRTS. As variáveis empregadas na estratificação, listadas na tabela 04, combinam os próprios produtos gerados pelo *toolkit* — vigor da pastagem (Seção 3.1.6) e tendência de vigor (Seção 3.1.9) — com variáveis complementares de degradação agronômica e de pressão pecuária.
+Na área piloto, o resultado é um quadro amostral de **N = 52.719 propriedades**. Sobre esse quadro são aplicados o agrupamento K-Means e o sorteio GRTS. As variáveis empregadas na estratificação, listadas na Tabela 04, combinam os próprios produtos gerados pelo *toolkit* — vigor da pastagem (Seção 3.1.6) e tendência de vigor (Seção 3.1.9) — com variáveis complementares de degradação agronômica e de pressão pecuária.
 
 #### Tabela 04 - Variáveis utilizadas no agrupamento K-Means para estratificação das propriedades
 
@@ -337,7 +337,7 @@ Definidos os estratos, o tamanho amostral total é calculado pela Eq. 08 e distr
 
 ### 3.2.4 - Estrutura Hierárquica do Funil
 
-A inovação do desenho em relação a planos amostrais convencionais está na introdução do nível N0B. Inspecionar visualmente a totalidade da área de pastagem de uma propriedade grande não é viável em gabinete: uma fazenda com 500 ha de pastagem corresponde a uma janela de aproximadamente 1.118 × 1.118 pixels em um sensor de 2 m. Sorteia-se, portanto, um conjunto de pontos de inspeção dentro de cada propriedade selecionada. O mesmo princípio de subamostragem interna se repete em todos os níveis subsequentes — pontos dentro de propriedades visitadas, subpontos dentro de sítios de drone — e é o que mantém o custo controlado sem quebrar a cadeia probabilística. A tabela 05 sintetiza a estrutura completa.
+A inovação do desenho em relação a planos amostrais convencionais está na introdução do nível N0B. Inspecionar visualmente a totalidade da área de pastagem de uma propriedade grande não é viável em gabinete: uma fazenda com 500 ha de pastagem corresponde a uma janela de aproximadamente 1.118 × 1.118 pixels em um sensor de 2 m. Sorteia-se, portanto, um conjunto de pontos de inspeção dentro de cada propriedade selecionada. O mesmo princípio de subamostragem interna se repete em todos os níveis subsequentes — pontos dentro de propriedades visitadas, subpontos dentro de sítios de drone — e é o que mantém o custo controlado sem quebrar a cadeia probabilística. A Tabela 05 sintetiza a estrutura completa.
 
 #### Tabela 05 - Estrutura hierárquica do funil de amostragem de campo (7 níveis)
 
@@ -363,7 +363,7 @@ Caso a ACELEN disponibilize acesso às imagens Planet, estas oferecem duas vanta
 
 O uso combinado dessas fontes só é válido após o co-registro sub-pixel descrito na Seção 2.12. A necessidade é concreta: o erro de co-registro do Sentinel-2 é inferior a 6 m em escala global (Rengarajan et al., 2024), enquanto o erro posicional absoluto das imagens CBERS-4B pode atingir cerca de 400 m (Akiyama et al., 2018) — deslocamento que supera a própria janela de inspeção. A correção é executada com o software AROSICS, que alinha as cenas CBERS à base Sentinel-2 por correlação de fase com eliminação de falsos positivos por RANSAC, alcançando co-registro residual inferior a 2 m, isto é, menos de um pixel CBERS. *Tiles* cujo RMSE residual exceda 3 m são reprocessados com pontos de controle adicionais, e o relatório de RMSE por *tile* integra a documentação de qualidade do levantamento.
 
-A janela de aquisição das imagens e a janela de coleta em campo são condicionadas pela fenologia e pela cobertura de nuvens, conforme a tabela 06. 
+A janela de aquisição das imagens e a janela de coleta em campo são condicionadas pela fenologia e pela cobertura de nuvens, conforme a Tabela 06. 
 
 #### Tabela 06 - Calendário fenológico para aquisição de imagens e coleta de campo
 
@@ -383,7 +383,7 @@ Dentro de cada propriedade N0A, os pontos de inspeção são sorteados por GRTS 
 k_i = \max\left(k_{\min},\ \min\left(k_{\max},\ \left\lceil A_i / d \right\rceil\right)\right) \tag{Eq. 16}
 \]
 
-com \(k_{\min} = 3\) (mínimo necessário para avaliar heterogeneidade espacial), \(k_{\max} = 20\) (teto operacional por propriedade) e \(d = 20\) ha/ponto (densidade de referência, correspondente à cobertura de cerca de 20% da área por janelas de 4 ha). A tabela 07 detalha os quantitativos por faixa de área e a justificativa de cada faixa.
+com \(k_{\min} = 3\) (mínimo necessário para avaliar heterogeneidade espacial), \(k_{\max} = 20\) (teto operacional por propriedade) e \(d = 20\) ha/ponto (densidade de referência, correspondente à cobertura de cerca de 20% da área por janelas de 4 ha). A Tabela 07 detalha os quantitativos por faixa de área e a justificativa de cada faixa.
 
 #### Tabela 07 - Número de pontos N0B por faixa de área de pastagem
 
@@ -419,7 +419,7 @@ O ponto é **inelegível** quando o uso foi convertido para agricultura ou área
 
 #### 3.2.6.3 Aplicação da normalização sazonal
 
-Os critérios acima só são comparáveis entre propriedades inspecionadas em épocas distintas do ano se os índices forem previamente normalizados pelos fatores de correção sazonal definidos nas Eq. 13 e Eq. 14 (Seção 2.13). A aplicação é **obrigatória** sempre que a imagem inspecionada tiver data de aquisição fora do período de referência. O analista registra o mês da imagem no formulário digital, os valores normalizados são calculados na rotina de pós-processamento, e a decisão de elegibilidade é sempre tomada sobre os índices normalizados. A tabela 08 apresenta valores regionais típicos dos dois fatores para o Cerrado norte-mineiro.
+Os critérios acima só são comparáveis entre propriedades inspecionadas em épocas distintas do ano se os índices forem previamente normalizados pelos fatores de correção sazonal definidos nas Eq. 13 e Eq. 14 (Seção 2.13). A aplicação é **obrigatória** sempre que a imagem inspecionada tiver data de aquisição fora do período de referência. O analista registra o mês da imagem no formulário digital, os valores normalizados são calculados na rotina de pós-processamento, e a decisão de elegibilidade é sempre tomada sobre os índices normalizados. A Tabela 08 apresenta valores regionais típicos dos dois fatores para o Cerrado norte-mineiro.
 
 #### Tabela 08 - Fatores de correção sazonal para inspeção de imagens (N0B), referência jun-set
 
@@ -438,7 +438,7 @@ Os valores da Tabela 25 são aproximações climatológicas regionais. Proprieda
 
 Concluída a inspeção dos \(k_i\) pontos de uma propriedade, seja \(x_i\) o número de pontos elegíveis. Como cada ponto tem resultado binário, \(x_i\) segue distribuição Binomial de parâmetros \(k_i\) e \(p_i\). Dado que \(k_i\) é pequeno por construção — entre 3 e 20 —, a incerteza sobre \(p_i\) é quantificada por inferência Bayesiana com *a priori* de Jeffreys, conforme a Eq. 10, e a estimativa pontual \(\hat p_i\) é a média da posteriori (Eq. 11, Seção 2.10). O intervalo de credibilidade de 95% é obtido diretamente dos quantis da distribuição Beta posterior.
 
-A estimativa \(\hat p_i\) define a classe de prioridade da propriedade, conforme a tabela 09. A priorização em três classes, em lugar de um corte binário, é o que permite ao GRTS selecionar as propriedades de campo cobrindo todo o gradiente de degradação, e não apenas os casos extremos.
+A estimativa \(\hat p_i\) define a classe de prioridade da propriedade, conforme a Tabela 09. A priorização em três classes, em lugar de um corte binário, é o que permite ao GRTS selecionar as propriedades de campo cobrindo todo o gradiente de degradação, e não apenas os casos extremos.
 
 #### Tabela 09 - Critérios de priorização de propriedades para o nível N1A
 
@@ -466,7 +466,7 @@ Um filtro baseado exclusivamente em evidência de degradação produz, por const
 
 #### 3.2.7.2 Seleção de Pontos de Campo dentro de cada Fazenda N1A
 
-Dentro de cada propriedade N1A, os pontos de validação são sorteados por GRTS aninhado, tendo como base prioritária os pontos N0B já classificados como elegíveis naquela propriedade. Isso concentra as visitas em locais com pré-evidência de degradação, o que maximiza a taxa de confirmação e a eficiência logística. A tabela 10 define o número de pontos e as restrições de espaçamento por faixa de área.
+Dentro de cada propriedade N1A, os pontos de validação são sorteados por GRTS aninhado, tendo como base prioritária os pontos N0B já classificados como elegíveis naquela propriedade. Isso concentra as visitas em locais com pré-evidência de degradação, o que maximiza a taxa de confirmação e a eficiência logística. A Tabela 10 define o número de pontos e as restrições de espaçamento por faixa de área.
 
 #### Tabela 10 - Critérios de seleção de pontos N1B por faixa de área de pastagem
 
@@ -520,7 +520,7 @@ Cada visita registra também o contexto de manejo que condiciona a interpretaç�
 
 #### 3.2.7.7 Sistema de Escores Visuais (0–10) e Método LPI
 
-O escore visual integra cinco atributos (cobertura por forragem; solo exposto; invasoras; altura e uniformidade do dossel; sinais de compactação/erosão), cada um com peso de 0–2, totalizando até 10. A avaliação é feita por dois observadores independentes; discrepâncias > 1,5 ponto são dirimidas pelo Método LPI (tabela 13).
+O escore visual integra cinco atributos (cobertura por forragem; solo exposto; invasoras; altura e uniformidade do dossel; sinais de compactação/erosão), cada um com peso de 0–2, totalizando até 10. A avaliação é feita por dois observadores independentes; discrepâncias > 1,5 ponto são dirimidas pelo Método LPI (Tabela 13).
 
 #### Tabela 13 - Sistema de escores visuais para avaliação de pastagens em campo (adaptado de Teles et al., 2025)
 
