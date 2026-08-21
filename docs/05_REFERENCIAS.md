@@ -10,8 +10,6 @@ Aragão, L. E. O. C. *Modelagem dos Padrões Temporal e Espacial da produtividad
 
 Barbosa, W. C. de S et al. Soil erosion modeling using the revised universal soil loss equation and a geographic information system in a watershed in the northeastern Brazilian Cerrado. *Geosciences*, v. 14, n. 3, p. 78, 2024.
 
-Brandão, A. M. et al. Principais aspectos da nova regulamentação do Cadastro Ambiental Rural (CAR). *Revista do BNDES*, n. 45, 2016.
-
 Breiman, L. Random forests. *Machine learning*, v. 45, n. 1, p. 5-32, 2001.
 
 Brown, C. F. et al. AlphaEarth Foundations: An embedding field model for accurate and efficient global mapping from sparse label data. *arXiv preprint arXiv:2507.22291*, 2025.
@@ -23,8 +21,6 @@ Cochran, W. G. Sampling Techniques. 3. ed. New York: John Wiley & Sons, 1977.
 Cohen, J. A coefficient of agreement for nominal scales. *Educational and Psychological Measurement*, v. 20, n. 1, p. 37-46, 1960. doi: 10.1177/001316446002000104.
 
 Consoli, D., Parente, L., Simoes, R., S¸ Ahin,M., Tian, X.,Witjes, M., Hengl, T. (2024). A computational framework for processing time-series of earth observation data based on discrete convolution: global-scale historical landsat cloud-free aggregates at 30 m spatial resolution. *PeerJ*, 12, e18585. doi: 10.7717/peerj.18585.
-
-Coutinho, P. A. Q.; Fernandes, P. G.; Scarabello, M. C.; Barretto, A. G. O. P. et al. *Malha Fundiária: Nota Técnica 2025*. 2. ed. São Paulo: Instituto para Governança Territorial e Políticas Públicas (iGPP), Imaflora e Grupo de Políticas Públicas ESALQ/USP, 2025. Disponível em: <https://storage.googleapis.com/cartas-da-terra/2025/NOTA_TECNICA_2025.pdf>.
 
 Dias-Filho, M. B. *Degradação de pastagens: processos, causas e estratégias de recuperação*. 4. ed. Belém: Edição do Autor, 2011.
 
@@ -83,8 +79,6 @@ Santos, C. O. DOS; Mesquita, V. V. ; Parente, L. L.; Pinto, A. de S.; Ferreira J
 Souza, C. M. et al. Reconstructing three decades of land use and land cover changes in brazilian biomes with landsat archive and earth engine. *Remote Sens* 12 (17): 2735. *Landsc Urban Plan*, v. 86, n. 3-4, p. 219-225, 2020.
 
 Souza, G. F. A. et al. *Padrões e tendências das pastagens do Brasil: uma análise a partir de imagens índice de vegetação MODIS e algoritmos de detecção de mudanças*, 2017
-
-Sparovek, G.; Reydon, B. P.; Pinto, L. F. G. et al. Who owns Brazilian lands? *Land Use Policy*, v. 87, p. 104062, 2019. doi: 10.1016/j.landusepol.2019.104062.
 
 Stevens, D. L.; Olsen, A. R. Spatially balanced sampling of natural resources. Journal of the American Statistical Association, 99(465), 262-278, 2004.
 
