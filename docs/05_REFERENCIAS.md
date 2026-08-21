@@ -30,8 +30,6 @@ Ferreira Jr., L. G; Mesquita, V. V. (Coords.) et al. *Pasture Appendix Collectio
 
 Freitas, F. L. M.; Guidotti, V.; Sparovek, G.; Hamamura, C. *Nota técnica: Malha fundiária do Brasil*, v. 1812. In: Atlas — A Geografia da Agropecuária Brasileira. Piracicaba: Imaflora, 2018. Disponível em: <https://www.imaflora.org/atlasagropecuario>.
 
-Freitas, F. L. M.; Guidotti, V.; Sparovek, G.; Hamamura, C. Nota técnica: Malha fundiária do Brasil, v.1812. In: Atlas - A Geografia da Agropecuária Brasileira, 2018. Disponível em: www.imaflora.org/atlasagropecuario
-
 Gorelick, N. et al. Google Earth Engine: Planetary-scale geospatial analysis for everyone. *Remote sensing of Environment*, v. 202, p. 18-27, 2017.
 
 Huete, A. R. et al. Overview of the radiometric and biophysical performance of the MODIS vegetation indices. *Remote Sensing of Environment*, v. 83, n. 1-2, p. 195-213, 2002.
