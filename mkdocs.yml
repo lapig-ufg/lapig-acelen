@@ -3,7 +3,7 @@ site_author: Bernard Silva de Oliveira
 copyright: ATBD versão 5.0 — agosto de 2026 · LAPIG/UFG–FUNAPE × Acelen Renováveis
 theme:
   name: material # O estilo material
-  custom_dir: overrides # Sobrescreve o partial da logo para exibir LAPIG + UFG + Acelen separadas
+  logo: figures/logo.png
 
   # Recursos visuais (Habilita a barra de pesquisa que expande e abas se necessário)
   features:

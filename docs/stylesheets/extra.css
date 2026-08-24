@@ -9,9 +9,6 @@
   --md-primary-bg-color: #1b1b1b;
   --md-primary-bg-color--light: #1b1b1b;
 
-  /* Cabeçalho mais alto para acomodar a logo maior */
-  --md-header-height: 9.5rem;
-
   /* Cor dos links no texto e do item do menu lateral quando selecionado */
   --md-typeset-a-color: #0074fc;
 
@@ -20,42 +17,16 @@
   --md-accent-fg-color--transparent: #0074fc1a;
 }
 
-/* Logo (LAPIG + UFG + Acelen, como três imagens separadas) legível no
-   cabeçalho e na gaveta de navegação, sem tomar espaço demais e cortar
-   o título do site ao lado. */
-.md-header__button.md-logo,
-.md-nav__title .md-logo {
-  margin: 0.3rem;
-  padding: 0;
+/* Logo 30% maior que o padrão do tema (cabeçalho: 1.2rem -> 1.56rem;
+   gaveta de navegação: 2.4rem -> 3.12rem). */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 1.80rem;
 }
 
-.md-logo-group {
-  display: flex;
-  align-items: center;
-}
-
-.md-logo-group__item {
-  height: 6.25rem;
-  width: auto;
-  max-height: none;
-  margin-left: 0.6rem;
-}
-
-/* LAPIG e UFG têm textos internos menores (subtítulos), por isso ficam
-   maiores que a Acelen para manter a mesma nitidez percebida. */
-.md-logo-group__item--lapig,
-.md-logo-group__item--ufg {
-  height: 8.1rem;
-}
-
-.md-logo-group__item:first-child {
-  margin-left: 0;
-}
-
-/* Linha divisória sutil entre as logos, exceto antes da primeira */
-.md-logo-group__item + .md-logo-group__item {
-  padding-left: 0.6rem;
-  border-left: 1px solid currentcolor;
+.md-nav__title .md-logo img,
+.md-nav__title .md-logo svg {
+  height: 20.12rem;
 }
 
 /* Campo de busca mais estreito para sobrar espaço ao título do site
