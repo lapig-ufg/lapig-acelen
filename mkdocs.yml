@@ -1,6 +1,6 @@
 site_name: Acelen - Algorithm Theoretical Basis Document (ATBD)
 site_author: Bernard Silva de Oliveira
-copyright: ATBD versão 5.0 — agosto de 2026 · LAPIG/UFG–FUNAPE × Acelen Renováveis
+copyright: ATBD versão 5.0 — agosto de 2026 · Parceria LAPIG/UFG–FUNAPE e Acelen Renováveis
 theme:
   name: material # O estilo material
   logo: figures/logo.png
@@ -17,7 +17,7 @@ repo_name: LAPIG-UFG/toolkit-acelen  # Nome que aparecerá ao lado do ícone
 repo_url: https://github.com/lapig-ufg/lapig-acelen #O link do endereço do github do lapig na acelen
 
 nav:
-  - 'Pagina Principal': 'index.md'
+  - 'Página Principal': 'index.md'
   - 'Introdução': '01_INTRODUCAO.md'
   - 'Base Teórica': '02_BASE_TEORICA.md'
   - 'Descrição e Abordagem do Algoritmo': '03_DESCRICAO_ABORDAGEM_DO_ALGORITMO.md'

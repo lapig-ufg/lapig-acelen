@@ -75,10 +75,10 @@ O *toolkit* permanece em desenvolvimento ativo, em regime de **atualização con
 
 #### Tabela 24 - Atualizações previstas do toolkit
 
-| Prazo | Atualização | Seções afetadas |
-| --- | --- | --- |
-| Primeira quinzena de setembro de 2026 | Migração dos dados do MapBiomas da Coleção 10.1 para a **Coleção 11**, com série estendida até 2025 | 2.3, 3.1.4, 3.1.5 e 4.1 |
-| Final de outubro de 2026 | Atualização dos dados de **biomassa** para o ano de 2026 para as áreas de interesse da ACELEN, com cobertura até outubro | 3.1.10 |
+| Prazo | Atualização |
+| --- | --- |
+| Primeira quinzena de setembro de 2026 | Migração dos dados do MapBiomas da Coleção 10.1 para a **Coleção 11**, com série estendida até 2025 |
+| Final de outubro de 2026 | Atualização dos dados de **biomassa** para o ano de 2026 para as áreas de interesse da ACELEN, com cobertura até outubro |
 
 ### 4.3.1 - Migração para a Coleção 11 do MapBiomas
 
@@ -106,18 +106,3 @@ A documentação reunida neste ATBD é um dos instrumentos de transferência de 
 - **O vídeo tutorial de operação**, descrito na Seção 4.1.1, que percorre as funcionalidades do *toolkit* com narração e demonstração em tela, e que serve tanto à capacitação inicial quanto à consulta pontual durante o uso.
 - **O Plano Amostral LAPIG/ACELEN v6.0**, referenciado na Seção 4.2, que detalha os protocolos operacionais de campo em nível de execução — formulários, equipamentos, roteiros e procedimentos por nível amostral.
 
-### 4.4.1 - Webinário de apresentação e capacitação
-
-A capacitação dos técnicos indicados pela Acelen Renováveis será conduzida em formato de **webinário**, organizado em três módulos que percorrem o conjunto do que foi desenvolvido, conforme a Tabela 25.
-
-#### Tabela 25 - Módulos do webinário de capacitação
-
-| Módulo | Conteúdo | Seções de referência |
-|---|---|---|
-| 1 — Usabilidade do *toolkit* | Percurso pelos menus de análise: dinâmica de cobertura e uso, vigor, mapeamento automático em nível de propriedade, perda de solo, tendência de produtividade, biomassa seca e exportação de camadas | 3.1 · 4.1 |
-| 2 — Malha Fundiária Ambiental | Construção da base fundiária: hierarquia de prevalência entre fontes, resolução de sobreposições por análise multicritério, depuração topológica e integração de ativos ambientais | 2.8 · 4.1.1 |
-| 3 — Plano amostral de verificação em campo | Estrutura do funil amostral em sete níveis, estratificação e dimensionamento, protocolos de triagem e de campo, classificação da condição das pastagens e controle de qualidade | 2.9 a 2.14 · 3.2 |
-
-O formato remoto permite alcançar equipes distribuídas, dispensa deslocamento e possibilita o registro em vídeo da sessão, que passa a integrar o acervo de consulta descrito acima. As demonstrações do Módulo 1 são conduzidas sobre as próprias áreas de interesse da Acelen Renováveis, de modo que os participantes reproduzam, durante a sessão, as análises que executarão em sua rotina.
-
-A realização do seminário de apresentação de resultados, envolvendo setores da academia, do governo e da sociedade civil organizada, será agendada em conjunto com a Acelen Renováveis.
