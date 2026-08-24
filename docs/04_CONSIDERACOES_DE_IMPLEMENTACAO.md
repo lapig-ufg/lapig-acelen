@@ -47,13 +47,13 @@ Os dados brutos e processados são retidos por no mínimo dez anos. Esse prazo n
 
 ### 4.2.3 - Requisitos operacionais
 
-A execução do algoritmo de campo impõe condições que não se aplicam ao *toolkit* e que precisam ser consideradas no planejamento:
+A execução do plano de amostragem de campo impõe condições que não se aplicam ao *toolkit* e que precisam ser consideradas no planejamento:
 
-- **Janela sazonal.** A aquisição de imagens e a coleta de campo concentram-se no período de estiagem, conforme a Tabela 23. Fora dessa janela, os índices exigem normalização sazonal e a confiança na avaliação visual diminui, além de o acesso rural se tornar incerto.
+- **Janela sazonal.** A aquisição de imagens e a coleta de campo concentram-se no período de estiagem (Seção 3.2.5 Tabela 06). Fora dessa janela, os índices exigem normalização sazonal e a confiança na avaliação visual diminui, além de o acesso rural se tornar incerto.
 - **Equipe qualificada.** A triagem em gabinete requer analistas treinados em interpretação de imagens, submetidos a controle de concordância inter-observador. As campanhas de campo exigem equipes com formação em sensoriamento remoto e em avaliação de pastagens, além de piloto de drone certificado.
 - **Autorização de voo.** Os sobrevoos dependem de consulta a NOTAM e de autorização de espaço aéreo junto ao DECEA, pelo sistema SARPAS, com antecedência mínima de 24 horas.
 - **Autorização de acesso.** A visita a propriedades privadas depende de anuência do proprietário. A recusa é tratada como inelegibilidade e aciona o protocolo de substituição pela próxima unidade da lista GRTS.
-- **Capacidade laboratorial.** As análises bromatológicas e de solo dependem de laboratório parceiro, com prazos de entrega que condicionam o cronograma da Tabela 38.
+- **Capacidade laboratorial.** As análises bromatológicas e de solo dependem de laboratório parceiro, com prazos de entrega que condicionam o cronograma da Tabela 21 na seção 3.2.12.
 
 ### 4.2.4 - Limitações reconhecidas
 
