@@ -246,7 +246,7 @@ As figuras 12 e 13 apresentam exemplos do resultado da Análise de tendência da
 
 ### 3.1.10 - Análise de Biomassa Seca
 
-No menu "Análise de Biomassa Seca", o usuário pode estimar a série temporal mensal de biomassa seca das áreas de pastagem dentro da propriedade de interesse selecionada no toolkit. O cálculo é feito a partir dos dados de Produtividade Primária Bruta em calculos a partir dos dados do satélite Sentinel com 10 metros de resolução, disponibilizados pela iniciativa WRI Land & Carbon Lab (Time2Graze).
+No menu "Análise de Biomassa Seca", o usuário pode estimar a série temporal mensal de biomassa seca das áreas de pastagem dentro da propriedade de interesse selecionada no toolkit. A análise parte das estimativas de Produtividade Primária Bruta (GPP) derivadas de imagens Sentinel-2, com 10 metros de resolução espacial, disponibilizadas pela iniciativa WRI Land & Carbon Lab (Time2Graze).
 
 Para realizar a análise, o usuário deve:
 
