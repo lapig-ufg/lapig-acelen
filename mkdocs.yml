@@ -3,7 +3,7 @@ site_author: Bernard Silva de Oliveira
 copyright: ATBD versão 5.0 — agosto de 2026 · LAPIG/UFG–FUNAPE × Acelen Renováveis
 theme:
   name: material # O estilo material
-  logo: figures/logo.png # <--- Logo que vai aparecer na ESQUERDA
+  custom_dir: overrides # Sobrescreve o partial da logo para exibir LAPIG + UFG + Acelen separadas
 
   # Recursos visuais (Habilita a barra de pesquisa que expande e abas se necessário)
   features:
@@ -17,6 +17,7 @@ repo_name: LAPIG-UFG/toolkit-acelen  # Nome que aparecerá ao lado do ícone
 repo_url: https://github.com/lapig-ufg/lapig-acelen #O link do endereço do github do lapig na acelen
 
 nav:
+  - 'Pagina Principal': 'index.md'
   - 'Introdução': '01_INTRODUCAO.md'
   - 'Base Teórica': '02_BASE_TEORICA.md'
   - 'Descrição e Abordagem do Algoritmo': '03_DESCRICAO_ABORDAGEM_DO_ALGORITMO.md'
@@ -32,3 +33,6 @@ markdown_extensions:
 
 extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js
+
+extra_css:
+  - stylesheets/extra.css

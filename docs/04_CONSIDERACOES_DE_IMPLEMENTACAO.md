@@ -6,13 +6,13 @@ Este capítulo reúne as condições práticas de operação dos dois componente
 
 O toolkit versão 5.0 (Análise Temporal da Dinâmica de Cobertura e Uso da Terra) foi desenvolvido no ambiente do Google Earth Engine, a partir do Javascript, que é uma linguagem open source e gratuita. Para acessar o toolkit é necessária uma conexão à internet, um navegador compatível com o Google Earth Engine e uma conta da Google (Gmail).
 
-É importante enfatizar que a qualidade e nível de informação acessível nesta versão do toolkit é função dos dados utilizados, i.e. Coleção 10.1 do Mapbiomas, cuja acurácia global está em torno de 93% e imagens da série Landsat, com resolução de 30 metros e cuja disponibilidade e qualidade dos dados variam entre os sensores Thematic Mapper (Landsat 5), ETM+ (Landsat 7) e OLI (Landsat 8 e 9). Da mesma forma, é importante reiterar que a velocidade de visualização e consulta aos dados depende da complexidade dos dados poligonais, da conexão ao Google Earth Engine e da própria capacidade de processamento da plataforma da Google.
+É importante enfatizar que a qualidade e nível de informação acessíveis nesta versão do toolkit são função dos dados utilizados, i.e. Coleção 10.1 do Mapbiomas, cuja acurácia global está em torno de 93% e imagens da série Landsat, com resolução de 30 metros e cuja disponibilidade e qualidade dos dados variam entre os sensores Thematic Mapper (Landsat 5), ETM+ (Landsat 7) e OLI (Landsat 8 e 9). Da mesma forma, é importante reiterar que a velocidade de visualização e consulta aos dados depende da complexidade dos dados poligonais, da conexão ao Google Earth Engine e da própria capacidade de processamento da plataforma da Google.
 
 Para ter acesso ao código fonte e a interface do toolkit desenvolvido, acesse os links do GitHub no endereço [https://github.com/lapig-ufg/lapig-acelen](https://github.com/lapig-ufg/lapig-acelen) e o do Google Earth Engine [https://code.earthengine.google.com/bfad226b58bbb70d9524c9b6f9bb7462](https://code.earthengine.google.com/bfad226b58bbb70d9524c9b6f9bb7462) respectivamente.
 
 ### 4.1.1 - Material de apoio à operação
 
-Complementando esta documentação, um vídeo tutorial registra a operação do toolkit de ponta a ponta, com narração e demonstração em tela de todas as funcionalidades descritas na Seção 3.1. O material está disponível em vídeo_tutorial neste link [link-video](https://drive.google.com/file/d/1_GYqF-2kMnPF4Lnsrr97450Kq_Bqhhvy/view?usp=sharing). A base de entrada no vídeo tutorial é a Malha Fundiária Ambiental, desenvolvida pelo LAPIG/UFG e descrita, quanto à metodologia de construção, na Seção 2.8. Para as análises deste projeto, foi preparado um recorte específico, disponível no Google Earth Engine sob o identificador projects/ee-amazonas21/assets/Acelen/Datasets/propriedade_montes_claros_lapig. Esse recorte abrange os imóveis rurais privados com área igual ou superior a 2 hectares situados na Região Intermediária de Montes Claros, no trecho que faz interseção com o bioma Cerrado. É essa camada que delimita a unidade de análise do toolkit — a propriedade rural — e que constitui o quadro amostral da estratégia de verificação em campo, conforme a Seção 3.2.2
+Complementando esta documentação, um vídeo tutorial registra a operação do toolkit de ponta a ponta, com narração e demonstração em tela de todas as funcionalidades descritas na Seção 3.1. O material está disponível em vídeo_tutorial neste link [link-video](https://drive.google.com/file/d/1_GYqF-2kMnPF4Lnsrr97450Kq_Bqhhvy/view?usp=sharing). A base de entrada no vídeo tutorial é a Malha Fundiária Ambiental, desenvolvida pelo LAPIG/UFG e descrita, quanto à metodologia de construção, na Seção 2.8. Para as análises deste projeto, foi preparado um recorte específico, disponível no Google Earth Engine sob o identificador projects/ee-amazonas21/assets/Acelen/Datasets/propriedade_montes_claros_lapig. Esse recorte abrange os imóveis rurais privados com área igual ou superior a 2 hectares situados na Região Intermediária de Montes Claros, no trecho que faz interseção com o bioma Cerrado. É essa camada que delimita a unidade de análise do toolkit — a propriedade rural — e que constitui o quadro amostral da estratégia de verificação em campo, conforme a Seção 3.2.2.
 
 ## 4.2 - Estratégia de Amostragem em Campo
 
@@ -47,13 +47,13 @@ Os dados brutos e processados são retidos por no mínimo dez anos. Esse prazo n
 
 ### 4.2.3 - Requisitos operacionais
 
-A execução do algoritmo de campo impõe condições que não se aplicam ao *toolkit* e que precisam ser consideradas no planejamento:
+A execução do plano de amostragem de campo impõe condições que não se aplicam ao *toolkit* e que precisam ser consideradas no planejamento:
 
-- **Janela sazonal.** A aquisição de imagens e a coleta de campo concentram-se no período de estiagem, conforme a Tabela 23. Fora dessa janela, os índices exigem normalização sazonal e a confiança na avaliação visual diminui, além de o acesso rural se tornar incerto.
+- **Janela sazonal.** A aquisição de imagens e a coleta de campo concentram-se no período de estiagem (Seção 3.2.5 Tabela 06). Fora dessa janela, os índices exigem normalização sazonal e a confiança na avaliação visual diminui, além de o acesso rural se tornar incerto.
 - **Equipe qualificada.** A triagem em gabinete requer analistas treinados em interpretação de imagens, submetidos a controle de concordância inter-observador. As campanhas de campo exigem equipes com formação em sensoriamento remoto e em avaliação de pastagens, além de piloto de drone certificado.
 - **Autorização de voo.** Os sobrevoos dependem de consulta a NOTAM e de autorização de espaço aéreo junto ao DECEA, pelo sistema SARPAS, com antecedência mínima de 24 horas.
 - **Autorização de acesso.** A visita a propriedades privadas depende de anuência do proprietário. A recusa é tratada como inelegibilidade e aciona o protocolo de substituição pela próxima unidade da lista GRTS.
-- **Capacidade laboratorial.** As análises bromatológicas e de solo dependem de laboratório parceiro, com prazos de entrega que condicionam o cronograma da Tabela 38.
+- **Capacidade laboratorial.** As análises bromatológicas e de solo dependem de laboratório parceiro, com prazos de entrega que condicionam o cronograma da Tabela 21 na seção 3.2.12.
 
 ### 4.2.4 - Limitações reconhecidas
 
@@ -95,3 +95,29 @@ Até o final de outubro de 2026, os dados de biomassa serão atualizados para o 
 Até outubro de 2026, o *toolkit* segue em atualização constante, o que significa que correções, ajustes de desempenho e incorporação de novas versões dos dados de entrada ocorrem de forma contínua, sem necessidade de intervenção do usuário — as alterações ficam disponíveis na próxima sessão no Google Earth Engine.
 
 Duas implicações decorrem desse regime. A primeira é de **reprodutibilidade**: análises executadas em datas distintas podem apresentar resultados diferentes se, entre elas, houver atualização da base de entrada. Recomenda-se, por isso, registrar a data de execução junto de qualquer resultado destinado a relatório ou auditoria. A segunda é **documental**: cada atualização relevante deve ser refletida neste ATBD e registrada no controle de versões da página inicial, de modo que a documentação e a ferramenta permaneçam correspondentes.
+
+---
+
+## 4.4 - Transferência de Conhecimento e Capacitação
+
+A documentação reunida neste ATBD é um dos instrumentos de transferência de conhecimento do projeto, mas não o único. Compõem esse conjunto:
+
+- **O código-fonte completo**, versionado e de acesso aberto, disponível no repositório GitHub e no editor do Google Earth Engine pelos endereços indicados na Seção 4.1. Qualquer etapa descrita neste documento pode ser inspecionada, reexecutada e adaptada a partir dele.
+- **O vídeo tutorial de operação**, descrito na Seção 4.1.1, que percorre as funcionalidades do *toolkit* com narração e demonstração em tela, e que serve tanto à capacitação inicial quanto à consulta pontual durante o uso.
+- **O Plano Amostral LAPIG/ACELEN v6.0**, referenciado na Seção 4.2, que detalha os protocolos operacionais de campo em nível de execução — formulários, equipamentos, roteiros e procedimentos por nível amostral.
+
+### 4.4.1 - Webinário de apresentação e capacitação
+
+A capacitação dos técnicos indicados pela Acelen Renováveis será conduzida em formato de **webinário**, organizado em três módulos que percorrem o conjunto do que foi desenvolvido, conforme a Tabela 25.
+
+#### Tabela 25 - Módulos do webinário de capacitação
+
+| Módulo | Conteúdo | Seções de referência |
+|---|---|---|
+| 1 — Usabilidade do *toolkit* | Percurso pelos menus de análise: dinâmica de cobertura e uso, vigor, mapeamento automático em nível de propriedade, perda de solo, tendência de produtividade, biomassa seca e exportação de camadas | 3.1 · 4.1 |
+| 2 — Malha Fundiária Ambiental | Construção da base fundiária: hierarquia de prevalência entre fontes, resolução de sobreposições por análise multicritério, depuração topológica e integração de ativos ambientais | 2.8 · 4.1.1 |
+| 3 — Plano amostral de verificação em campo | Estrutura do funil amostral em sete níveis, estratificação e dimensionamento, protocolos de triagem e de campo, classificação da condição das pastagens e controle de qualidade | 2.9 a 2.14 · 3.2 |
+
+O formato remoto permite alcançar equipes distribuídas, dispensa deslocamento e possibilita o registro em vídeo da sessão, que passa a integrar o acervo de consulta descrito acima. As demonstrações do Módulo 1 são conduzidas sobre as próprias áreas de interesse da Acelen Renováveis, de modo que os participantes reproduzam, durante a sessão, as análises que executarão em sua rotina.
+
+A realização do seminário de apresentação de resultados, envolvendo setores da academia, do governo e da sociedade civil organizada, será agendada em conjunto com a Acelen Renováveis.

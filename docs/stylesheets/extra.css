@@ -1,0 +1,79 @@
+/* Cor primária customizada (cabeçalho, abas, links de destaque) */
+:root {
+  --md-primary-fg-color: #a5dc00;
+  --md-primary-fg-color--light: #a5dc00;
+  --md-primary-fg-color--dark: #83b000;
+
+  /* Cor do texto/ícones sobre o cabeçalho — escurecida para manter contraste
+     sobre o verde-limão, já que branco fica com baixo contraste. */
+  --md-primary-bg-color: #1b1b1b;
+  --md-primary-bg-color--light: #1b1b1b;
+
+  /* Cabeçalho mais alto para acomodar a logo maior */
+  --md-header-height: 9.5rem;
+
+  /* Cor dos links no texto e do item do menu lateral quando selecionado */
+  --md-typeset-a-color: #0074fc;
+
+  /* Mesma cor ao passar o mouse (hover) sobre links/itens do menu */
+  --md-accent-fg-color: #0074fc;
+  --md-accent-fg-color--transparent: #0074fc1a;
+}
+
+/* Logo (LAPIG + UFG + Acelen, como três imagens separadas) legível no
+   cabeçalho e na gaveta de navegação, sem tomar espaço demais e cortar
+   o título do site ao lado. */
+.md-header__button.md-logo,
+.md-nav__title .md-logo {
+  margin: 0.3rem;
+  padding: 0;
+}
+
+.md-logo-group {
+  display: flex;
+  align-items: center;
+}
+
+.md-logo-group__item {
+  height: 6.25rem;
+  width: auto;
+  max-height: none;
+  margin-left: 0.6rem;
+}
+
+/* LAPIG e UFG têm textos internos menores (subtítulos), por isso ficam
+   maiores que a Acelen para manter a mesma nitidez percebida. */
+.md-logo-group__item--lapig,
+.md-logo-group__item--ufg {
+  height: 8.1rem;
+}
+
+.md-logo-group__item:first-child {
+  margin-left: 0;
+}
+
+/* Linha divisória sutil entre as logos, exceto antes da primeira */
+.md-logo-group__item + .md-logo-group__item {
+  padding-left: 0.6rem;
+  border-left: 1px solid currentcolor;
+}
+
+/* Campo de busca mais estreito para sobrar espaço ao título do site
+   "Acelen - Algorithm Theoretical Basis Document (ATBD)" no cabeçalho. */
+@media screen and (min-width: 60em) {
+  .md-search__inner {
+    width: 8rem;
+  }
+}
+
+@media screen and (min-width: 60em) and (max-width: 76.234375em) {
+  [data-md-toggle="search"]:checked ~ .md-header .md-search__inner {
+    width: 16rem;
+  }
+}
+
+@media screen and (min-width: 76.25em) {
+  [data-md-toggle="search"]:checked ~ .md-header .md-search__inner {
+    width: 20rem;
+  }
+}
