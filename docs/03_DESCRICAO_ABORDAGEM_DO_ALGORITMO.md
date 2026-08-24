@@ -1,10 +1,10 @@
 # 3. DESCRIÇÃO E ABORDAGEM DO ALGORITMO
 
-Nesta seção serão abordadas todas as funcionalidades do toolkit, versão 5.0, especificamente voltado à Análise Temporal da Dinâmica da Cobertura e Uso da Terra, tendo por referência os mapas de cobertura e uso da terra, vigor das pastagens da Coleção 10.1 do Mapbiomas, bem como imagens das séries Landsat, mapeamento detalhado das pastagens em nível de propriedade e o cálculo da perda anual média do solo
+Nesta seção serão abordadas todas as funcionalidades do *toolkit*, versão 5.0, especificamente voltado à Análise Temporal da Dinâmica da Cobertura e Uso da Terra, tendo por referência os mapas de cobertura e uso da terra, vigor das pastagens da Coleção 10.1 do Mapbiomas, bem como imagens das séries *Landsat*, mapeamento detalhado das pastagens em nível de propriedade e o cálculo da perda anual média do solo
 
-## 3.1 - Análise Temporal da Dinâmica da Cobertura e Uso da Terra (toolkit 5.0)
+## 3.1 - Análise Temporal da Dinâmica da Cobertura e Uso da Terra (*toolkit* 5.0)
 
-O toolkit versão 5.0 permite ao usuário explorar a série histórica dos mapas de cobertura e uso da terra da Coleção 10.1 do MapBiomas, mapear em nível de propriedade as pastagens e calcular a perda anual média do solo. Ao fazer o upload de um arquivo vetorial, o usuário pode analisar instantaneamente a dinâmica da cobertura da terra entre 1985 e 2024 para as classes: Soja, Cana, Pastagem, Vegetação Natural, Silvicultura, Outras Lavouras, Outros, Água e Mosaico de Uso. Além disso, é possível acessar imagens Landsat de diferentes anos e períodos (seco, chuvoso e anual), e identificar o nível de vigor das pastagens.
+O *toolkit* versão 5.0 permite ao usuário explorar a série histórica dos mapas de cobertura e uso da terra da Coleção 10.1 do MapBiomas, mapear em nível de propriedade as pastagens e calcular a perda anual média do solo. Ao fazer o *upload* de um arquivo vetorial, o usuário pode analisar instantaneamente a dinâmica da cobertura da terra entre 1985 e 2024 para as classes: Soja, Cana, Pastagem, Vegetação Natural, Silvicultura, Outras Lavouras, Outros, Água e Mosaico de Uso. Além disso, é possível acessar imagens *Landsat* de diferentes anos e períodos (seco, chuvoso e anual), e identificar o nível de vigor das pastagens.
 
 A Figura 03 mostra o fluxograma do processo de usabilidade da Análise Temporal da Dinâmica de Cobertura e Uso da Terra.
 
@@ -16,39 +16,41 @@ A Figura 03 mostra o fluxograma do processo de usabilidade da Análise Temporal 
 
 ### 3.1.1 - Variáveis e Parâmetros
 
-A entrada principal do toolkit é um arquivo poligonal das áreas de interesse da Acelen Renováveis. O usuário insere esse arquivo fazendo o upload dele como um asset no Google Earth Engine.
+A entrada principal do *toolkit* é um arquivo poligonal das áreas de interesse da Acelen Renováveis. O usuário insere esse arquivo fazendo o *upload* dele como um *asset* no *Google Earth Engine*.
 
-O usuário pode interagir com os seguintes parâmetros do toolkit:
+O usuário pode interagir com os seguintes parâmetros do *toolkit*:
 
-- Filtro da camada de entrada: Permite ao usuário filtrar a camada de entrada a partir do conjunto de atributos, antes da inserção no mapa;
+- **Filtro da camada de entrada:** Permite ao usuário filtrar a camada de entrada a partir do conjunto de atributos, antes da inserção no mapa;
 
-- Visualização da camada a partir de um raio de Influência: Permite que o usuário visualize sua área de interesse sobre um raio de influência (buffer)
+- **Visualização da camada a partir de um raio de Influência:** Permite que o usuário visualize sua área de interesse sobre um raio de influência (*buffer*)
 
-- Data de análise da cobertura e uso da terra: O período específico para a análise temporal;
+- **Data de análise da cobertura e uso da terra:** O período específico para a análise temporal;
 
-- Período de aquisição das cenas Landsat: O período (chuvoso, seca ou anual) de visualização das imagens dos satélites Landsat (5, 7, 8 e 9);
+- **Período de aquisição das cenas *Landsat*:** O período (chuvoso, seca ou anual) de visualização das imagens dos satélites *Landsat* (5, 7, 8 e 9);
 
-- Tipo de classificação: Forma de visualização das classes de cobertura e uso da terra na propriedade, sendo: Moda, Original e Original - Área Total;
+- **Tipo de classificação:** Forma de visualização das classes de cobertura e uso da terra na propriedade, sendo: Moda, Original e Original - Área Total;
 
-- Visualização do vigor de pastagens: Visualização dos níveis de vigor das áreas de interesse da Acelen Renováveis, a partir dos dados do vigor da vegetação normalizados por biomas (Brasil) e por estados (no momento, disponível apenas para Minas Gerais e Bahia);
+- **Visualização do vigor de pastagens:** Visualização dos níveis de vigor das áreas de interesse da Acelen Renováveis, a partir dos dados do vigor da vegetação normalizados por biomas (Brasil) e por estados (no momento, disponível apenas para Minas Gerais e Bahia);
 
-- Mapeamento automático das pastagens ao nível de propriedade: O mapeamento automático das pastagens é realizado sobre a camada de entrada. O usuário pode selecionar a quantidade de amostras, a área de influência (buffer) e as bases de dados de uso e cobertura da terra, a fim de coletar informações das pastagens usadas no processo de classificação;
+- **Mapeamento automático das pastagens ao nível de propriedade:** O mapeamento automático das pastagens é realizado sobre a camada de entrada. O usuário pode selecionar a quantidade de amostras, a área de influência (*buffer*) e as bases de dados de uso e cobertura da terra, a fim de coletar informações das pastagens usadas no processo de classificação;
 
-- Cálculo da perda média anual de solo: O cálculo da perda média anual de solo, usando a equação RUSLE, é aplicado na bacia hidrográfica onde a área de interesse do usuário está inserida;
+- **Cálculo da perda média anual de solo:** O cálculo da perda média anual de solo, usando a equação RUSLE, é aplicado na bacia hidrográfica onde a área de interesse do usuário está inserida;
 
-- Análise de tendência da pastagem na propriedade: Analisa-se a tendência dos valores de NDVI e dos valores de produtividade primária bruta (GPP), derivados de séries temporais de imagens Landsat, nas áreas de pastagem contidas na camada de entrada definida pelo usuário.
+- **Análise de tendência da pastagem na propriedade:** Analisa-se a tendência dos valores de NDVI e dos valores de produtividade primária bruta (GPP), derivados de séries temporais de imagens *Landsat*, nas áreas de pastagem contidas na camada de entrada definida pelo usuário.
 
-- Série temporal de cobertura e uso da terra (gráfico): Gera um gráfico (para a área de interesse) que mostra a evolução do uso e cobertura da terra ao longo do tempo;
+- **Série temporal de cobertura e uso da terra (gráfico):** Gera um gráfico (para a área de interesse) que mostra a evolução do uso e cobertura da terra ao longo do tempo;
 
-- Taxa de conversão: Verifica a taxa de conversão de áreas naturais para antrópicas para cada área de interesse;
+- **Taxa de conversão:** Verifica a taxa de conversão de áreas naturais para antrópicas para cada área de interesse;
 
-- Análise temporal da evolução das áreas de pastagem sobre áreas naturais e outros: Visualização dos valores das áreas em hectares das classes (pastagem, vegetação natural e outras), ao longo do tempo, para cada área de interesse.
+- **Análise temporal da evolução das áreas de pastagem sobre áreas naturais e outros:** Visualização dos valores das áreas em hectares das classes (pastagem, vegetação natural e outras), ao longo do tempo, para cada área de interesse.
 
-- Download das camadas do toolkit: Permite o usuário fazer download da camada que está presente no mapa e/ou a série temporal das bases de dados contidas no toolkit, como: Vigor das pastagens e o uso e cobertura da terra (Mapbiomas)
+- **_Download_ das camadas do *toolkit*:** Permite o usuário fazer *download* da camada que está presente no mapa e/ou a série temporal das bases de dados contidas no *toolkit*, como: Vigor das pastagens e o uso e cobertura da terra (Mapbiomas).
+
+- **Análise de Biomassa seca:** Permite o usuário analise em série temporal a partir de 2025 a biomassa seca das áreas de pastagem usando dados do *sentinel-2*.
 
 ### 3.1.2 - Processamento
 
-Os mapas de cobertura e uso da terra compreendem 29 classes, as quais, com o intuito de melhorar o entendimento e as análises da dinâmica e uso da terra nas áreas de interesse da Acelen Renováveis, foram agrupadas em nove classes: Soja, Cana, Pastagem, Vegetação Natural, Silvicultura, Outras Lavouras, Outros, Água e Mosaico de Uso. A Tabela 02 mostra o agrupamento das classes de cobertura e uso da terra em relação à base de dados original:
+Os mapas de cobertura e uso da terra compreendem 29 classes, as quais, com o intuito de melhorar o entendimento e as análises da dinâmica e uso da terra nas áreas de interesse da **Acelen Renováveis**, foram agrupadas em nove classes: Soja, Cana, Pastagem, Vegetação Natural, Silvicultura, Outras Lavouras, Outros, Água e Mosaico de Uso. A Tabela 02 mostra o agrupamento das classes de cobertura e uso da terra em relação à base de dados original:
 
 #### Tabela 02 - Classes agrupadas conforme as nove classes de interesse consideradas neste estudo.
 
@@ -68,31 +70,31 @@ Quando o usuário opta por visualizar a moda das classes dentro de uma área de 
 
 ### 3.1.3 - Dados de entrada
 
-Os dados de entrada para o toolkit são informações vetoriais na estrutura poligonal. Inicialmente, o dado de entrada deve estar no formato de arquivo vetorial shapefile, e compactado no formato .zip. Com o dado no formato .zip, é necessário fazer o upload desse arquivo na plataforma Google Earth Engine, com o usuário já autenticado nessa mesma plataforma.
+Os dados de entrada para o *toolkit* são informações vetoriais na estrutura poligonal. Inicialmente, o dado de entrada deve estar no formato de arquivo vetorial *shapefile*, e compactado no formato .zip. Com o dado no formato .zip, é necessário fazer o *upload* desse arquivo na plataforma *Google Earth Engine*, com o usuário já autenticado nessa mesma plataforma.
 
-Uma vez que o arquivo vetorial tenha sido adicionado ao toolkit, o usuário pode filtrar áreas de interesse a partir das informações contidas no respectivo conjunto de atributos. Especificamente, no menu Entrada de Dados, cole o link do asset para integrá-lo à ferramenta. Após a visualização no mapa, você pode refinar a análise utilizando filtros específicos. Basta clicar na opção e filtro e depois, selecionar o campo e o valor desejado para isolar a área geográfica de interesse dentro do seu conjunto de dados.
+Uma vez que o arquivo vetorial tenha sido adicionado ao *toolkit*, o usuário pode filtrar áreas de interesse a partir das informações contidas no respectivo conjunto de atributos. Especificamente, no menu **Entrada de Dados**, cole o link do *asset* para integrá-lo à ferramenta. Após a visualização no mapa, você pode refinar a análise utilizando filtros específicos. Basta clicar na opção e filtro e depois, selecionar o campo e o valor desejado para isolar a área geográfica de interesse dentro do seu conjunto de dados.
 
-### 3.1.4 - Visualização dos mapas de cobertura e uso da terra no
+### 3.1.4 - Visualização dos mapas de cobertura e uso da terra no Mapa
 
-Para visualizar os mapas de cobertura e uso da terra na ferramenta a partir de um arquivo externo, no menu Classificação Uso da Terra, o usuário deve seguir estas etapas:
+Para visualizar os mapas de cobertura e uso da terra na ferramenta a partir de um arquivo externo, no **menu Classificação Uso da Terra**, o usuário deve seguir estas etapas:
 
-- Na opção "Fonte de dados", selecione a fonte de dados de uso da terra que deseja visualizar. Atualmente, o toolkit suporta apenas a fonte MapBiomas;
+- Na opção **"Fonte de dados"**, selecione a fonte de dados de uso da terra que deseja visualizar. Atualmente, o *toolkit* suporta apenas a fonte **MapBiomas**;
 
-- No campo "Ano de Análise", deve-se escolher o ano da análise, que está ligado à fonte de dados selecionada;
+- No campo **"Ano de Análise"**, deve-se escolher o ano da análise, que está ligado à fonte de dados selecionada;
 
-- Na opção "Buffer (m)", o usuário pode expandir o limite (raio de influência) da camada de entrada. O objetivo é visualizar os dados de classificação em uma área que se estende além dos limites originais da camada;
+- Na opção **"*Buffer* (m)"**, o usuário pode expandir o limite (raio de influência) da camada de entrada. O objetivo é visualizar os dados de classificação em uma área que se estende além dos limites originais da camada;
 
-- Após isso, selecione o tipo de classificação que deseja visualizar.
+- Após isso, selecione o **tipo de classificação** que deseja visualizar.
 
 O campo Tipo de Classificação, possui três opções, sendo elas:
 
-- Moda: O limite de cada área de interesse será classificado a partir da classe majoritária, ou seja, a classe de cobertura e uso da terra que mais se repetir na propriedade / área de interesse;
+- **Moda:** O limite de cada área de interesse será classificado a partir da classe majoritária, ou seja, a classe de cobertura e uso da terra que mais se repetir na propriedade / área de interesse;
 
-- Original: Cada elemento do arquivo externo mostrará todas as classificações em seu interior;
+- **Original:** Cada elemento do arquivo externo mostrará todas as classificações em seu interior;
 
-- Original - Área total: Serão visualizadas todas as classes de cobertura e uso da terra de toda a extensão geográfica do arquivo externo inserido.
+- **Original - Área total:** Serão visualizadas todas as classes de cobertura e uso da terra de toda a extensão geográfica do arquivo externo inserido.
 
-Depois da seleção do tipo de classificação, clique no botão Gerar classificação do ano da análise para visualizar o mapa na tela da ferramenta. A tela traz a informação das classes de cobertura e uso da terra, legenda e os gráficos do quantitativo das classes no arquivo inserido, conforme o respectivo ano selecionado pelo usuário. O gráfico gerado pode ser exportado nos formatos: CSV (tabela de dados), SVG e PNG (Figura 04).
+Depois da seleção do tipo de classificação, clique no botão **Gerar classificação do ano da análise** para visualizar o mapa na tela da ferramenta. A tela traz a informação das classes de cobertura e uso da terra, legenda e os gráficos do quantitativo das classes no arquivo inserido, conforme o respectivo ano selecionado pelo usuário. O gráfico gerado pode ser exportado nos formatos: CSV (tabela de dados), SVG e PNG (Figura 04).
 
 <center>
 <img width="500px" src="../figures/figure_02.png"/>
@@ -102,7 +104,7 @@ Depois da seleção do tipo de classificação, clique no botão Gerar classific
 
 ### 3.1.5 - Visualização da dinâmica de cobertura e uso da terra, conversão para uso antrópico e evolução das áreas de pastagens
 
-Para visualizar a dinâmica das classes de cobertura e uso da terra, é necessário que a opção escolhida no campo Tipo de Classificação seja a moda. Clique no ícone e aparecerá no centro superior da tela as opções das informações que o usuário deseja visualizar (Figura 05):
+Para visualizar a dinâmica das classes de cobertura e uso da terra, é necessário que a opção escolhida no campo **Tipo de Classificação** seja a moda. Clique no ícone e aparecerá no centro superior da tela as opções das informações que o usuário deseja visualizar (Figura 05):
 
 <center>
 <img width="300px" src="../figures/figure_03_a.png"/>
@@ -136,9 +138,9 @@ Após selecionar a opção de visualização do gráfico, clique na propriedade 
 
 Para visualizar os níveis de vigor da pastagem, siga os seguintes passos no menu "Análise de Vigor":
 
-- Selecione o Ano do Vigor (a série temporal disponível vai de 2000 a 2024).
-- Defina a região para Análise (selecionando entre Brasil e Unidades da Federação - UF's).
-- Ajuste o valor do Buffer em metros para a análise.
+- Selecione o **Ano do Vigor** (a série temporal disponível vai de 2000 a 2024).
+- Defina a **região para Análise** (selecionando entre Brasil e Unidades da Federação - UF's).
+- Ajuste o valor do **_Buffer_** em metros para a análise.
 - Por fim, clique no botão "Visualizar Vigor"..
 
 A Figura 09 mostra a visualização do Vigor da pastagem:
@@ -150,35 +152,16 @@ A Figura 09 mostra a visualização do Vigor da pastagem:
 </center>
 
 
-Os dados de vigor utilizado neste toolkit são disponibilizados pelo MapBiomas, sendo gerados pelo Laboratório de Sensoriamento Remoto e Geoprocessamento - LAPIG da Universidade Federal de Goiás (conforme metodologia proposta por Santos et al., 2022 e modificada por Ferreira Jr et al., 2023).
+Os dados de vigor utilizado neste *toolkit* são disponibilizados pelo MapBiomas, sendo gerados pelo Laboratório de Sensoriamento Remoto e Geoprocessamento - LAPIG da Universidade Federal de Goiás (conforme metodologia proposta por Santos et al., 2022 e modificada por Ferreira Jr et al., 2023).
 
 ### 3.1.7 - Mapeamento automático de pastagens em nível de propriedade
 
-Para o mapeamento automatizado das pastagens em nível de propriedade, o usuário deve, inicialmente, acessar o Menu Mapeamento Automático Detalhado - Pastagem, selecionar a base de dados para a classificação. As opções disponíveis são Sentinel-2 e Embeddings, ambas com resolução espacial de 10 metros.
+Para o mapeamento automatizado das pastagens em nível de propriedade, o usuário deve, inicialmente, acessar o Menu **Mapeamento Automático Detalhado - Pastagem**, selecionar a base de dados para a classificação. As opções disponíveis são *Sentinel-2* e *Embeddings*, ambas com resolução espacial de 10 metros.
 
-Após a seleção, o usuário define a quantidade de amostras, o buffer (em metros) e o ano para o mapeamento. Por fim, ele escolhe a fonte de dados de pastagem existentes para a geração de amostras, as quais serão usadas pelo algoritmo Random Forest para o mapeamento final.
+Após a seleção, o usuário define a quantidade de amostras, o *buffer* (em metros) e o ano para o mapeamento. Por fim, ele escolhe a fonte de dados de pastagem existentes para a geração de amostras, as quais serão usadas pelo algoritmo *Random Forest* para o mapeamento final.
 
-As fontes de mapeamento existentes incluem dados do MapBiomas, dados da iniciativa Global Pasture Watch (Parente et al., 2024) e a sobreposição das áreas de pastagem de ambas as fontes. A Figura 10 apresenta o resultado do mapeamento automático de pastagem em nível de propriedade.
+As fontes de mapeamento existentes incluem dados do MapBiomas, dados da iniciativa *Global Pasture Watch* (Parente et al., 2024) e a sobreposição das áreas de pastagem de ambas as fontes. A Figura 10 apresenta o resultado do mapeamento automático de pastagem em nível de propriedade.
 
-#### 3.1.7.1 - Espaço de atributos e parâmetros do classificador
-
-O mapeamento descrito acima apoia-se em um espaço de atributos construído a partir da série anual de imagens Sentinel-2, ao qual se aplica um classificador Random Forest. Esta seção detalha as duas etapas, uma vez que delas dependem tanto a resolução temática alcançada quanto a reprodutibilidade do resultado.
-
-**Geração das amostras.** As amostras de treinamento são obtidas por amostragem estratificada sobre a fonte de pastagem escolhida pelo usuário. O número total de amostras por ele definido é distribuído entre as classes pastagem e não-pastagem proporcionalmente à frequência de cada uma dentro da área de interesse acrescida do buffer informado. Essa alocação proporcional evita que a classe minoritária fique sub-representada em propriedades onde a pastagem ocupa fração pequena do território, situação em que uma alocação uniforme produziria um classificador enviesado.
-
-**Pré-processamento das imagens.** A coleção Sentinel-2 é filtrada para o ano civil selecionado e submetida a três operações encadeadas: descarte das cenas com mais de 80% de cobertura de nuvem; mascaramento de nuvem e sombra pelo produto Cloud Score+, com limiar de 0,50 na banda de qualidade; e mascaramento das bordas com falha radiométrica. As bandas adquiridas a 20 metros são reamostradas para 10 metros por interpolação bilinear, de modo que todo o espaço de atributos opere na resolução mais fina disponível.
-
-**Atributos espectrais.** A cada imagem da coleção são acrescentados oito índices espectrais, calculados a partir das bandas originais: NDVI, NDWI, CAI, CRI1, ARI1, RGR, PSRI e SATVI. O conjunto combina índices sensíveis ao vigor fotossintético (NDVI), ao conteúdo de água (NDWI), à presença de material vegetal seco e resíduo (CAI, SATVI), a pigmentos acessórios (CRI1, ARI1) e à senescência (PSRI, RGR). É essa diversidade que permite distinguir pastagem de outras coberturas herbáceas com resposta espectral semelhante em uma única data.
-
-**Filtro fenológico.** Antes da redução temporal, calcula-se o percentil 25 da série de NDVI para cada pixel e descartam-se as observações abaixo desse limiar. O procedimento retém preferencialmente as observações da estação de crescimento e remove aquelas adquiridas em período de senescência ou sob influência residual de nuvem, reduzindo a variabilidade que não decorre da cobertura em si. É essa etapa que confere caráter fenológico ao espaço de atributos: o classificador não opera sobre uma composição de data fixa, e sim sobre a resposta do alvo ao longo do seu ciclo vegetativo.
-
-**Métricas temporais.** Sobre a coleção filtrada são calculados, banda a banda e pixel a pixel, cinco redutores — mínimo, máximo, mediana, desvio-padrão e amplitude, esta última definida como a diferença entre máximo e mínimo — e quatro percentis: 10, 25, 75 e 90. A amplitude e o desvio-padrão descrevem a magnitude da variação intra-anual, atributo que distingue pastagens manejadas, sujeitas a ciclos de rebrota e pastejo, de coberturas com resposta estável ao longo do ano.
-
-**Atributos geográficos e topográficos.** Ao espaço de atributos somam-se a latitude e a longitude de cada pixel, que informam ao classificador o contexto espacial, e duas variáveis derivadas do modelo digital de elevação NASADEM: a elevação e a declividade, esta expressa em porcentagem.
-
-**Classificador.** Emprega-se o Random Forest com 500 árvores, 13 variáveis sorteadas por divisão de nó, população mínima de uma amostra por folha e fração de bagging de 0,5. A semente aleatória é fixada no ano de análise, o que torna o resultado reprodutível: a mesma propriedade, no mesmo ano e com os mesmos parâmetros, produz sempre a mesma classificação. O classificador opera em modo de probabilidade, e o mapa final resulta da aplicação do limiar de 0,51 sobre a probabilidade estimada.
-
-**Alternativa por Satellite Embeddings.** Quando o usuário seleciona a opção Embeddings, o espaço de atributos descrito acima é substituído pelos vetores de características do Google Satellite Embeddings para o ano selecionado, também a 10 metros, mantidos os mesmos parâmetros do Random Forest e o mesmo conjunto de amostras. A alternativa dispensa o cálculo dos índices e das métricas temporais, o que reduz substancialmente o tempo de processamento.
 
 <center>
 <img width="500px" src="../figures/figure_08.png"/>
@@ -203,23 +186,23 @@ Nesta etapa é possível avaliar a tendência dos valores de produtividade prim�
 
 #### 3.1.9.1 - Análise de tendência da Produtividade Primária Bruta (GPP)
 
-Na análise de tendência da produtividade das pastagens nas áreas de interesse da Acelen, tivemos que organizar uma base de dados histórica bimestral de GPP, cobrindo o período de 2000 a 2024. A inserção desses dados no toolkit seguiu três grandes etapas:
+Na análise de tendência da produtividade das pastagens nas áreas de interesse da Acelen, tivemos que organizar uma base de dados histórica bimestral de GPP, cobrindo o período de 2000 a 2024. A inserção desses dados no *toolkit* seguiu três grandes etapas:
 
-1. **Coleta de Dados:** Baixamos as imagens via shell que estão armazenados no servidor da OpenGeoHub, que é uma fundação de Pesquisa sediada em Doorwerth, localizada nos Países Baixos, que se dedica a promover o acesso aberto a dados geoespaciais e softwares de código aberto. Os dados possuem uma resolução espacial de 30 metros, e o cálculo do GPP segue a metodologia adotadas por Isik et al. (2024).
+1. **Coleta de Dados:** Baixamos as imagens via *shell* que estão armazenados no servidor da *OpenGeoHub*, que é uma fundação de Pesquisa sediada em Doorwerth, localizada nos Países Baixos, que se dedica a promover o acesso aberto a dados geoespaciais e softwares de código aberto. Os dados possuem uma resolução espacial de 30 metros, e o cálculo do GPP segue a metodologia adotadas por Isik et al. (2024).
 
 2. **Junção das imagens e um único arquivo:** Em vez de manipular centenas de arquivos individuais, agrupamos todas as imagens baixadas em um único arquivo georreferenciado (formato multibanda). Nele, cada registro bimestral do GPP é armazenado como uma banda distinta, facilitando o processamento e a organização espacial.
 
-3. **Upload dos arquivos no Google Earth Engine:** Por fim, fizemos o upload desse arquivo para o Google Earth Engine. Para usuários de conta gratuita, o Google Earth Engine limita a quantidade de upload por imagem em 10GB, com isso, tivemos que recortar as imagens do GPP bimestral em pedaços inferior ao tamanho permitido pela Google.
+3. **_Upload_ dos arquivos no *Google Earth Engine*:** Por fim, fizemos o *upload* desse arquivo para o *Google Earth Engine*. Para usuários de conta gratuita, o *Google Earth Engine* limita a quantidade de *upload* por imagem em 10GB, com isso, tivemos que recortar as imagens do GPP bimestral em pedaços inferior ao tamanho permitido pela *Google*.
 
-Com os arquivos de GPP na plataforma do Google Earth Engine, o usuário pode fazer a análise da tendência nas áreas de pastagem na propriedade, acessando o menu de Análise de Tendência das Pastagem. De acordo com as seguintes etapas:
+Com os arquivos de GPP na plataforma do *Google Earth Engine*, o usuário pode fazer a análise da tendência nas áreas de pastagem na propriedade, acessando o menu de Análise de Tendência das Pastagem. De acordo com as seguintes etapas:
 
-1. Selecione o produto Produtividade Primária Bruta (GPP)
+1. Selecione o produto **Produtividade Primária Bruta (GPP)**.
 
-2. Selecione o período de análise nos campos Ano Inicial e Ano Final.
+2. Selecione o período de análise nos campos **Ano Inicial** e **Ano Final**.
 
-3. Após a seleção de todos os parâmetros, clique no botão "Calcular Tendência" para gerar o gráfico que indica se a tendência do GPP nas áreas de pastagem é positiva ou negativa.
+3. Após a seleção de todos os parâmetros, clique no botão **"Calcular Tendência"** para gerar o gráfico que indica se a tendência do GPP nas áreas de pastagem é positiva ou negativa.
 
-As figuras 10 e 11 apresentam exemplos do resultado da Análise de tendência da pastagem usando o produto Produtividade Primária Bruta (GPP).
+As figuras 12 e 13 apresentam exemplos do resultado da Análise de tendência da pastagem usando o produto Produtividade Primária Bruta (GPP).
 
 <center>
 <img width="500px" src="../figures/figure_10.png"/>
@@ -237,19 +220,19 @@ As figuras 10 e 11 apresentam exemplos do resultado da Análise de tendência da
 
 Para verificar a tendência dos valores de índice de vegetação (NDVI) nas áreas de pastagem da propriedade, acesse o menu Análise de Tendência das Pastagem.
 
-4. Selecione o produto Índice de Vegetação (NDVI)
+4. Selecione o produto **Índice de Vegetação (NDVI)**
 
-5. Selecione o período de análise nos campos Ano Inicial e Ano Final.
+5. Selecione o período de análise nos campos **Ano Inicial** e **Ano Final**.
 
-6. Em seguida, escolha os parâmetros Janelas de Análise do Algoritmo TMWM:
+6. Em seguida, escolha os parâmetros **Janelas de Análise do Algoritmo TMWM:**
 
-- O campo "Tamanho da Janela - Anos" representa o número máximo de anos do mesmo mês utilizado no gap filling.
+- O campo **"Tamanho da Janela - Anos"** representa o número máximo de anos do mesmo mês utilizado no *gap filling*.
 
-- O campo "Tamanho da Janela - Dias" define o valor em dias dos vizinhos adjacentes do mesmo ano.
+- O campo **"Tamanho da Janela - Dias"** define o valor em dias dos vizinhos adjacentes do mesmo ano.
 
-7. Após a seleção de todos os parâmetros, clique no botão "Calcular Tendência" para gerar o gráfico que indica se a tendência do NDVI nas áreas de pastagem é positiva ou negativa
+7. Após a seleção de todos os parâmetros, clique no botão **"Calcular Tendência"** para gerar o gráfico que indica se a tendência do NDVI nas áreas de pastagem é positiva ou negativa
 
-As figuras 12 e 13 apresentam exemplos do resultado da Análise de tendência da pastagem usando o Índice de Vegetação (NDVI).
+As figuras 14 e 15 apresentam exemplos do resultado da Análise de tendência da pastagem usando o Índice de Vegetação (NDVI).
 
 <center>
 <img width="550px" src="../figures/figure_12.png"/>
@@ -266,17 +249,17 @@ As figuras 12 e 13 apresentam exemplos do resultado da Análise de tendência da
 
 ### 3.1.10 - Análise de Biomassa Seca
 
-No menu "Análise de Biomassa Seca", o usuário pode estimar a série temporal mensal de biomassa seca das áreas de pastagem dentro da propriedade de interesse selecionada no toolkit. A análise parte das estimativas de Produtividade Primária Bruta (GPP) derivadas de imagens Sentinel-2, com 10 metros de resolução espacial, disponibilizadas pela iniciativa WRI Land & Carbon Lab (Time2Graze). Trata-se da mesma grandeza tratada na Seção 3.1.9.1, ali derivada de imagens Landsat a 30 metros — de modo que o toolkit disponibiliza GPP em duas resoluções complementares: a série Landsat, voltada à análise de tendência de longo prazo, e a série Sentinel-2, voltada ao acompanhamento mensal da produtividade e à sua conversão em biomassa seca.
+No menu **"Análise de Biomassa Seca"**, o usuário pode estimar a série temporal mensal de biomassa seca das áreas de pastagem dentro da propriedade de interesse selecionada no *toolkit*. A análise parte das estimativas de Produtividade Primária Bruta (GPP) derivadas de imagens *Sentinel-2*, com 10 metros de resolução espacial, disponibilizadas pela iniciativa *WRI Land & Carbon Lab* (*Time2Graze*). Trata-se da mesma grandeza tratada na Seção 3.1.9.1, ali derivada de imagens *Landsat* a 30 metros — de modo que o *toolkit* disponibiliza GPP em duas resoluções complementares: a série *Landsat*, voltada à análise de tendência de longo prazo, e a série *Sentinel-2*, voltada ao acompanhamento mensal da produtividade e à sua conversão em biomassa seca.
 
 Para realizar a análise, o usuário deve:
 
-1. Informar o valor de Eficiência de Uso da Luz (LUE, em gC/m²/dia/MJ) — parâmetro que representa a eficiência com que a vegetação de pastagem converte a radiação fotossinteticamente ativa absorvida em biomassa.
+1. Informar o **valor de Eficiência de Uso da Luz** (LUE, em gC/m²/dia/MJ) — parâmetro que representa a eficiência com que a vegetação de pastagem converte a radiação fotossinteticamente ativa absorvida em biomassa.
 
-2. Informar o valor do fator de conversão da biomassa (fator IPCC), utilizado para converter a produtividade primária bruta estimada em massa de biomassa seca.
+2. Informar o **valor do fator de conversão da biomassa** (fator IPCC), utilizado para converter a produtividade primária bruta estimada em massa de biomassa seca.
 
-3. Clicar no botão "Calcular série temporal da Biomassa" para gerar o gráfico.
+3. Clicar no botão **"Calcular série temporal da Biomassa"** para gerar o gráfico.
 
-Internamente, o toolkit multiplica os dois parâmetros informados pelo usuário (LUE × fator de conversão IPCC) para obter o fator de conversão de biomassa seca. Em seguida, para cada mês do período de análise (janeiro de 2025 a abril de 2026), a ferramenta:
+Internamente, o *toolkit* multiplica os dois parâmetros informados pelo usuário (LUE × fator de conversão IPCC) para obter o fator de conversão de biomassa seca. Em seguida, para cada mês do período de análise (janeiro de 2025 a abril de 2026), a ferramenta:
 
 - Filtra e calcula a média mensal do uGPP dentro da área de interesse selecionada;
 - Aplica o fator de escala do produto uGPP e converte a unidade de gC/m²/dia para toneladas de carbono por hectare (tC/ha), multiplicando o resultado pelo número de dias do respectivo mês para obter o total mensal;
@@ -285,17 +268,17 @@ Internamente, o toolkit multiplica os dois parâmetros informados pelo usuário 
 
 O resultado é exibido em um gráfico de série temporal (linha), com a média mensal de biomassa seca de pastagem (tC/ha) no eixo vertical e os meses no eixo horizontal, intitulado "Média Mensal da Biomassa Seca de Pastagem (Jan 2025 — Abr 2026)". O usuário pode fechar a janela do gráfico clicando no botão "Fechar".
 
-### 3.1.11 - Download das camadas no toolkit
+### 3.1.11 - *Download* das camadas no *toolkit*
 
-No toolkit, o usuário pode fazer o download tanto das camadas geradas por sua interação com a ferramenta quanto das bases de dados estáticas, como os dados de uso e cobertura da terra do MapBiomas e os dados de vigor da pastagem. Para executar o download, o usuário deve clicar no ícone.
+No *toolkit*, o usuário pode **fazer o _download_** tanto das camadas geradas por sua interação com a ferramenta quanto das bases de dados estáticas, como os dados de uso e cobertura da terra do MapBiomas e os dados de vigor da pastagem. Para executar o *download*, o usuário deve clicar no ícone.
 
-Na parte central inferior da tela, surgirá uma janela (conforme a Figura 14), onde é possível selecionar as camadas da base de dados estática ou as camadas geradas que estão sendo visualizadas no mapa. Após selecionar a camada desejada, clique no botão "Download". Em seguida, acesse a aba "Tasks" e clique no botão "Run" referente à camada selecionada para iniciar a exportação. O arquivo será exportado para a pasta "GEEX" no Google Drive pessoal do usuário.
+Na parte central inferior da tela, surgirá uma janela (conforme a Figura 16), onde é possível selecionar as camadas da base de dados estática ou as camadas geradas que estão sendo visualizadas no mapa. Após selecionar a camada desejada, clique no botão "*Download*". Em seguida, acesse a aba "*Tasks*" e clique no botão "*Run*" referente à camada selecionada para iniciar a exportação. O arquivo será exportado para a pasta "GEEX" no *Google Drive* pessoal do usuário.
 
-A Figura 16 mostra o painel de download do toolkit.
+A Figura 16 mostra o painel de *download* do *toolkit*.
 
 <center>
 <img width="350px" src="../figures/figure_14.png"/>
-<div>Figura 16 - Painel de download da camada do toolkit.</div>
+<div>Figura 16 - Painel de download da camada do *toolkit*.</div>
 <p></p>
 </center>
 
@@ -333,23 +316,23 @@ Três critérios restritivos e concorrentes são aplicados na filtragem:
 2. **Aptidão temática.** A propriedade deve intersectar áreas de pastagem mapeadas no ano de referência pelo produto de cobertura de 10 m adotado pelo projeto. O arquivo raster e a legenda correspondentes permanecem anexados ao dossiê técnico, de modo que a composição do quadro amostral seja reconstituível.
 3. **Limiar de dimensão.** Apenas propriedades com área igual ou superior a 2 hectares, o que exclui minifúndios e ruídos de vetorização.
 
-Na área piloto, o resultado é um quadro amostral de **N = 52.719 propriedades**. Sobre esse quadro são aplicados o agrupamento K-Means e o sorteio GRTS. As variáveis empregadas na estratificação, listadas na Tabela 04, combinam os próprios produtos gerados pelo *toolkit* — vigor da pastagem (Seção 3.1.6) e tendência de vigor (Seção 3.1.9) — com variáveis complementares de degradação agronômica e de pressão pecuária.
+Na área piloto, o resultado é um quadro amostral de **N = 52.719 propriedades**. Sobre esse quadro são aplicados o agrupamento *K-Means* e o sorteio GRTS. As variáveis empregadas na estratificação, listadas na Tabela 04, combinam os próprios produtos gerados pelo *toolkit* — vigor da pastagem (Seção 3.1.6) e tendência de vigor (Seção 3.1.9) — com variáveis complementares de degradação agronômica e de pressão pecuária.
 
-#### Tabela 04 - Variáveis utilizadas no agrupamento K-Means para estratificação das propriedades
+#### Tabela 04 - Variáveis utilizadas no agrupamento *K-Means* para estratificação das propriedades
 
 | Variável | Fonte | Resolução | Papel na estratificação |
 | --- | --- | --- | --- |
-| Vigor de pastagem (EVI médio do período chuvoso) | Sentinel-2 (GEE) | 10 m / 16 d | Discrimina pastagens produtivas de pastagens de baixo vigor |
-| Tendência de vigor (coeficiente angular, Mann-Kendall) | Sentinel-2 (GEE) | 10 m | Identifica áreas em declínio crônico de produtividade |
-| Fração de solo exposto (NDTI) | Sentinel-2 (GEE) | 10 m | Proxy de degradação agronômica e biológica |
+| Vigor de pastagem (EVI médio do período chuvoso) | *Sentinel-2* (GEE) | 10 m / 16 d | Discrimina pastagens produtivas de pastagens de baixo vigor |
+| Tendência de vigor (coeficiente angular, Mann-Kendall) | *Sentinel-2* (GEE) | 10 m | Identifica áreas em declínio crônico de produtividade |
+| Fração de solo exposto (NDTI) | *Sentinel-2* (GEE) | 10 m | Proxy de degradação agronômica e biológica |
 | Altura mediana da vegetação | Hunter et al., 2024 | 10 m | Diferencia campos baixos de regeneração arbórea |
-| Matéria seca mensal (GPW 10m) | Global Pasture Watch / LAPIG-ACELEN (base do projeto; metadados a anexar) | 10 m | Estima capacidade de suporte e biomassa forrageira |
+| Matéria seca mensal (GPW 10m) | *Global Pasture Watch* / LAPIG-ACELEN (base do projeto; metadados a anexar) | 10 m | Estima capacidade de suporte e biomassa forrageira |
 | Densidade bovina estimada (UA/ha) | LAPIG-ACELEN (base modelada do projeto); IBGE PPM como referência auxiliar | ~1 km ou resolução do modelo |Pressão pecuária como agente de degradação; documentar método de interpolação/desagregação e fonte primária |
 
 
 ### 3.2.3 - Estratificação e Dimensionamento da Amostra de Propriedades
 
-A estratificação é obtida por agrupamento K-Means sobre as seis variáveis normalizadas por escore-z (Seção 2.9). O número de estratos *k* é determinado pelo método Elbow combinado ao índice de Davies-Bouldin, com validação em mapa; na área piloto, espera-se *k* entre 6 e 8, faixa que captura os principais gradientes de degradação da paisagem regional.
+A estratificação é obtida por agrupamento *K-Means* sobre as seis variáveis normalizadas por escore-z (Seção 2.9). O número de estratos *k* é determinado pelo método *Elbow* combinado ao índice de Davies-Bouldin, com validação em mapa; na área piloto, espera-se *k* entre 6 e 8, faixa que captura os principais gradientes de degradação da paisagem regional.
 
 A validação dos agrupamentos responde a duas perguntas independentes. A primeira é espacial: propriedades de um mesmo estrato estão geograficamente próximas ou compartilham condições similares de relevo e clima? A segunda é temática: cada estrato representa uma condição de pastagem interpretável — por exemplo, alto vigor com baixa densidade animal, em oposição a baixo vigor com alta densidade? Estratos que respondam afirmativamente a ambas são mantidos. Estratos que representem menos de 5% do quadro amostral têm variabilidade insuficiente para sustentar alocação própria e são fundidos ao estrato de perfil multivariado mais próximo, medido pela distância euclidiana entre centroides normalizados.
 
@@ -363,31 +346,31 @@ A inovação do desenho em relação a planos amostrais convencionais está na i
 
 | Nível | Unidade | N amostral (referência) | Método de seleção | Custo relativo |
 | --- | --- | --- | --- | --- |
-| N0A - Seleção de propriedades | Propriedade rural | ≈ 1.200 | GRTS por estrato K-Means (N = 52.719) | Muito baixo (gabinete) |
+| N0A - Seleção de propriedades | Propriedade rural | ≈ 1.200 | GRTS por estrato *K-Means* (N = 52.719) | Muito baixo (gabinete) |
 | N0B - Pontos de inspeção em imagem de alta resolução | Ponto amostral (~1-4 ha) por propriedade | ≈ 5.000-7.000 (média ≈ 5 pontos/propriedade) | GRTS aninhado na máscara de pastagem de cada propriedade N0A; \(k_i = \max(3,\ \min(20,\ \lceil A_i/20 \rceil))\) | Muito baixo (gabinete) |
 | N1A - Propriedades para campo (principal + controle) | Propriedade rural | ≈ 228 principais + 12 de controle (≈ 240) | Principal: GRTS entre propriedades com ≥ 30% de pontos N0B elegíveis. Controle (5%): GRTS no pool inelegível (\(\hat p_i < 0{,}10\)) | Baixo |
 | N1B - Pontos de validação em campo | Ponto amostral *in loco* | ≈ 480-960 (2-4 por propriedade N1A) | GRTS aninhado nos pontos N0B elegíveis; \(n_i = \max(2,\ \lceil A_i/100 \rceil)\) | Baixo-Médio |
 | N2 - Sobrevoo de drone (principal + controle) | Sítio de voo (100-250 m) | ≈ 72 principais + 8 de controle (≈ 80) | PPrincipal: GRTS nos pontos N1B com escore 0–6; Controle (10%): GRTS nos pontos N1B com escore 7–10 (D0/D1) para calcular especificidade do modelo | Médio |
-| N3 - Biomassa (método do quadrado) | Subponto amostral no sítio N2 | ≈ 40 sítios; ≈ 120-200 subpontos | GRTS sobre grade de 20 m dentro do footprint do drone de cada sítio N2 selecionado (50% de N2) | Médio-Alto |
+| N3 - Biomassa (método do quadrado) | Subponto amostral no sítio N2 | ≈ 40 sítios; ≈ 120-200 subpontos | GRTS sobre grade de 20 m dentro do *footprint* do drone de cada sítio N2 selecionado (50% de N2) | Médio-Alto |
 | N4 - Solo (trado, 0-30 cm) | Subponto aninhado em N3 | ≈ 15-20 sítios; ≥ 1 amostra composta por sítio | Seleção aleatória simples nos subpontos N3 do sítio; mínimo 1 solo por sítio N4 | Alto |
 
 Em todos os níveis, o GRTS produz também uma lista sequencial de unidades de substituição (sobreamostragem de 50%). Unidades inelegíveis — acesso negado, cobertura de nuvens persistente, uso atual incompatível — são substituídas pela unidade imediatamente seguinte da lista, dentro do mesmo estrato, o que preserva o balanceamento espacial e temático do sorteio original. Cada substituição é registrada no banco de dados com o motivo específico, mantendo a auditabilidade do quadro efetivamente amostrado.
 
 ### 3.2.5 - Nível N0A - Seleção de Propriedades e Preparo das Imagens
 
-Aplicado o GRTS por estrato, o produto do nível N0A é um arquivo vetorial georreferenciado contendo, para cada propriedade sorteada: identificador hierárquico, estrato K-Means, coordenadas do centroide, área total, área de pastagem no ano de referência e os valores das seis variáveis de estratificação. Esse arquivo é a base de todas as etapas seguintes — geração da grade de pontos N0B, identificação das propriedades N1A, navegação das equipes de campo e vinculação dos registros digitais.
+Aplicado o GRTS por estrato, o produto do nível N0A é um arquivo vetorial georreferenciado contendo, para cada propriedade sorteada: identificador hierárquico, estrato *K-Means*, coordenadas do centroide, área total, área de pastagem no ano de referência e os valores das seis variáveis de estratificação. Esse arquivo é a base de todas as etapas seguintes — geração da grade de pontos N0B, identificação das propriedades N1A, navegação das equipes de campo e vinculação dos registros digitais.
 
-A inspeção visual do nível seguinte exige a combinação de dois conjuntos de imagens com papéis distintos. As imagens Sentinel-2 (10 m) funcionam como **base geométrica de referência** e como fonte das variáveis de estratificação. As imagens de alta resolução — CBERS-4A/4B, sensor WPM (2 m) — são o **instrumento de inspeção**, pois permitem identificar manchas de solo exposto, erosão em sulcos, padrões de invasoras e estrutura do dossel em detalhe inacessível ao Sentinel-2. 
+A inspeção visual do nível seguinte exige a combinação de dois conjuntos de imagens com papéis distintos. As imagens *Sentinel-2* (10 m) funcionam como **base geométrica de referência** e como fonte das variáveis de estratificação. As imagens de alta resolução — CBERS-4A/4B, sensor WPM (2 m) — são o **instrumento de inspeção**, pois permitem identificar manchas de solo exposto, erosão em sulcos, padrões de invasoras e estrutura do dossel em detalhe inacessível ao *Sentinel-2*. 
 
-Caso a ACELEN disponibilize acesso às imagens Planet, estas oferecem duas vantagens complementares: (a) maior número de bandas espectrais (até 8 bandas, incluindo Red-Edge e NIR estreito), melhorando a caracterização da composição botânica e da biomassa das pastagens em comparação ao CBERS-4A/WPM (4 bandas); (b) datas de aquisição distintas das imagens CBERS, permitindo inspeção de um mesmo ponto em períodos diferentes do ano e reforçando a confiabilidade das interpretações visuais ao confrontar avaliações independentes da mesma área.
+Caso a ACELEN disponibilize acesso às imagens *Planet*, estas oferecem duas vantagens complementares: (a) maior número de bandas espectrais (até 8 bandas, incluindo *Red-Edge* e NIR estreito), melhorando a caracterização da composição botânica e da biomassa das pastagens em comparação ao CBERS-4A/WPM (4 bandas); (b) datas de aquisição distintas das imagens CBERS, permitindo inspeção de um mesmo ponto em períodos diferentes do ano e reforçando a confiabilidade das interpretações visuais ao confrontar avaliações independentes da mesma área.
 
-O uso combinado dessas fontes só é válido após o co-registro sub-pixel descrito na Seção 2.12. A necessidade é concreta: o erro de co-registro do Sentinel-2 é inferior a 6 m em escala global (Rengarajan et al., 2024), enquanto o erro posicional absoluto das imagens CBERS-4B pode atingir cerca de 400 m (Akiyama et al., 2018) — deslocamento que supera a própria janela de inspeção. A correção é executada com o software AROSICS, que alinha as cenas CBERS à base Sentinel-2 por correlação de fase com eliminação de falsos positivos por RANSAC, alcançando co-registro residual inferior a 2 m, isto é, menos de um pixel CBERS. *Tiles* cujo RMSE residual exceda 3 m são reprocessados com pontos de controle adicionais, e o relatório de RMSE por *tile* integra a documentação de qualidade do levantamento.
+O uso combinado dessas fontes só é válido após o co-registro sub-pixel descrito na Seção 2.12. A necessidade é concreta: o erro de co-registro do *Sentinel-2* é inferior a 6 m em escala global (Rengarajan et al., 2024), enquanto o erro posicional absoluto das imagens CBERS-4B pode atingir cerca de 400 m (Akiyama et al., 2018) — deslocamento que supera a própria janela de inspeção. A correção é executada com o software *AROSICS*, que alinha as cenas CBERS à base *Sentinel-2* por correlação de fase com eliminação de falsos positivos por RANSAC, alcançando co-registro residual inferior a 2 m, isto é, menos de um pixel CBERS. *Tiles* cujo RMSE residual exceda 3 m são reprocessados com pontos de controle adicionais, e o relatório de RMSE por *tile* integra a documentação de qualidade do levantamento.
 
 A janela de aquisição das imagens e a janela de coleta em campo são condicionadas pela fenologia e pela cobertura de nuvens, conforme a Tabela 06. 
 
 #### Tabela 06 - Calendário fenológico para aquisição de imagens e coleta de campo
 
-| Período | Cobertura de nuvens | Imagens de alta resolução (N0B) | Sentinel-2 | Campo (N1B-N4) | Observações |
+| Período | Cobertura de nuvens | Imagens de alta resolução (N0B) | *Sentinel-2* | Campo (N1B-N4) | Observações |
 | --- | --- | --- | --- | --- | --- |
 | Jan-Mar | Alta (> 70%) | Inadequado | Inadequado | Evitar | Acesso rural difícil; pastagens verdes mascaram o solo exposto |
 | Abr-Mai | Média (30-60%) | Parcial | Parcial | Adequado (início) | Transição; janela para imagens de final do período chuvoso |
@@ -422,14 +405,14 @@ Com base na distribuição de tamanhos das 52.719 fazendas da malha fundiária, 
 Para cada ponto N0B sorteado, o analista segue a sequência padronizada::
 
 1. Centraliza o QGIS/WebGIS no ponto N0B (coordenadas carregadas automaticamente como camada ponto);
-2. Visualiza a composição colorida falsa-cor do Sentinel-2 (B8-B4-B3) no período chuvoso para verificar o vigor geral da pastagem nessa janela;
+2. Visualiza a composição colorida falsa-cor do *Sentinel-2* (B8-B4-B3) no período chuvoso para verificar o vigor geral da pastagem nessa janela;
 3. Visualiza a composição do CBERS-4A (NIR-vermelho-verde) na janela de estiagem (jun–set) para identificar solo exposto, erosão e invasoras em detalhe;
 4. Visualiza a série temporal do EVI no ponto (gráfico de 2019–2025) para confirmar tendência de degradação;
-5. Preenche o formulário digital de inspeção no ODK Collect (perfil 'N0B — Inspeção CBERS'); vide Apêndice A;
+5. Preenche o formulário digital de inspeção no *ODK Collect* (perfil 'N0B — Inspeção CBERS'); vide Apêndice A;
 6. Captura obrigatória de screenshot da janela inspecionada como evidência auditável;
 7. Classifica o ponto em: Elegível / Inelegível / Inconclusivo.
 
-**Nota:** Inconclusivos (alta cobertura de nuvens, mosaico incompleto, ambiguidade de uso) são remetidos ao supervisor, que tenta imagem complementar (Planet ou data alternativa CBERS). Se não houver imagem disponível, o ponto é descartado e substituído pelo próximo da lista GRTS da mesma fazenda.
+**Nota:** Inconclusivos (alta cobertura de nuvens, mosaico incompleto, ambiguidade de uso) são remetidos ao supervisor, que tenta imagem complementar (*Planet* ou data alternativa CBERS). Se não houver imagem disponível, o ponto é descartado e substituído pelo próximo da lista GRTS da mesma fazenda.
 
 #### 3.2.6.2 Critérios de elegibilidade do ponto N0B
 
@@ -479,7 +462,7 @@ Vinte por cento dos pontos N0B — cerca de 1.000 a 1.400 pontos na área piloto
 
 #### 3.2.7.1 Seleção das Fazendas para Visita de Campo (N1A)
 
-Das aproximadamente 1.200 fazendas N0A, são selecionadas ≈ 240 para visita de campo (N1A), aplicando o critério da Tabela 09. O sorteio GRTS é executado sobre a lista de fazendas elegíveis (prioridade alta + média + baixa), ponderado pela prioridade, e com balanceamento por estrato K-Means — garantindo que todos os estratos tenham representação proporcional em N1A. O critério de ≥ 30% dos pontos N0B elegíveis equivale, em termos práticos, a exigir que pelo menos 30% da área de pastagem inspecionada visualmente em CBERS apresente evidências de degradação, o que é consistente com as definições das categorias D2 a D4 (Seção 3.2.10) e com os requisitos de comprovação das certificações ISCC e RSB.
+Das aproximadamente 1.200 fazendas N0A, são selecionadas ≈ 240 para visita de campo (N1A), aplicando o critério da Tabela 09. O sorteio GRTS é executado sobre a lista de fazendas elegíveis (prioridade alta + média + baixa), ponderado pela prioridade, e com balanceamento por estrato *K-Means* — garantindo que todos os estratos tenham representação proporcional em N1A. O critério de ≥ 30% dos pontos N0B elegíveis equivale, em termos práticos, a exigir que pelo menos 30% da área de pastagem inspecionada visualmente em CBERS apresente evidências de degradação, o que é consistente com as definições das categorias D2 a D4 (Seção 3.2.10) e com os requisitos de comprovação das certificações ISCC e RSB.
 
 Um filtro baseado exclusivamente em evidência de degradação produz, por construção, uma amostra enviesada: apenas propriedades já suspeitas são visitadas. Isso basta para estimar a prevalência de degradação, mas é insuficiente para avaliar a qualidade do próprio modelo preditivo, pois sem dados de campo em propriedades classificadas como íntegras não é possível calcular a taxa de falsos positivos nem a Especificidade (Seção 2.11). Reserva-se, portanto, uma **subamostra de controle** correspondente a 5% das unidades N1A — cerca de 12 propriedades —, sorteada por GRTS exclusivamente no pool inelegível (\(\hat p_i < 0{,}10\)). Essas propriedades recebem exatamente o mesmo protocolo de campo, sem qualquer hipótese prévia de degradação, e alimentam as células de Verdadeiro Negativo e Falso Positivo da matriz de confusão (Seção 3.2.11). O custo marginal é baixo frente ao ganho metodológico: sem esse controle, o sistema não pode ser validado quanto à sua taxa de alarmes falsos, lacuna crítica em auditoria de certificação.
 
@@ -497,7 +480,7 @@ Dentro de cada propriedade N1A, os pontos de validação são sorteados por GRTS
 | 200-500 ha | 4 | GRTS nos pontos N0B elegíveis da fazenda | ≥ 100 m | Estratificar por sub-área (ex.: proximidade ao cocho) quando a heterogeneidade for evidente |
 | > 500 ha | 4 | GRTS nos pontos N0B elegíveis da fazenda |≥ 150 m ou setores separados | Teto logístico de 4 pontos por propriedade por dia; propriedades muito grandes podem ser divididas em setores |
 
-Os pontos N1B são exportados como waypoints GPS (formato GPX) para os receptores de campo antes da mobilização, servindo como alvos de navegação. Cada ponto tem coordenadas com precisão posicional de ≤ 10 m no GPS de mão, suficiente para localizar o ponto sorteado em campo.
+Os pontos N1B são exportados como *waypoints* GPS (formato GPX) para os receptores de campo antes da mobilização, servindo como alvos de navegação. Cada ponto tem coordenadas com precisão posicional de ≤ 10 m no GPS de mão, suficiente para localizar o ponto sorteado em campo.
 
 ####  3.2.7.3 Protocolo de Campo — Janela Temporal e Equipes
 
@@ -507,12 +490,12 @@ A coleta de campo é concentrada no período de junho a outubro, com prioridade 
 
 | Categoria | Itens |
 | --- | --- |
-| GPS e navegação | GPS de mão (precisão < 3 m); receptor GNSS RTK para GCPs do drone; smartphone com ODK Collect / KoBoCollect |
+| GPS e navegação | GPS de mão (precisão < 3 m); receptor GNSS RTK para GCPs do drone; smartphone com *ODK Collect* / *KoBoCollect* |
 | Avaliação da pastagem | Trena de 100 m (LPI); quadrados de amostragem (0,25 m² e 1,0 m²); tesoura de poda; sacos de papel kraft etiquetados; balança digital (precisão 1 g) |
-| Solo | Trado holandês (0–30 cm); sacos plásticos Ziploc; etiquetas impermeáveis; balde de 5 L (composição); caixa isotérmica com gelo seco |
-| Imageamento | Drone DJI Mavic 3 Multispectral ou equivalente; painel de calibração radiométrica; GCPs (alvos 50×50 cm); câmera georreferenciada |
+| Solo | Trado holandês (0–30 cm); sacos plásticos *Ziploc*; etiquetas impermeáveis; balde de 5 L (composição); caixa isotérmica com gelo seco |
+| Imageamento | Drone *DJI Mavic 3 Multispectral* ou equivalente; painel de calibração radiométrica; GCPs (alvos 50×50 cm); câmera georreferenciada |
 | Segurança e logística | Colete refletivo; kit de primeiros socorros; veículo 4×4; comunicação via rádio ou satélite em áreas sem sinal |
-| Documentação | Tablet resistente (IP67) com formulário digital em modo off-line; bateria externa; caderneta de campo impermeável como redundância analógica |
+| Documentação | Tablet resistente (IP67) com formulário digital em modo *off-line*; bateria externa; caderneta de campo impermeável como redundância analógica |
 
 #### 3.2.7.4 Sistema de IDs e Rastreabilidade
 
@@ -530,9 +513,9 @@ A Tabela 12 apresenta a convenção adotada para identificação e rastreabilida
 | Quadrado de biomassa | `[ID-SUBPONTO]-Q[SEQ2]` | `MC-E3-000142-P02-D-B01-Q03` |
 | Amostra de solo (N4) | `[ID-DRONE]-S[PROFUNDIDADE]` | `MC-E3-000142-P02-D-S0-10` — camada 0-10 cm |
 
-#### 3.2.7.5 Plataforma Digital de Coleta (ODK Collect / KoBoToolbox)
+#### 3.2.7.5 Plataforma Digital de Coleta (*ODK Collect* / *KoBoToolbox*)
 
-Todos os dados de campo são coletados em formulários digitais via ODK Collect (Android), operando em modo off-line. Vantagens para auditoria: timestamp automático e geolocalizado; campos obrigatórios (*) impedem envio incompleto; fotos são georeferenciadas via EXIF; dados sincronizados diretamente ao servidor LAPIG. O formulário exibe automaticamente o ID do ponto N1B, as coordenadas do target e os valores N0B da inspeção CBERS daquele ponto (EVI2, % solo exposto, decisão N0B) — servindo como contexto para o técnico de campo.
+Todos os dados de campo são coletados em formulários digitais via _ODK Collect_ (_Android_), operando em modo _off-line_. Vantagens para auditoria: _timestamp_ automático e geolocalizado; campos obrigatórios (*) impedem envio incompleto; fotos são georeferenciadas via EXIF; dados sincronizados diretamente ao servidor LAPIG. O formulário exibe automaticamente o ID do ponto N1B, as coordenadas do _target_ e os valores N0B da inspeção CBERS daquele ponto (EVI2, % solo exposto, decisão N0B) — servindo como contexto para o técnico de campo.
 
 #### 3.2.7.6 Roteiro Socioeconômico e de Manejo
 
@@ -582,7 +565,7 @@ Cerca de 80 sítios de voo são selecionados por GRTS entre os pontos N1B já vi
 | 5-6 (regular) | D1-D2 | Prioridade baixa (reserva) | ~25% dos pontos N1B nessa faixa | Incluídos como pontos de referência para calibração no gradiente moderado de degradação |
 | 7-10 (bom a excelente) | D0-D1 | GRUPO CONTROLE(~10% de N2, via GRTS) | ~8 sítios de controle(de um total de ~80 N2) | Pastagens classificadas como não degradadas pelo modelo de gabinete. Sua inclusão é essencial para calcular a Especificidade (Taxa de Verdadeiros Negativos) e detectar Falsos Positivos do modelo preditivo. Sem esse controle, a acurácia do modelo é impossível de verificar adequadamente |
 
-A cobertura espacial dos ≈ 80 sítios de drone (footprint médio de 150 × 150 m ≈ 2,25 ha por sítio) totaliza cerca de 180 ha de imageamento de altíssima resolução (GSD ≤ 5 cm), distribuídos proporcionalmente pelos 6–8 estratos K-Means. Esse volume é suficiente para calibrar os índices espectrais do Sentinel-2 (pixel de 100 m²) e do CBERS (pixel de 4 m²) em toda a extensão do gradiente de degradação da região piloto.
+A cobertura espacial dos ≈ 80 sítios de drone (*footprint* médio de 150 × 150 m ≈ 2,25 ha por sítio) totaliza cerca de 180 ha de imageamento de altíssima resolução (GSD ≤ 5 cm), distribuídos proporcionalmente pelos 6–8 estratos *K-Means*. Esse volume é suficiente para calibrar os índices espectrais do *Sentinel-2* (pixel de 100 m²) e do CBERS (pixel de 4 m²) em toda a extensão do gradiente de degradação da região piloto.
 
 #### 3.2.8.1.1 Sítios de Controle em N2 — Cálculo da Especificidade do Modelo
 
@@ -593,19 +576,19 @@ A exclusão das pastagens de escore alto da seleção principal é metodologicam
 
 O protocolo de voo é padronizado nos seguintes parâmetros: altura de aproximadamente 50 m acima do nível do solo; câmera em posição nadir, com o eixo óptico perpendicular ao terreno; área de cobertura de 100 × 100 m em pastagens homogêneas, 150 × 150 m em pastagens semi-heterogêneas e 250 × 250 m em sistemas silvipastoris; sensores RGB e multiespectral com resolução no solo igual ou inferior a 5 cm; sobreposição frontal de ao menos 80% e lateral de ao menos 70%; e no mínimo 4 alvos de controle no solo com coordenadas RTK de precisão centimétrica, distribuídos nos vértices e no centro da área imageada.
 
-A posição nadir é obrigatória e não é uma preferência operacional: ângulos oblíquos introduzem sombreamento, variação de BRDF e erros de projeção que comprometem simultaneamente a acurácia geométrica do ortomosaico e a integridade radiométrica dos índices extraídos. Voos oblíquos são admitidos apenas como missão complementar de reconhecimento tridimensional, nunca como missão principal de sensoriamento remoto quantitativo. Os produtos gerados — ortomosaico, modelo digital do terreno, modelo digital de superfície e índices de vegetação por parcela — constituem a ponte de escala entre a parcela de campo, da ordem de 1 m², e o pixel Sentinel-2, de 100 m². O detalhamento operacional do voo consta do Apêndice B.
+A posição nadir é obrigatória e não é uma preferência operacional: ângulos oblíquos introduzem sombreamento, variação de BRDF e erros de projeção que comprometem simultaneamente a acurácia geométrica do ortomosaico e a integridade radiométrica dos índices extraídos. Voos oblíquos são admitidos apenas como missão complementar de reconhecimento tridimensional, nunca como missão principal de sensoriamento remoto quantitativo. Os produtos gerados — ortomosaico, modelo digital do terreno, modelo digital de superfície e índices de vegetação por parcela — constituem a ponte de escala entre a parcela de campo, da ordem de 1 m², e o pixel *Sentinel-2*, de 100 m². O detalhamento operacional do voo consta do Apêndice B.
 
 ### 3.2.9 - Níveis N3 e N4 - Coleta de Biomassa e Solo
 
 #### 3.2.9.1 Seleção de Subpontos e Coleta de Biomassa 
 
-Dentro de cada sítio de drone N2 selecionado para coleta de biomassa (≈ 40 sítios = 50% de N2), o posicionamento dos subpontos de amostragem não é arbitrário: é executado via GRTS sobre a grade de pixels de 10 m do footprint do drone, respeitando um buffer de borda de 10 m e distância mínima entre subpontos conforme o tamanho do footprint. A estratificação interna é feita com base nos valores de NDVI do ortomosaico de drone (zona de maior NDVI vs. zona de menor NDVI dentro do sítio), garantindo que os subpontos cubram a heterogeneidade de vigor detectada no drone.
+Dentro de cada sítio de drone N2 selecionado para coleta de biomassa (≈ 40 sítios = 50% de N2), o posicionamento dos subpontos de amostragem não é arbitrário: é executado via GRTS sobre a grade de pixels de 10 m do *footprint* do drone, respeitando um *buffer* de borda de 10 m e distância mínima entre subpontos conforme o tamanho do *footprint*. A estratificação interna é feita com base nos valores de NDVI do ortomosaico de drone (zona de maior NDVI vs. zona de menor NDVI dentro do sítio), garantindo que os subpontos cubram a heterogeneidade de vigor detectada no drone.
 
 #### Tabela 16 - Grade de subpontos N3 por tamanho de *footprint* de drone
 
 | *Footprint* e gatilho de enquadramento | Subpontos N3 por sítio | Quadrados por subponto | Método deposicionamento | Total por sítio |
 | --- | --- | --- | --- | --- |
-| 100 × 100 m — pastagem homogênea (dossel ≤ 30 cm e CV de biomassa ≤ 25%) | 3 subpontos (±20 m espaçamento mínimo) | 3 quadrados de 0,5 m² | GRTS na grade 10 m do footprint; buffer borda 10 m |9 quadrados (4,5 m²) |
+| 100 × 100 m — pastagem homogênea (dossel ≤ 30 cm e CV de biomassa ≤ 25%) | 3 subpontos (±20 m espaçamento mínimo) | 3 quadrados de 0,5 m² | GRTS na grade 10 m do *footprint*; *buffer* borda 10 m |9 quadrados (4,5 m²) |
 | 150 × 150 m — semi-heterogênea (dossel > 30 cm ou CV > 25% ou cobertura arbustiva de 10-30%) | 4 subpontos (±30 m espaçamento) | 5 quadrados 1,0 m²(usar 1,0 m² quando: pastagem com touceiras, vegetação nativa intercalada ou dossel > 30 cm — heterogeneidade exige área maior para representatividade) | GRTS na grade 10 m; estratificação por zona (EVI2 do drone) |20 quadrados (20 m²) |
 | 250 × 250 m — heterogênea ou silvipastoril (cobertura lenhosa > 30% ou dossel > 60 cm ou campo nativo) | 5 subpontos (±40 m espaçamento) |5 quadrados 1,0 m² por subponto + 1 parcela lenhosa 100 m² | GRTS na grade 10 m; 1 parcela lenhosa por subponto | 25 quadrados (25 m²) + 5 parcelas lenhosas |
 
@@ -640,7 +623,7 @@ O registro fotográfico segue dois padrões complementares. A **fotografia nadir
 ### 3.2.10 - Classificação Integrada da Condição das Pastagens
 #### 3.2.10.1 - Categorias de Degradação D0 - D4
 
-Com base na metodologia LAPIG/UFG (Teles et al., 2025, base metodológica LAPIG/UFG a documentar), as pastagens são classificadas em cinco categorias (D0 a D4), obtidas pela integração dos escores visuais de campo, frações PV/NPV/BS (LPI), índices espectrais (EVI2, NDTI de imagens Sentinel-2/CBERS) e análises laboratoriais de biomassa e solo (Tabela 18).
+Com base na metodologia LAPIG/UFG (Teles et al., 2025, base metodológica LAPIG/UFG a documentar), as pastagens são classificadas em cinco categorias (D0 a D4), obtidas pela integração dos escores visuais de campo, frações PV/NPV/BS (LPI), índices espectrais (EVI2, NDTI de imagens *Sentinel-2*/CBERS) e análises laboratoriais de biomassa e solo (Tabela 18).
 
 #### Tabela 18 - Categorias de degradação de pastagens (D0-D4), adaptado de Teles et al. (2025)
 
@@ -663,11 +646,11 @@ Para fins de certificação (ISCC, RSB, RED III), uma propriedade é classificad
 
 #### 3.2.10.3 - Calibração dos Modelos de Sensoriamento Remoto
 
-Os dados coletados retroalimentam diretamente a calibração dos modelos orbitais em três direções. As frações de cobertura medidas por LPI nos subpontos N3 são correlacionadas com o índice espectral de solo exposto do pixel Sentinel-2 correspondente, ajustando os limiares de classificação. A biomassa seca por hectare valida as estimativas mensais de matéria seca empregadas na estratificação (Tabela 21) e nas análises de produtividade (Seção 3.1.9). As análises de carbono total do nível N4 alimentam a interpolação geoestatística dos mapas de carbono orgânico do solo, com a ressalva de suficiência amostral registrada em 3.2.9.
+Os dados coletados retroalimentam diretamente a calibração dos modelos orbitais em três direções. As frações de cobertura medidas por LPI nos subpontos N3 são correlacionadas com o índice espectral de solo exposto do pixel *Sentinel-2* correspondente, ajustando os limiares de classificação. A biomassa seca por hectare valida as estimativas mensais de matéria seca empregadas na estratificação (Tabela 21) e nas análises de produtividade (Seção 3.1.9). As análises de carbono total do nível N4 alimentam a interpolação geoestatística dos mapas de carbono orgânico do solo, com a ressalva de suficiência amostral registrada em 3.2.9.
 
 #### 3.2.10.4 - Matriz de confusão e métricas de acurácia do sistema de classificação
 
-A acurácia do sistema hierárquico de classificação de pastagens — que integra inspeção visual de imagens (N0B), avaliação de campo (N1B) e imageamento de drone (N2) — é avaliada pela comparação entre a predição do modelo de gabinete (baseada em índices de SR) e a verdade de campo (ground truth, obtida nos níveis N1B e N2). Para que essa avaliação seja válida e não enviesada, é imprescindível que a amostra de validação inclua tanto áreas positivas (degradadas) quanto áreas negativas (não degradadas) — o que justifica as subamostras de controle descritas nas XXX . A Tabela 19 apresenta a estrutura da matriz de confusão binária (degradada vs. não degradada) que será calculada ao final das campanhas de campo, com as métricas derivadas e as metas de desempenho estabelecidas para este projeto. 
+A acurácia do sistema hierárquico de classificação de pastagens — que integra inspeção visual de imagens (N0B), avaliação de campo (N1B) e imageamento de drone (N2) — é avaliada pela comparação entre a predição do modelo de gabinete (baseada em índices de SR) e a verdade de campo (*ground truth*, obtida nos níveis N1B e N2). Para que essa avaliação seja válida e não enviesada, é imprescindível que a amostra de validação inclua tanto áreas positivas (degradadas) quanto áreas negativas (não degradadas) — o que justifica as subamostras de controle descritas nas XXX . A Tabela 19 apresenta a estrutura da matriz de confusão binária (degradada vs. não degradada) que será calculada ao final das campanhas de campo, com as métricas derivadas e as metas de desempenho estabelecidas para este projeto. 
 
 #### Tabela 19 - Matriz de confusão e métricas de acurácia do sistema de classificação (modelo de gabinete × verdade de campo).
 
@@ -684,7 +667,7 @@ Uma limitação deve ser declarada explicitamente: como o campo visita apenas ce
 ### 3.2.11 - Gestão de Dados e Controle de Qualidade
 #### 3.2.11.1 - Fluxo de dados
 
-O fluxo de dados percorre quatro etapas encadeadas: coleta digital off-line em campo; sincronização ao servidor institucional; processamento automatizado em rotinas versionadas; e carga em banco de dados geoespacial, do qual derivam os painéis de acompanhamento. Cada etapa é documentada com o resumo criptográfico (*hash*) dos arquivos, o que permite verificar a integridade dos dados em qualquer ponto da cadeia e detectar alterações não registradas.
+O fluxo de dados percorre quatro etapas encadeadas: coleta digital *off-line* em campo; sincronização ao servidor institucional; processamento automatizado em rotinas versionadas; e carga em banco de dados geoespacial, do qual derivam os painéis de acompanhamento. Cada etapa é documentada com o resumo criptográfico (*hash*) dos arquivos, o que permite verificar a integridade dos dados em qualquer ponto da cadeia e detectar alterações não registradas.
 
 #### 3.2.11.2 - Controle da Qualidade por Nível
 
@@ -706,9 +689,9 @@ O controle de qualidade é aplicado nível a nível, com limiares de aceitação
 
 #### 3.2.11.3 - Armazenamento, Backup e Acesso
 
-1. **Servidor primário:** Banco PostgreSQL/PostGIS no servidor LAPIG (backup automático diário).
-2. **Backup remoto:** Google Drive institucional com versionamento automático a cada sincronização ODK.
-3. **Acesso ACELEN:** Dashboards em tempo real via LAPIG WebGIS; exportação em shapefile e CSV sob demanda.
+1. **Servidor primário:** Banco *PostgreSQL*/*PostGIS* no servidor LAPIG (backup automático diário).
+2. **Backup remoto:** *Google Drive* institucional com versionamento automático a cada sincronização ODK.
+3. **Acesso ACELEN:** *Dashboards* em tempo real via LAPIG WebGIS; exportação em *shapefile* e CSV sob demanda.
 4. **Retenção:** Dados brutos e processados retidos por mínimo de 10 anos (requisito RED III Art. 29).
 
 
@@ -720,7 +703,7 @@ O cronograma de execução do plano de campo é organizada em cinco fases encade
 
 | Fase | Atividade principal | Período de referência | Responsável |
 | --- | --- | --- | --- |
-| 1 — Pré-processamento | Filtragem do quadro amostral; K-Means; dimensionamento por Cochran/Neyman; sorteio GRTS N0A; geração da grade de pontos N0B | Jul-Ago 2026 | Equipes de sensoriamento remoto e estatística |
+| 1 — Pré-processamento | Filtragem do quadro amostral; *K-Means*; dimensionamento por Cochran/Neyman; sorteio GRTS N0A; geração da grade de pontos N0B | Jul-Ago 2026 | Equipes de sensoriamento remoto e estatística |
 | 2 — Triagem em gabinete (N0B) | Co-registro das imagens; inspeção visual dos pontos N0B; QA/QC por Kappa; priorização das propriedades para N1A | Ago-Out 2026 | 4 analistas + 1 supervisor |
 | 3 — Campo I (piloto) | Visita a cerca de metade das propriedades N1A; pontos N1B; escores; LPI; caracterização socioeconômica | Ago-Set 2026 | 2 equipes de campo |
 | 3 — Campo II (pleno) | Visitas restantes; sobrevoos N2; biomassa N3; solo N4 | Set-Nov 2026 | 2 equipes + piloto de drone certificado |
@@ -741,7 +724,7 @@ O formulário é implementado como perfil de coleta digital e preenchido pelo an
 | Identificador da propriedade N0A | Alfanumérico | `MC-E[k]-[SEQ6]` |
 | Analista responsável (*) | Texto | Nome completo |
 | Data e hora de início da inspeção (*) | Registro temporal | Gerado automaticamente |
-| Imagem utilizada e data de passagem (*) | Lista + data | CBERS-4A / CBERS-4B / Sentinel-2 / PlanetScope |
+| Imagem utilizada e data de passagem (*) | Lista + data | CBERS-4A / CBERS-4B / *Sentinel-2* / *PlanetScope* |
 | Escala de visualização (*) | Lista | 1:5.000 / 1:10.000 / 1:20.000 — anotar a escala do julgamento final |
 | Área de pastagem visível no ponto (*) | Sim / Não / Parcialmente | Se "Não", registrar o motivo (nuvem, sombra, mosaico incompleto) |
 | Solo exposto estimado (*) | Lista | < 5% / 5-15% / 15-30% / 30-50% / > 50% |

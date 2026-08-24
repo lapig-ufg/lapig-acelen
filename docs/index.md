@@ -2,12 +2,12 @@
 
 **Documento Base Teórico do Algoritmo (ATBD) — Versão 5.0**  
 **Agosto de 2026** · Parceria LAPIG/UFG e Acelen Renováveis  
-Referente ao *toolkit* AtDCT versão 5.0 (Google Earth Engine)
+Referente ao *toolkit* AtDCT versão 5.0 (*Google Earth Engine*)
 
 ## Sobre 
-Este repositório consolida a documentação técnica oficial e os algoritmos que integram o toolkit **"Análise Temporal da Dinâmica da Cobertura e Uso da Terra"**, uma solução analítica avançada desenvolvida pelo [Laboratório de Processamento de Imagens e Geoprocessamento (LAPIG/UFG)](https://lapig.iesa.ufg.br/).
+Este repositório consolida a documentação técnica oficial e os algoritmos que integram o *toolkit* **"Análise Temporal da Dinâmica da Cobertura e Uso da Terra"**, uma solução analítica avançada desenvolvida pelo [Laboratório de Sensoriamento Remoto e Geoprocessamento (LAPIG/UFG)](https://lapig.iesa.ufg.br/).
 
-O objetivo deste espaço é apresentar detalhadamente a fundamentação teórica, as metodologias científicas e a arquitetura de códigos que estruturam o projeto. Desenvolvida de forma personalizada para atender às demandas estratégicas e aos desafios operacionais da **Acelen**, a inteligência do toolkit está alicerçada em três pilares fundamentais:
+O objetivo deste espaço é apresentar detalhadamente a fundamentação teórica, as metodologias científicas e a arquitetura de códigos que estruturam o projeto. Desenvolvida de forma personalizada para atender às demandas estratégicas e aos desafios operacionais da **Acelen**, a inteligência do *toolkit* está alicerçada em três pilares fundamentais:
 
 * **Mapeamento em Alta Resolução e Escala Detalhada:** Monitoramento de precisão e detecção automatizada das transformações na paisagem ao longo de séries históricas.
 
@@ -15,7 +15,7 @@ O objetivo deste espaço é apresentar detalhadamente a fundamentação teórica
 
 * **Diagnóstico de Vigor e Produtividade:** Avaliação rigorosa do vigor vegetativo e determinação da Produtividade Primária Bruta (GPP) das pastagens em território nacional.
 
-Neste espaço, documentamos todo o processo de desenvolvimento do toolkit — desde o processamento dos dados brutos e aplicação de algoritmos até as análises finais —, servindo como um guia técnico e prático para a reprodutibilidade e aplicação da metodologia.
+Neste espaço, documentamos todo o processo de desenvolvimento do *toolkit* — desde o processamento dos dados brutos e aplicação de algoritmos até as análises finais —, servindo como um guia técnico e prático para a reprodutibilidade e aplicação da metodologia.
 
 
 
