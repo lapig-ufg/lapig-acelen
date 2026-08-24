@@ -32,6 +32,8 @@ Freitas, F. L. M.; Guidotti, V.; Sparovek, G.; Hamamura, C. *Nota técnica: Malh
 
 Gorelick, N. et al. Google Earth Engine: Planetary-scale geospatial analysis for everyone. *Remote sensing of Environment*, v. 202, p. 18-27, 2017.
 
+Hengl, T. *Soil texture classes (USDA system) for 6 soil depths (0, 10, 30, 60, 100 and 200 cm) at 250 m*. Versão v0.2. Zenodo, 2018. Conjunto de dados. doi: 10.5281/zenodo.2525817. Disponível em: <https://doi.org/10.5281/zenodo.2525817>.
+
 Huete, A. R. et al. Overview of the radiometric and biophysical performance of the MODIS vegetation indices. *Remote Sensing of Environment*, v. 83, n. 1-2, p. 195-213, 2002.
 
 Hunter, M. O.; Parente, L.; Ho, Y. F. et al. Global maps of 30 m annual median vegetation height (2000-2022) based on ICESat-2 and machine learning. *Scientific Data*, v. 12, p. 1470, 2025. doi: 10.1038/s41597-025-05739-6.
