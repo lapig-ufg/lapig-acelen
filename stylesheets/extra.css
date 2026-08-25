@@ -1,0 +1,50 @@
+/* Cor primária customizada (cabeçalho, abas, links de destaque) */
+:root {
+  --md-primary-fg-color: #a5dc00;
+  --md-primary-fg-color--light: #a5dc00;
+  --md-primary-fg-color--dark: #83b000;
+
+  /* Cor do texto/ícones sobre o cabeçalho — escurecida para manter contraste
+     sobre o verde-limão, já que branco fica com baixo contraste. */
+  --md-primary-bg-color: #1b1b1b;
+  --md-primary-bg-color--light: #1b1b1b;
+
+  /* Cor dos links no texto e do item do menu lateral quando selecionado */
+  --md-typeset-a-color: #0074fc;
+
+  /* Mesma cor ao passar o mouse (hover) sobre links/itens do menu */
+  --md-accent-fg-color: #0074fc;
+  --md-accent-fg-color--transparent: #0074fc1a;
+}
+
+/* Logo 30% maior que o padrão do tema (cabeçalho: 1.2rem -> 1.56rem;
+   gaveta de navegação: 2.4rem -> 3.12rem). */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 1.80rem;
+}
+
+.md-nav__title .md-logo img,
+.md-nav__title .md-logo svg {
+  height: 20.12rem;
+}
+
+/* Campo de busca mais estreito para sobrar espaço ao título do site
+   "Acelen - Algorithm Theoretical Basis Document (ATBD)" no cabeçalho. */
+@media screen and (min-width: 60em) {
+  .md-search__inner {
+    width: 8rem;
+  }
+}
+
+@media screen and (min-width: 60em) and (max-width: 76.234375em) {
+  [data-md-toggle="search"]:checked ~ .md-header .md-search__inner {
+    width: 16rem;
+  }
+}
+
+@media screen and (min-width: 76.25em) {
+  [data-md-toggle="search"]:checked ~ .md-header .md-search__inner {
+    width: 20rem;
+  }
+}

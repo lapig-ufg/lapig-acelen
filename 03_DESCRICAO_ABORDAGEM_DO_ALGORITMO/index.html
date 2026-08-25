@@ -1,0 +1,3035 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Bernard Silva de Oliveira">
+      
+      
+      
+        <link rel="prev" href="../02_BASE_TEORICA/">
+      
+      
+        <link rel="next" href="../04_CONSIDERACOES_DE_IMPLEMENTACAO/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Descrição e Abordagem do Algoritmo - Acelen - Algorithm Theoretical Basis Document (ATBD)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3-descricao-e-abordagem-do-algoritmo" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Acelen - Algorithm Theoretical Basis Document (ATBD)" class="md-header__button md-logo" aria-label="Acelen - Algorithm Theoretical Basis Document (ATBD)" data-md-component="logo">
+      
+  <img src="../figures/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Acelen - Algorithm Theoretical Basis Document (ATBD)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Descrição e Abordagem do Algoritmo
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/lapig-ufg/lapig-acelen" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    LAPIG-UFG/toolkit-acelen
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Página Principal
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../01_INTRODUCAO/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Introdução
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../02_BASE_TEORICA/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Base Teórica
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Descrição e Abordagem do Algoritmo
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../04_CONSIDERACOES_DE_IMPLEMENTACAO/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Considerações de Implementação
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../05_REFERENCIAS/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Referências Bibliográficas
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Acelen - Algorithm Theoretical Basis Document (ATBD)" class="md-nav__button md-logo" aria-label="Acelen - Algorithm Theoretical Basis Document (ATBD)" data-md-component="logo">
+      
+  <img src="../figures/logo.png" alt="logo">
+
+    </a>
+    Acelen - Algorithm Theoretical Basis Document (ATBD)
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/lapig-ufg/lapig-acelen" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    LAPIG-UFG/toolkit-acelen
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Página Principal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_INTRODUCAO/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_BASE_TEORICA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base Teórica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrição e Abordagem do Algoritmo
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descrição e Abordagem do Algoritmo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31-analise-temporal-da-dinamica-da-cobertura-e-uso-da-terra-toolkit-50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 - Análise Temporal da Dinâmica da Cobertura e Uso da Terra (toolkit 5.0)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 - Análise Temporal da Dinâmica da Cobertura e Uso da Terra (toolkit 5.0)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311-variaveis-e-parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.1 - Variáveis e Parâmetros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312-processamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.2 - Processamento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1.2 - Processamento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tabela-02-classes-agrupadas-conforme-as-nove-classes-de-interesse-consideradas-neste-estudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 02 - Classes agrupadas conforme as nove classes de interesse consideradas neste estudo.
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#313-dados-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.3 - Dados de entrada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#314-visualizacao-dos-mapas-de-cobertura-e-uso-da-terra-no-mapa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.4 - Visualização dos mapas de cobertura e uso da terra no Mapa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#315-visualizacao-da-dinamica-de-cobertura-e-uso-da-terra-conversao-para-uso-antropico-e-evolucao-das-areas-de-pastagens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.5 - Visualização da dinâmica de cobertura e uso da terra, conversão para uso antrópico e evolução das áreas de pastagens
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#316-vigor-da-pastagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.6 - Vigor da pastagem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#317-mapeamento-automatico-de-pastagens-em-nivel-de-propriedade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.7 - Mapeamento automático de pastagens em nível de propriedade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#318-calculo-da-perda-media-anual-do-solo-rusle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.8 - Cálculo da perda média anual do solo (RUSLE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#319-analise-de-tendencia-da-pastagem-na-propriedade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.9 - Análise de tendência da pastagem na propriedade
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1.9 - Análise de tendência da pastagem na propriedade">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3191-analise-de-tendencia-da-produtividade-primaria-bruta-gpp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.9.1 - Análise de tendência da Produtividade Primária Bruta (GPP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3192-analise-de-tendencia-do-ndvi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.9.2 - Análise de tendência do NDVI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3110-analise-de-biomassa-seca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.10 - Análise de Biomassa Seca
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3111-download-das-camadas-no-toolkit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.11 - Download das camadas no toolkit
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-estrategia-de-amostragem-em-campo-para-verificacao-de-pastagens-degradadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 - Estratégia de Amostragem em Campo para Verificação de Pastagens Degradadas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 - Estratégia de Amostragem em Campo para Verificação de Pastagens Degradadas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321-enquadramento-regulatorio-e-evidencias-exigidas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.1 - Enquadramento Regulatório e Evidências Exigidas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2.1 - Enquadramento Regulatório e Evidências Exigidas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tabela-03-requisitos-de-certificacao-e-evidencias-correspondentes-produzidas-pelo-algoritmo-de-campo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 03 - Requisitos de certificação e evidências correspondentes produzidas pelo algoritmo de campo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322-quadro-amostral-e-populacao-alvo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.2 - Quadro Amostral e População-Alvo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2.2 - Quadro Amostral e População-Alvo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tabela-04-variaveis-utilizadas-no-agrupamento-k-means-para-estratificacao-das-propriedades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 04 - Variáveis utilizadas no agrupamento K-Means para estratificação das propriedades
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#323-estratificacao-e-dimensionamento-da-amostra-de-propriedades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.3 - Estratificação e Dimensionamento da Amostra de Propriedades
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#324-estrutura-hierarquica-do-funil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.4 - Estrutura Hierárquica do Funil
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2.4 - Estrutura Hierárquica do Funil">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tabela-05-estrutura-hierarquica-do-funil-de-amostragem-de-campo-7-niveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 05 - Estrutura hierárquica do funil de amostragem de campo (7 níveis)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#325-nivel-n0a-selecao-de-propriedades-e-preparo-das-imagens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.5 - Nível N0A - Seleção de Propriedades e Preparo das Imagens
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2.5 - Nível N0A - Seleção de Propriedades e Preparo das Imagens">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tabela-06-calendario-fenologico-para-aquisicao-de-imagens-e-coleta-de-campo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 06 - Calendário fenológico para aquisição de imagens e coleta de campo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#326-nivel-n0b-triagem-por-inspecao-visual-em-gabinete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.6 - Nível N0B - Triagem por Inspeção Visual em Gabinete
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2.6 - Nível N0B - Triagem por Inspeção Visual em Gabinete">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tabela-07-numero-de-pontos-n0b-por-faixa-de-area-de-pastagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 07 - Número de pontos N0B por faixa de área de pastagem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3261-procedimento-padronizado-de-inspecao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.6.1 Procedimento padronizado de inspeção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3262-criterios-de-elegibilidade-do-ponto-n0b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.6.2 Critérios de elegibilidade do ponto N0B
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3263-aplicacao-da-normalizacao-sazonal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.6.3 Aplicação da normalização sazonal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-08-fatores-de-correcao-sazonal-para-inspecao-de-imagens-n0b-referencia-jun-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 08 - Fatores de correção sazonal para inspeção de imagens (N0B), referência jun-set
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3264-priorizacao-das-propriedades-para-o-nivel-seguinte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.6.4 Priorização das propriedades para o nível seguinte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-09-criterios-de-priorizacao-de-propriedades-para-o-nivel-n1a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 09 - Critérios de priorização de propriedades para o nível N1A
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3265-controle-de-qualidade-inter-observador-kappa-n0b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.6.5 Controle de qualidade inter-observador (Kappa N0B)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#327-niveis-n1a-e-n1b-validacao-em-campo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.7 - Níveis N1A e N1B - Validação em Campo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2.7 - Níveis N1A e N1B - Validação em Campo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3271-selecao-das-fazendas-para-visita-de-campo-n1a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.7.1 Seleção das Fazendas para Visita de Campo (N1A)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3272-selecao-de-pontos-de-campo-dentro-de-cada-fazenda-n1a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.7.2 Seleção de Pontos de Campo dentro de cada Fazenda N1A
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-10-criterios-de-selecao-de-pontos-n1b-por-faixa-de-area-de-pastagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 10 - Critérios de seleção de pontos N1B por faixa de área de pastagem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3273-protocolo-de-campo-janela-temporal-e-equipes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.7.3 Protocolo de Campo — Janela Temporal e Equipes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-11-equipamentos-e-materiais-por-equipe-de-campo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 11 - Equipamentos e materiais por equipe de campo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3274-sistema-de-ids-e-rastreabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.7.4 Sistema de IDs e Rastreabilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-12-sistema-de-identificacao-e-rastreabilidade-de-amostras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 12 - Sistema de identificação e rastreabilidade de amostras
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3275-plataforma-digital-de-coleta-odk-collect-kobotoolbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.7.5 Plataforma Digital de Coleta (ODK Collect / KoBoToolbox)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3276-roteiro-socioeconomico-e-de-manejo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.7.6 Roteiro Socioeconômico e de Manejo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3277-sistema-de-escores-visuais-010-e-metodo-lpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.7.7 Sistema de Escores Visuais (0–10) e Método LPI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-13-sistema-de-escores-visuais-para-avaliacao-de-pastagens-em-campo-adaptado-de-teles-et-al-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 13 - Sistema de escores visuais para avaliação de pastagens em campo (adaptado de Teles et al., 2025)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-14-fator-de-ajuste-sazonal-do-escore-de-campo-delta-s-referencia-jun-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 14 - Fator de ajuste sazonal do escore de campo (\(\Delta s\)), referência jun-set
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#328-nivel-n2-sobrevoo-de-drone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.8 - Nível N2 - Sobrevoo de Drone
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2.8 - Nível N2 - Sobrevoo de Drone">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3281-criterio-de-selecao-dos-sitios-n2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.8.1 Critério de Seleção dos Sítios N2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-15-criterio-de-selecao-e-proporcionalidade-dos-sitios-n2-por-classe-de-escore-de-campo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 15 - Critério de seleção e proporcionalidade dos sítios N2 por classe de escore de campo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32811-sitios-de-controle-em-n2-calculo-da-especificidade-do-modelo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.8.1.1 Sítios de Controle em N2 — Cálculo da Especificidade do Modelo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3282-protocolo-de-voo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.8.2 Protocolo de Voo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#329-niveis-n3-e-n4-coleta-de-biomassa-e-solo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.9 - Níveis N3 e N4 - Coleta de Biomassa e Solo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2.9 - Níveis N3 e N4 - Coleta de Biomassa e Solo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3291-selecao-de-subpontos-e-coleta-de-biomassa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.9.1 Seleção de Subpontos e Coleta de Biomassa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-16-grade-de-subpontos-n3-por-tamanho-de-footprint-de-drone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 16 - Grade de subpontos N3 por tamanho de footprint de drone
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-17-protocolo-de-amostragem-de-biomassa-por-tipo-de-pastagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 17 - Protocolo de amostragem de biomassa por tipo de pastagem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32911-procedimento-padronizado-por-subponto-n3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.9.1.1 Procedimento padronizado por subponto N3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3292-selecao-de-subpontos-para-coleta-de-solo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.9.2 Seleção de Subpontos para Coleta de Solo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32921-procedimento-padronizado-por-subponto-n4-coleta-por-camadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.9.2.1 Procedimento padronizado por subponto N4 — Coleta por Camadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3293-protocolo-fotografico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.9.3 Protocolo Fotográfico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3210-classificacao-integrada-da-condicao-das-pastagens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.10 - Classificação Integrada da Condição das Pastagens
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2.10 - Classificação Integrada da Condição das Pastagens">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#32101-categorias-de-degradacao-d0-d4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.10.1 - Categorias de Degradação D0 - D4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-18-categorias-de-degradacao-de-pastagens-d0-d4-adaptado-de-teles-et-al-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 18 - Categorias de degradação de pastagens (D0-D4), adaptado de Teles et al. (2025)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32102-matriz-de-decisao-integrada-para-elegibilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.10.2 - Matriz de decisão Integrada para Elegibilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32103-calibracao-dos-modelos-de-sensoriamento-remoto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.10.3 - Calibração dos Modelos de Sensoriamento Remoto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32104-matriz-de-confusao-e-metricas-de-acuracia-do-sistema-de-classificacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.10.4 - Matriz de confusão e métricas de acurácia do sistema de classificação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-19-matriz-de-confusao-e-metricas-de-acuracia-do-sistema-de-classificacao-modelo-de-gabinete-verdade-de-campo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 19 - Matriz de confusão e métricas de acurácia do sistema de classificação (modelo de gabinete × verdade de campo).
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3211-gestao-de-dados-e-controle-de-qualidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.11 - Gestão de Dados e Controle de Qualidade
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2.11 - Gestão de Dados e Controle de Qualidade">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#32111-fluxo-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.11.1 - Fluxo de dados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32112-controle-da-qualidade-por-nivel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.11.2 - Controle da Qualidade por Nível
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-20-metricas-de-qaqc-limiares-de-aceitacao-e-acoes-corretivas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 20 - Métricas de QA/QC, limiares de aceitação e ações corretivas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32113-armazenamento-backup-e-acesso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.11.3 - Armazenamento, Backup e Acesso
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3212-cronograma-de-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.12 - Cronograma de execução
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2.12 - Cronograma de execução">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tabela-21-cronograma-de-execucao-por-fase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 21 - Cronograma de execução por fase
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apendice-a-formulario-digital-de-inspecao-visual-nivel-n0b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Apêndice A - Formulário Digital de Inspeção Visual (Nível N0B)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Apêndice A - Formulário Digital de Inspeção Visual (Nível N0B)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tabela-22-campos-do-formulario-digital-de-inspecao-visual-por-ponto-n0b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 22 - Campos do formulário digital de inspeção visual por ponto N0B
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apendice-b-protocolo-operacional-de-voo-de-drone-nivel-n2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Apêndice B - Protocolo Operacional de Voo de Drone (Nível N2)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_CONSIDERACOES_DE_IMPLEMENTACAO/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Considerações de Implementação
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_REFERENCIAS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referências Bibliográficas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="3-descricao-e-abordagem-do-algoritmo">3. DESCRIÇÃO E ABORDAGEM DO ALGORITMO</h1>
+<p>Nesta seção serão abordadas todas as funcionalidades do <em>toolkit</em>, versão 5.0, especificamente voltado à Análise Temporal da Dinâmica da Cobertura e Uso da Terra, tendo por referência os mapas de cobertura e uso da terra, vigor das pastagens da Coleção 10.1 do Mapbiomas, bem como imagens das séries <em>Landsat</em>, mapeamento detalhado das pastagens em nível de propriedade e o cálculo da perda anual média do solo</p>
+<h2 id="31-analise-temporal-da-dinamica-da-cobertura-e-uso-da-terra-toolkit-50">3.1 - Análise Temporal da Dinâmica da Cobertura e Uso da Terra (<em>toolkit</em> 5.0)</h2>
+<p>O <em>toolkit</em> versão 5.0 permite ao usuário explorar a série histórica dos mapas de cobertura e uso da terra da Coleção 10.1 do MapBiomas, mapear em nível de propriedade as pastagens e calcular a perda anual média do solo. Ao fazer o <em>upload</em> de um arquivo vetorial, o usuário pode analisar instantaneamente a dinâmica da cobertura da terra entre 1985 e 2024 para as classes: Soja, Cana, Pastagem, Vegetação Natural, Silvicultura, Outras Lavouras, Outros, Água e Mosaico de Uso. Além disso, é possível acessar imagens <em>Landsat</em> de diferentes anos e períodos (seco, chuvoso e anual), e identificar o nível de vigor das pastagens.</p>
+<p>A Figura 03 mostra o fluxograma do processo de usabilidade da Análise Temporal da Dinâmica de Cobertura e Uso da Terra.</p>
+<center>
+<img width="600px" title="" src="../figures/figure_01.png"/>
+<div>Figura 03 - Fluxograma de processo da Análise da Dinâmica de Cobertura e Uso da Terra.</div>
+<p></p>
+</center>
+
+<h3 id="311-variaveis-e-parametros">3.1.1 - Variáveis e Parâmetros</h3>
+<p>A entrada principal do <em>toolkit</em> é um arquivo poligonal das áreas de interesse da Acelen Renováveis. O usuário insere esse arquivo fazendo o <em>upload</em> dele como um <em>asset</em> no <em>Google Earth Engine</em>.</p>
+<p>O usuário pode interagir com os seguintes parâmetros do <em>toolkit</em>:</p>
+<ul>
+<li>
+<p><strong>Filtro da camada de entrada:</strong> Permite ao usuário filtrar a camada de entrada a partir do conjunto de atributos, antes da inserção no mapa;</p>
+</li>
+<li>
+<p><strong>Visualização da camada a partir de um raio de Influência:</strong> Permite que o usuário visualize sua área de interesse sobre um raio de influência (<em>buffer</em>)</p>
+</li>
+<li>
+<p><strong>Data de análise da cobertura e uso da terra:</strong> O período específico para a análise temporal;</p>
+</li>
+<li>
+<p><strong>Período de aquisição das cenas <em>Landsat</em>:</strong> O período (chuvoso, seca ou anual) de visualização das imagens dos satélites <em>Landsat</em> (5, 7, 8 e 9);</p>
+</li>
+<li>
+<p><strong>Tipo de classificação:</strong> Forma de visualização das classes de cobertura e uso da terra na propriedade, sendo: Moda, Original e Original - Área Total;</p>
+</li>
+<li>
+<p><strong>Visualização do vigor de pastagens:</strong> Visualização dos níveis de vigor das áreas de interesse da Acelen Renováveis, a partir dos dados do vigor da vegetação normalizados por biomas (Brasil) e por estados (no momento, disponível apenas para Minas Gerais e Bahia);</p>
+</li>
+<li>
+<p><strong>Mapeamento automático das pastagens ao nível de propriedade:</strong> O mapeamento automático das pastagens é realizado sobre a camada de entrada. O usuário pode selecionar a quantidade de amostras, a área de influência (<em>buffer</em>) e as bases de dados de uso e cobertura da terra, a fim de coletar informações das pastagens usadas no processo de classificação;</p>
+</li>
+<li>
+<p><strong>Cálculo da perda média anual de solo:</strong> O cálculo da perda média anual de solo, usando a equação RUSLE, é aplicado na bacia hidrográfica onde a área de interesse do usuário está inserida;</p>
+</li>
+<li>
+<p><strong>Análise de tendência da pastagem na propriedade:</strong> Analisa-se a tendência dos valores de NDVI e dos valores de produtividade primária bruta (GPP), derivados de séries temporais de imagens <em>Landsat</em>, nas áreas de pastagem contidas na camada de entrada definida pelo usuário.</p>
+</li>
+<li>
+<p><strong>Série temporal de cobertura e uso da terra (gráfico):</strong> Gera um gráfico (para a área de interesse) que mostra a evolução do uso e cobertura da terra ao longo do tempo;</p>
+</li>
+<li>
+<p><strong>Taxa de conversão:</strong> Verifica a taxa de conversão de áreas naturais para antrópicas para cada área de interesse;</p>
+</li>
+<li>
+<p><strong>Análise temporal da evolução das áreas de pastagem sobre áreas naturais e outros:</strong> Visualização dos valores das áreas em hectares das classes (pastagem, vegetação natural e outras), ao longo do tempo, para cada área de interesse.</p>
+</li>
+<li>
+<p><strong><em>Download</em> das camadas do <em>toolkit</em>:</strong> Permite o usuário fazer <em>download</em> da camada que está presente no mapa e/ou a série temporal das bases de dados contidas no <em>toolkit</em>, como: Vigor das pastagens e o uso e cobertura da terra (Mapbiomas).</p>
+</li>
+<li>
+<p><strong>Análise de Biomassa seca:</strong> Permite o usuário analise em série temporal a partir de 2025 a biomassa seca das áreas de pastagem usando dados do <em>sentinel-2</em>.</p>
+</li>
+</ul>
+<h3 id="312-processamento">3.1.2 - Processamento</h3>
+<p>Os mapas de cobertura e uso da terra compreendem 29 classes, as quais, com o intuito de melhorar o entendimento e as análises da dinâmica e uso da terra nas áreas de interesse da <strong>Acelen Renováveis</strong>, foram agrupadas em nove classes: Soja, Cana, Pastagem, Vegetação Natural, Silvicultura, Outras Lavouras, Outros, Água e Mosaico de Uso. A Tabela 02 mostra o agrupamento das classes de cobertura e uso da terra em relação à base de dados original:</p>
+<h4 id="tabela-02-classes-agrupadas-conforme-as-nove-classes-de-interesse-consideradas-neste-estudo">Tabela 02 - Classes agrupadas conforme as nove classes de interesse consideradas neste estudo.</h4>
+<table>
+<thead>
+<tr>
+<th>Classe Agrupada</th>
+<th>Classe Original</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Soja</td>
+<td>Soja</td>
+</tr>
+<tr>
+<td>Cana</td>
+<td>Cana</td>
+</tr>
+<tr>
+<td>Pastagem</td>
+<td>Pastagem</td>
+</tr>
+<tr>
+<td>Vegetação Natural</td>
+<td>Formação Florestal, Formação Savânica, Mangue, Restinga Arbórea, Campo Alagado e Área Pantanosa, Formação Campestre e Restinga Herbácea</td>
+</tr>
+<tr>
+<td>Silvicultura</td>
+<td>Silvicultura</td>
+</tr>
+<tr>
+<td>Outras lavouras</td>
+<td>Lavoura temporária, Arroz, Algodão, Outras lavouras temporárias, Café, Citrus, Outras Lavouras perenes</td>
+</tr>
+<tr>
+<td>Água</td>
+<td>Rio, lago, oceano e aquicultura</td>
+</tr>
+<tr>
+<td>Mosaico de usos</td>
+<td>Mosaico de usos</td>
+</tr>
+<tr>
+<td>Outros</td>
+<td>Todas as classes que restaram e que não foram adicionadas nas anteriores</td>
+</tr>
+</tbody>
+</table>
+<p>Quando o usuário opta por visualizar a moda das classes dentro de uma área de interesse, a ferramenta identifica e classifica essa área com base na classe de cobertura e uso da terra que mais se repete. Isso proporciona uma visão clara da cobertura dominante na região selecionada.</p>
+<h3 id="313-dados-de-entrada">3.1.3 - Dados de entrada</h3>
+<p>Os dados de entrada para o <em>toolkit</em> são informações vetoriais na estrutura poligonal. Inicialmente, o dado de entrada deve estar no formato de arquivo vetorial <em>shapefile</em>, e compactado no formato .zip. Com o dado no formato .zip, é necessário fazer o <em>upload</em> desse arquivo na plataforma <em>Google Earth Engine</em>, com o usuário já autenticado nessa mesma plataforma.</p>
+<p>Uma vez que o arquivo vetorial tenha sido adicionado ao <em>toolkit</em>, o usuário pode filtrar áreas de interesse a partir das informações contidas no respectivo conjunto de atributos. Especificamente, no menu <strong>Entrada de Dados</strong>, cole o link do <em>asset</em> para integrá-lo à ferramenta. Após a visualização no mapa, você pode refinar a análise utilizando filtros específicos. Basta clicar na opção e filtro e depois, selecionar o campo e o valor desejado para isolar a área geográfica de interesse dentro do seu conjunto de dados.</p>
+<h3 id="314-visualizacao-dos-mapas-de-cobertura-e-uso-da-terra-no-mapa">3.1.4 - Visualização dos mapas de cobertura e uso da terra no Mapa</h3>
+<p>Para visualizar os mapas de cobertura e uso da terra na ferramenta a partir de um arquivo externo, no <strong>menu Classificação Uso da Terra</strong>, o usuário deve seguir estas etapas:</p>
+<ul>
+<li>
+<p>Na opção <strong>"Fonte de dados"</strong>, selecione a fonte de dados de uso da terra que deseja visualizar. Atualmente, o <em>toolkit</em> suporta apenas a fonte <strong>MapBiomas</strong>;</p>
+</li>
+<li>
+<p>No campo <strong>"Ano de Análise"</strong>, deve-se escolher o ano da análise, que está ligado à fonte de dados selecionada;</p>
+</li>
+<li>
+<p>Na opção <strong>"<em>Buffer</em> (m)"</strong>, o usuário pode expandir o limite (raio de influência) da camada de entrada. O objetivo é visualizar os dados de classificação em uma área que se estende além dos limites originais da camada;</p>
+</li>
+<li>
+<p>Após isso, selecione o <strong>tipo de classificação</strong> que deseja visualizar.</p>
+</li>
+</ul>
+<p>O campo Tipo de Classificação, possui três opções, sendo elas:</p>
+<ul>
+<li>
+<p><strong>Moda:</strong> O limite de cada área de interesse será classificado a partir da classe majoritária, ou seja, a classe de cobertura e uso da terra que mais se repetir na propriedade / área de interesse;</p>
+</li>
+<li>
+<p><strong>Original:</strong> Cada elemento do arquivo externo mostrará todas as classificações em seu interior;</p>
+</li>
+<li>
+<p><strong>Original - Área total:</strong> Serão visualizadas todas as classes de cobertura e uso da terra de toda a extensão geográfica do arquivo externo inserido.</p>
+</li>
+</ul>
+<p>Depois da seleção do tipo de classificação, clique no botão <strong>Gerar classificação do ano da análise</strong> para visualizar o mapa na tela da ferramenta. A tela traz a informação das classes de cobertura e uso da terra, legenda e os gráficos do quantitativo das classes no arquivo inserido, conforme o respectivo ano selecionado pelo usuário. O gráfico gerado pode ser exportado nos formatos: CSV (tabela de dados), SVG e PNG (Figura 04).</p>
+<center>
+<img width="500px" src="../figures/figure_02.png"/>
+<div>Figura 04 - Visualização do arquivo no mapa da ferramenta Análise Temporal da Dinâmica de Cobertura e Uso da Terra.</div>
+<p></p>
+</center>
+
+<h3 id="315-visualizacao-da-dinamica-de-cobertura-e-uso-da-terra-conversao-para-uso-antropico-e-evolucao-das-areas-de-pastagens">3.1.5 - Visualização da dinâmica de cobertura e uso da terra, conversão para uso antrópico e evolução das áreas de pastagens</h3>
+<p>Para visualizar a dinâmica das classes de cobertura e uso da terra, é necessário que a opção escolhida no campo <strong>Tipo de Classificação</strong> seja a moda. Clique no ícone e aparecerá no centro superior da tela as opções das informações que o usuário deseja visualizar (Figura 05):</p>
+<center>
+<img width="300px" src="../figures/figure_03_a.png"/>
+<img width="300px" src="../figures/figure_03_b.png"/>
+<div>Figura 05 - (a) O menu da ferramenta de gráfico, e (b) opções de visualização do gráfico.</div>
+<p></p>
+</center>
+
+<p>Após selecionar a opção de visualização do gráfico, clique na propriedade do arquivo externo que você deseja analisar. As Figuras 04, 05 e 06 ilustram os resultados dos gráficos de Cobertura da Terra, Proporção de Área Convertida e Evolução das áreas de pastagens.</p>
+<center>
+<img width="400px" src="../figures/figure_04.png"/>
+<div>Figura 06 - Dinâmica da Cobertura e Uso da Terra do elemento selecionado.</div>
+<p></p>
+</center>
+
+<center>
+<img width="400px" src="../figures/figure_05.png"/>
+<div>Figura 07 - Proporção de área convertida do elemento selecionado.</div>
+<p></p>
+</center>
+
+<center>
+<img width="400px" src="../figures/figure_06.png"/>
+<div>Figura 08 - Evolução das áreas de pastagem.</div>
+<p></p>
+</center>
+
+<h3 id="316-vigor-da-pastagem">3.1.6 - Vigor da pastagem</h3>
+<p>Para visualizar os níveis de vigor da pastagem, siga os seguintes passos no menu "Análise de Vigor":</p>
+<ul>
+<li>Selecione o <strong>Ano do Vigor</strong> (a série temporal disponível vai de 2000 a 2024).</li>
+<li>Defina a <strong>região para Análise</strong> (selecionando entre Brasil e Unidades da Federação - UF's).</li>
+<li>Ajuste o valor do <strong><em>Buffer</em></strong> em metros para a análise.</li>
+<li>Por fim, clique no botão "Visualizar Vigor"..</li>
+</ul>
+<p>A Figura 09 mostra a visualização do Vigor da pastagem:</p>
+<center>
+<img width="500px" src="../figures/figure_07.png"/>
+<div>Figura 09 - Visualização do Vigor da Pastagem em 2000 no nível Baixo (Vermelho), Médio (Ocre) e Alto (Verde).</div>
+<p></p>
+</center>
+
+<p>Os dados de vigor utilizado neste <em>toolkit</em> são disponibilizados pelo MapBiomas, sendo gerados pelo Laboratório de Sensoriamento Remoto e Geoprocessamento - LAPIG da Universidade Federal de Goiás (conforme metodologia proposta por Santos et al., 2022 e modificada por Ferreira Jr et al., 2023).</p>
+<h3 id="317-mapeamento-automatico-de-pastagens-em-nivel-de-propriedade">3.1.7 - Mapeamento automático de pastagens em nível de propriedade</h3>
+<p>Para o mapeamento automatizado das pastagens em nível de propriedade, o usuário deve, inicialmente, acessar o Menu <strong>Mapeamento Automático Detalhado - Pastagem</strong>, selecionar a base de dados para a classificação. As opções disponíveis são <em>Sentinel-2</em> e <em>Embeddings</em>, ambas com resolução espacial de 10 metros.</p>
+<p>Após a seleção, o usuário define a quantidade de amostras, o <em>buffer</em> (em metros) e o ano para o mapeamento. Por fim, ele escolhe a fonte de dados de pastagem existentes para a geração de amostras, as quais serão usadas pelo algoritmo <em>Random Forest</em> para o mapeamento final.</p>
+<p>As fontes de mapeamento existentes incluem dados do MapBiomas, dados da iniciativa <em>Global Pasture Watch</em> (Parente et al., 2024) e a sobreposição das áreas de pastagem de ambas as fontes. A Figura 10 apresenta o resultado do mapeamento automático de pastagem em nível de propriedade.</p>
+<center>
+<img width="500px" src="../figures/figure_08.png"/>
+<div>Figura 10 - Exemplo do mapeamento automático das pastagens em nível de propriedade.</div>
+<p></p>
+</center>
+
+<h3 id="318-calculo-da-perda-media-anual-do-solo-rusle">3.1.8 - Cálculo da perda média anual do solo (RUSLE)</h3>
+<p>Para calcular a perda média anual de solo, no menu Método RUSLE, selecione um ano no período de 2017 a 2024. Em seguida, escolha qual fator deseja visualizar ou a própria perda média anual de solo e posteriormente, o usuário selecionará qual divisão da bacia hidrográfica deseja calcular, sendo as opções a divisão do DHN e do DNAEE. A Figura 11 apresenta um exemplo do resultado.</p>
+<center>
+<img width="500px" src="../figures/figure_09.png"/>
+<div>Figura 11 - Exemplo da perda média potencial anual de solo (t/ha/ano).</div>
+<p></p>
+</center>
+
+<h3 id="319-analise-de-tendencia-da-pastagem-na-propriedade">3.1.9 - Análise de tendência da pastagem na propriedade</h3>
+<p>Nesta etapa é possível avaliar a tendência dos valores de produtividade primária bruta e NDVI, conforme a mancha de pastagem identificada nas áreas de interesse na Acelen. Para realizar a análise de tendência da pastagem, acesse o menu "Análise de Tendência das Pastagens".</p>
+<h4 id="3191-analise-de-tendencia-da-produtividade-primaria-bruta-gpp">3.1.9.1 - Análise de tendência da Produtividade Primária Bruta (GPP)</h4>
+<p>Na análise de tendência da produtividade das pastagens nas áreas de interesse da Acelen, tivemos que organizar uma base de dados histórica bimestral de GPP, cobrindo o período de 2000 a 2024. A inserção desses dados no <em>toolkit</em> seguiu três grandes etapas:</p>
+<ol>
+<li>
+<p><strong>Coleta de Dados:</strong> Baixamos as imagens via <em>shell</em> que estão armazenados no servidor da <em>OpenGeoHub</em>, que é uma fundação de Pesquisa sediada em Doorwerth, localizada nos Países Baixos, que se dedica a promover o acesso aberto a dados geoespaciais e softwares de código aberto. Os dados possuem uma resolução espacial de 30 metros, e o cálculo do GPP segue a metodologia adotadas por Isik et al. (2024).</p>
+</li>
+<li>
+<p><strong>Junção das imagens e um único arquivo:</strong> Em vez de manipular centenas de arquivos individuais, agrupamos todas as imagens baixadas em um único arquivo georreferenciado (formato multibanda). Nele, cada registro bimestral do GPP é armazenado como uma banda distinta, facilitando o processamento e a organização espacial.</p>
+</li>
+<li>
+<p><strong><em>Upload</em> dos arquivos no <em>Google Earth Engine</em>:</strong> Por fim, fizemos o <em>upload</em> desse arquivo para o <em>Google Earth Engine</em>. Para usuários de conta gratuita, o <em>Google Earth Engine</em> limita a quantidade de <em>upload</em> por imagem em 10GB, com isso, tivemos que recortar as imagens do GPP bimestral em pedaços inferior ao tamanho permitido pela <em>Google</em>.</p>
+</li>
+</ol>
+<p>Com os arquivos de GPP na plataforma do <em>Google Earth Engine</em>, o usuário pode fazer a análise da tendência nas áreas de pastagem na propriedade, acessando o menu de Análise de Tendência das Pastagem. De acordo com as seguintes etapas:</p>
+<ol>
+<li>
+<p>Selecione o produto <strong>Produtividade Primária Bruta (GPP)</strong>.</p>
+</li>
+<li>
+<p>Selecione o período de análise nos campos <strong>Ano Inicial</strong> e <strong>Ano Final</strong>.</p>
+</li>
+<li>
+<p>Após a seleção de todos os parâmetros, clique no botão <strong>"Calcular Tendência"</strong> para gerar o gráfico que indica se a tendência do GPP nas áreas de pastagem é positiva ou negativa.</p>
+</li>
+</ol>
+<p>As figuras 12 e 13 apresentam exemplos do resultado da Análise de tendência da pastagem usando o produto Produtividade Primária Bruta (GPP).</p>
+<center>
+<img width="500px" src="../figures/figure_10.png"/>
+<div>Figura 12 - Ocupação da área de uso e cobertura da terra em 2001.</div>
+<p></p>
+</center>
+
+<center>
+<img width="600px" src="../figures/figure_11.png"/>
+<div>Figura 13 - Tendência de GPP da pastagem da propriedade rural de 2001 à 2023.</div>
+<p></p>
+</center>
+
+<h4 id="3192-analise-de-tendencia-do-ndvi">3.1.9.2 - Análise de tendência do NDVI</h4>
+<p>Para verificar a tendência dos valores de índice de vegetação (NDVI) nas áreas de pastagem da propriedade, acesse o menu Análise de Tendência das Pastagem.</p>
+<ol>
+<li>
+<p>Selecione o produto <strong>Índice de Vegetação (NDVI)</strong></p>
+</li>
+<li>
+<p>Selecione o período de análise nos campos <strong>Ano Inicial</strong> e <strong>Ano Final</strong>.</p>
+</li>
+<li>
+<p>Em seguida, escolha os parâmetros <strong>Janelas de Análise do Algoritmo TMWM:</strong></p>
+</li>
+<li>
+<p>O campo <strong>"Tamanho da Janela - Anos"</strong> representa o número máximo de anos do mesmo mês utilizado no <em>gap filling</em>.</p>
+</li>
+<li>
+<p>O campo <strong>"Tamanho da Janela - Dias"</strong> define o valor em dias dos vizinhos adjacentes do mesmo ano.</p>
+</li>
+<li>
+<p>Após a seleção de todos os parâmetros, clique no botão <strong>"Calcular Tendência"</strong> para gerar o gráfico que indica se a tendência do NDVI nas áreas de pastagem é positiva ou negativa</p>
+</li>
+</ol>
+<p>As figuras 14 e 15 apresentam exemplos do resultado da Análise de tendência da pastagem usando o Índice de Vegetação (NDVI).</p>
+<center>
+<img width="550px" src="../figures/figure_12.png"/>
+<div>Figura 14 - Área ocupada por pastagem a partir 2016.</div>
+<p></p>
+</center>
+
+<center>
+<img width="650px" src="../figures/figure_13.png"/>
+<div>Figura 15 - Tendência da pastagem da propriedade rural de 2016 à 2024</div>
+<p></p>
+</center>
+
+<h3 id="3110-analise-de-biomassa-seca">3.1.10 - Análise de Biomassa Seca</h3>
+<p>No menu <strong>"Análise de Biomassa Seca"</strong>, o usuário pode estimar a série temporal mensal de biomassa seca das áreas de pastagem dentro da propriedade de interesse selecionada no <em>toolkit</em>. A análise parte das estimativas de Produtividade Primária Bruta (GPP) derivadas de imagens <em>Sentinel-2</em>, com 10 metros de resolução espacial, disponibilizadas pela iniciativa <em>WRI Land &amp; Carbon Lab</em> (<em>Time2Graze</em>). Trata-se da mesma grandeza tratada na Seção 3.1.9.1, ali derivada de imagens <em>Landsat</em> a 30 metros — de modo que o <em>toolkit</em> disponibiliza GPP em duas resoluções complementares: a série <em>Landsat</em>, voltada à análise de tendência de longo prazo, e a série <em>Sentinel-2</em>, voltada ao acompanhamento mensal da produtividade e à sua conversão em biomassa seca.</p>
+<p>Para realizar a análise, o usuário deve:</p>
+<ol>
+<li>
+<p>Informar o <strong>valor de Eficiência de Uso da Luz</strong> (LUE, em gC/m²/dia/MJ) — parâmetro que representa a eficiência com que a vegetação de pastagem converte a radiação fotossinteticamente ativa absorvida em biomassa.</p>
+</li>
+<li>
+<p>Informar o <strong>valor do fator de conversão da biomassa</strong> (fator IPCC), utilizado para converter a produtividade primária bruta estimada em massa de biomassa seca.</p>
+</li>
+<li>
+<p>Clicar no botão <strong>"Calcular série temporal da Biomassa"</strong> para gerar o gráfico.</p>
+</li>
+</ol>
+<p>Internamente, o <em>toolkit</em> multiplica os dois parâmetros informados pelo usuário (LUE × fator de conversão IPCC) para obter o fator de conversão de biomassa seca. Em seguida, para cada mês do período de análise (janeiro de 2025 a abril de 2026), a ferramenta:</p>
+<ul>
+<li>Filtra e calcula a média mensal do uGPP dentro da área de interesse selecionada;</li>
+<li>Aplica o fator de escala do produto uGPP e converte a unidade de gC/m²/dia para toneladas de carbono por hectare (tC/ha), multiplicando o resultado pelo número de dias do respectivo mês para obter o total mensal;</li>
+<li>Restringe o resultado às áreas classificadas como pastagem pela máscara da Global Pasture Watch referente a 2024;</li>
+<li>Aplica o fator de conversão de biomassa seca (LUE × fator IPCC) sobre o valor mensal de carbono, obtendo a estimativa de biomassa seca (tC/ha/mês).</li>
+</ul>
+<p>O resultado é exibido em um gráfico de série temporal (linha), com a média mensal de biomassa seca de pastagem (tC/ha) no eixo vertical e os meses no eixo horizontal, intitulado "Média Mensal da Biomassa Seca de Pastagem (Jan 2025 — Abr 2026)". O usuário pode fechar a janela do gráfico clicando no botão "Fechar".</p>
+<h3 id="3111-download-das-camadas-no-toolkit">3.1.11 - <em>Download</em> das camadas no <em>toolkit</em></h3>
+<p>No <em>toolkit</em>, o usuário pode <strong>fazer o <em>download</em></strong> tanto das camadas geradas por sua interação com a ferramenta quanto das bases de dados estáticas, como os dados de uso e cobertura da terra do MapBiomas e os dados de vigor da pastagem. Para executar o <em>download</em>, o usuário deve clicar no ícone.</p>
+<p>Na parte central inferior da tela, surgirá uma janela (conforme a Figura 16), onde é possível selecionar as camadas da base de dados estática ou as camadas geradas que estão sendo visualizadas no mapa. Após selecionar a camada desejada, clique no botão "<em>Download</em>". Em seguida, acesse a aba "<em>Tasks</em>" e clique no botão "<em>Run</em>" referente à camada selecionada para iniciar a exportação. O arquivo será exportado para a pasta "GEEX" no <em>Google Drive</em> pessoal do usuário.</p>
+<p>A Figura 16 mostra o painel de <em>download</em> do <em>toolkit</em>.</p>
+<center>
+<img width="350px" src="../figures/figure_14.png"/>
+<div>Figura 16 - Painel de download da camada do *toolkit*.</div>
+<p></p>
+</center>
+
+<h2 id="32-estrategia-de-amostragem-em-campo-para-verificacao-de-pastagens-degradadas">3.2 - Estratégia de Amostragem em Campo para Verificação de Pastagens Degradadas</h2>
+<p>Enquanto a Seção 3.1 descreve o algoritmo do <em>toolkit</em> propriamente dito — a análise, na escala orbital, da dinâmica de cobertura, do vigor e da tendência de produtividade das pastagens —, esta seção descreve o algoritmo complementar de verificação em campo, referido na Tabela 01 (Seção 1.2) como "Estratégias de amostragem de campo". Seu papel é gerar a verdade terrestre (<em>ground truth</em>) necessária para confirmar, calibrar e auditar as saídas do <em>toolkit</em>, aplicando os fundamentos de auditabilidade, amostragem espacialmente balanceada, alocação ótima, inferência para proporções, normalização sazonal e metrologia de campo apresentados nas Seções 2.8 a 2.13.</p>
+<p>Nessa estratégia de campo, é aplicado um detalhamento de amostragem em uma estrutura hierárquica do funil no sete níveis (N0A, N0B, N1A, N1B, N2, N3 e N4), no qual cada nível aumenta a resolução da evidência coletada — e, consequentemente, o custo por unidade — e é aninhado estatisticamente no nível anterior por meio do algoritmo GRTS (Seção 2.9.1). A descrição a seguir toma como referência de aplicação a área piloto do projeto: a Região Intermediária de Montes Claros (MG), no recorte que faz interseção com o bioma Cerrado, com cerca de 1,6 milhão de hectares de pastagens. Os quantitativos apresentados (número de propriedades, de pontos e de sítios) são, portanto, valores de referência dimensionados para essa área; os critérios e as fórmulas que os geram são gerais e escaláveis para as demais regiões de interesse.</p>
+<h3 id="321-enquadramento-regulatorio-e-evidencias-exigidas">3.2.1 - Enquadramento Regulatório e Evidências Exigidas</h3>
+<p>O ponto de partida do algoritmo não é uma escolha metodológica interna, mas um conjunto de evidências que precisam existir ao final do processo. A aviação civil responde por aproximadamente 2,5% das emissões diretas de CO₂ globais, com impacto climático total ainda maior quando considerados os efeitos não-CO₂ (IPCC, 2022; IEA, 2023; ICAO, 2022). O Combustível Sustentável de Aviação (SAF) emerge como a alternativa mais viável no curto e médio prazo, e marcos regulatórios como o ReFuelEU Aviation (Regulamento UE 2023/2405), o <em>SAF Blending Mandate</em> do Reino Unido e o CORSIA/ICAO já impõem mandatos progressivos de incorporação de SAF, exigindo comprovação rigorosa de sustentabilidade de toda a cadeia produtiva.</p>
+<p>A aplicação que motiva o plano de amostragem de campo é a identificação de pastagens degradadas elegíveis ao cultivo da macaúba (<em>Acrocomia aculeata</em>), palmeira nativa do Cerrado com emissões de 19,32 gCO₂eq/MJ ao longo do ciclo de vida e capacidade comprovada de recuperação do solo, implantada <strong>exclusivamente em áreas de pastagem degradada</strong>. Para que essa premissa seja reconhecida pelos sistemas de certificação internacionais, a simples declaração de degradação não é suficiente: exige-se metodologia de verificação transparente, auditável e replicável. Cada sistema estabelece critérios próprios sobre a condição da terra antes da conversão, e é a partir deles que se define o que precisa ser medido, com que rastreabilidade e em que nível do funil. A Tabela 03 explicita essa correspondência.</p>
+<h4 id="tabela-03-requisitos-de-certificacao-e-evidencias-correspondentes-produzidas-pelo-algoritmo-de-campo">Tabela 03 - Requisitos de certificação e evidências correspondentes produzidas pelo algoritmo de campo</h4>
+<table>
+<thead>
+<tr>
+<th>Certificação / Diretiva</th>
+<th>Critério aplicável</th>
+<th>Evidências exigidas — atendidas pelo algoritmo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ISCC EU 202</td>
+<td>Critérios de sustentabilidade de terra</td>
+<td>Comprovação de degradação da terra antes da conversão (evidências orbitais + campo); ausência de conversão de vegetação nativa desde jan/2008</td>
+</tr>
+<tr>
+<td>RSB Standard 03</td>
+<td>Biomassa e uso da terra</td>
+<td>Demonstração de que a expansão ocorre exclusivamente em pastagens degradadas; levantamento de solo e carbono; evidências de biodiversidade</td>
+</tr>
+<tr>
+<td>RED III (Dir. UE 2023/2413, Art. 29)</td>
+<td>Terras degradadas</td>
+<td>Evidências de degradação severa e persistente por pelo menos 10 anos; ausência de alto valor de carbono; dados de campo auditáveis e rastreáveis</td>
+</tr>
+<tr>
+<td>Verificação de campo (critérios Acelen)</td>
+<td>Inspeção e validação presencial</td>
+<td>Inspeção visual em imagens de sensoriamento remoto + visita de campo com escore 0–10; coleta de biomassa e solo; documentação fotográfica e imageamento por drone</td>
+</tr>
+</tbody>
+</table>
+<p>A leitura da Tabela 20 na direção inversa define a arquitetura do funil: o requisito de persistência decenal é atendido pela análise de tendência da série orbital (Seção 3.1.9); a comprovação de degradação, pela combinação de triagem em gabinete (N0B) e validação presencial (N1B); o levantamento de solo e carbono, pelos níveis N3 e N4; e a rastreabilidade, pelo sistema de identificadores hierárquicos e pelo registro digital descritos em 3.2.7.</p>
+<h3 id="322-quadro-amostral-e-populacao-alvo">3.2.2 - Quadro Amostral e População-Alvo</h3>
+<p>A população-alvo é constituída pelas propriedades rurais privadas delimitadas pela malha fundiária ambiental do LAPIG/UFG, que integra dados do Cadastro Ambiental Rural (CAR) e do Sistema de Gestão Fundiária (SIGEF) com mitigação de inconsistências geométricas. Trata-se do mesmo tipo de camada de entrada utilizada pelo <em>toolkit</em> (Seção 3.1.3), agora empregada como quadro amostral (<em>frame</em>) e não apenas como recorte de consulta.</p>
+<p>Três critérios restritivos e concorrentes são aplicados na filtragem:</p>
+<ol>
+<li><strong>Delimitação geográfico-ecológica.</strong> Imóveis situados na região de interesse, no recorte de interseção com o bioma alvo.</li>
+<li><strong>Aptidão temática.</strong> A propriedade deve intersectar áreas de pastagem mapeadas no ano de referência pelo produto de cobertura de 10 m adotado pelo projeto. O arquivo raster e a legenda correspondentes permanecem anexados ao dossiê técnico, de modo que a composição do quadro amostral seja reconstituível.</li>
+<li><strong>Limiar de dimensão.</strong> Apenas propriedades com área igual ou superior a 2 hectares, o que exclui minifúndios e ruídos de vetorização.</li>
+</ol>
+<p>Na área piloto, o resultado é um quadro amostral de <strong>N = 52.719 propriedades</strong>. Sobre esse quadro são aplicados o agrupamento <em>K-Means</em> e o sorteio GRTS. As variáveis empregadas na estratificação, listadas na Tabela 04, combinam os próprios produtos gerados pelo <em>toolkit</em> — vigor da pastagem (Seção 3.1.6) e tendência de vigor (Seção 3.1.9) — com variáveis complementares de degradação agronômica e de pressão pecuária.</p>
+<h4 id="tabela-04-variaveis-utilizadas-no-agrupamento-k-means-para-estratificacao-das-propriedades">Tabela 04 - Variáveis utilizadas no agrupamento <em>K-Means</em> para estratificação das propriedades</h4>
+<table>
+<thead>
+<tr>
+<th>Variável</th>
+<th>Fonte</th>
+<th>Resolução</th>
+<th>Papel na estratificação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vigor de pastagem (EVI médio do período chuvoso)</td>
+<td><em>Sentinel-2</em> (GEE)</td>
+<td>10 m / 16 d</td>
+<td>Discrimina pastagens produtivas de pastagens de baixo vigor</td>
+</tr>
+<tr>
+<td>Tendência de vigor (coeficiente angular, Mann-Kendall)</td>
+<td><em>Sentinel-2</em> (GEE)</td>
+<td>10 m</td>
+<td>Identifica áreas em declínio crônico de produtividade</td>
+</tr>
+<tr>
+<td>Fração de solo exposto (NDTI)</td>
+<td><em>Sentinel-2</em> (GEE)</td>
+<td>10 m</td>
+<td>Proxy de degradação agronômica e biológica</td>
+</tr>
+<tr>
+<td>Altura mediana da vegetação</td>
+<td>Hunter et al., 2024</td>
+<td>10 m</td>
+<td>Diferencia campos baixos de regeneração arbórea</td>
+</tr>
+<tr>
+<td>Matéria seca mensal (GPW 10m)</td>
+<td><em>Global Pasture Watch</em> / LAPIG-ACELEN (base do projeto; metadados a anexar)</td>
+<td>10 m</td>
+<td>Estima capacidade de suporte e biomassa forrageira</td>
+</tr>
+<tr>
+<td>Densidade bovina estimada (UA/ha)</td>
+<td>LAPIG-ACELEN (base modelada do projeto); IBGE PPM como referência auxiliar</td>
+<td>~1 km ou resolução do modelo</td>
+<td>Pressão pecuária como agente de degradação; documentar método de interpolação/desagregação e fonte primária</td>
+</tr>
+</tbody>
+</table>
+<h3 id="323-estratificacao-e-dimensionamento-da-amostra-de-propriedades">3.2.3 - Estratificação e Dimensionamento da Amostra de Propriedades</h3>
+<p>A estratificação é obtida por agrupamento <em>K-Means</em> sobre as seis variáveis normalizadas por escore-z (Seção 2.9). O número de estratos <em>k</em> é determinado pelo método <em>Elbow</em> combinado ao índice de Davies-Bouldin, com validação em mapa; na área piloto, espera-se <em>k</em> entre 6 e 8, faixa que captura os principais gradientes de degradação da paisagem regional.</p>
+<p>A validação dos agrupamentos responde a duas perguntas independentes. A primeira é espacial: propriedades de um mesmo estrato estão geograficamente próximas ou compartilham condições similares de relevo e clima? A segunda é temática: cada estrato representa uma condição de pastagem interpretável — por exemplo, alto vigor com baixa densidade animal, em oposição a baixo vigor com alta densidade? Estratos que respondam afirmativamente a ambas são mantidos. Estratos que representem menos de 5% do quadro amostral têm variabilidade insuficiente para sustentar alocação própria e são fundidos ao estrato de perfil multivariado mais próximo, medido pela distância euclidiana entre centroides normalizados.</p>
+<p>Definidos os estratos, o tamanho amostral total é calculado pela Eq. 08 e distribuído entre os estratos pela alocação ótima de Neyman (Eq. 09, Seção 2.9). Na área piloto adotou-se, como referência de planejamento, nível de confiança de 95% (<em>z</em> = 1,96), margem de erro de 2,8% (<span class="arithmatex">\(\varepsilon\)</span> = 0,028), variância máxima para proporções (<span class="arithmatex">\(\sigma_h^2 = 1/4\)</span>) e <em>N</em> = 52.719, resultando em aproximadamente <strong>1.200 propriedades</strong> no nível N0A. O valor <span class="arithmatex">\(\sigma_h^2 = 1/4\)</span> é conservador e superestima a amostra; assim que estimativas específicas de variabilidade por estrato estiverem disponíveis, elas substituem esse valor na aplicação da alocação de Neyman, tipicamente reduzindo o esforço necessário.</p>
+<h3 id="324-estrutura-hierarquica-do-funil">3.2.4 - Estrutura Hierárquica do Funil</h3>
+<p>A inovação do desenho em relação a planos amostrais convencionais está na introdução do nível N0B. Inspecionar visualmente a totalidade da área de pastagem de uma propriedade grande não é viável em gabinete: uma fazenda com 500 ha de pastagem corresponde a uma janela de aproximadamente 1.118 × 1.118 pixels em um sensor de 2 m. Sorteia-se, portanto, um conjunto de pontos de inspeção dentro de cada propriedade selecionada. O mesmo princípio de subamostragem interna se repete em todos os níveis subsequentes — pontos dentro de propriedades visitadas, subpontos dentro de sítios de drone — e é o que mantém o custo controlado sem quebrar a cadeia probabilística. A Tabela 05 sintetiza a estrutura completa.</p>
+<h4 id="tabela-05-estrutura-hierarquica-do-funil-de-amostragem-de-campo-7-niveis">Tabela 05 - Estrutura hierárquica do funil de amostragem de campo (7 níveis)</h4>
+<table>
+<thead>
+<tr>
+<th>Nível</th>
+<th>Unidade</th>
+<th>N amostral (referência)</th>
+<th>Método de seleção</th>
+<th>Custo relativo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>N0A - Seleção de propriedades</td>
+<td>Propriedade rural</td>
+<td>≈ 1.200</td>
+<td>GRTS por estrato <em>K-Means</em> (N = 52.719)</td>
+<td>Muito baixo (gabinete)</td>
+</tr>
+<tr>
+<td>N0B - Pontos de inspeção em imagem de alta resolução</td>
+<td>Ponto amostral (~1-4 ha) por propriedade</td>
+<td>≈ 5.000-7.000 (média ≈ 5 pontos/propriedade)</td>
+<td>GRTS aninhado na máscara de pastagem de cada propriedade N0A; <span class="arithmatex">\(k_i = \max(3,\ \min(20,\ \lceil A_i/20 \rceil))\)</span></td>
+<td>Muito baixo (gabinete)</td>
+</tr>
+<tr>
+<td>N1A - Propriedades para campo (principal + controle)</td>
+<td>Propriedade rural</td>
+<td>≈ 228 principais + 12 de controle (≈ 240)</td>
+<td>Principal: GRTS entre propriedades com ≥ 30% de pontos N0B elegíveis. Controle (5%): GRTS no pool inelegível (<span class="arithmatex">\(\hat p_i &lt; 0{,}10\)</span>)</td>
+<td>Baixo</td>
+</tr>
+<tr>
+<td>N1B - Pontos de validação em campo</td>
+<td>Ponto amostral <em>in loco</em></td>
+<td>≈ 480-960 (2-4 por propriedade N1A)</td>
+<td>GRTS aninhado nos pontos N0B elegíveis; <span class="arithmatex">\(n_i = \max(2,\ \lceil A_i/100 \rceil)\)</span></td>
+<td>Baixo-Médio</td>
+</tr>
+<tr>
+<td>N2 - Sobrevoo de drone (principal + controle)</td>
+<td>Sítio de voo (100-250 m)</td>
+<td>≈ 72 principais + 8 de controle (≈ 80)</td>
+<td>PPrincipal: GRTS nos pontos N1B com escore 0–6; Controle (10%): GRTS nos pontos N1B com escore 7–10 (D0/D1) para calcular especificidade do modelo</td>
+<td>Médio</td>
+</tr>
+<tr>
+<td>N3 - Biomassa (método do quadrado)</td>
+<td>Subponto amostral no sítio N2</td>
+<td>≈ 40 sítios; ≈ 120-200 subpontos</td>
+<td>GRTS sobre grade de 20 m dentro do <em>footprint</em> do drone de cada sítio N2 selecionado (50% de N2)</td>
+<td>Médio-Alto</td>
+</tr>
+<tr>
+<td>N4 - Solo (trado, 0-30 cm)</td>
+<td>Subponto aninhado em N3</td>
+<td>≈ 15-20 sítios; ≥ 1 amostra composta por sítio</td>
+<td>Seleção aleatória simples nos subpontos N3 do sítio; mínimo 1 solo por sítio N4</td>
+<td>Alto</td>
+</tr>
+</tbody>
+</table>
+<p>Em todos os níveis, o GRTS produz também uma lista sequencial de unidades de substituição (sobreamostragem de 50%). Unidades inelegíveis — acesso negado, cobertura de nuvens persistente, uso atual incompatível — são substituídas pela unidade imediatamente seguinte da lista, dentro do mesmo estrato, o que preserva o balanceamento espacial e temático do sorteio original. Cada substituição é registrada no banco de dados com o motivo específico, mantendo a auditabilidade do quadro efetivamente amostrado.</p>
+<h3 id="325-nivel-n0a-selecao-de-propriedades-e-preparo-das-imagens">3.2.5 - Nível N0A - Seleção de Propriedades e Preparo das Imagens</h3>
+<p>Aplicado o GRTS por estrato, o produto do nível N0A é um arquivo vetorial georreferenciado contendo, para cada propriedade sorteada: identificador hierárquico, estrato <em>K-Means</em>, coordenadas do centroide, área total, área de pastagem no ano de referência e os valores das seis variáveis de estratificação. Esse arquivo é a base de todas as etapas seguintes — geração da grade de pontos N0B, identificação das propriedades N1A, navegação das equipes de campo e vinculação dos registros digitais.</p>
+<p>A inspeção visual do nível seguinte exige a combinação de dois conjuntos de imagens com papéis distintos. As imagens <em>Sentinel-2</em> (10 m) funcionam como <strong>base geométrica de referência</strong> e como fonte das variáveis de estratificação. As imagens de alta resolução — CBERS-4A/4B, sensor WPM (2 m) — são o <strong>instrumento de inspeção</strong>, pois permitem identificar manchas de solo exposto, erosão em sulcos, padrões de invasoras e estrutura do dossel em detalhe inacessível ao <em>Sentinel-2</em>. </p>
+<p>Caso a ACELEN disponibilize acesso às imagens <em>Planet</em>, estas oferecem duas vantagens complementares: (a) maior número de bandas espectrais (até 8 bandas, incluindo <em>Red-Edge</em> e NIR estreito), melhorando a caracterização da composição botânica e da biomassa das pastagens em comparação ao CBERS-4A/WPM (4 bandas); (b) datas de aquisição distintas das imagens CBERS, permitindo inspeção de um mesmo ponto em períodos diferentes do ano e reforçando a confiabilidade das interpretações visuais ao confrontar avaliações independentes da mesma área.</p>
+<p>O uso combinado dessas fontes só é válido após o co-registro sub-pixel descrito na Seção 2.12. A necessidade é concreta: o erro de co-registro do <em>Sentinel-2</em> é inferior a 6 m em escala global (Rengarajan et al., 2024), enquanto o erro posicional absoluto das imagens CBERS-4B pode atingir cerca de 400 m (Akiyama et al., 2018) — deslocamento que supera a própria janela de inspeção. A correção é executada com o software <em>AROSICS</em>, que alinha as cenas CBERS à base <em>Sentinel-2</em> por correlação de fase com eliminação de falsos positivos por RANSAC, alcançando co-registro residual inferior a 2 m, isto é, menos de um pixel CBERS. <em>Tiles</em> cujo RMSE residual exceda 3 m são reprocessados com pontos de controle adicionais, e o relatório de RMSE por <em>tile</em> integra a documentação de qualidade do levantamento.</p>
+<p>A janela de aquisição das imagens e a janela de coleta em campo são condicionadas pela fenologia e pela cobertura de nuvens, conforme a Tabela 06. </p>
+<h4 id="tabela-06-calendario-fenologico-para-aquisicao-de-imagens-e-coleta-de-campo">Tabela 06 - Calendário fenológico para aquisição de imagens e coleta de campo</h4>
+<table>
+<thead>
+<tr>
+<th>Período</th>
+<th>Cobertura de nuvens</th>
+<th>Imagens de alta resolução (N0B)</th>
+<th><em>Sentinel-2</em></th>
+<th>Campo (N1B-N4)</th>
+<th>Observações</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jan-Mar</td>
+<td>Alta (&gt; 70%)</td>
+<td>Inadequado</td>
+<td>Inadequado</td>
+<td>Evitar</td>
+<td>Acesso rural difícil; pastagens verdes mascaram o solo exposto</td>
+</tr>
+<tr>
+<td>Abr-Mai</td>
+<td>Média (30-60%)</td>
+<td>Parcial</td>
+<td>Parcial</td>
+<td>Adequado (início)</td>
+<td>Transição; janela para imagens de final do período chuvoso</td>
+</tr>
+<tr>
+<td>Jun-Set</td>
+<td>Baixa (&lt; 20%)</td>
+<td>Ideal</td>
+<td>Ideal</td>
+<td>Ideal</td>
+<td>Maior visibilidade de solo exposto e invasoras; acesso rural viável</td>
+</tr>
+<tr>
+<td>Out-Nov</td>
+<td>Crescente (20-50%)</td>
+<td>Parcial</td>
+<td>Parcial</td>
+<td>Adequado</td>
+<td>Início do período chuvoso; complementar com imagens de jun-set</td>
+</tr>
+<tr>
+<td>Dez</td>
+<td>Alta (&gt; 60%)</td>
+<td>Inadequado</td>
+<td>Inadequado</td>
+<td>Evitar</td>
+<td>Pico de chuvas; concentrar em análises laboratoriais e processamento</td>
+</tr>
+</tbody>
+</table>
+<h3 id="326-nivel-n0b-triagem-por-inspecao-visual-em-gabinete">3.2.6 - Nível N0B - Triagem por Inspeção Visual em Gabinete</h3>
+<p>Dentro de cada propriedade N0A, os pontos de inspeção são sorteados por GRTS sobre a máscara de pastagem de 2024 (MapBiomas 10 m / acervo do projeto). Cada ponto representa uma janela visual de aproximadamente 4 ha (200 × 200 m, inspecionada em escala 1:5.000). O número de pontos <span class="arithmatex">\(k_i\)</span> da propriedade <em>i</em>, com área de pastagem <span class="arithmatex">\(A_i\)</span> em hectares, é dado por:</p>
+<div class="arithmatex">\[
+k_i = \max\left(k_{\min},\ \min\left(k_{\max},\ \left\lceil A_i / d \right\rceil\right)\right) \tag{Eq. 16}
+\]</div>
+<p>com <span class="arithmatex">\(k_{\min} = 3\)</span> (mínimo necessário para avaliar heterogeneidade espacial), <span class="arithmatex">\(k_{\max} = 20\)</span> (teto operacional por propriedade) e <span class="arithmatex">\(d = 20\)</span> ha/ponto (densidade de referência, correspondente à cobertura de cerca de 20% da área por janelas de 4 ha). A Tabela 07 detalha os quantitativos por faixa de área e a justificativa de cada faixa.</p>
+<h4 id="tabela-07-numero-de-pontos-n0b-por-faixa-de-area-de-pastagem">Tabela 07 - Número de pontos N0B por faixa de área de pastagem</h4>
+<table>
+<thead>
+<tr>
+<th>Área de pastagem (<span class="arithmatex">\(A_i\)</span>)</th>
+<th>Pontos N0B (<span class="arithmatex">\(k_i\)</span>)</th>
+<th>Janela visual por ponto</th>
+<th>Cobertura total estimada</th>
+<th>Justificativa estatística</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt; 20 ha</td>
+<td>3 (mínimo)</td>
+<td>~4 ha (200 × 200 m)</td>
+<td>12 ha (até ~60%)</td>
+<td>Censo visual praticamente completo; mínimo para avaliar heterogeneidade espacial</td>
+</tr>
+<tr>
+<td>20-60 ha</td>
+<td>3</td>
+<td>~4 ha</td>
+<td>12 ha (~20-60%)</td>
+<td>Suficiente para triagem visual padronizada, com confirmação posterior em N1B</td>
+</tr>
+<tr>
+<td>&gt; 60-200 ha</td>
+<td>4-10 (pontos)</td>
+<td>~4 ha</td>
+<td>16-40 ha (~20-27%)</td>
+<td>Densidade de 1 ponto/20 ha; permite estimar a proporção degradada com distribuição balanceada</td>
+</tr>
+<tr>
+<td>&gt; 200-500 ha</td>
+<td>11-20 (pontos)</td>
+<td>~4 ha</td>
+<td>44-80 ha (~16-22%)</td>
+<td>O GRTS garante distribuição espacialmente balanceada e evita agrupamento em áreas de fácil leitura</td>
+</tr>
+<tr>
+<td>&gt; 500 ha</td>
+<td>20 (máximo)</td>
+<td>~4 ha</td>
+<td>80 ha (≤ 16%, decrescente com a área)</td>
+<td>Teto operacional; propriedades grandes são compensadas por peso amostral e validação hierárquica</td>
+</tr>
+</tbody>
+</table>
+<p>Com base na distribuição de tamanhos das 52.719 fazendas da malha fundiária, e considerando que a área mediana de pastagem por fazenda na região é de aproximadamente 50–80 ha (distribuição log-normal), estima-se um total de 5.000 a 7.000 pontos N0B distribuídos pelas ≈ 1.200 fazendas selecionadas. A inspeção de cada ponto leva, em média, 4–6 minutos por analista experiente, implicando carga de trabalho de aproximadamente 400–700 horas-analista no total — executáveis em 2–3 meses com 4 analistas em paralelo.</p>
+<h4 id="3261-procedimento-padronizado-de-inspecao">3.2.6.1 Procedimento padronizado de inspeção</h4>
+<p>Para cada ponto N0B sorteado, o analista segue a sequência padronizada::</p>
+<ol>
+<li>Centraliza o QGIS/WebGIS no ponto N0B (coordenadas carregadas automaticamente como camada ponto);</li>
+<li>Visualiza a composição colorida falsa-cor do <em>Sentinel-2</em> (B8-B4-B3) no período chuvoso para verificar o vigor geral da pastagem nessa janela;</li>
+<li>Visualiza a composição do CBERS-4A (NIR-vermelho-verde) na janela de estiagem (jun–set) para identificar solo exposto, erosão e invasoras em detalhe;</li>
+<li>Visualiza a série temporal do EVI no ponto (gráfico de 2019–2025) para confirmar tendência de degradação;</li>
+<li>Preenche o formulário digital de inspeção no <em>ODK Collect</em> (perfil 'N0B — Inspeção CBERS'); vide Apêndice A;</li>
+<li>Captura obrigatória de screenshot da janela inspecionada como evidência auditável;</li>
+<li>Classifica o ponto em: Elegível / Inelegível / Inconclusivo.</li>
+</ol>
+<p><strong>Nota:</strong> Inconclusivos (alta cobertura de nuvens, mosaico incompleto, ambiguidade de uso) são remetidos ao supervisor, que tenta imagem complementar (<em>Planet</em> ou data alternativa CBERS). Se não houver imagem disponível, o ponto é descartado e substituído pelo próximo da lista GRTS da mesma fazenda.</p>
+<h4 id="3262-criterios-de-elegibilidade-do-ponto-n0b">3.2.6.2 Critérios de elegibilidade do ponto N0B</h4>
+<p>O ponto é classificado como <strong>elegível</strong> quando atende simultaneamente a dois critérios. O primeiro é de <strong>persistência temporal</strong>: presença de pastagem em pelo menos 3 dos últimos 5 anos na série de cobertura e uso da terra do MapBiomas (evita falsos positivos por conversões recentes). O segundo é de <strong>evidência de degradação</strong>: solo exposto estimado em pelo menos 5%, ou presença moderada a dominante de invasoras, ou vigor baixo (EVI2 inferior a 0,35) na imagem CBERS da estação seca.</p>
+<p>O ponto é <strong>inelegível</strong> quando o uso foi convertido para agricultura ou área urbanizada, quando há regeneração florestal com mais de 50% de cobertura arbórea, ou quando a área de pastagem &lt; 0,5 ha na janela de 4 ha inspecionada.</p>
+<h4 id="3263-aplicacao-da-normalizacao-sazonal">3.2.6.3 Aplicação da normalização sazonal</h4>
+<p>Os critérios acima só são comparáveis entre propriedades inspecionadas em épocas distintas do ano se os índices forem previamente normalizados pelos fatores de correção sazonal definidos nas Eq. 13 e Eq. 14 (Seção 2.13). A aplicação é <strong>obrigatória</strong> sempre que a imagem inspecionada tiver data de aquisição fora do período de referência. O analista registra o mês da imagem no formulário digital, os valores normalizados são calculados na rotina de pós-processamento, e a decisão de elegibilidade é sempre tomada sobre os índices normalizados. A Tabela 08 apresenta valores regionais típicos dos dois fatores para o Cerrado norte-mineiro.</p>
+<h4 id="tabela-08-fatores-de-correcao-sazonal-para-inspecao-de-imagens-n0b-referencia-jun-set">Tabela 08 - Fatores de correção sazonal para inspeção de imagens (N0B), referência jun-set</h4>
+<table>
+<thead>
+<tr>
+<th>Mês</th>
+<th>Estação</th>
+<th>Viés no solo exposto observado</th>
+<th>Viés no vigor observado</th>
+<th>FCS<sub>EVI2</sub></th>
+<th>FCS<sub>BS</sub></th>
+<th>Ação recomendada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jan-Fev</td>
+<td>Chuvosa intensa</td>
+<td>Subestimativa severa (–10 a –20 pp)</td>
+<td>Superestimativa severa (+0,15 a +0,25)</td>
+<td>0,60-0,70</td>
+<td>3,0-5,0</td>
+<td>Evitar. Se inevitável, aplicar os dois fatores separadamente e confrontar com a série temporal do ponto</td>
+</tr>
+<tr>
+<td>Mar</td>
+<td>Chuvosa tardia</td>
+<td>Subestimativa moderada (–6 a –12 pp)</td>
+<td>Superestimativa moderada (+0,10 a +0,18)</td>
+<td>0,70-0,82</td>
+<td>2,0-3,5</td>
+<td>Somente como complemento; exigir confirmação com imagem de jun-set</td>
+</tr>
+<tr>
+<td>Abr-Mai</td>
+<td>Transição para a seca</td>
+<td>Subestimativa leve (–3 a –6 pp)</td>
+<td>Superestimativa leve (+0,05 a +0,10)</td>
+<td>0,82-0,94</td>
+<td>1,3-2,0</td>
+<td>Aceitável com correção; anotar o estágio de senescência</td>
+</tr>
+<tr>
+<td>Jun-Set</td>
+<td>Seca (referência)</td>
+<td>Sem viés</td>
+<td>Sem viés</td>
+<td>1,00</td>
+<td>1,00</td>
+<td>Período ideal; nenhuma correção necessária</td>
+</tr>
+<tr>
+<td>Out-Nov</td>
+<td>Transição para a chuva</td>
+<td>Subestimativa leve (–2 a –5 pp)</td>
+<td>Superestimativa leve (+0,03 a +0,08)</td>
+<td>0,92-0,97</td>
+<td>1,1-1,4</td>
+<td>Aceitável; preferir imagens de ago-set e anotar chuvas recentes (&lt; 5 dias)</td>
+</tr>
+<tr>
+<td>Dez</td>
+<td>Chuvosa inicial</td>
+<td>Subestimativa moderada (–5 a –10 pp)</td>
+<td>Superestimativa moderada (+0,08 a +0,15)</td>
+<td>0,75-0,88</td>
+<td>1,5-2,5</td>
+<td>Evitar. Se usado, aplicar ambos os fatores e confrontar com a série temporal</td>
+</tr>
+</tbody>
+</table>
+<p>Os valores da Tabela 08 são aproximações climatológicas regionais. Propriedades situadas em microclimas diferenciados — proximidade de grandes cursos d'água, áreas de cerradão, veredas — podem desviar dessa climatologia. Sempre que o processamento em nuvem estiver disponível, recomenda-se calcular <span class="arithmatex">\(\mu_{\text{EVI2}}(p,M)\)</span> e <span class="arithmatex">\(\mu_{\text{BS}}(p,M)\)</span> diretamente para o pixel da propriedade, dispensando os fatores tabelados e obtendo normalização pixel a pixel, mais precisa e mais defensável em auditoria.</p>
+<h4 id="3264-priorizacao-das-propriedades-para-o-nivel-seguinte">3.2.6.4 Priorização das propriedades para o nível seguinte</h4>
+<p>Concluída a inspeção dos <span class="arithmatex">\(k_i\)</span> pontos de uma propriedade, seja <span class="arithmatex">\(x_i\)</span> o número de pontos elegíveis. Como cada ponto tem resultado binário, <span class="arithmatex">\(x_i\)</span> segue distribuição Binomial de parâmetros <span class="arithmatex">\(k_i\)</span> e <span class="arithmatex">\(p_i\)</span>. Dado que <span class="arithmatex">\(k_i\)</span> é pequeno por construção — entre 3 e 20 —, a incerteza sobre <span class="arithmatex">\(p_i\)</span> é quantificada por inferência Bayesiana com <em>a priori</em> de Jeffreys, conforme a Eq. 10, e a estimativa pontual <span class="arithmatex">\(\hat p_i\)</span> é a média da posteriori (Eq. 11, Seção 2.10). O intervalo de credibilidade de 95% é obtido diretamente dos quantis da distribuição Beta posterior.</p>
+<p>A estimativa <span class="arithmatex">\(\hat p_i\)</span> define a classe de prioridade da propriedade, conforme a Tabela 09. A priorização em três classes, em lugar de um corte binário, é o que permite ao GRTS selecionar as propriedades de campo cobrindo todo o gradiente de degradação, e não apenas os casos extremos.</p>
+<h4 id="tabela-09-criterios-de-priorizacao-de-propriedades-para-o-nivel-n1a">Tabela 09 - Critérios de priorização de propriedades para o nível N1A</h4>
+<table>
+<thead>
+<tr>
+<th>Proporção estimada de pontos N0B elegíveis (<span class="arithmatex">\(\hat p_i\)</span>)</th>
+<th>Decisão N1A</th>
+<th>Justificativa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\hat p_i \geq 0{,}50\)</span></td>
+<td>Elegível — prioridade alta</td>
+<td>Maioria dos pontos com evidência de degradação; alta probabilidade de confirmação em campo</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0{,}30 \leq \hat p_i &lt; 0{,}50\)</span></td>
+<td>Elegível — prioridade média</td>
+<td>Degradação presente em 30-50% dos pontos; sorteada via GRTS para representar o gradiente</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0{,}10 \leq \hat p_i &lt; 0{,}30\)</span></td>
+<td>Elegível — prioridade baixa</td>
+<td>Reserva da lista GRTS; usada para substituição ou ampliação amostral</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\hat p_i &lt; 0{,}10\)</span></td>
+<td>Inelegível</td>
+<td>Sem evidências relevantes de degradação; compõe o pool de sorteio da subamostra de controle (3.2.7)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3265-controle-de-qualidade-inter-observador-kappa-n0b">3.2.6.5 Controle de qualidade inter-observador (Kappa N0B)</h4>
+<p>Vinte por cento dos pontos N0B — cerca de 1.000 a 1.400 pontos na área piloto — são inspecionados de forma independente por dois analistas. A concordância é medida quinzenalmente pelo coeficiente Kappa de Cohen (Eq. 12, Seção 2.11), com a seguinte escala de decisão: <span class="arithmatex">\(\kappa \geq 0{,}85\)</span> indica desempenho excelente; <span class="arithmatex">\(0{,}75 \leq \kappa &lt; 0{,}85\)</span> dispara revisão dos critérios com o supervisor; e <span class="arithmatex">\(\kappa &lt; 0{,}75\)</span> exige sessão obrigatória de recalibração com análise dos casos divergentes antes da continuidade da triagem. O procedimento é análogo ao controle de acurácia aplicado à classificação automática de uso e cobertura da terra (Seção 2.3), com a diferença de que aqui o objeto avaliado é a consistência do julgamento humano.</p>
+<h3 id="327-niveis-n1a-e-n1b-validacao-em-campo">3.2.7 - Níveis N1A e N1B - Validação em Campo</h3>
+<h4 id="3271-selecao-das-fazendas-para-visita-de-campo-n1a">3.2.7.1 Seleção das Fazendas para Visita de Campo (N1A)</h4>
+<p>Das aproximadamente 1.200 fazendas N0A, são selecionadas ≈ 240 para visita de campo (N1A), aplicando o critério da Tabela 09. O sorteio GRTS é executado sobre a lista de fazendas elegíveis (prioridade alta + média + baixa), ponderado pela prioridade, e com balanceamento por estrato <em>K-Means</em> — garantindo que todos os estratos tenham representação proporcional em N1A. O critério de ≥ 30% dos pontos N0B elegíveis equivale, em termos práticos, a exigir que pelo menos 30% da área de pastagem inspecionada visualmente em CBERS apresente evidências de degradação, o que é consistente com as definições das categorias D2 a D4 (Seção 3.2.10) e com os requisitos de comprovação das certificações ISCC e RSB.</p>
+<p>Um filtro baseado exclusivamente em evidência de degradação produz, por construção, uma amostra enviesada: apenas propriedades já suspeitas são visitadas. Isso basta para estimar a prevalência de degradação, mas é insuficiente para avaliar a qualidade do próprio modelo preditivo, pois sem dados de campo em propriedades classificadas como íntegras não é possível calcular a taxa de falsos positivos nem a Especificidade (Seção 2.11). Reserva-se, portanto, uma <strong>subamostra de controle</strong> correspondente a 5% das unidades N1A — cerca de 12 propriedades —, sorteada por GRTS exclusivamente no pool inelegível (<span class="arithmatex">\(\hat p_i &lt; 0{,}10\)</span>). Essas propriedades recebem exatamente o mesmo protocolo de campo, sem qualquer hipótese prévia de degradação, e alimentam as células de Verdadeiro Negativo e Falso Positivo da matriz de confusão (Seção 3.2.11). O custo marginal é baixo frente ao ganho metodológico: sem esse controle, o sistema não pode ser validado quanto à sua taxa de alarmes falsos, lacuna crítica em auditoria de certificação.</p>
+<h4 id="3272-selecao-de-pontos-de-campo-dentro-de-cada-fazenda-n1a">3.2.7.2 Seleção de Pontos de Campo dentro de cada Fazenda N1A</h4>
+<p>Dentro de cada propriedade N1A, os pontos de validação são sorteados por GRTS aninhado, tendo como base prioritária os pontos N0B já classificados como elegíveis naquela propriedade. Isso concentra as visitas em locais com pré-evidência de degradação, o que maximiza a taxa de confirmação e a eficiência logística. A Tabela 10 define o número de pontos e as restrições de espaçamento por faixa de área.</p>
+<h4 id="tabela-10-criterios-de-selecao-de-pontos-n1b-por-faixa-de-area-de-pastagem">Tabela 10 - Critérios de seleção de pontos N1B por faixa de área de pastagem</h4>
+<table>
+<thead>
+<tr>
+<th>Área de pastagem (<span class="arithmatex">\(A_i\)</span>)</th>
+<th>Pontos N1B (<span class="arithmatex">\(n_i\)</span>)</th>
+<th>Base de seleção</th>
+<th>Distância mínima entre pontos</th>
+<th>Critério de posicionamento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt; 50 ha</td>
+<td>2</td>
+<td>GRTS nos pontos N0B elegíveis da fazenda</td>
+<td>≥ 50 m</td>
+<td>Havendo menos de 2 pontos N0B elegíveis, complementar com novo sorteio GRTS na máscara de pastagem</td>
+</tr>
+<tr>
+<td>50-200 ha</td>
+<td>3</td>
+<td>GRTS nos pontos N0B elegíveis da fazenda</td>
+<td>≥ 75 m</td>
+<td>Priorizar pontos N0B com maior evidência espectral de degradação (menor EVI2)</td>
+</tr>
+<tr>
+<td>200-500 ha</td>
+<td>4</td>
+<td>GRTS nos pontos N0B elegíveis da fazenda</td>
+<td>≥ 100 m</td>
+<td>Estratificar por sub-área (ex.: proximidade ao cocho) quando a heterogeneidade for evidente</td>
+</tr>
+<tr>
+<td>&gt; 500 ha</td>
+<td>4</td>
+<td>GRTS nos pontos N0B elegíveis da fazenda</td>
+<td>≥ 150 m ou setores separados</td>
+<td>Teto logístico de 4 pontos por propriedade por dia; propriedades muito grandes podem ser divididas em setores</td>
+</tr>
+</tbody>
+</table>
+<p>Os pontos N1B são exportados como <em>waypoints</em> GPS (formato GPX) para os receptores de campo antes da mobilização, servindo como alvos de navegação. Cada ponto tem coordenadas com precisão posicional de ≤ 10 m no GPS de mão, suficiente para localizar o ponto sorteado em campo.</p>
+<h4 id="3273-protocolo-de-campo-janela-temporal-e-equipes">3.2.7.3 Protocolo de Campo — Janela Temporal e Equipes</h4>
+<p>A coleta de campo é concentrada no período de junho a outubro, com prioridade para julho–setembro (período de estiagem do Cerrado). Duas equipes de campo simultâneas, cada uma composta por: técnico líder (SR + avaliação de pastagens), técnico de campo (biomassa + solo) e motorista com veículo 4×4. Cada equipe cobre aproximadamente 3–5 fazendas por dia (1–2 fazendas com coleta extensiva N3/N4). A Tabela 11 lista os materiais por equipe.</p>
+<h4 id="tabela-11-equipamentos-e-materiais-por-equipe-de-campo">Tabela 11 - Equipamentos e materiais por equipe de campo</h4>
+<table>
+<thead>
+<tr>
+<th>Categoria</th>
+<th>Itens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPS e navegação</td>
+<td>GPS de mão (precisão &lt; 3 m); receptor GNSS RTK para GCPs do drone; smartphone com <em>ODK Collect</em> / <em>KoBoCollect</em></td>
+</tr>
+<tr>
+<td>Avaliação da pastagem</td>
+<td>Trena de 100 m (LPI); quadrados de amostragem (0,25 m² e 1,0 m²); tesoura de poda; sacos de papel kraft etiquetados; balança digital (precisão 1 g)</td>
+</tr>
+<tr>
+<td>Solo</td>
+<td>Trado holandês (0–30 cm); sacos plásticos <em>Ziploc</em>; etiquetas impermeáveis; balde de 5 L (composição); caixa isotérmica com gelo seco</td>
+</tr>
+<tr>
+<td>Imageamento</td>
+<td>Drone <em>DJI Mavic 3 Multispectral</em> ou equivalente; painel de calibração radiométrica; GCPs (alvos 50×50 cm); câmera georreferenciada</td>
+</tr>
+<tr>
+<td>Segurança e logística</td>
+<td>Colete refletivo; kit de primeiros socorros; veículo 4×4; comunicação via rádio ou satélite em áreas sem sinal</td>
+</tr>
+<tr>
+<td>Documentação</td>
+<td>Tablet resistente (IP67) com formulário digital em modo <em>off-line</em>; bateria externa; caderneta de campo impermeável como redundância analógica</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3274-sistema-de-ids-e-rastreabilidade">3.2.7.4 Sistema de IDs e Rastreabilidade</h4>
+<p>A Tabela 12 apresenta a convenção adotada para identificação e rastreabilidade das amostras.</p>
+<h4 id="tabela-12-sistema-de-identificacao-e-rastreabilidade-de-amostras">Tabela 12 - Sistema de identificação e rastreabilidade de amostras</h4>
+<table>
+<thead>
+<tr>
+<th>Entidade</th>
+<th>Formato do identificador</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Propriedade (N0A)</td>
+<td><code>MC-[ESTRATO]-[SEQ6]</code></td>
+<td><code>MC-E3-000142</code> — propriedade 142 do estrato 3</td>
+</tr>
+<tr>
+<td>Ponto de inspeção em imagem (N0B)</td>
+<td><code>[ID-PROPRIEDADE]-C[SEQ2]</code></td>
+<td><code>MC-E3-000142-C01</code></td>
+</tr>
+<tr>
+<td>Ponto de campo (N1B)</td>
+<td><code>[ID-PROPRIEDADE]-P[SEQ2]</code></td>
+<td><code>MC-E3-000142-P02</code></td>
+</tr>
+<tr>
+<td>Sítio de drone (N2)</td>
+<td><code>[ID-PONTO-CAMPO]-D</code></td>
+<td><code>MC-E3-000142-P02-D</code></td>
+</tr>
+<tr>
+<td>Subponto de biomassa (N3)</td>
+<td><code>[ID-DRONE]-B[SEQ2]</code></td>
+<td><code>MC-E3-000142-P02-D-B01</code></td>
+</tr>
+<tr>
+<td>Quadrado de biomassa</td>
+<td><code>[ID-SUBPONTO]-Q[SEQ2]</code></td>
+<td><code>MC-E3-000142-P02-D-B01-Q03</code></td>
+</tr>
+<tr>
+<td>Amostra de solo (N4)</td>
+<td><code>[ID-DRONE]-S[PROFUNDIDADE]</code></td>
+<td><code>MC-E3-000142-P02-D-S0-10</code> — camada 0-10 cm</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3275-plataforma-digital-de-coleta-odk-collect-kobotoolbox">3.2.7.5 Plataforma Digital de Coleta (<em>ODK Collect</em> / <em>KoBoToolbox</em>)</h4>
+<p>Todos os dados de campo são coletados em formulários digitais via <em>ODK Collect</em> (<em>Android</em>), operando em modo <em>off-line</em>. Vantagens para auditoria: <em>timestamp</em> automático e geolocalizado; campos obrigatórios (*) impedem envio incompleto; fotos são georeferenciadas via EXIF; dados sincronizados diretamente ao servidor LAPIG. O formulário exibe automaticamente o ID do ponto N1B, as coordenadas do <em>target</em> e os valores N0B da inspeção CBERS daquele ponto (EVI2, % solo exposto, decisão N0B) — servindo como contexto para o técnico de campo.</p>
+<h4 id="3276-roteiro-socioeconomico-e-de-manejo">3.2.7.6 Roteiro Socioeconômico e de Manejo</h4>
+<p>Cada visita registra também o contexto de manejo que condiciona a interpretação do estado da pastagem, organizado em quatro blocos. O <strong>contexto fundiário e de acesso</strong> cobre o tipo de posse, o sistema de pastejo praticado (contínuo, rotativo, diferido ou transumante) e o estado atual do piquete (em pastejo ou em descanso). A <strong>composição botânica e estrutura funcional</strong> registra a espécie forrageira dominante, a proporção estimada de gramíneas, leguminosas e componente lenhoso, a identificação de espécies invasoras e o estágio fenológico predominante. O <strong>histórico de manejo</strong> documenta a última intervenção realizada — reforma, queima prescrita, roçagem mecânica ou nenhuma —, além de adubação, calagem e irrigação. A <strong>pressão pecuária</strong> registra categoria e número de animais no piquete, tamanho estimado do piquete e a avaliação visual da pressão de pastejo. Esse conjunto é o que permite distinguir, na análise posterior, degradação estrutural de efeitos transitórios de manejo.</p>
+<h4 id="3277-sistema-de-escores-visuais-010-e-metodo-lpi">3.2.7.7 Sistema de Escores Visuais (0–10) e Método LPI</h4>
+<p>O escore visual integra cinco atributos (cobertura por forragem; solo exposto; invasoras; altura e uniformidade do dossel; sinais de compactação/erosão), cada um com peso de 0–2, totalizando até 10. A avaliação é feita por dois observadores independentes; discrepâncias &gt; 1,5 ponto são dirimidas pelo Método LPI (Tabela 13).</p>
+<h4 id="tabela-13-sistema-de-escores-visuais-para-avaliacao-de-pastagens-em-campo-adaptado-de-teles-et-al-2025">Tabela 13 - Sistema de escores visuais para avaliação de pastagens em campo (adaptado de Teles et al., 2025)</h4>
+<table>
+<thead>
+<tr>
+<th>Escore</th>
+<th>Categoria</th>
+<th>Solo exposto</th>
+<th>Invasoras</th>
+<th>Vigor (EVI2)</th>
+<th>Classe</th>
+<th>Indicação de manejo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9-10</td>
+<td>Excelente</td>
+<td>&lt; 5%</td>
+<td>Ausente</td>
+<td>&gt; 0,55</td>
+<td>D0</td>
+<td>Manutenção</td>
+</tr>
+<tr>
+<td>7-8</td>
+<td>Bom</td>
+<td>5-10%</td>
+<td>Raro</td>
+<td>0,40-0,55</td>
+<td>D0-D1</td>
+<td>Monitorar</td>
+</tr>
+<tr>
+<td>5-6</td>
+<td>Regular</td>
+<td>10-20%</td>
+<td>Moderado</td>
+<td>0,25-0,40</td>
+<td>D1-D2</td>
+<td>Ajuste de carga e fertilização</td>
+</tr>
+<tr>
+<td>3-4</td>
+<td>Degradação incipiente</td>
+<td>20-40%</td>
+<td>Alto</td>
+<td>0,10-0,25</td>
+<td>D2-D3</td>
+<td>Recuperação parcial (overseeding, calagem)</td>
+</tr>
+<tr>
+<td>1-2</td>
+<td>Degradação severa</td>
+<td>&gt; 40%</td>
+<td>Dominante</td>
+<td>&lt; 0,10</td>
+<td>D3-D4</td>
+<td>Reforma completa ou integração lavoura-pecuária</td>
+</tr>
+<tr>
+<td>0</td>
+<td>Solo degradado / erosão ativa</td>
+<td>&gt; 60%</td>
+<td>Solo nu</td>
+<td>Nulo</td>
+<td>D4</td>
+<td>Recuperação de área degradada e controle de erosão</td>
+</tr>
+</tbody>
+</table>
+<p>O escore bruto assim obtido está sujeito ao mesmo viés sazonal discutido na Seção 2.13 e é convertido em escore corrigido pela Eq. 15, com os valores de <span class="arithmatex">\(\Delta s\)</span> da tabela 14. O escore corrigido é o valor utilizado em todos os critérios de seleção dos níveis subsequentes, nas análises de calibração e nos relatórios de certificação; o escore bruto, o <span class="arithmatex">\(\Delta s\)</span> aplicado e o mês da visita são sempre preservados no banco de dados como dado primário, o que garante rastreabilidade e permite reanálise futura com fatores recalibrados.</p>
+<h4 id="tabela-14-fator-de-ajuste-sazonal-do-escore-de-campo-delta-s-referencia-jun-set">Tabela 14 - Fator de ajuste sazonal do escore de campo (<span class="arithmatex">\(\Delta s\)</span>), referência jun-set</h4>
+<table>
+<thead>
+<tr>
+<th>Mês da visita</th>
+<th>Estação</th>
+<th><span class="arithmatex">\(\Delta s\)</span></th>
+<th>Confiança na avaliação visual</th>
+<th>Justificativa e cuidados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jan-Fev</td>
+<td>Chuvosa intensa</td>
+<td>–2,0</td>
+<td>Baixa</td>
+<td>Rebrote pleno: cobertura verde alta mesmo em áreas degradadas. LPI obrigatório e fotografias nadir essenciais; considerar reagendamento</td>
+</tr>
+<tr>
+<td>Mar</td>
+<td>Chuvosa tardia</td>
+<td>–1,5</td>
+<td>Baixa-Média</td>
+<td>Senescência incipiente nas gramíneas mais degradadas; ainda há mascaramento</td>
+</tr>
+<tr>
+<td>Abr-Mai</td>
+<td>Transição</td>
+<td>–1,0</td>
+<td>Média</td>
+<td>Visita aceitável; solo começando a ficar visível. Anotar altura média do dossel</td>
+</tr>
+<tr>
+<td>Jun-Set</td>
+<td>Seca (referência)</td>
+<td>0</td>
+<td>Alta</td>
+<td>Período ideal: solo exposto máximo, invasoras visíveis, vigor mínimo. Sem correção</td>
+</tr>
+<tr>
+<td>Out-Nov</td>
+<td>Transição</td>
+<td>–0,5</td>
+<td>Média-Alta</td>
+<td>Primeiras chuvas; correção pequena. Anotar chuvas recentes (&lt; 5 dias)</td>
+</tr>
+<tr>
+<td>Dez</td>
+<td>Chuvosa inicial</td>
+<td>–1,5</td>
+<td>Baixa</td>
+<td>Rebrote inicial. Evitar; se inevitável, registrar a precipitação dos 10 dias anteriores</td>
+</tr>
+</tbody>
+</table>
+<p>Acumulados 20 ou mais pares de visitas ao mesmo ponto em épocas distintas — produto esperado dos ciclos anuais de monitoramento —, os valores de <span class="arithmatex">\(\Delta s\)</span> podem ser recalibrados empiricamente para a região, substituindo os valores de referência desta tabela.</p>
+<h3 id="328-nivel-n2-sobrevoo-de-drone">3.2.8 - Nível N2 - Sobrevoo de Drone</h3>
+<h4 id="3281-criterio-de-selecao-dos-sitios-n2">3.2.8.1 Critério de Seleção dos Sítios N2</h4>
+<p>Cerca de 80 sítios de voo são selecionados por GRTS entre os pontos N1B já visitados e validados, com estratificação pelo escore corrigido de campo. A seleção é estratificada pelo escore de campo (0–10) para garantir que o conjunto de sítios N2 cubra toda a amplitude do gradiente de degradação — de pastagens severamente degradadas (escore 0–2) a pastagens regulares (5–6), evitando o viés de amostrar apenas os casos extremos. A Tabela 15 define a proporcionalidade por faixa de escore.</p>
+<h4 id="tabela-15-criterio-de-selecao-e-proporcionalidade-dos-sitios-n2-por-classe-de-escore-de-campo">Tabela 15 - Critério de seleção e proporcionalidade dos sítios N2 por classe de escore de campo</h4>
+<table>
+<thead>
+<tr>
+<th>Escore de campo (ponto N1B)</th>
+<th>Classe de degradação</th>
+<th>Elegibilidade para N2</th>
+<th>Proporção N2/N1B por estrato</th>
+<th>Justificativa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0-2 (degradação severa)</td>
+<td>D3-D4</td>
+<td>Alta prioridade</td>
+<td>~35% dos pontos N1B nessa faixa</td>
+<td>Calibração dos índices espectrais nos extremos; maior variabilidade de resposta orbital</td>
+</tr>
+<tr>
+<td>3-4 (degradação incipiente)</td>
+<td>D2-D3</td>
+<td>Prioridade média</td>
+<td>~40% dos pontos N1B nessa faixa</td>
+<td>Faixa de maior incerteza classificatória; o drone permite desambiguar D2 de D3</td>
+</tr>
+<tr>
+<td>5-6 (regular)</td>
+<td>D1-D2</td>
+<td>Prioridade baixa (reserva)</td>
+<td>~25% dos pontos N1B nessa faixa</td>
+<td>Incluídos como pontos de referência para calibração no gradiente moderado de degradação</td>
+</tr>
+<tr>
+<td>7-10 (bom a excelente)</td>
+<td>D0-D1</td>
+<td>GRUPO CONTROLE(~10% de N2, via GRTS)</td>
+<td>~8 sítios de controle(de um total de ~80 N2)</td>
+<td>Pastagens classificadas como não degradadas pelo modelo de gabinete. Sua inclusão é essencial para calcular a Especificidade (Taxa de Verdadeiros Negativos) e detectar Falsos Positivos do modelo preditivo. Sem esse controle, a acurácia do modelo é impossível de verificar adequadamente</td>
+</tr>
+</tbody>
+</table>
+<p>A cobertura espacial dos ≈ 80 sítios de drone (<em>footprint</em> médio de 150 × 150 m ≈ 2,25 ha por sítio) totaliza cerca de 180 ha de imageamento de altíssima resolução (GSD ≤ 5 cm), distribuídos proporcionalmente pelos 6–8 estratos <em>K-Means</em>. Esse volume é suficiente para calibrar os índices espectrais do <em>Sentinel-2</em> (pixel de 100 m²) e do CBERS (pixel de 4 m²) em toda a extensão do gradiente de degradação da região piloto.</p>
+<h4 id="32811-sitios-de-controle-em-n2-calculo-da-especificidade-do-modelo">3.2.8.1.1 Sítios de Controle em N2 — Cálculo da Especificidade do Modelo</h4>
+<p>A exclusão das pastagens de escore alto da seleção principal é metodologicamente justificada — concentra o imageamento onde há variabilidade a calibrar —, mas introduz exatamente o mesmo viés discutido em 3.2.7: o modelo nunca seria testado sobre pastagens que ele próprio classificou como saudáveis, e um eventual excesso de falsos positivos permaneceria invisível. Por isso, cerca de 8 sítios de controle são sorteados por GRTS exclusivamente entre pontos N1B com escore corrigido igual ou superior a 7, recebendo o mesmo protocolo de voo e, quando selecionados, também coleta de biomassa e solo.</p>
+<h4 id="3282-protocolo-de-voo">3.2.8.2 Protocolo de Voo</h4>
+<p>O protocolo de voo é padronizado nos seguintes parâmetros: altura de aproximadamente 50 m acima do nível do solo; câmera em posição nadir, com o eixo óptico perpendicular ao terreno; área de cobertura de 100 × 100 m em pastagens homogêneas, 150 × 150 m em pastagens semi-heterogêneas e 250 × 250 m em sistemas silvipastoris; sensores RGB e multiespectral com resolução no solo igual ou inferior a 5 cm; sobreposição frontal de ao menos 80% e lateral de ao menos 70%; e no mínimo 4 alvos de controle no solo com coordenadas RTK de precisão centimétrica, distribuídos nos vértices e no centro da área imageada.</p>
+<p>A posição nadir é obrigatória e não é uma preferência operacional: ângulos oblíquos introduzem sombreamento, variação de BRDF e erros de projeção que comprometem simultaneamente a acurácia geométrica do ortomosaico e a integridade radiométrica dos índices extraídos. Voos oblíquos são admitidos apenas como missão complementar de reconhecimento tridimensional, nunca como missão principal de sensoriamento remoto quantitativo. Os produtos gerados — ortomosaico, modelo digital do terreno, modelo digital de superfície e índices de vegetação por parcela — constituem a ponte de escala entre a parcela de campo, da ordem de 1 m², e o pixel <em>Sentinel-2</em>, de 100 m². O detalhamento operacional do voo consta do Apêndice B.</p>
+<h3 id="329-niveis-n3-e-n4-coleta-de-biomassa-e-solo">3.2.9 - Níveis N3 e N4 - Coleta de Biomassa e Solo</h3>
+<h4 id="3291-selecao-de-subpontos-e-coleta-de-biomassa">3.2.9.1 Seleção de Subpontos e Coleta de Biomassa</h4>
+<p>Dentro de cada sítio de drone N2 selecionado para coleta de biomassa (≈ 40 sítios = 50% de N2), o posicionamento dos subpontos de amostragem não é arbitrário: é executado via GRTS sobre a grade de pixels de 10 m do <em>footprint</em> do drone, respeitando um <em>buffer</em> de borda de 10 m e distância mínima entre subpontos conforme o tamanho do <em>footprint</em>. A estratificação interna é feita com base nos valores de NDVI do ortomosaico de drone (zona de maior NDVI vs. zona de menor NDVI dentro do sítio), garantindo que os subpontos cubram a heterogeneidade de vigor detectada no drone.</p>
+<h4 id="tabela-16-grade-de-subpontos-n3-por-tamanho-de-footprint-de-drone">Tabela 16 - Grade de subpontos N3 por tamanho de <em>footprint</em> de drone</h4>
+<table>
+<thead>
+<tr>
+<th><em>Footprint</em> e gatilho de enquadramento</th>
+<th>Subpontos N3 por sítio</th>
+<th>Quadrados por subponto</th>
+<th>Método deposicionamento</th>
+<th>Total por sítio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100 × 100 m — pastagem homogênea (dossel ≤ 30 cm e CV de biomassa ≤ 25%)</td>
+<td>3 subpontos (±20 m espaçamento mínimo)</td>
+<td>3 quadrados de 0,5 m²</td>
+<td>GRTS na grade 10 m do <em>footprint</em>; <em>buffer</em> borda 10 m</td>
+<td>9 quadrados (4,5 m²)</td>
+</tr>
+<tr>
+<td>150 × 150 m — semi-heterogênea (dossel &gt; 30 cm ou CV &gt; 25% ou cobertura arbustiva de 10-30%)</td>
+<td>4 subpontos (±30 m espaçamento)</td>
+<td>5 quadrados 1,0 m²(usar 1,0 m² quando: pastagem com touceiras, vegetação nativa intercalada ou dossel &gt; 30 cm — heterogeneidade exige área maior para representatividade)</td>
+<td>GRTS na grade 10 m; estratificação por zona (EVI2 do drone)</td>
+<td>20 quadrados (20 m²)</td>
+</tr>
+<tr>
+<td>250 × 250 m — heterogênea ou silvipastoril (cobertura lenhosa &gt; 30% ou dossel &gt; 60 cm ou campo nativo)</td>
+<td>5 subpontos (±40 m espaçamento)</td>
+<td>5 quadrados 1,0 m² por subponto + 1 parcela lenhosa 100 m²</td>
+<td>GRTS na grade 10 m; 1 parcela lenhosa por subponto</td>
+<td>25 quadrados (25 m²) + 5 parcelas lenhosas</td>
+</tr>
+</tbody>
+</table>
+<p>A escolha do tamanho do quadrado segue o princípio metrológico discutido na Seção 2.14: conforme a Tabela 17, além do Método LPI no transecto de 100 m passando pelo subponto central.</p>
+<h4 id="tabela-17-protocolo-de-amostragem-de-biomassa-por-tipo-de-pastagem">Tabela 17 - Protocolo de amostragem de biomassa por tipo de pastagem</h4>
+<table>
+<thead>
+<tr>
+<th>Tipo de pastagem</th>
+<th>Quadrado</th>
+<th>Altura de corte</th>
+<th>Repetições mínimas por subponto</th>
+<th>Pós-coleta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pastagem cultivada (homogênea)</td>
+<td>0,25 m²</td>
+<td>1-2 cm acima do solo</td>
+<td>5 quadrados/subponto</td>
+<td>Pesagem do peso fresco e sub-amostra de ~300 g para matéria seca e bromatologia</td>
+</tr>
+<tr>
+<td>Pastagem natural (heterogênea)</td>
+<td>1,0 m²</td>
+<td>1-2 cm acima do solo</td>
+<td>10 quadrados/subponto</td>
+<td>Pesagem do peso fresco e separação morfológica (folha, haste, material morto)</td>
+</tr>
+<tr>
+<td>Sistema silvipastoril</td>
+<td>0,25 m² (herbáceo) + parcela de 10 × 10 m (lenhoso)</td>
+<td>Conforme a espécie</td>
+<td>5 herbáceos + censo lenhoso por parcela</td>
+<td>Diâmetro à altura do peito, altura total e espécie; aplicação de equações alométricas</td>
+</tr>
+</tbody>
+</table>
+<h4 id="32911-procedimento-padronizado-por-subponto-n3">3.2.9.1.1 Procedimento padronizado por subponto N3</h4>
+<p>O procedimento padronizado por subponto compreende: registro das coordenadas antes do início; medição da altura do dossel em 5 a 10 pontos com régua ou prato nivelador; corte da biomassa acima da altura especificada, com exclusão da serapilheira; pesagem imediata do peso fresco em balança digital; homogeneização dos quadrados do subponto e separação de cerca de 300 g para determinação de matéria seca, separação morfológica e análise bromatológica; e etiquetagem, acondicionamento refrigerado e entrega ao laboratório em até 48 horas. O método LPI é aplicado em transecto de 100 m passando pelo subponto central, conforme a Seção 2.14.</p>
+<h4 id="3292-selecao-de-subpontos-para-coleta-de-solo">3.2.9.2 Seleção de Subpontos para Coleta de Solo</h4>
+<p>Em cerca de 40% dos sítios com coleta de biomassa, a amostragem de solo é aninhada nos subpontos N3 por amostragem aleatória simples sem reposição, com mínimo de um subponto por sítio. Sítios com 3 subpontos N3 fornecem 1 a 2 subpontos de solo; sítios com 5 subpontos fornecem 2 a 3.</p>
+<h4 id="32921-procedimento-padronizado-por-subponto-n4-coleta-por-camadas">3.2.9.2.1 Procedimento padronizado por subponto N4 — Coleta por Camadas</h4>
+<p>A coleta é feita por camadas — 0-10 cm, 10-20 cm e 20-30 cm —, com 5 a 8 subamostras por camada em raio de 3 m, acondicionadas separadamente e identificadas com o código de profundidade da Tabela 12. Havendo cálculo de estoque de carbono, coleta-se adicionalmente amostra indeformada com anel volumétrico em cada camada, registrando volume, massa úmida, massa seca e umidade gravimétrica. O controle de contaminação prevê limpeza do trado entre camadas e subpontos, uso de luvas, descarte do material de borda e registro de duplicata de campo em pelo menos 5% das amostras ou uma duplicata por dia de coleta. As subamostras de cada camada são homogeneizadas separadamente, secas ao ar à sombra e enviadas ao laboratório em até 5 dias, acompanhadas de ficha de cadeia de custódia. As análises mínimas por camada são textura, pH, matéria orgânica, carbono total e nitrogênio total; na camada superficial acrescentam-se os atributos de fertilidade e a densidade aparente.</p>
+<p>Uma ressalva de suficiência amostral deve ser explicitada. Os 15 a 20 sítios N4 são suficientes para a caracterização descritiva e para a auditoria mínima exigida pelas certificações da Tabela 20. Não são, contudo, suficientes para a construção de modelos robustos de interpolação geoestatística do carbono orgânico do solo, que requerem variograma estável e validação cruzada confiável — a literatura recomenda tipicamente de 50 a 100 pontos de treinamento distribuídos ao longo da variabilidade espacial de interesse. Os sítios N4 devem, portanto, ser tratados como <strong>base de calibração primária</strong>, a ser complementada em fases posteriores por coletas de baixo custo caso a modelagem espacial de carbono venha a ser um entregável do projeto.</p>
+<h4 id="3293-protocolo-fotografico">3.2.9.3 Protocolo Fotográfico</h4>
+<p>O registro fotográfico segue dois padrões complementares. A <strong>fotografia nadir</strong>, tomada com câmera georreferenciada a 1,5 m de altura sobre o quadrado, antes e depois da coleta, permite estimar por análise digital a cobertura fracional e as proporções de vegetação fotossintética, não-fotossintética e solo exposto. As <strong>fotografias panorâmicas</strong>, tomadas nas quatro direções cardeais a partir do centro do subponto, documentam o contexto da paisagem. Em ambos os casos são obrigatórios os metadados de identificador, data e hora, coordenadas e observador.</p>
+<h3 id="3210-classificacao-integrada-da-condicao-das-pastagens">3.2.10 - Classificação Integrada da Condição das Pastagens</h3>
+<h4 id="32101-categorias-de-degradacao-d0-d4">3.2.10.1 - Categorias de Degradação D0 - D4</h4>
+<p>Com base na metodologia LAPIG/UFG (Teles et al., 2025, base metodológica LAPIG/UFG a documentar), as pastagens são classificadas em cinco categorias (D0 a D4), obtidas pela integração dos escores visuais de campo, frações PV/NPV/BS (LPI), índices espectrais (EVI2, NDTI de imagens <em>Sentinel-2</em>/CBERS) e análises laboratoriais de biomassa e solo (Tabela 18).</p>
+<h4 id="tabela-18-categorias-de-degradacao-de-pastagens-d0-d4-adaptado-de-teles-et-al-2025">Tabela 18 - Categorias de degradação de pastagens (D0-D4), adaptado de Teles et al. (2025)</h4>
+<table>
+<thead>
+<tr>
+<th>Categoria</th>
+<th>Denominação</th>
+<th>Solo exposto + invasoras</th>
+<th>EVI2 médio (estação seca)</th>
+<th>Indicador agronômico / biológico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D0</td>
+<td>Sem degradação</td>
+<td>&lt; 5%</td>
+<td>&gt; 0,50</td>
+<td>Forragem vigorosa; composição desejada &gt; 95%</td>
+</tr>
+<tr>
+<td>D1</td>
+<td>Indícios leves (agronômica)</td>
+<td>5-15%</td>
+<td>0,35-0,50</td>
+<td>Início de invasão por plantas indesejadas; vigor reduzido, recuperável com adubação</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>Degradação moderada (agronômica)</td>
+<td>15-30%</td>
+<td>0,20-0,35</td>
+<td>Invasoras ocupam 15-30% da área; reforma parcial ou sobressemeadura necessárias</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>Degradação severa (biológica incipiente)</td>
+<td>30-50%</td>
+<td>0,10-0,20</td>
+<td>Compactação superficial e erosão laminar visíveis; solo empobrecido; reforma completa</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>Degradação severa (biológica avançada)</td>
+<td>&gt; 50%</td>
+<td>&lt; 0,10</td>
+<td>Erosão em sulcos e voçorocas; solo nu dominante; perda do banco de sementes</td>
+</tr>
+</tbody>
+</table>
+<h4 id="32102-matriz-de-decisao-integrada-para-elegibilidade">3.2.10.2 - Matriz de decisão Integrada para Elegibilidade</h4>
+<p>Para fins de certificação (ISCC, RSB, RED III), uma propriedade é classificada como <strong>área de pastagem degradada elegível para plantio de Macaúba</strong> quando apresenta confluência de pelo menos <strong>dois</strong> dos quatro critérios independentes a seguir:</p>
+<ol>
+<li>Escore corrigido médio de campo igual ou inferior a 4 (categoria D2 ou superior) em pelo menos 50% dos pontos N1B visitados;</li>
+<li>EVI2 médio da estação seca inferior a 0,25 em pelo menos 30% da área de pastagem da propriedade;</li>
+<li>Fração de solo exposto medida por LPI igual ou superior a 15% em pelo menos um ponto N1B;</li>
+<li>Tendência negativa significativa de vigor (Mann-Kendall, <em>p</em> &lt; 0,05) no período de 2019-2025.</li>
+</ol>
+<h4 id="32103-calibracao-dos-modelos-de-sensoriamento-remoto">3.2.10.3 - Calibração dos Modelos de Sensoriamento Remoto</h4>
+<p>Os dados coletados retroalimentam diretamente a calibração dos modelos orbitais em três direções. As frações de cobertura medidas por LPI nos subpontos N3 são correlacionadas com o índice espectral de solo exposto do pixel <em>Sentinel-2</em> correspondente, ajustando os limiares de classificação. A biomassa seca por hectare valida as estimativas mensais de matéria seca empregadas na estratificação (Tabela 21) e nas análises de produtividade (Seção 3.1.9). As análises de carbono total do nível N4 alimentam a interpolação geoestatística dos mapas de carbono orgânico do solo, com a ressalva de suficiência amostral registrada em 3.2.9.</p>
+<h4 id="32104-matriz-de-confusao-e-metricas-de-acuracia-do-sistema-de-classificacao">3.2.10.4 - Matriz de confusão e métricas de acurácia do sistema de classificação</h4>
+<p>A acurácia do sistema hierárquico de classificação de pastagens — que integra inspeção visual de imagens (N0B), avaliação de campo (N1B) e imageamento de drone (N2) — é avaliada pela comparação entre a predição do modelo de gabinete (baseada em índices de SR) e a verdade de campo (<em>ground truth</em>, obtida nos níveis N1B e N2). Para que essa avaliação seja válida e não enviesada, é imprescindível que a amostra de validação inclua tanto áreas positivas (degradadas) quanto áreas negativas (não degradadas) — o que justifica as subamostras de controle descritas nas XXX . A Tabela 19 apresenta a estrutura da matriz de confusão binária (degradada vs. não degradada) que será calculada ao final das campanhas de campo, com as métricas derivadas e as metas de desempenho estabelecidas para este projeto. </p>
+<h4 id="tabela-19-matriz-de-confusao-e-metricas-de-acuracia-do-sistema-de-classificacao-modelo-de-gabinete-verdade-de-campo">Tabela 19 - Matriz de confusão e métricas de acurácia do sistema de classificação (modelo de gabinete × verdade de campo).</h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Campo confirma degradada (D1-D4)</th>
+<th>Campo confirma não degradada (D0)</th>
+<th>Métrica derivada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gabinete prediz degradada</strong></td>
+<td><strong>VP</strong> — Verdadeiro Positivo. Fonte: unidades N1A e N2 da amostra principal</td>
+<td><strong>FP</strong> — Falso Positivo. Fonte: unidades sinalizadas pelo gabinete e refutadas em campo</td>
+<td>Precisão (VPP) = VP / (VP + FP)</td>
+</tr>
+<tr>
+<td><strong>Gabinete prediz não degradada</strong></td>
+<td><strong>FN</strong> — Falso Negativo. Fonte: subamostra de controle sorteada no pool inelegível</td>
+<td><strong>VN</strong> — Verdadeiro Negativo. Fonte: subamostra de controle N1A e sítios N2 de controle</td>
+<td>Valor preditivo negativo = VN / (VN + FN)</td>
+</tr>
+<tr>
+<td><strong>Métrica derivada</strong></td>
+<td>Sensibilidade = VP / (VP + FN). Meta: ≥ 90%</td>
+<td>Especificidade = VN / (VN + FP). Meta: ≥ 80%</td>
+<td>Acurácia global = (VP + VN) / total. Meta: ≥ 85%</td>
+</tr>
+</tbody>
+</table>
+<p>A interpretação das métricas deve considerar o contexto de aplicação. A Sensibilidade é crítica porque um falso negativo — propriedade degradada não detectada — representa perda de área elegível e, no limite, risco regulatório. A Especificidade mede a capacidade de não alarmar em pastagens saudáveis e só é calculável com a subamostra de controle. As metas adotadas são Sensibilidade de ao menos 90%, Especificidade de ao menos 80% e acurácia global de ao menos 85%. Caso não sejam atingidas na campanha piloto, os limiares dos índices espectrais e os critérios de elegibilidade N0B e N1A são revisados antes da campanha plena — ciclo de calibração análogo ao já empregado na validação da classificação automática de uso e cobertura da terra (Seção 2.3).</p>
+<p>Uma limitação deve ser declarada explicitamente: como o campo visita apenas cerca de 20% das propriedades N0A, a taxa de falsos negativos no universo completo não é diretamente calculável. Ela é estimada por reamostragem <em>bootstrap</em> a partir da proporção de degradação observada nos pontos N0B das propriedades classificadas como inelegíveis e visitadas como controle.</p>
+<h3 id="3211-gestao-de-dados-e-controle-de-qualidade">3.2.11 - Gestão de Dados e Controle de Qualidade</h3>
+<h4 id="32111-fluxo-de-dados">3.2.11.1 - Fluxo de dados</h4>
+<p>O fluxo de dados percorre quatro etapas encadeadas: coleta digital <em>off-line</em> em campo; sincronização ao servidor institucional; processamento automatizado em rotinas versionadas; e carga em banco de dados geoespacial, do qual derivam os painéis de acompanhamento. Cada etapa é documentada com o resumo criptográfico (<em>hash</em>) dos arquivos, o que permite verificar a integridade dos dados em qualquer ponto da cadeia e detectar alterações não registradas.</p>
+<h4 id="32112-controle-da-qualidade-por-nivel">3.2.11.2 - Controle da Qualidade por Nível</h4>
+<p>O controle de qualidade é aplicado nível a nível, com limiares de aceitação e ações corretivas predefinidas, conforme a Tabela 20.</p>
+<h4 id="tabela-20-metricas-de-qaqc-limiares-de-aceitacao-e-acoes-corretivas">Tabela 20 - Métricas de QA/QC, limiares de aceitação e ações corretivas</h4>
+<table>
+<thead>
+<tr>
+<th>Nível</th>
+<th>Métrica</th>
+<th>Limiar de aceitação</th>
+<th>Ação corretiva</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>N0B</td>
+<td>Kappa de Cohen inter-observador (20% dos pontos em dupla)</td>
+<td><span class="arithmatex">\(\kappa \geq 0{,}75\)</span></td>
+<td>Retreinar analistas; sessão de calibração com casos divergentes</td>
+</tr>
+<tr>
+<td>N0B</td>
+<td>Taxa de concordância bruta</td>
+<td>≥ 85%</td>
+<td>Revisão dos critérios de elegibilidade com o supervisor</td>
+</tr>
+<tr>
+<td>N1B</td>
+<td>Discrepância entre observadores no escore 0-10</td>
+<td>≤ 1,5 ponto</td>
+<td>Dirimir por medição LPI</td>
+</tr>
+<tr>
+<td>N1B</td>
+<td>Precisão das coordenadas registradas</td>
+<td>&lt; 5 m (CEP95)</td>
+<td>Recoletar o ponto; usar receptor diferencial se necessário</td>
+</tr>
+<tr>
+<td>N2</td>
+<td>Resolução no solo (GSD)</td>
+<td>≤ 5 cm/pixel</td>
+<td>Refazer o voo em altitude menor; verificar o sensor</td>
+</tr>
+<tr>
+<td>N2</td>
+<td>Sobreposição frontal / lateral</td>
+<td>≥ 75% / ≥ 65%</td>
+<td>Ajustar o plano de voo e reexecutar</td>
+</tr>
+<tr>
+<td>N3</td>
+<td>Coeficiente de variação entre quadrados do subponto</td>
+<td>CV ≤ 30%</td>
+<td>Aumentar o número de quadrados; registrar a heterogeneidade observada</td>
+</tr>
+<tr>
+<td>N4</td>
+<td>Integridade da amostra composta</td>
+<td>≥ 5 subamostras por camada, sem contaminação</td>
+<td>Recoletar a amostra</td>
+</tr>
+<tr>
+<td>Geral</td>
+<td>Preenchimento do formulário digital</td>
+<td>100% dos campos obrigatórios</td>
+<td>Alerta automático; envio bloqueado até o preenchimento completo</td>
+</tr>
+</tbody>
+</table>
+<h4 id="32113-armazenamento-backup-e-acesso">3.2.11.3 - Armazenamento, Backup e Acesso</h4>
+<ol>
+<li><strong>Servidor primário:</strong> Banco <em>PostgreSQL</em>/<em>PostGIS</em> no servidor LAPIG (backup automático diário).</li>
+<li><strong>Backup remoto:</strong> <em>Google Drive</em> institucional com versionamento automático a cada sincronização ODK.</li>
+<li><strong>Acesso ACELEN:</strong> <em>Dashboards</em> em tempo real via LAPIG WebGIS; exportação em <em>shapefile</em> e CSV sob demanda.</li>
+<li><strong>Retenção:</strong> Dados brutos e processados retidos por mínimo de 10 anos (requisito RED III Art. 29).</li>
+</ol>
+<h3 id="3212-cronograma-de-execucao">3.2.12 - Cronograma de execução</h3>
+<p>O cronograma de execução do plano de campo é organizada em cinco fases encadeadas. A Tabela 21 apresenta o sequenciamento tomando como referência a campanha da área piloto.</p>
+<h4 id="tabela-21-cronograma-de-execucao-por-fase">Tabela 21 - Cronograma de execução por fase</h4>
+<table>
+<thead>
+<tr>
+<th>Fase</th>
+<th>Atividade principal</th>
+<th>Período de referência</th>
+<th>Responsável</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 — Pré-processamento</td>
+<td>Filtragem do quadro amostral; <em>K-Means</em>; dimensionamento por Cochran/Neyman; sorteio GRTS N0A; geração da grade de pontos N0B</td>
+<td>Jul-Ago 2026</td>
+<td>Equipes de sensoriamento remoto e estatística</td>
+</tr>
+<tr>
+<td>2 — Triagem em gabinete (N0B)</td>
+<td>Co-registro das imagens; inspeção visual dos pontos N0B; QA/QC por Kappa; priorização das propriedades para N1A</td>
+<td>Ago-Out 2026</td>
+<td>4 analistas + 1 supervisor</td>
+</tr>
+<tr>
+<td>3 — Campo I (piloto)</td>
+<td>Visita a cerca de metade das propriedades N1A; pontos N1B; escores; LPI; caracterização socioeconômica</td>
+<td>Ago-Set 2026</td>
+<td>2 equipes de campo</td>
+</tr>
+<tr>
+<td>3 — Campo II (pleno)</td>
+<td>Visitas restantes; sobrevoos N2; biomassa N3; solo N4</td>
+<td>Set-Nov 2026</td>
+<td>2 equipes + piloto de drone certificado</td>
+</tr>
+<tr>
+<td>4 — Laboratório</td>
+<td>Análise bromatológica e química de solo; processamento dos mosaicos de drone; extração de índices; integração ao banco de dados</td>
+<td>Out-Dez 2026</td>
+<td>Laboratório parceiro + equipe de sensoriamento remoto</td>
+</tr>
+<tr>
+<td>5 — Análise e relatório</td>
+<td>Integração dos dados; calibração dos modelos; estimativas de carbono; relatório final</td>
+<td>Nov 2026-Fev 2027</td>
+<td>Equipe do projeto</td>
+</tr>
+</tbody>
+</table>
+<p>O período de campo coincide com a transição da estação seca para a chuvosa, o que impõe uma condição logística: a programação das rotas deve prever alternativa de saída em caso de chuvas antecipadas, sob pena de perda de acesso a propriedades já mobilizadas.</p>
+<h2 id="apendice-a-formulario-digital-de-inspecao-visual-nivel-n0b">Apêndice A - Formulário Digital de Inspeção Visual (Nível N0B)</h2>
+<p>O formulário é implementado como perfil de coleta digital e preenchido pelo analista durante a inspeção descrita em 3.2.6. Campos assinalados com asterisco são obrigatórios: o aplicativo bloqueia o envio enquanto houver campo obrigatório vazio, o que garante que nenhuma decisão de elegibilidade seja registrada sem a evidência que a sustenta.</p>
+<h3 id="tabela-22-campos-do-formulario-digital-de-inspecao-visual-por-ponto-n0b">Tabela 22 - Campos do formulário digital de inspeção visual por ponto N0B</h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo de dado</th>
+<th>Valores / critérios</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identificador do ponto N0B</td>
+<td>Alfanumérico (automático)</td>
+<td><code>MC-E[k]-[SEQ6]-C[SEQ2]</code></td>
+</tr>
+<tr>
+<td>Identificador da propriedade N0A</td>
+<td>Alfanumérico</td>
+<td><code>MC-E[k]-[SEQ6]</code></td>
+</tr>
+<tr>
+<td>Analista responsável (*)</td>
+<td>Texto</td>
+<td>Nome completo</td>
+</tr>
+<tr>
+<td>Data e hora de início da inspeção (*)</td>
+<td>Registro temporal</td>
+<td>Gerado automaticamente</td>
+</tr>
+<tr>
+<td>Imagem utilizada e data de passagem (*)</td>
+<td>Lista + data</td>
+<td>CBERS-4A / CBERS-4B / <em>Sentinel-2</em> / <em>PlanetScope</em></td>
+</tr>
+<tr>
+<td>Escala de visualização (*)</td>
+<td>Lista</td>
+<td>1:5.000 / 1:10.000 / 1:20.000 — anotar a escala do julgamento final</td>
+</tr>
+<tr>
+<td>Área de pastagem visível no ponto (*)</td>
+<td>Sim / Não / Parcialmente</td>
+<td>Se "Não", registrar o motivo (nuvem, sombra, mosaico incompleto)</td>
+</tr>
+<tr>
+<td>Solo exposto estimado (*)</td>
+<td>Lista</td>
+<td>&lt; 5% / 5-15% / 15-30% / 30-50% / &gt; 50%</td>
+</tr>
+<tr>
+<td>Sinais de invasoras ou arbustização (*)</td>
+<td>Lista</td>
+<td>Ausente / Raro (&lt; 10%) / Moderado (10-30%) / Dominante (&gt; 30%)</td>
+</tr>
+<tr>
+<td>Sinais de erosão (sulcos, voçorocas) (*)</td>
+<td>Sim / Não</td>
+<td>Verificar padrão linear de solo exposto em relação ao relevo</td>
+</tr>
+<tr>
+<td>Vigor vegetativo geral (*)</td>
+<td>Lista</td>
+<td>Alto (EVI2 &gt; 0,40) / Médio (0,25-0,40) / Baixo (&lt; 0,25)</td>
+</tr>
+<tr>
+<td>Uso atual confirmado como pastagem (*)</td>
+<td>Sim / Não / Incerto</td>
+<td>Verificar ausência de padrão agrícola ou florestal</td>
+</tr>
+<tr>
+<td>Mês da imagem inspecionada (*)</td>
+<td>Lista</td>
+<td>Insumo para os fatores de correção sazonal (Tabela 08)</td>
+</tr>
+<tr>
+<td>Decisão de elegibilidade do ponto (*)</td>
+<td>Lista</td>
+<td>Elegível / Inelegível / Inconclusivo</td>
+</tr>
+<tr>
+<td>Captura de tela (*)</td>
+<td>Imagem</td>
+<td>Evidência auditável da inspeção visual</td>
+</tr>
+<tr>
+<td>Observações do analista</td>
+<td>Texto livre</td>
+<td>Qualquer observação relevante sobre a imagem ou o ponto</td>
+</tr>
+</tbody>
+</table>
+<h2 id="apendice-b-protocolo-operacional-de-voo-de-drone-nivel-n2">Apêndice B - Protocolo Operacional de Voo de Drone (Nível N2)</h2>
+<p>Complementa os parâmetros técnicos definidos em 3.2.8, detalhando a sequência operacional que assegura a repetibilidade radiométrica e geométrica entre sítios e entre campanhas.</p>
+<p><strong>B.1 — Pré-voo.</strong> Verificar avisos aeronáuticos e autorização de espaço aéreo com pelo menos 24 horas de antecedência; posicionar os alvos de controle no solo com receptor RTK e registrar suas coordenadas tridimensionais com precisão centimétrica; calibrar o painel radiométrico antes do primeiro voo do dia; configurar a missão autônoma com altura de 50 m acima do nível do solo, câmera nadir e sobreposições de 85% frontal e 75% lateral; verificar carga de bateria de ao menos 80%, memória livre de ao menos 16 GB e fixação de posição inferior a 5 m.</p>
+<p><strong>B.2 — Durante o voo.</strong> Iniciar com a captura do painel radiométrico em ambos os sensores; executar a missão em modo autônomo, mantendo a aeronave em linha de visada; registrar horários de início e término e as condições atmosféricas. Vento superior a 8 m/s ou ocorrência de chuva impõem aborto e reagendamento — não são condições de julgamento do operador, mas critérios objetivos de interrupção.</p>
+<p><strong>B.3 — Pós-voo.</strong> Capturar novamente o painel radiométrico, o que permite detectar deriva das condições de iluminação ao longo da missão; transferir as imagens para armazenamento externo em cópia dupla; processar o mosaico com os alvos de controle; exportar ortomosaico RGB e multiespectral, modelo digital do terreno, modelo digital de superfície e índices de vegetação; validar o erro quadrático médio do processamento e arquivar o relatório vinculado ao identificador do sítio, conforme a Tabela 12.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      ATBD versão 5.0 — agosto de 2026 · Parceria LAPIG/UFG–FUNAPE e Acelen Renováveis
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "search.suggest", "search.highlight", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
