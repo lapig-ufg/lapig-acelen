@@ -39,13 +39,7 @@ A Tabela 23 relaciona cada etapa do algoritmo de campo à plataforma que a execu
 
 Três características desse arranjo merecem registro. A primeira é que **nenhuma etapa depende de software proprietário de uso obrigatório**: R, QGIS, *AROSICS*, *ODK Collect*, *KoBoToolbox*, *OpenDroneMap*, *PostgreSQL* e *PostGIS* são de código aberto e gratuitos, e o *Agisoft Metashape*, único componente comercial da cadeia, tem alternativa aberta equivalente indicada na mesma linha da tabela. A segunda é que a coleta em campo opera **inteiramente _off-line_**, com sincronização posterior — condição necessária em propriedades rurais sem cobertura de dados móveis. A terceira é que a cadeia é **reprodutível**: as rotinas de sorteio e de processamento são versionadas, e cada arquivo transferido entre etapas carrega resumo criptográfico MD5, de modo que qualquer resultado pode ser refeito a partir dos dados brutos.
 
-### 4.2.2 - Armazenamento, acesso e retenção
-
-O repositório primário é o banco *PostgreSQL*/*PostGIS* hospedado no servidor do LAPIG/UFG, com rotina de *backup* diário e cópia remota em *Google Drive* institucional, versionada a cada sincronização do ODK. O acesso da Acelen Renováveis se dá por painéis do LAPIG WebGIS, com exportação sob demanda em *shapefile* e CSV.
-
-Os dados brutos e processados são retidos por no mínimo dez anos. Esse prazo não é uma convenção interna: decorre do requisito de rastreabilidade do Artigo 29 da Diretiva RED III, discutido na Seção 3.2.1, e é o que permite que uma auditoria futura reconstitua a evidência que sustentou a classificação de uma área como degradada.
-
-### 4.2.3 - Requisitos operacionais
+### 4.2.2 - Requisitos operacionais
 
 A execução do plano de amostragem de campo impõe condições que não se aplicam ao *toolkit* e que precisam ser consideradas no planejamento:
 
@@ -55,7 +49,7 @@ A execução do plano de amostragem de campo impõe condições que não se apli
 - **Autorização de acesso.** A visita a propriedades privadas depende de anuência do proprietário. A recusa é tratada como inelegibilidade e aciona o protocolo de substituição pela próxima unidade da lista GRTS.
 - **Capacidade laboratorial.** As análises bromatológicas e de solo dependem de laboratório parceiro, com prazos de entrega que condicionam o cronograma da Tabela 21 na seção 3.2.12.
 
-### 4.2.4 - Limitações reconhecidas
+### 4.2.3 - Limitações reconhecidas
 
 Assim como a qualidade do *toolkit* é função dos dados que o alimentam, o alcance do algoritmo de campo é limitado por quatro fatores que devem ser explicitados perante auditoria.
 
