@@ -456,8 +456,6 @@ A estimativa \(\hat p_i\) define a classe de prioridade da propriedade, conforme
 
 Vinte por cento dos pontos N0B — cerca de 1.000 a 1.400 pontos na área piloto — são inspecionados de forma independente por dois analistas. A concordância é medida quinzenalmente pelo coeficiente Kappa de Cohen (Eq. 12, Seção 2.11), com a seguinte escala de decisão: \(\kappa \geq 0{,}85\) indica desempenho excelente; \(0{,}75 \leq \kappa < 0{,}85\) dispara revisão dos critérios com o supervisor; e \(\kappa < 0{,}75\) exige sessão obrigatória de recalibração com análise dos casos divergentes antes da continuidade da triagem. O procedimento é análogo ao controle de acurácia aplicado à classificação automática de uso e cobertura da terra (Seção 2.3), com a diferença de que aqui o objeto avaliado é a consistência do julgamento humano.
 
-> **Nota técnica — divergência de limiares a resolver.** O Plano Amostral LAPIG/ACELEN v6.0, em seu item 5.6, apresenta duas escalas de decisão distintas para o mesmo controle. A escala acima trata \(\kappa < 0{,}75\) como reprovação, enquanto a Tabela 20 adota \(\kappa \geq 0{,}75\) como limiar de aceitação — de modo que um valor como \(\kappa = 0{,}78\) é aceitável sob um critério e dispara revisão sob o outro. A divergência é anterior a este documento e precisa ser dirimida pela equipe responsável pelo plano antes da campanha de triagem; até lá, recomenda-se adotar a escala mais conservadora.
-
 ### 3.2.7 - Níveis N1A e N1B - Validação em Campo
 
 #### 3.2.7.1 Seleção das Fazendas para Visita de Campo (N1A)
